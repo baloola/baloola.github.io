@@ -81,7 +81,7 @@
       });
       
         return balla=geojson
-      console.log('sdasd')
+      
       
       
     };
@@ -330,7 +330,7 @@
     addLegendActions();
   
   
-    getUpdatedData();
+    getUpdatedData('https://baloola.github.io/index.html#6.32/41.911/-71.727');
     
   
   
