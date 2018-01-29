@@ -330,7 +330,7 @@
     addLegendActions();
   
   
-    getUpdatedData('https://baloola.github.io/index.html#6.32/41.911/-71.727');
+    getUpdatedData();
     
   
   
