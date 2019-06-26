@@ -1,0 +1,514 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Handling Coverages &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Processes" href="processes.html" />
+    <link rel="prev" title="SOAP Proxy" href="soap_proxy.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developers’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_model.html">Data Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migrations.html">Data Migrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services.html">Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_formats.html">Data Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metadata_formats.html">Metadata Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autotest.html">The <em>autotest</em> instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Handling Coverages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creating-coverages">Creating Coverages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-collections">Creating Collections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#accessing-coverages">Accessing Coverages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#accessing-coverage-data">Accessing Coverage Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="processes.html">Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_dev_guide.html">Asynchronous Task Processing - Developers Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-style-guide.html">EOxServer code style guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Developers’ Guide</a> &raquo;</li>
+        
+      <li>Handling Coverages</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/developers/handling_coverages.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="handling-coverages">
+<span id="id1"></span><h1>Handling Coverages<a class="headerlink" href="#handling-coverages" title="Permalink to this headline">¶</a></h1>
+<p>This document will explain the basic principles of handling the most important
+EOxServer data models: coverages. The layout of the data models is explained in
+its <a class="reference external" href="DataModelOverview">own chapter</a>.</p>
+<p>Since all data models in EOxServer are based upon the
+<a class="reference external" href="https://docs.djangoproject.com/en/1.8/ref/models/instances/#django.db.models.Model" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.db.models.Model</span></code></a> class all associated documentation is also
+applicable to all EOxServer models. Highly recommendable is also the <a class="reference external" href="https://docs.djangoproject.com/en/dev/ref/models/querysets/">Django
+QuerySet documentation</a>,</p>
+<div class="section" id="creating-coverages">
+<h2>Creating Coverages<a class="headerlink" href="#creating-coverages" title="Permalink to this headline">¶</a></h2>
+<p>As we allready mentioned, coverages are basically Django models and are also
+created as such.</p>
+<p>The following example creates a <code class="xref py py-class docutils literal"><span class="pre">Rectified</span> <span class="pre">Dataset</span></code>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eoxserver.core.util.timetools</span> <span class="k">import</span> <span class="n">parse_iso8601</span>
+<span class="kn">from</span> <span class="nn">django.contrib.gis</span> <span class="k">import</span> <span class="n">geos</span>
+<span class="kn">from</span> <span class="nn">eoxserver.resources.coverages</span> <span class="k">import</span> <span class="n">models</span>
+
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">RectifiedDataset</span><span class="p">(</span>
+    <span class="n">identifier</span><span class="o">=</span><span class="s2">&quot;SomeIdentifier&quot;</span><span class="p">,</span>
+    <span class="n">size_x</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">size_y</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+    <span class="n">min_x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">min_y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_x</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">max_y</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">srid</span><span class="o">=</span><span class="mi">4326</span><span class="p">,</span>
+    <span class="n">begin_time</span><span class="o">=</span><span class="n">parse_iso8601</span><span class="p">(</span><span class="s2">&quot;2014-05-10&quot;</span><span class="p">),</span>
+    <span class="n">end_time</span><span class="o">=</span><span class="n">parse_iso8601</span><span class="p">(</span><span class="s2">&quot;2014-05-12&quot;</span><span class="p">),</span>
+    <span class="n">footprint</span><span class="o">=</span><span class="n">geos</span><span class="o">.</span><span class="n">MultiPolygon</span><span class="p">(</span><span class="n">geos</span><span class="o">.</span><span class="n">Polygon</span><span class="o">.</span><span class="n">from_bbox</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">)))</span>
+<span class="p">)</span>
+
+<span class="n">dataset</span><span class="o">.</span><span class="n">full_clean</span><span class="p">()</span>
+<span class="n">dataset</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Of course, in a productive environment,  all of the above values would come
+from a actual data and metadata files and would be parsed by
+<a class="reference internal" href="../apidoc/eoxserver.resources.coverages.metadata.html#eoxserver.resources.coverages.metadata.interfaces.MetadataReaderInterface" title="eoxserver.resources.coverages.metadata.interfaces.MetadataReaderInterface"><code class="xref py py-class docutils literal"><span class="pre">metadata</span> <span class="pre">readers</span></code></a>.</p>
+<p>Also, our dataset is currently not linked to any actual raster files. To do
+this, we need to create at least one <code class="xref py py-class docutils literal"><span class="pre">DataItem</span></code> and add it to our Dataset.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eoxserver.backends</span> <span class="k">import</span> <span class="n">models</span> <span class="k">as</span> <span class="n">backends</span>
+
+
+<span class="n">data_item</span> <span class="o">=</span> <span class="n">backends</span><span class="o">.</span><span class="n">DataItem</span><span class="p">(</span>
+    <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s2">&quot;/path/to/your/data.tif&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;image/tiff&quot;</span><span class="p">,</span>
+    <span class="n">semantic</span><span class="o">=</span><span class="s2">&quot;bands&quot;</span>
+<span class="p">)</span>
+
+<span class="n">data_item</span><span class="o">.</span><span class="n">full_clean</span><span class="p">()</span>
+<span class="n">data_item</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This would link the dataset to a local file with the path
+<code class="docutils literal"><span class="pre">/path/to/your/data.tif</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Be cautious with relative paths! Depending on the deployment of the
+server instance the actual meaning of the paths might differ! If you are
+using <code class="xref py py-class docutils literal"><span class="pre">Storages</span></code> or
+<code class="xref py py-class docutils literal"><span class="pre">Packages</span></code> relative paths are of
+course okay and unambigous since they are relative to the package or storage
+base location.</p>
+</div>
+<p>If you want to set up a data item that resides in a package (such as a .zip or
+.tar file) or on a storage (like an HTTP or FTP server) you would need to set
+up the <code class="xref py py-class docutils literal"><span class="pre">Packages</span></code> or
+<code class="xref py py-class docutils literal"><span class="pre">Storages</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http_storage</span> <span class="o">=</span> <span class="n">backends</span><span class="o">.</span><span class="n">Storage</span><span class="p">(</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://example.com/base_path/&quot;</span><span class="p">,</span>
+    <span class="n">storage_type</span><span class="o">=</span><span class="s2">&quot;HTTP&quot;</span>
+<span class="p">)</span>
+<span class="n">http_storage</span><span class="o">.</span><span class="n">full_clean</span><span class="p">()</span>
+<span class="n">http_storage</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+<span class="n">data_item</span><span class="o">.</span><span class="n">storage</span> <span class="o">=</span> <span class="n">http_storage</span>
+<span class="n">data_item</span><span class="o">.</span><span class="n">full_clean</span><span class="p">()</span>
+<span class="n">data_item</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+<span class="c1"># *or* in case of a package</span>
+
+<span class="n">zip_package</span> <span class="o">=</span> <span class="n">backends</span><span class="o">.</span><span class="n">Package</span><span class="p">(</span>
+    <span class="n">location</span><span class="o">=</span><span class="s2">&quot;/path/to/package.zip&quot;</span><span class="p">,</span>
+    <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;ZIP&quot;</span>
+<span class="p">)</span>
+<span class="n">zip_package</span><span class="o">.</span><span class="n">full_clean</span><span class="p">()</span>
+<span class="n">zip_package</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+<span class="n">data_item</span><span class="o">.</span><span class="n">package</span> <span class="o">=</span> <span class="n">zip_package</span>
+<span class="n">data_item</span><span class="o">.</span><span class="n">full_clean</span><span class="p">()</span>
+<span class="n">data_item</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A <code class="docutils literal"><span class="pre">DataItem</span></code> can only be in either a storage <em>or</em> a package. If it
+has defined both a storage and a package, the storage has precedence. If you
+want to have a <code class="docutils literal"><span class="pre">Package</span></code> that resides on a <code class="docutils literal"><span class="pre">Storage</span></code> you must use the
+<code class="xref py py-attr docutils literal"><span class="pre">storage</span></code> of the
+<code class="docutils literal"><span class="pre">Package</span></code>.</p>
+</div>
+</div>
+<div class="section" id="creating-collections">
+<h2>Creating Collections<a class="headerlink" href="#creating-collections" title="Permalink to this headline">¶</a></h2>
+<p>Collections are also created like <a class="reference external" href="CreatingCoverages">Coverages</a>, but usually
+require less initial information (because the metadata is usually collected from
+all entailed datasets).</p>
+<p>The following creates a <code class="xref py py-class docutils literal"><span class="pre">DatasetSeries</span></code>, a collection that can
+entail almost any object of any subtype of <code class="xref py py-class docutils literal"><span class="pre">EOObject</span></code>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">dataset_series</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DatasetSeries</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="s2">&quot;CollectionIdentifier&quot;</span><span class="p">)</span>
+<span class="n">dataset_series</span><span class="o">.</span><span class="n">full_clean</span><span class="p">()</span>
+<span class="n">dataset_series</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The handling of collections is fairly simple: you use <code class="xref py py-meth docutils literal"><span class="pre">insert()</span></code> to add a dataset or
+subcollection to a collection and use <code class="xref py py-meth docutils literal"><span class="pre">remove()</span></code> to remove them.
+Whenever either of the action is performed, the EO metadata of the collection is
+updated according to the entailed datasets.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">dataset_series</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+<span class="n">dataset_series</span><span class="o">.</span><span class="n">footprint</span>  <span class="c1"># is now exactly the same as dataset.footprint</span>
+<span class="n">dataset_series</span><span class="o">.</span><span class="n">begin_time</span> <span class="c1"># is now exactly the same as dataset.begin_time</span>
+<span class="n">dataset_series</span><span class="o">.</span><span class="n">end_time</span>   <span class="c1"># is now exactly the same as dataset.end_time</span>
+
+<span class="n">dataset_series</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+<span class="n">dataset_series</span><span class="o">.</span><span class="n">footprint</span>  <span class="c1"># is now None</span>
+<span class="n">dataset_series</span><span class="o">.</span><span class="n">begin_time</span> <span class="c1"># is now None</span>
+<span class="n">dataset_series</span><span class="o">.</span><span class="n">end_time</span>   <span class="c1"># is now None</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="accessing-coverages">
+<h2>Accessing Coverages<a class="headerlink" href="#accessing-coverages" title="Permalink to this headline">¶</a></h2>
+<p>The simplest way to retrieve a coverage is by its ID:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eoxserver.resources.coverages</span> <span class="k">import</span> <span class="n">models</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Coverage</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="s2">&quot;SomeIdentifier&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This always returns an object of type <code class="xref py py-class docutils literal"><span class="pre">Coverage</span></code>, to “cast” it to the actual
+type:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">cast</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">the <code class="docutils literal"><span class="pre">cast()</span></code> method only makes a database lookup if the actual type
+and the current type do not match. Otherwise (and only in this case), the
+object itself is returned and no lookup is performed.</p>
+</div>
+<p>If you know the exact type of the coverage you want to look up you can also
+make the query with the desired type:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">RectifiedDataset</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="s2">&quot;SomeIdentifier&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the <code class="docutils literal"><span class="pre">get()</span></code> query did not match any object (or possible more than one) an
+exception is raised.</p>
+<p>If you want to query more than one coverage at one (e.g: all coverages in a
+certain time period) the <code class="docutils literal"><span class="pre">filter()</span></code> method is what you want:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eoxserver.core.util.timetools</span> <span class="k">import</span> <span class="n">parse_iso8601</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">parse_iso8601</span><span class="p">(</span><span class="s2">&quot;2014-05-10&quot;</span><span class="p">)</span>
+<span class="n">stop</span> <span class="o">=</span> <span class="n">parse_iso8601</span><span class="p">(</span><span class="s2">&quot;2014-05-12&quot;</span><span class="p">)</span>
+<span class="n">coverages_qs</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Coverage</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+    <span class="n">begin_time__gte</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">end_time__lte</span><span class="o">=</span><span class="n">stop</span>
+<span class="p">)</span>
+<span class="k">for</span> <span class="n">coverage</span> <span class="ow">in</span> <span class="n">coverages_qs</span><span class="p">:</span>
+    <span class="o">...</span> <span class="c1"># Do whatever you like with the coverage</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal"><span class="pre">filter()</span></code> returns a <a class="reference external" href="https://docs.djangoproject.com/en/1.8/ref/models/querysets/#django.db.models.query.QuerySet" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">Django</span> <span class="pre">QuerySet</span></code></a> which can be chained to further refine the
+actual query. There is a lot of <a class="reference external" href="https://docs.djangoproject.com/en/dev/topics/db/queries/">documentation on the topic</a> I
+highly recommend.</p>
+</div>
+<p>Usually coverages are organized in collections. If you want to iterate over a
+collection simply do so:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">dataset_series</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DatasetSeries</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="n">identifier</span><span class="o">=</span><span class="s2">&quot;CollectionIdentifier&quot;</span>
+<span class="p">)</span>
+<span class="k">for</span> <span class="n">eo_object</span> <span class="ow">in</span> <span class="n">dataset_series</span><span class="p">:</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>It is important to note that such an iteration <em>does not</em> yield coverages, but
+<code class="xref py py-class docutils literal"><span class="pre">EOObjects</span></code>. This is due
+to the fact that collections might also contain other collections that don’t
+necessarily have to inherit from <code class="xref py py-class docutils literal"><span class="pre">Coverage</span></code>. If you just want to explicitly
+get all <code class="docutils literal"><span class="pre">Coverages</span></code> from a collection you can do it like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">coverages_qs</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Coverage</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+    <span class="n">collections__in</span><span class="o">=</span><span class="p">[</span><span class="n">dataset_series</span><span class="o">.</span><span class="n">pk</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also combine the filters for searches within a collection:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">coverages_qs</span> <span class="o">=</span> <span class="n">dataset_series</span><span class="o">.</span><span class="n">eo_objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+    <span class="n">begin_time__gte</span><span class="o">=</span><span class="n">start</span><span class="p">,</span> <span class="n">end_time__lte</span><span class="o">=</span><span class="n">stop</span>
+<span class="p">)</span>
+
+<span class="c1"># append an additional geometry search</span>
+<span class="n">coverages_qs</span> <span class="o">=</span> <span class="n">coverages_qs</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+    <span class="n">footprint__intersects</span><span class="o">=</span><span class="n">geos</span><span class="o">.</span><span class="n">Polygon</span><span class="o">.</span><span class="n">from_bbox</span><span class="p">((</span><span class="mi">30</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">40</span><span class="p">))</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">There is no intrinsic order of <code class="docutils literal"><span class="pre">EOObjects</span></code> in a <code class="docutils literal"><span class="pre">Collection</span></code>, but
+the <code class="docutils literal"><span class="pre">EOObjects</span></code> can be sorted when they are retrieved from a collection.
+(e.g: by <code class="docutils literal"><span class="pre">identifier</span></code>, <code class="docutils literal"><span class="pre">begin_time</span></code> or <code class="docutils literal"><span class="pre">end_time</span></code>) using the
+QuerySets <code class="docutils literal"><span class="pre">order_by()</span></code> method.</p>
+</div>
+</div>
+<div class="section" id="accessing-coverage-data">
+<h2>Accessing Coverage Data<a class="headerlink" href="#accessing-coverage-data" title="Permalink to this headline">¶</a></h2>
+<p>As already discussed, the actual data and metadata files of a coverage are
+referenced via its associated <code class="xref py py-class docutils literal"><span class="pre">DataItems</span></code>. First, it is necessary to select the
+<code class="docutils literal"><span class="pre">DataItems</span></code> that are actually relevant. This depends on the current situation:
+for example in a metadata oriented request (such as the WCS DescribeCoverage
+operation) only metadata items will be accessed (and only if they are of
+relevance):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">metadata_items</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">data_items</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+    <span class="n">semantic</span><span class="o">=</span><span class="s2">&quot;metadata&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;eogml&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The above example selected only metadata items with the format “eogml”.</p>
+<p>In some cases the bands of a coverage are separated into multiple files that
+have a <code class="docutils literal"><span class="pre">semantic</span></code> like this: “bands[x:y]”. To select only those, we can use
+the <a class="reference external" href="https://docs.djangoproject.com/en/dev/ref/models/querysets/#std:fieldlookup-startswith">startswith field lookup</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">band_items</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">data_items</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+    <span class="n">semantic__startswith</span><span class="o">=</span><span class="s2">&quot;bands&quot;</span>
+<span class="p">)</span>
+<span class="k">for</span> <span class="n">band_item</span> <span class="ow">in</span> <span class="n">band_items</span><span class="p">:</span>
+    <span class="c1"># TODO: parse the band index or start/stop indices</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>Now that we have our relevant <code class="docutils literal"><span class="pre">DataItems</span></code> we can start using them.</p>
+<p>We also explained that the DataItems can reside on a <code class="xref py py-class docutils literal"><span class="pre">Storage</span></code> or inside a <code class="xref py py-class docutils literal"><span class="pre">Package</span></code>. Each storage has a specific storage type
+and each package has a specific format. What types and formats are available
+depends on your instance configuration, since the formats are implemented as
+<code class="xref py py-class docutils literal"><span class="pre">Components</span></code>. EOxServer ships with
+support of <code class="xref py py-mod docutils literal"><span class="pre">local</span></code>, <code class="xref py py-mod docutils literal"><span class="pre">HTTP</span></code>, <code class="xref py py-mod docutils literal"><span class="pre">FTP</span></code> and <code class="xref py py-mod docutils literal"><span class="pre">Rasdaman</span></code> storages and with <code class="xref py py-mod docutils literal"><span class="pre">ZIP</span></code> and <code class="xref py py-mod docutils literal"><span class="pre">TAR</span></code> packages. This list of both storages and
+packages can be easily extended by creating plugin <code class="xref py py-class docutils literal"><span class="pre">Components</span></code> implementing either the
+<a class="reference internal" href="../apidoc/eoxserver.backends.html#eoxserver.backends.interfaces.FileStorageInterface" title="eoxserver.backends.interfaces.FileStorageInterface"><code class="xref py py-class docutils literal"><span class="pre">FileStorageInterface</span></code></a>,
+<a class="reference internal" href="../apidoc/eoxserver.backends.html#eoxserver.backends.interfaces.ConnectedStorageInterface" title="eoxserver.backends.interfaces.ConnectedStorageInterface"><code class="xref py py-class docutils literal"><span class="pre">ConnectedStorageInterface</span></code></a> or the
+<a class="reference internal" href="../apidoc/eoxserver.backends.html#eoxserver.backends.interfaces.PackageInterface" title="eoxserver.backends.interfaces.PackageInterface"><code class="xref py py-class docutils literal"><span class="pre">PackageInterface</span></code></a>.
+See the <a class="reference internal" href="plugins.html#plugins"><span class="std std-ref">documentation for writing Plugins</span></a> for further info.</p>
+<p>To ease the actual data access, there are two main methods: <code class="xref py py-func docutils literal"><span class="pre">retrieve()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">connect()</span></code>.</p>
+<p>Both functions have in common, that they operate on <code class="docutils literal"><span class="pre">DataItems</span></code> which are
+passed as the first parameter to the function.</p>
+<p>The function <code class="xref py py-func docutils literal"><span class="pre">retrieve()</span></code> returns a
+path to the local file: for already local files, the path is simply passed,
+in other cases the file is downloaded, unpacked, retrieved or whatever is
+necessary to make the file locally accessible.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">data_item</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">data_items</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">semantic</span><span class="o">=</span><span class="s2">&quot;metadata&quot;</span><span class="p">)</span>
+<span class="n">local_path</span> <span class="o">=</span> <span class="n">retrieve</span><span class="p">(</span><span class="n">data_item</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You do not have to care for cleanup afterwards, since this is handled by
+EOxServers cache layer.</p>
+<p>The function <code class="xref py py-func docutils literal"><span class="pre">connect()</span></code> works
+similarly, apart from the fact that it takes also storages into account that
+do not provide files, but streams of data. Currently this only includes the
+<code class="xref py py-mod docutils literal"><span class="pre">Rasdaman</span> <span class="pre">Storage</span></code>. If this
+function does not deal with a <a class="reference internal" href="../apidoc/eoxserver.backends.html#eoxserver.backends.interfaces.ConnectedStorageInterface" title="eoxserver.backends.interfaces.ConnectedStorageInterface"><code class="xref py py-class docutils literal"><span class="pre">Connected</span> <span class="pre">Storages</span></code></a> it behaves like the
+<code class="xref py py-func docutils literal"><span class="pre">retrieve()</span></code> function.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="processes.html" class="btn btn-neutral float-right" title="Processes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="soap_proxy.html" class="btn btn-neutral float-left" title="SOAP Proxy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

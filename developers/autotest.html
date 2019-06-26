@@ -1,0 +1,370 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The autotest instance &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="SOAP Proxy" href="soap_proxy.html" />
+    <link rel="prev" title="Metadata Formats" href="metadata_formats.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developers’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_model.html">Data Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migrations.html">Data Migrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services.html">Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_formats.html">Data Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metadata_formats.html">Metadata Formats</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The <em>autotest</em> instance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fixtures">Fixtures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#deployment">Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-tests">Run tests</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#testing-configuration">Testing Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xml-schemas">XML Schemas</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="handling_coverages.html">Handling Coverages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="processes.html">Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_dev_guide.html">Asynchronous Task Processing - Developers Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-style-guide.html">EOxServer code style guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Developers’ Guide</a> &raquo;</li>
+        
+      <li>The <em>autotest</em> instance</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/developers/autotest.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-autotest-instance">
+<span id="autotest"></span><span id="index-0"></span><h1><a class="toc-backref" href="#table-of-contents">The <em>autotest</em> instance</a><a class="headerlink" href="#the-autotest-instance" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#the-autotest-instance" id="id2">The <em>autotest</em> instance</a><ul>
+<li><a class="reference internal" href="#installation" id="id3">Installation</a></li>
+<li><a class="reference internal" href="#fixtures" id="id4">Fixtures</a></li>
+<li><a class="reference internal" href="#deployment" id="id5">Deployment</a></li>
+<li><a class="reference internal" href="#run-tests" id="id6">Run tests</a><ul>
+<li><a class="reference internal" href="#testing-configuration" id="id7">Testing Configuration</a></li>
+<li><a class="reference internal" href="#xml-schemas" id="id8">XML Schemas</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The <em>autotest</em> instance is a preconfigured EOxServer instance used for
+integration testing. It provides test data and accompanying fixtures,
+integration test procedures and expected results for test comparison.</p>
+<p>Technically it is a whole EOxServer instance with an additional Django app that
+provides the test code.</p>
+<p>The instance is preconfigured, and fixtures can be
+loaded</p>
+<div class="section" id="installation">
+<h2><a class="toc-backref" href="#table-of-contents">Installation</a><a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>To use the autotest instance, make sure that EOxServer was installed. You can
+obtain it via git:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">EOxServer</span><span class="o">/</span><span class="n">autotest</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">autotest</span>
+</pre></div>
+</div>
+<p>or from the projects release page:</p>
+<blockquote>
+<div>wget <a class="reference external" href="https://github.com/EOxServer/autotest/archive/release">https://github.com/EOxServer/autotest/archive/release</a>-&lt;version&gt;.tar.gz
+tar -xzvf release-&lt;version&gt;.tar.gz
+cd autotest</div></blockquote>
+<p>If you just want to run the tests with the default settings you should be fine
+now and <a class="reference internal" href="#run-tests"><span class="std std-ref">can start testing</span></a>. If you want to run the instance,
+you have create the database first:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">syncdb</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can run the <code class="docutils literal"><span class="pre">syncdb</span></code> command with the <code class="docutils literal"><span class="pre">--no-input</span></code> option and run
+<code class="docutils literal"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">loaddata</span> <span class="pre">auth_data.json</span></code> to load the default admin
+fixtures. This adds an administrator account for the admin app. The
+username and password is both <code class="docutils literal"><span class="pre">admin</span></code>. This account is, of course,
+<strong>not</strong> recommended for productive use.</p>
+</div>
+</div>
+<div class="section" id="fixtures">
+<h2><a class="toc-backref" href="#table-of-contents">Fixtures</a><a class="headerlink" href="#fixtures" title="Permalink to this headline">¶</a></h2>
+<p>In order to load the actual data fixtures, run the following commands:</p>
+<p>For MERIS UInt16 images:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">loaddata</span> <span class="n">meris_range_type</span><span class="o">.</span><span class="n">json</span> <span class="n">meris_coverages_uint16</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+<p>For MERIS RGB images:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">loaddata</span> <span class="n">range_types</span><span class="o">.</span><span class="n">json</span> <span class="n">meris_coverages_rgb</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+<p>For referenceable ASAR images:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">loaddata</span> <span class="n">asar_range_type</span><span class="o">.</span><span class="n">json</span> <span class="n">asar_coverages</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+<p>To load all available fixtures type:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">loaddata</span> <span class="n">autotest</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">fixtures</span><span class="o">/*.</span><span class="n">json</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="deployment">
+<h2><a class="toc-backref" href="#table-of-contents">Deployment</a><a class="headerlink" href="#deployment" title="Permalink to this headline">¶</a></h2>
+<p>The autotest instance can be deployed <a class="reference internal" href="../users/instance_creation.html#eoxserver-deployment"><span class="std std-ref">like any other EOxServer instance</span></a>. The fastest way to actually access the data just run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runserver</span> <span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span><span class="p">:</span><span class="mi">8000</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="run-tests">
+<span id="id1"></span><h2><a class="toc-backref" href="#table-of-contents">Run tests</a><a class="headerlink" href="#run-tests" title="Permalink to this headline">¶</a></h2>
+<p>Running tests does not require any deployment or even a database
+synchronization. To run all autotest testcases just call:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">test</span> <span class="n">autotest_services</span> <span class="o">-</span><span class="n">v2</span>
+</pre></div>
+</div>
+<p>If you only want to run a specific test case or only a specific test method run
+this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">test</span> <span class="n">autotest_services</span><span class="o">.</span><span class="n">WCS20GetCapabilitiesValidTestCase</span><span class="o">.</span><span class="n">testValid</span>
+</pre></div>
+</div>
+<div class="section" id="testing-configuration">
+<h3><a class="toc-backref" href="#table-of-contents">Testing Configuration</a><a class="headerlink" href="#testing-configuration" title="Permalink to this headline">¶</a></h3>
+<p>Our basic environment to test EOxServer on is a CentOS 6.5 operating system. On
+other systems some tests might produce slightly different results, which is due
+to slight variations of dependency software or 64 to 32 bit architecture
+differences. For this reason, the following setting can be adjusted to skip
+binary image comparisons:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">testing</span><span class="p">]</span>
+<span class="n">binary_raster_comparison_enabled</span><span class="o">=</span><span class="n">false</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="xml-schemas">
+<h3><a class="toc-backref" href="#table-of-contents">XML Schemas</a><a class="headerlink" href="#xml-schemas" title="Permalink to this headline">¶</a></h3>
+<p>Many tests of the autotest suite perform XML Schema validation. By default,
+the schemas will be fetched dynamically, but this really slows down the the
+tests. Because of this, we prepared a schemas repository that can be downloaded
+and used instead.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>wget https://github.com/EOxServer/schemas/archive/&lt;version&gt;.tar.gz
+tar -xzvf &lt;version&gt;.tar.gz
+export XML_CATALOG_FILES=`pwd`&quot;/schemas-&lt;version&gt;/catalog.xml&quot;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="soap_proxy.html" class="btn btn-neutral float-right" title="SOAP Proxy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="metadata_formats.html" class="btn btn-neutral float-left" title="Metadata Formats" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

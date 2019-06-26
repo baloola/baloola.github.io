@@ -1,0 +1,1004 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>RFC 18: Operator Interface Architecture &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="RFC 19: Migrate project repository from svn to git" href="rfc19.html" />
+    <link rel="prev" title="RFC 17: Configuration of Supported Output Formats and CRSes" href="rfc17.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Requests for Comments</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#rfc-procedures">RFC Procedures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#writing-rfcs">Writing RFCs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#rfcs">RFCs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="policies.html">RFC Policies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="howto.html">Guidelines for Requests for Comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc0.html">RFC 0: Project Steering Committee Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc1.html">RFC 1: An Extensible Software Architecture for EOxServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc2.html">RFC 2: Extension Mechanism for EOxServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc3.html">RFC 3: OGC Service Extensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc4.html">RFC 4: Data Packaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc5.html">RFC 5: Processing Chains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc6.html">RFC 6: Directory Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc7.html">RFC 7: Release Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc8.html">RFC 8: SVN Commit Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc9.html">RFC 9: SOAP Binding of WCS GetCoverage Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc10.html">RFC 10: SOAP Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc11.html">RFC 11: WPS 1.0.0 Interface Prototype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc12.html">RFC 12: Backends for the Data Access Layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc13.html">RFC 13: WCS-T 1.1 Interface Prototype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc14.html">RFC 14: Asynchronous Task Processing (ATP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc15.html">RFC 15: Access Control Support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc16.html">RFC 16: Referenceable Grid Coverages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc17.html">RFC 17: Configuration of Supported Output Formats and CRSes</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">RFC 18: Operator Interface Architecture</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basic-concepts">Basic Concepts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#detailed-concept-description">Detailed Concept Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementation-details">Implementation Details</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-component-coverage-component">Example Component: Coverage Component</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#technologies-used">Technologies Used</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#voting-history">Voting History</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#traceability">Traceability</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rfc19.html">RFC 19: Migrate project repository from svn to git</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Requests for Comments</a> &raquo;</li>
+        
+      <li>RFC 18: Operator Interface Architecture</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/rfc/rfc18.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="rfc-18-operator-interface-architecture">
+<span id="rfc-18"></span><h1>RFC 18: Operator Interface Architecture<a class="headerlink" href="#rfc-18-operator-interface-architecture" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Stephan Krause, Fabian Schindler</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Created:</th><td class="field-body">2012-05-08</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Last Edit:</th><td class="field-body">$Date$</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Status:</th><td class="field-body">PENDING</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Discussion:</th><td class="field-body">n/a</td>
+</tr>
+</tbody>
+</table>
+<p>The new Operator Interface of EOxServer shall become the main entrance point
+for operators who want to administrate an EOxServer instance. The Web UI design
+shall focus on usability and support for frequent administration tasks.</p>
+<p>The architecture of the Operator Interface shall be modular and extensible in
+order to accomodate for future extension and facilitate the maintenance of the
+software.</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>At the moment operators have two possibilities to administrate an EOxServer
+instance:</p>
+<ul class="simple">
+<li>Command Line Tools</li>
+<li>Administration Web Client</li>
+</ul>
+<p>The current Administration Client implementation is based on the
+<a class="reference external" href="https://docs.djangoproject.com/en/1.8/ref/contrib/admin/#module-django.contrib.admin" title="(in Django v1.8)"><code class="xref py py-mod docutils literal"><span class="pre">django.contrib.admin</span></code></a> package and very tightly coupled with the data
+model of EOxServer. Whereas this approach has made the development
+considerably easier it has several severe drawbacks with respect to usability
+and safety of the system:</p>
+<ul class="simple">
+<li>the EOxServer data model is fairly complicated and handling it requires a deep
+understanding of the EO-WCS standard as well as Django concepts like model
+inheritance</li>
+<li>certain actions trigger long-running processing tasks on the server side that
+are so far hidden from the operators</li>
+<li>there is no support for asynchronous requests which would be the preferred
+method</li>
+<li>error reporting and status monitoring is only minimal</li>
+<li>the current Admin Interface allows to edit database records without checks
+for consistency; the danger of breaking the system unintentionally is quite
+high</li>
+</ul>
+<p>Therefore a new web-based Operator Interface shall be designed that facilitates
+the administration tasks. It shall be more usable in the sense that</p>
+<ul class="simple">
+<li>the design shall focus on frequent administration tasks rather than the data
+model</li>
+<li>the interface shall provide guidance for operators</li>
+<li>safety shall be increased by checking the consistency of input data and
+organizing the operator actions in a way that precludes unintentionally
+breaking the system</li>
+<li>the operator shall have an overview of the processing tasks going on in the
+backend</li>
+</ul>
+<p>From the software point of view, the design shall focus on</p>
+<ul class="simple">
+<li>modularity and extensibility, thus preparing for future extensions of
+EOxServer and increasing maintainability</li>
+<li>reusing existing administration code like Coverage Managers</li>
+<li>separation of model, view and controller components where model and controller
+components should be concentrated on the server side and the view on the
+client side</li>
+</ul>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>The Operator Interface shall support the most frequent tasks for administration.
+These include:</p>
+<ul class="simple">
+<li>registering a Dataset</li>
+<li>handling the Range Types</li>
+<li>creating a Dataset Series</li>
+<li>creating a Stitched Mosaic</li>
+<li>deleting a Dataset, Dataset Series or Stitched Mosaic</li>
+<li>adding a Dataset to a Dataset Series or Stitched Mosaic</li>
+<li>removing a Dataset from a Dataset Series or Stitched Mosaic</li>
+<li>creating / adding / removing a data source to/from a Dataset Series or
+Stitched Mosaic</li>
+<li>viewing the logs</li>
+<li>enabling / disabling of components</li>
+<li>user management</li>
+</ul>
+</div>
+<div class="section" id="basic-concepts">
+<h2>Basic Concepts<a class="headerlink" href="#basic-concepts" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center" id="id4">
+<span id="fig-opclient-uml"></span><img alt="../_images/opclient_uml.png" src="../_images/opclient_uml.png" />
+<p class="caption"><span class="caption-text"><em>The Operator Interface structure expressed in a UML class diagram.</em></span></p>
+</div>
+<p>The Operator Interface shall be organized in so called Operator Components.
+Operator Components correspond to groups of related packages and modules of
+EOxServer or its extensions. The most important components at the moment
+are <code class="xref py py-mod docutils literal"><span class="pre">eoxserver.core</span></code> and <a class="reference internal" href="../apidoc/eoxserver.resources.coverages.html#module-eoxserver.resources.coverages" title="eoxserver.resources.coverages"><code class="xref py py-mod docutils literal"><span class="pre">eoxserver.resources.coverages</span></code></a>.</p>
+<p>An Operator Component bundles Actions and Views related to the specific
+EOxServer component in the backend.</p>
+<p>Actions provide an interface for operators to edit the system configuration
+including the data and metadata stored in the database. Most Actions are
+related to resources, e.g. coverages or Dataset Series.</p>
+<p>In order to make the functionality of these Actions available, the Operator
+Interface shall include Action Views. Action Views shall group actions and
+information that are closely related to each other.</p>
+<p>Each Operator Component may contain several Action Views. They represent a UI
+for access to the actions in the backend. Several Actions may be attached to a
+single Action View, and Actions may appear in several Action Views.</p>
+<p>For example, an Action View might show a list of Rectified Datasets with
+basic metadata which allows to create and delete items. Creation and deletion
+should each be modeled as Actions on the server side. Another Action View may
+show the whole information for a single Rectified Dataset and include
+forms and inputs to edit the metadata.</p>
+<p>As far as possible, the Action Views should be composed of reusable Widgets.
+Widgets consist of HTML and/or JavaScript. The aforementioned list of
+Rectified Datasets would be a typical example. It could be used also in the
+Dataset Series View.</p>
+<p>The core implementation of the Operator Interface shall provide reusable
+components to build Widgets of (e.g. lists …).</p>
+<p>The communication between the Action Views and the underlying Actions should
+be done via specific Interfaces. One REST-based interface shall be implemented
+whiche shall allow to read data and metadata to be displayed, and one
+RPC-based interface shall be implemented in order to trigger actions on the
+server side.</p>
+</div>
+<div class="section" id="detailed-concept-description">
+<h2>Detailed Concept Description<a class="headerlink" href="#detailed-concept-description" title="Permalink to this headline">¶</a></h2>
+<p>In this chapter, the introduced concepts will be elaborated in detail.</p>
+<div class="section" id="layout-of-the-operator-interface">
+<h3>Layout of the Operator Interface<a class="headerlink" href="#layout-of-the-operator-interface" title="Permalink to this headline">¶</a></h3>
+<p>The entry point to the operator interface shall be a dashboard-like page. It is
+envisaged to present a tab for each Operator Component; this tab shall
+contain an overview of the Action Views the Operator Component exhibits.</p>
+<p>So, on the client side, each Operator Component should provide:</p>
+<ul class="simple">
+<li>A name for the Operator Component that will be shown as caption of the
+tab</li>
+<li>the overview of the Operator Component, which links to the Action Views</li>
+<li>the Action Views</li>
+<li>the Widgets used in the Action Views</li>
+<li>a widget to be displayed on the entry page dashboard (optional)</li>
+</ul>
+<p>Each visual representation of the Operator Interface, namely the entry page
+dashboard, the Operator Component overview and the Action Views consist of:</p>
+<ul class="simple">
+<li>A Django HTML template</li>
+<li>A JavaScript View class</li>
+<li>A python class, entailing arbitrary information and “glue” between the other
+two parts</li>
+</ul>
+<p>Only the third part needs to be adjusted when creating a new visual element,
+for both the template and the JavaScript class defaults shall help with the
+usage.</p>
+<p>Action Views and Operator Component overviews should fit into the same basic
+layout; customizable CSS should be used for styling. The design of the entry
+page design (dashboard) may differ from the design of the sub-pages.</p>
+</div>
+<div class="section" id="components-and-operator-components">
+<h3>Components and Operator Components<a class="headerlink" href="#components-and-operator-components" title="Permalink to this headline">¶</a></h3>
+<p>Proposed Operator Components:</p>
+<ul class="simple">
+<li>User Management</li>
+<li>Configuration Management</li>
+<li>Action Control Center</li>
+<li>Coverages</li>
+</ul>
+</div>
+<div class="section" id="action-views">
+<h3>Action Views<a class="headerlink" href="#action-views" title="Permalink to this headline">¶</a></h3>
+<p>Proposed Action Views:</p>
+<ul class="simple">
+<li>User Management<ul>
+<li>add/delete users</li>
+<li>edit permissions</li>
+</ul>
+</li>
+<li>Configuration Management<ul>
+<li>enable and disable components</li>
+<li>edit configuration settings</li>
+</ul>
+</li>
+<li>Action Control Center<ul>
+<li>overview over running and completed actions</li>
+<li>detail views for actions, including status and logs</li>
+</ul>
+</li>
+<li>Coverages<ul>
+<li>For both Rectified and Referenceable datasets:<ul>
+<li>list view including limited update and delete actions</li>
+<li>detail view including update and delete actions</li>
+<li>create view to create a new dataset</li>
+</ul>
+</li>
+<li>For both Rectified Stitched Mosaics and Dataset Series<ul>
+<li>list view including limited update and delete actions</li>
+<li>detail view including update, delete and synchronize actions and a
+list display of all contained datasets and data sources including actions
+to insert/remove data sources or datasets</li>
+<li>create view to create a new dataset</li>
+</ul>
+</li>
+<li>list view of Range Types with create, limited update and delete actions</li>
+<li>detail view of Range Types with update and delete actions and a list
+display of all included Bands with update actions</li>
+<li>list view of Nil Values with create, update and delete actions</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="actions">
+<h3>Actions<a class="headerlink" href="#actions" title="Permalink to this headline">¶</a></h3>
+<p>The Actions shall be represented by corresponding Python classes on the
+server side. Actions shall be reusable in the sense that they can also be
+invoked using a CLI command.</p>
+<p>Most Actions are tied to resources like coverages. Resources in that sense
+should not be confused with database models. In most cases, a resource will be
+tied to a higher-level object: coverage resources for instance shall be tied to
+the wrappers defined in <code class="xref py py-mod docutils literal"><span class="pre">eoxserver.resources.coverages.wrappers</span></code>.</p>
+<p>It should be possible to invoke Actions in synchronous and asynchronous mode.
+For the asynchronous mode, the existing facilities of the <a class="reference internal" href="../users/atp_sum.html#atp-sum"><span class="std std-ref">Asynchronous Task Processing</span></a>
+(the <a class="reference internal" href="../apidoc/eoxserver.resources.processes.html#module-eoxserver.resources.processes" title="eoxserver.resources.processes"><code class="xref py py-mod docutils literal"><span class="pre">eoxserver.resources.processes</span></code></a>) shall be adapted and extended. For
+this purpose, the <code class="xref py py-class docutils literal"><span class="pre">eoxserver.resources.processes.models.LogRecord</span></code> shall
+receive an additional field <code class="docutils literal"><span class="pre">level</span></code>, which specifies the log level the log
+record was created with. This allows easy filtering for a minimum log level and
+e.g: only show errors and warnings raised during a process.</p>
+<p>Every Action shall expose methods to</p>
+<ul class="simple">
+<li>validate the parameters</li>
+<li>start the Action and return the ID of that action</li>
+<li>stop the Action</li>
+<li>check the status of the Action</li>
+<li>check the log messages issued by the Action (maybe this is better implemented
+using the Resource mechanism)</li>
+</ul>
+<p>On the client side, Actions are wrapped with ActionProxy objects that offer an
+easy API and abstraction for the remote invocation of the Actions methods. For
+Asynchronous Action the AsyncActionProxy offers a specialization.</p>
+</div>
+<div class="section" id="resources">
+<h3>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h3>
+<p>Resources are an interface to the data stored as models in the database but
+also custom data sources are possible. When applied to models, a resource
+allows the create, read, update and delete (CRUD) methods, but this may be
+restricted per resource for certain models where the modification of data
+requires a more elaborate handling.</p>
+<p>On the client side, Resources are wrapped in Models and Collections, which
+provide a layer of abstraction and handle the communication with and
+consume the REST interface offered by the server. A Model is the abstraction of
+a single dataset and a Collection is a set of models in a certain context.</p>
+<p>Both Models and Collections offer certain events, to which the client can react
+in a suitable manner. This may trigger a synchronization of data with the
+server or a (re-)rendering of data on the client in an associated view.
+Additionally, models offer validation, which can be used for example to check
+if all mandatory fields are set, or inputs are syntactically correct.</p>
+</div>
+<div class="section" id="interfaces">
+<h3>Interfaces<a class="headerlink" href="#interfaces" title="Permalink to this headline">¶</a></h3>
+<p>The following interfaces will be used to exchange data between the server and
+the client:</p>
+<div class="section" id="rpc-interface">
+<h4>RPC Interface<a class="headerlink" href="#rpc-interface" title="Permalink to this headline">¶</a></h4>
+<p>Actions shall be triggered via the RPC Interface. Invocation from the Operator
+Interface can be synchronous or asynchronous. Incoming requests from the
+Operator Interface shall be dispatched to the respective Actions using a
+common mechanism that implements the following workflow:</p>
+<ul class="simple">
+<li>validate the parameters conveyed with the request, using the Action interface</li>
+<li>in case they are invalid, return an error code</li>
+<li>in case they are valid, proceed</li>
+<li>queue the Action in the asynchronous processing queue</li>
+<li>return a response that contains the Action ID</li>
+</ul>
+<p>Using the Action ID, the Operator Interface can</p>
+<ul class="simple">
+<li>check the status of the Action</li>
+<li>view the log messages issued by the Action</li>
+<li>cancel the Action</li>
+</ul>
+</div>
+<div class="section" id="rest-interface">
+<h4>REST Interface<a class="headerlink" href="#rest-interface" title="Permalink to this headline">¶</a></h4>
+<p>The REST interface shall be used for resource data retrieval and simple
+modification. Usually a REST interface is tightly bound to a database model
+and its fields. Thus modification of data via REST should only be possible
+in simple situations where there is no dependency tp other resources and no
+other synchronization mechanism necessary.</p>
+<p>Where the REST interface is not applicable, the RPC interface shall be used.</p>
+</div>
+</div>
+<div class="section" id="directory-structure">
+<h3>Directory Structure<a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h3>
+<p>For the server part, the directory structure of the operator interface follows
+the standard guidelines for Django apps (as created with the <cite>django-admin.py
+startapp</cite> command):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>operator/
+|-- action.py
+|-- common.py
+|-- component.py
+|-- __init__.py
+|-- resource.py
+|-- sites.py
+|-- static
+|   `-- operator
+|       |-- actions.js
+|       |-- actionviews.js
+|       |-- componentviews.js
+|       |-- main.js
+|       |-- router.js
+|       `-- widgets.js
+`-- templates
+    `-- operator
+        |-- base_actionview.html
+        |-- base_component.html
+        `-- operatorsite.html
+</pre></div>
+</div>
+<p>In the templates directory all Django templates are held. It is encouraged to
+use the same scheme for all components to be implemented.</p>
+<p>The static files are placed in the sub-folder “operator” which serves as a
+namespaces for javascript module retrieval. All components shall use an
+additional unique subfolder to avoid collision. For example:
+“operator/coverages”.</p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="implementation-details">
+<h2>Implementation Details<a class="headerlink" href="#implementation-details" title="Permalink to this headline">¶</a></h2>
+<p>In this chapter, the proposed implementation API of components explained.</p>
+<div class="section" id="implementing-components">
+<h3>Implementing Components<a class="headerlink" href="#implementing-components" title="Permalink to this headline">¶</a></h3>
+<p>To create a component, one simply shall have to subclass the abstract base
+class provided by the Operator Interface API. It shall be easily adjustible
+by using either a custom JavaScript view class or a different django template.</p>
+<p>To further improve the handling of components, several default properties
+within the subclass can be used, like title, name, description or others. Of
+course default values shall be provided.</p>
+<p>Components are registered by the Operator Interface API function
+<code class="docutils literal"><span class="pre">register()</span></code>, which shall be sufficient to append it to the visualized
+components.</p>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">operatorinterface</span> <span class="k">as</span> <span class="nn">operator</span>
+
+<span class="k">class</span> <span class="nc">MyAComponent</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">Component</span><span class="p">):</span>
+    <span class="n">dependencies</span> <span class="o">=</span> <span class="p">[</span><span class="n">SomeOtherComponent</span><span class="p">]</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ComponentA&quot;</span>
+    <span class="n">javascript_class</span> <span class="o">=</span> <span class="s2">&quot;operator/component/MyAComponentView&quot;</span>
+
+<span class="n">operator</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">MyAComponent</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="implementing-action-views">
+<h3>Implementing Action Views<a class="headerlink" href="#implementing-action-views" title="Permalink to this headline">¶</a></h3>
+<p>The implementation of action views is very much like the implementation of
+components and should follow the same rules concerning JavaScript view classes
+and django templates.</p>
+<p>Additionally it shall have two fields named <code class="docutils literal"><span class="pre">actions</span></code> and <code class="docutils literal"><span class="pre">resources</span></code>, each
+is a list of Action or Resource classes.</p>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyTestActionView</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">ActionView</span><span class="p">):</span>
+    <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">MyTestAction</span><span class="p">]</span>
+    <span class="n">resources</span> <span class="o">=</span> <span class="p">[</span><span class="n">ResourceA</span><span class="p">,</span> <span class="n">ResourceB</span><span class="p">]</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;mytestactionview&quot;</span>
+    <span class="n">javascript_class</span> <span class="o">=</span> <span class="s2">&quot;operator/component/MyTestActionView&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="implementing-resources">
+<h3>Implementing Resources<a class="headerlink" href="#implementing-resources" title="Permalink to this headline">¶</a></h3>
+<p>Implementing Resources should be as easy as implementing actions. As with
+Actions, Resources are implemented by subclassing the according abstract base
+class and providing several options. The only mandatory arguments shall be the
+Django model to be externalized, optional are the permissions required for this
+resource, maybe means to limit the acces to read-/write-only (maybe coupled
+to the provided permissions) and the inc-/exclusion of model fields.</p>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyResource</span><span class="p">(</span><span class="n">ModelResource</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">MyModel</span>
+    <span class="n">exclude</span> <span class="o">=</span> <span class="p">(</span> <span class="o">...</span> <span class="p">)</span>
+    <span class="n">include</span> <span class="o">=</span> <span class="p">(</span> <span class="o">...</span> <span class="p">)</span>
+    <span class="n">permissions</span> <span class="o">=</span> <span class="p">[</span> <span class="o">...</span> <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="implementing-actions">
+<h3>Implementing Actions<a class="headerlink" href="#implementing-actions" title="Permalink to this headline">¶</a></h3>
+<p>To implement a new Action, it shall be enough to inherit from an abstract base
+class and implement the required methods. Once registered the operator
+framework shall handle the URL and method registration.</p>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ProgressAction</span><span class="p">(</span><span class="n">BaseAction</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;progressaction&quot;</span>
+    <span class="n">permissions</span> <span class="o">=</span> <span class="p">[</span> <span class="o">...</span> <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="p">):</span>
+        <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="p">):</span>
+        <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">view_logs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj_id</span><span class="p">,</span> <span class="n">timeframe</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="access-control">
+<h3>Access Control<a class="headerlink" href="#access-control" title="Permalink to this headline">¶</a></h3>
+<p>The Operator Interface itself, its Resources and its Actions shall only be
+accessible for authorized users. Also, the Interface shall distinguish between
+at least two types of users: administrative users and users that only have
+reading permissions and are not allowed to alter data. The permissions shall
+be able to be set fine-grained, on a per-action or per-resource basis.</p>
+<p>It is proposed to use the Django buil-in auth framework and its integrations in
+other software frameworks.</p>
+</div>
+<div class="section" id="configuration-and-registration-of-components">
+<h3>Configuration and Registration of Components<a class="headerlink" href="#configuration-and-registration-of-components" title="Permalink to this headline">¶</a></h3>
+<p>On the server side, the Operator Interface is set up similar to the Djangos
+built-in Admin Interface. To enable the Operator Interface, its app identifier
+has to be inserted in the <cite>INSTALLED_APPS</cite> list setting and its URLs have to be
+included in the URLs configuration file.</p>
+<p>Also similar to the Admin Interface, the Operator Interface provides an
+<cite>autodiscover()</cite> function, which sweeps through all <cite>INSTALLED_APPS</cite>
+directories in search of a <cite>operator.py</cite> module, which shall contain the apps
+setup of Components, Action Views, Actions and Resources.</p>
+</div>
+</div>
+<div class="section" id="example-component-coverage-component">
+<h2>Example Component: Coverage Component<a class="headerlink" href="#example-component-coverage-component" title="Permalink to this headline">¶</a></h2>
+<p>This chapter explains an the example component to handle all kinds of
+interactions concerning coverages, mosaics and dataset series respectively all
+types of assorted metadata.</p>
+<div class="section" id="id1">
+<h3>Requirements<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>As described earlier, the interactions shall entail creating/updating/deleting
+coverages and containers aswell inserting coverages into containers.
+Additionally users shall also trigger a synchronization process on rectified
+stitched mosaics and dataset series. As this may well be a time-consuming task,
+scanning through both the database and the (possibly remote) filesystem, it
+shall be handled asynchronously and output status messages.</p>
+<p>Last but not least, all coverage metadata shall also be handled, including
+geo-spatial, earth observational and raster specific metadata.</p>
+<p>The above requirements can be summarized in the following groups:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Coverage Handling (also includes geospatial and EO-meta-data as the
+relation is one-to-one)</li>
+<li>Container Handling (same as above)</li>
+<li>Range Type Handling (as other more tied meta-data is handled in the other
+sections)</li>
+</ul>
+</div></blockquote>
+<p>The requirement groups will be implemented as Action Views on the client, using
+specific widgets to allow interaction.</p>
+</div>
+<div class="section" id="server-side-implementation">
+<h3>Server-Side implementation<a class="headerlink" href="#server-side-implementation" title="Permalink to this headline">¶</a></h3>
+<p>The identified requirements have several implications on the server side. First
+off the three Action Views need to be declared to implement the three groups of
+reqiurements listed above and suited with the needed resources and actions.</p>
+<div class="section" id="id2">
+<h4>Resources<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<p>For simple access to the internally stored data, a list of Resources need to be
+defined: one for each coverage/container type, one for range types, bands and
+nil values and also for data sources.</p>
+<p>For asynchronous tasks, also the running tasks and their logs need to be
+exposed as resources.</p>
+</div>
+<div class="section" id="id3">
+<h4>Actions<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<p>The actions derived from the requirements can be summarized in the following
+list: add coverage to a container, remove a coverage from a container, add a
+data source to a container, remove a datasource from a container, manually
+start a synchronization process for a container. The first two actions can
+likely be handled synchronously as the management overhead is potentially not
+as high as with the latter three actions. Thus the introduced actions can be
+split into synchronous and asynchronous actions.</p>
+<p>Additionally, for creating/deleting coverages and containers is done by using
+Actions instead of their Resources, because it involves a higher order of
+validation and additional tasks to be done which are too complex and unreliable
+if controlled by the server.</p>
+</div>
+<div class="section" id="summary">
+<h4>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h4>
+<p>The following classes with their according hierarchical structure has been
+identified.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="27%" />
+<col width="26%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Component</th>
+<th class="head">Action Views</th>
+<th class="head">Resources</th>
+<th class="head">Actions</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td rowspan="16">Coverages</td>
+<td rowspan="6">Coverage Handling</td>
+<td>Rect. Coverages</td>
+<td>Add to Container</td>
+</tr>
+<tr class="row-odd"><td>Ref. Coverages</td>
+<td>Remove from Container</td>
+</tr>
+<tr class="row-even"><td>Rect. Mosaics</td>
+<td>Create Coverage</td>
+</tr>
+<tr class="row-odd"><td>Range Types</td>
+<td>Delete Coverage</td>
+</tr>
+<tr class="row-even"><td>Bands</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>NilValues</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td rowspan="7">Container Handling</td>
+<td>Coverages</td>
+<td>Add Coverage</td>
+</tr>
+<tr class="row-odd"><td>Rect. Mosaics</td>
+<td>Remove Coverage</td>
+</tr>
+<tr class="row-even"><td>Dataset Series</td>
+<td>Add Datasource</td>
+</tr>
+<tr class="row-odd"><td>Logs</td>
+<td>Remove Datasource</td>
+</tr>
+<tr class="row-even"><td rowspan="3">&#160;</td>
+<td>Synchronize</td>
+</tr>
+<tr class="row-odd"><td>Create Container</td>
+</tr>
+<tr class="row-even"><td>Delete Container</td>
+</tr>
+<tr class="row-odd"><td rowspan="3">RangeType Handling</td>
+<td>Range Types</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Bands</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>NilValues</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="client-side-implementation">
+<h3>Client-Side implementation<a class="headerlink" href="#client-side-implementation" title="Permalink to this headline">¶</a></h3>
+<p>From the requirements we allready have designed three Action Views, which will
+be implemented as Backbone views. Each offered resource from the server will
+have a Backbone model/collection counterpart communicating with that interface.
+Similarily each action will have a proxy class on the client side.</p>
+<div class="section" id="views">
+<h4>Views<a class="headerlink" href="#views" title="Permalink to this headline">¶</a></h4>
+<p>The hierarchy of the client views can be seen in the following figure.</p>
+<div class="figure align-center" id="id5">
+<span id="fig-client-views"></span><img alt="../_images/client_views.png" src="../_images/client_views.png" />
+<p class="caption"><span class="caption-text"><em>The client views/widget hierarchy.</em></span></p>
+</div>
+</div>
+<div class="section" id="models-collection">
+<h4>Models/Collection<a class="headerlink" href="#models-collection" title="Permalink to this headline">¶</a></h4>
+<p>Each offered resource is encapsulated in a model and collection. The following
+figure shows the relation of the model/collection layout:</p>
+<div class="figure align-center" id="id6">
+<span id="fig-client-models"></span><img alt="../_images/client_models.png" src="../_images/client_models.png" />
+<p class="caption"><span class="caption-text"><em>The models/collection hierarchy on the client.</em></span></p>
+</div>
+</div>
+<div class="section" id="actionproxies">
+<h4>ActionProxies<a class="headerlink" href="#actionproxies" title="Permalink to this headline">¶</a></h4>
+<p>For each Action on the server, an ActionProxy has to be instantiated on the
+client which handle the communication with the server. For the three Actions
+that are running asynchronously, a special ActionProxy subclass is used. The
+following figure shows which actions are handled synchronously and which follow
+an asynchronous approach.</p>
+<div class="figure align-center" id="id7">
+<span id="fig-client-action-proxies"></span><img alt="../_images/client_action_proxies.png" src="../_images/client_action_proxies.png" />
+<p class="caption"><span class="caption-text"><em>The action proxies used on the client.</em></span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="technologies-used">
+<h2>Technologies Used<a class="headerlink" href="#technologies-used" title="Permalink to this headline">¶</a></h2>
+<p>On the server side, the Django framework shall be used to provide the basic
+functionality of the Operator Interface including specifically the URL setup,
+HTML templating and request dispatching.</p>
+<p>To help publishing RESTful resources, the django extension <a class="reference external" href="http://django-rest-framework.org/">Django REST
+framework</a> can be used. It provides a
+rather simple, yet customizeable access to database model. It also supports
+user authorization as required in the chapter <a class="reference internal" href="#access-control">Access Control</a>. The library
+is available under the BSD license.</p>
+<p>To provide the RPC interface, there are two possibilities. The first is a
+wrapped setup of the <a class="reference external" href="http://docs.python.org/library/simplexmlrpcserver.html">SimpleXMLRPCServer module</a>, which would
+represent an abstraction of the XML to the actual entailed data and the
+dispatching of registered functions. As the module is already included in the
+standard library of recent Python versions, this approach would not impose an
+additional dependency. A drawback is the missing user authorization, which has
+to be implemented manually. Also, this method is only suitable for XML-RPC,
+which is more verbose than its JSON counterpart.</p>
+<p>The second option would be to use a django extension framework, e.g
+<a class="reference external" href="http://davidfischer.name/rpc4django/">rpc4django</a>. This framework eases the
+setup of RPC enabled functions, provides user authorization an is agnostic to
+the RPC protocol used (either JSON- or XML-RPC). This library also uses the BSD
+license.</p>
+<p>On the client side, several JavaScript libraries are required. For DOM
+manipulation and several utility functions <a class="reference external" href="http://jquery.com/">jQuery</a> and
+<a class="reference external" href="http://jqueryui.com/">jQueryUI</a> are used. The libraries are licensed under
+the GPL and MIT licenses.</p>
+<p>As a general utility library and dependency for other module comes <a class="reference external" href="http://underscorejs.org/">Underscore</a>. To implement a working MVC layout,
+<a class="reference external" href="http://backbonejs.org/">Backbone</a> is suggested. This library also abstracts
+the use of REST resources. Both libraries are distributed under the MIT
+license.</p>
+<p>For calling RPC functions and parsing the output, the library <a class="reference external" href="https://github.com/westonruter/json-xml-rpc">rpc.js</a> is required. It adheres to
+either the JSON-RPC or the XML-RPC protocol. The library is dual-licensed under
+the MIT and the GPL license.</p>
+<p>To display larger amounts of objects and to efficiently manipulate them, the
+<a class="reference external" href="https://github.com/mleibman/SlickGrid">SlickGrid</a> and its integration with
+Backbone, <a class="reference external" href="https://github.com/teleological/slickback">Slickback</a> are used.
+The two libraries are both licensed under the MIT license.</p>
+<p>For easy management of javascript files in conjunction with other resources the
+<a class="reference external" href="http://requirejs.org/">requirejs</a> framework is included. It provides means
+to modularize javascript code and resolve dependencies. The toolset also
+includes an optimizer which merges and minimizes all modules into a single
+javascript file with no changes to the client code. The framework is published
+under both MIT and BSD license.</p>
+<p>To avoid incompatibilities and third party server dependencies, all javascript
+libraries will be served from the EOxServer static files. This implies that for
+the operator client-side libraries no additional software needs to be installed
+as EOxServer ships with all requirements.</p>
+<p>On the server-side the two packages <cite>rpc4django</cite> and <cite>djangorestframework</cite> need
+to be installed for the operator to function. As both libraries can be found on
+the Python Package Index (PyPI) the installation procedure using <cite>pip</cite> is
+straightforward when both dependencies are added to the EOxServer <cite>setup.py</cite>.</p>
+<p>When EOxServer is installed using another technique than <cite>pip</cite> (like using the
+RPM or Debian packages), the libraries will likely have to be installed
+manually. For this reason they have to be listed in the dependencies page in
+the user manual aswell.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="11%" />
+<col width="12%" />
+<col width="45%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Dependency</th>
+<th class="head">Cat.</th>
+<th class="head">License</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Django REST Framework</td>
+<td>Server</td>
+<td>BSD</td>
+<td>Expose server data via REST</td>
+</tr>
+<tr class="row-odd"><td>RPC 4 Django</td>
+<td>Server</td>
+<td>BSD</td>
+<td>Expose server methods via RPC</td>
+</tr>
+<tr class="row-even"><td>jQuery</td>
+<td>Client</td>
+<td>GPL/MIT</td>
+<td>DOM Manipulation / AJAX Client</td>
+</tr>
+<tr class="row-odd"><td>UnderscoreJS</td>
+<td>Client</td>
+<td>MIT</td>
+<td>General Javascript utilities</td>
+</tr>
+<tr class="row-even"><td>BackboneJS</td>
+<td>Client</td>
+<td>MIT</td>
+<td>MVC Framework, REST abstraction</td>
+</tr>
+<tr class="row-odd"><td>json-xml-rpc</td>
+<td>Client</td>
+<td>GPL/MIT</td>
+<td>RPC client</td>
+</tr>
+<tr class="row-even"><td>SlickGrid</td>
+<td>Client</td>
+<td>MIT</td>
+<td>Data Grid widget implementation</td>
+</tr>
+<tr class="row-odd"><td>Slickback</td>
+<td>Client</td>
+<td>MIT</td>
+<td>SlickGrid to Backbone bridge</td>
+</tr>
+<tr class="row-even"><td>requirejs</td>
+<td>Client</td>
+<td>MIT/BSD</td>
+<td>Modularization and optimization</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="voting-history">
+<h2>Voting History<a class="headerlink" href="#voting-history" title="Permalink to this headline">¶</a></h2>
+<p>N/A</p>
+</div>
+<div class="section" id="traceability">
+<h2>Traceability<a class="headerlink" href="#traceability" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Requirements:</th><td class="field-body">N/A</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Tickets:</th><td class="field-body"><a class="reference external" href="http://eoxserver.org/ticket/4">http://eoxserver.org/ticket/4</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="rfc19.html" class="btn btn-neutral float-right" title="RFC 19: Migrate project repository from svn to git" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="rfc17.html" class="btn btn-neutral float-left" title="RFC 17: Configuration of Supported Output Formats and CRSes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

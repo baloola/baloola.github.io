@@ -1,0 +1,829 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>RFC 2: Extension Mechanism for EOxServer &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="RFC 3: OGC Service Extensions" href="rfc3.html" />
+    <link rel="prev" title="RFC 1: An Extensible Software Architecture for EOxServer" href="rfc1.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Requests for Comments</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#rfc-procedures">RFC Procedures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#writing-rfcs">Writing RFCs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#rfcs">RFCs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="policies.html">RFC Policies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="howto.html">Guidelines for Requests for Comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc0.html">RFC 0: Project Steering Committee Guidelines</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="rfc1.html">RFC 1: An Extensible Software Architecture for EOxServer</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="rfc1.html#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rfc1.html#requirements">Requirements</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="rfc1.html#architecture-overview">Architecture Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rfc1.html#distribution-core">Distribution Core</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rfc1.html#service-layer">Service Layer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rfc1.html#processing-layer">Processing Layer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rfc1.html#data-integration-layer">Data Integration Layer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rfc1.html#data-access-layer">Data Access Layer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rfc1.html#instances">Instances</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rfc1.html#voting-history">Voting History</a></li>
+<li class="toctree-l4"><a class="reference internal" href="rfc1.html#traceability">Traceability</a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">RFC 2: Extension Mechanism for EOxServer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#extension-mechanism">Extension Mechanism</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#interfaces-and-implementations">Interfaces and Implementations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#registry">Registry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#voting-history">Voting History</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#traceability">Traceability</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rfc3.html">RFC 3: OGC Service Extensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc4.html">RFC 4: Data Packaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc5.html">RFC 5: Processing Chains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc6.html">RFC 6: Directory Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc7.html">RFC 7: Release Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc8.html">RFC 8: SVN Commit Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc9.html">RFC 9: SOAP Binding of WCS GetCoverage Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc10.html">RFC 10: SOAP Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc11.html">RFC 11: WPS 1.0.0 Interface Prototype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc12.html">RFC 12: Backends for the Data Access Layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc13.html">RFC 13: WCS-T 1.1 Interface Prototype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc14.html">RFC 14: Asynchronous Task Processing (ATP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc15.html">RFC 15: Access Control Support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc16.html">RFC 16: Referenceable Grid Coverages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc17.html">RFC 17: Configuration of Supported Output Formats and CRSes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc18.html">RFC 18: Operator Interface Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc19.html">RFC 19: Migrate project repository from svn to git</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Requests for Comments</a> &raquo;</li>
+        
+          <li><a href="rfc1.html">RFC 1: An Extensible Software Architecture for EOxServer</a> &raquo;</li>
+        
+      <li>RFC 2: Extension Mechanism for EOxServer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/rfc/rfc2.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="rfc-2-extension-mechanism-for-eoxserver">
+<span id="rfc-2"></span><h1>RFC 2: Extension Mechanism for EOxServer<a class="headerlink" href="#rfc-2-extension-mechanism-for-eoxserver" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Stephan Krause</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Created:</th><td class="field-body">2011-02-20</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Last Edit:</th><td class="field-body">2011-09-15</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Status:</th><td class="field-body">ACCEPTED</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Discussion:</th><td class="field-body"><a class="reference external" href="http://www.eoxserver.org/wiki/DiscussionRfc2">http://www.eoxserver.org/wiki/DiscussionRfc2</a></td>
+</tr>
+</tbody>
+</table>
+<p>This RFC proposes an extension mechanism that allows to integrate
+extension modules and plugins dynamically into the EOxServer
+distribution and instances.</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="rfc1.html"><span class="doc">RFC 1: An Extensible Software Architecture for EOxServer</span></a> proposes an extensible architecture for EOxServer in order
+to ensure</p>
+<ul class="simple">
+<li>modularity</li>
+<li>extensibility</li>
+<li>flexibility</li>
+</ul>
+<p>of the design. It establishes the need for an extension mechanism which
+acts as a sort of “glue” between different parts of the architecture
+and enables dynamic binding to these components.</p>
+<p>This RFC discusses the extension mechanism in further detail and
+identifies the architectural principles and components needed to
+implement it.</p>
+<p>The constituent components of the extension mechanism design are
+interface declarations, the respective implementations and a central
+registry that contains metadata about interfaces and implementations
+and enables dynamic binding to the latter ones.</p>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="rfc1.html"><span class="doc">RFC 1: An Extensible Software Architecture for EOxServer</span></a> proposes an extension mechanism for EOxServer. It shall
+assure extensibility by additional modules and plugins and provide
+functionality to enable dynamic binding to extending modules.</p>
+<p>In the layered architecture of RFC 1 the <a class="reference internal" href="rfc1.html#rfc1-core"><span class="std std-ref">Distribution Core</span></a> shall be the
+place where the central logic that enables the dynamic extension of
+system functionality resides. The layers shall provide interface
+definitions based on the extension model of the Core that can be
+implemented by extending modules and plugins.</p>
+<p>Now which extensions are needed and which requirements do they impose on
+the extension mechansims? Digging deeper we have a look at the four
+architectural layers of EOxServer and analyze the interfaces and
+implementations needed by each of them.</p>
+<p>The <a class="reference internal" href="rfc1.html#rfc1-svc-lyr"><span class="std std-ref">Service Layer</span></a> defines a structured approach to OGC Web Service
+(OWS) request handling that discerns different levels:</p>
+<ul class="simple">
+<li>services</li>
+<li>service versions</li>
+<li>service extensions</li>
+<li>service operations</li>
+</ul>
+<p>For all of these levels interfaces are defined that are implemented by
+extending modules for specific OWS and their different versions and
+extensions.</p>
+<p>The <a class="reference internal" href="rfc1.html#rfc1-proc-lyr"><span class="std std-ref">Processing Layer</span></a> defines interfaces for processes and processing
+chains (see <a class="reference internal" href="rfc5.html"><span class="doc">RFC 5: Processing Chains</span></a>). Some of these are used internally and
+integrated into the distribution, most will be provided by plugins.
+While the process interface needs to be generic in order to make the
+implementation of many different processes possible, it must be concise
+enough to allow binding between processes in a processing chain. So,
+this must be sustained by the extension mechanism as well.</p>
+<p>The <a class="reference internal" href="rfc1.html#rfc1-dint-lyr"><span class="std std-ref">Data Integration Layer</span></a> shall provide an abstraction layer for
+different data formats, metadata formats and data packaging formats.
+This shall be achieved using common interfaces for coverage data, vector
+data and metadata respectively.</p>
+<p>Data and packaging formats are often not known by the system before
+ingesting a dataset. Thus, some kind of autodetection of formats is
+necessary. This is provided partly by the underlying
+libraries such as <a class="reference external" href="http://www.gdal.org">GDAL</a>, but shall also be
+considered for the design of the extension mechanism: it must be
+possible to dynamically bind to the right data, metadata and data
+packaging format based on evaluations of the data. These tests should be
+implemented by format extensions and supported by the extension
+mechansim.</p>
+<p>The <a class="reference internal" href="rfc1.html#rfc1-dacc-lyr"><span class="std std-ref">Data Access Layer</span></a> is built around the interface definitions of
+backends and data sources stored by them.</p>
+<p>In addition to modularity and extensibility RFC 1 states that the
+system shall be</p>
+<blockquote>
+<div>flexible in the sense that it must be possible to select different
+combinations of modules to deploy and activate</div></blockquote>
+<p>Modules can be combined to build a specific application. From a user
+perspective it is essential to be able to activate and deactivate
+services, service versions and service extensions globally
+and/or separately for each resource or process. The same applies for
+other extensible parts of the system such as backends.</p>
+<p>The O3S Use Case 2 for instance requires a server setup that consists of:</p>
+<ul class="simple">
+<li>local and WCS backends in the Data Access Layer</li>
+<li>a specific combination of coverage, vector data, metadata and
+packaging formats in the Data Integration Layer</li>
+<li>a feature detection process in the Processing Layer</li>
+<li>WPS and WFS implementations in the Service Layer</li>
+</ul>
+<p>All other backends, services and processes shall be disabled.</p>
+<p>Summarizing the requirements the extension mechanism shall support:</p>
+<ul class="simple">
+<li>extensibility by additional modules and plugins</li>
+<li>dynamic binding</li>
+<li>interface definitions for extensions</li>
+<li>implementations that can be enabled or disabled<ul>
+<li>globally</li>
+<li>per resource or per process</li>
+</ul>
+</li>
+<li>modules that can be configured dynamically to build an application</li>
+<li>autodetection of data, metadata and data packaging formats</li>
+</ul>
+</div>
+<div class="section" id="extension-mechanism">
+<h2>Extension Mechanism<a class="headerlink" href="#extension-mechanism" title="Permalink to this headline">¶</a></h2>
+<p>The basic questions for the design of the extension mechanism are:</p>
+<ul class="simple">
+<li>how to declare extensible interfaces</li>
+<li>how to design implementations of these interfaces</li>
+<li>how to advertise them</li>
+<li>how to bind to them</li>
+</ul>
+<p>Unlike Java or C++, Python does not have a built-in mechanism to
+declare interfaces. A method definition always comes with an
+implementation. With Python 2.6 support for abstract base classes and
+abstract methods was added, but at the moment it is not an option to use
+this framework as this would break support for earlier Python versions.</p>
+<p>So, two basic design options remain:</p>
+<ul class="simple">
+<li>using conventional Python classes and inheritance mechanisms for
+interfaces and implementations</li>
+<li>customize the interface declaration and implementation creation using
+Python metaclasses</li>
+</ul>
+<p>Whereas the first approach is easier, the second one can provide more
+control and a clear differentiation between interface declaration
+and implementation. Both design options are discussed in further detail
+in the <a class="reference internal" href="#rfc2-ifs-impls"><span class="std std-ref">Interfaces and Implementations</span></a> section below.</p>
+<p>The second major topic is how to find and bind to implementations of an
+interface if not all implementations are known to the system a priori,
+as is the case with plugins. Some “glue” is needed that holds the
+system together and allows for dynamic binding. In the case of EOxServer
+this is implemented by a central registry that keeps track of
+implementations by automatically scanning Python modules in certain
+directories that are supposed to contain EOxServer extending modules or
+plugins. For more details on the basics of <a class="reference internal" href="#rfc2-registry"><span class="std std-ref">Registry</span></a> see
+below.</p>
+<p>In most cases an instance of EOxServer will not need all the
+functionality provided by the distribution or plugins installed on the
+system. Dynamic binding allows for enabling and disabling certain
+services, processes, formats, backends and plugins in an interactive
+way using the administration client. In order to assure this required
+functionality a configuration data model is needed that allows to store
+information about what parts of the system are activated and what
+resources they may operate on. See the section <a class="reference internal" href="#rfc2-model"><span class="std std-ref">Data Model</span></a> for
+further details.</p>
+<p>Implementations of interfaces are not isolated objects. They depend on
+libraries, functionality provided by the EOxServer core and layers and,
+last but not least, on other interface implementations. In order to
+assure that the dynamically configurable system is in a consistent
+state, the interdependencies between implementations need to be
+properly advertised and stored in the configuration data model.</p>
+<p>After this short overview, we will go more in depth in the following
+sections.</p>
+</div>
+<div class="section" id="interfaces-and-implementations">
+<span id="rfc2-ifs-impls"></span><h2>Interfaces and Implementations<a class="headerlink" href="#interfaces-and-implementations" title="Permalink to this headline">¶</a></h2>
+<p>As already discussed before there are two design options for interfaces
+and implementations:</p>
+<ul class="simple">
+<li>interfaces and implementations as conventional Python classes that
+are linked through inheritance</li>
+<li>interfaces as special Python classes that are linked to
+implementations by a custom mechanism.</li>
+</ul>
+<p>Whereas the first approach is straightforward and easy to implement and
+handle it has also some serious drawbacks. Most importantly it does
+not allow for a clear separation between interface declaration and
+implementation. A method declared in the interface always must contain
+an implementation, and an implementation may change the signature of the
+methods it implements in any possible way.</p>
+<p>What’s more, as the implementation inherits (mostly generic) method
+code from the interface there is no way to validate if it actually
+defines concrete methods to override the “abstract” ones the interface
+class provides.</p>
+<p>So, there are also good reasons for the second approach although it is
+more challenging for developers. The approach proposed here allows to
+customize class generation and inheritance enabling validation at
+“compile time” (i.e. when classes are created) and runtime (i.e. when
+instance methods are invoked) as well as separation of interface
+definition from implementation.</p>
+<p>How can this be achieved? The proposed mechanism relies on an
+interface base class called <code class="docutils literal"><span class="pre">Interface</span></code> that concrete interface
+declarations can derive from, implementing code contained in a
+conventional Python class and a method called <code class="docutils literal"><span class="pre">implement()</span></code> that
+generates a special  implementation class from the interface declaration
+and the class containing the implementing code.</p>
+<div class="section" id="interface-declaration">
+<h3>Interface Declaration<a class="headerlink" href="#interface-declaration" title="Permalink to this headline">¶</a></h3>
+<p>It has already been said that interface declarations shall derive from
+a common base class called <code class="docutils literal"><span class="pre">Interface</span></code>. But that is not the end of the
+story - one big question remains: how to declare actual methods without
+implementation? The proposed approach is not to declare methods as such
+at all, but use classes representing them instead.</p>
+<p>For this end three classes are to be defined alongside the <code class="docutils literal"><span class="pre">Interface</span></code>
+base class.</p>
+<ul class="simple">
+<li>instances of the <code class="docutils literal"><span class="pre">Constant</span></code> class represent constants defined by
+the interface</li>
+<li>instances of the <code class="docutils literal"><span class="pre">Method</span></code> class represent methods</li>
+<li>instances of the <code class="docutils literal"><span class="pre">Arg</span></code> class represent method arguments; subclasses
+of <code class="docutils literal"><span class="pre">Arg</span></code> allow for type validation, e.g. instances of <code class="docutils literal"><span class="pre">IntArg</span></code>
+represent integer arguments</li>
+</ul>
+<p>Let’s have a look at a quick example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eoxserver.core.interfaces</span> <span class="k">import</span> <span class="n">Interface</span><span class="p">,</span> <span class="n">Method</span><span class="p">,</span> <span class="n">Arg</span>
+
+<span class="k">class</span> <span class="nc">ServiceInterface</span><span class="p">(</span><span class="n">Interface</span><span class="p">):</span>
+    <span class="n">handle</span> <span class="o">=</span> <span class="n">Method</span><span class="p">(</span>
+        <span class="n">Arg</span><span class="p">(</span><span class="s2">&quot;req&quot;</span><span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Code examples in this RFC are merely informational. The actual
+implementation may deviate a little bit from them. A reference
+documentation will be prepared for the definitive extension
+mechanism.</p>
+</div>
+<p>This snippet of Python code represents a simple and complete interface
+declaration. The <code class="docutils literal"><span class="pre">ServiceInterface</span></code> class will be used in further
+examples as well. It shows a method definition that declares the
+following: the method <code class="docutils literal"><span class="pre">handle</span></code> shall take one argument of arbitrary
+type named <code class="docutils literal"><span class="pre">req</span></code> that stands for an OWS request.</p>
+<p>As you can see the declaration is a class variable containing an
+instance of the <code class="docutils literal"><span class="pre">Method</span></code> class. It is not a method (it does not even
+have to be callable). It serves two purposes:</p>
+<ul class="simple">
+<li>documentation of the interface</li>
+<li>validation of the implementation</li>
+</ul>
+<p>Thinking of these two goals, the writer of the code could have been more
+rigorous and declare an argument like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">handle</span> <span class="o">=</span> <span class="n">Method</span><span class="p">(</span>
+    <span class="n">ObjectArg</span><span class="p">(</span><span class="s2">&quot;req&quot;</span><span class="p">,</span> <span class="n">arg_class</span><span class="o">=</span><span class="n">OWSRequest</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>That way it is documented what kind of argument is expected. When
+defining the implementation it is enforced that it have a method
+<code class="docutils literal"><span class="pre">handle</span></code> which takes exactly one argument besides <code class="docutils literal"><span class="pre">self</span></code>, otherwise
+an exception will be raised. When invoking an interface of the
+implementation it can be validated that the argument is of the right
+type. More on this later under <a class="reference internal" href="#rfc2-impl-val"><span class="std std-ref">Validation of Implementations</span></a>. Now let’s have a
+look at implementations.</p>
+</div>
+<div class="section" id="implementations">
+<h3>Implementations<a class="headerlink" href="#implementations" title="Permalink to this headline">¶</a></h3>
+<p>The proposed design of interface implementation intends to hide all the
+complexity of this process from the developers of implementations. They
+just have to write an implementing class which is a normal new-style
+Python class, and wrap it with the <code class="docutils literal"><span class="pre">implement()</span></code> method of the
+interface, such as in the following example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eoxserver.services.owscommon</span> <span class="k">import</span> <span class="n">ServiceInterface</span>
+
+<span class="k">class</span> <span class="nc">WxSService</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+
+        <span class="c1"># ...</span>
+
+        <span class="k">return</span> <span class="n">response</span>
+
+<span class="n">WxSServiceImplementation</span> <span class="o">=</span> <span class="n">ServiceInterface</span><span class="o">.</span><span class="n">implement</span><span class="p">(</span><span class="n">WxSService</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The call to <code class="docutils literal"><span class="pre">implement()</span></code> ensures validation of the interface and
+produces an implementation class that inherits all the code of the
+implementing class and contains information about the interface. This is
+only the basic functionality of the interface implementation process:
+more is to be revealed in the following sections.</p>
+</div>
+<div class="section" id="validation-of-implementations">
+<span id="rfc2-impl-val"></span><h3>Validation of Implementations<a class="headerlink" href="#validation-of-implementations" title="Permalink to this headline">¶</a></h3>
+<p>The validation of implementations is performed in two ways:</p>
+<ul class="simple">
+<li>at class creation time</li>
+<li>at instance method invocation time</li>
+</ul>
+<p>Validation at class creation time checks:</p>
+<ul class="simple">
+<li>if all methods declared by the interface are implemented</li>
+<li>if the method arguments of the interface and implementation match</li>
+</ul>
+<p>Class creation time validation is performed unconditionally.</p>
+<p>Instance method invocation time (“runtime”) validation is optional. It
+can be triggered by the <code class="docutils literal"><span class="pre">runtime_validation_level</span></code> setting. There are
+three possible values for this option:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">trust</span></code>: no runtime validation</li>
+<li><code class="docutils literal"><span class="pre">warn</span></code>: argument types are checked against interface declaration;
+in case of mismatch a warning is written to the log file</li>
+<li><code class="docutils literal"><span class="pre">fail</span></code>: argument types are checked against interface declaration;
+in case of mismatch an exception is raised</li>
+</ul>
+<p>The <code class="docutils literal"><span class="pre">runtime_validation_level</span></code> option can be set</p>
+<blockquote>
+<div><ul class="simple">
+<li>globally (in configuration file)</li>
+<li>per interface</li>
+<li>per implementation</li>
+</ul>
+</div></blockquote>
+<p>where stricter settings override weaker ones.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <code class="docutils literal"><span class="pre">warn</span></code> and <code class="docutils literal"><span class="pre">fail</span></code> levels are intended for use
+throughout the development process. In a production setting <code class="docutils literal"><span class="pre">trust</span></code>
+should be used.</p>
+</div>
+</div>
+</div>
+<div class="section" id="registry">
+<span id="rfc2-registry"></span><h2>Registry<a class="headerlink" href="#registry" title="Permalink to this headline">¶</a></h2>
+<p>The Registry is the core component for managing the extension mechanism
+of EOxServer. It is the central entry point for:</p>
+<ul class="simple">
+<li>automated detection of registered interfaces and implementations</li>
+<li>dynamical binding to the implementations</li>
+<li>configuration of components and relations between them</li>
+</ul>
+<p>Its functionality shall be discussed in further detail in the following
+subsections:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#rfc2-model"><span class="std std-ref">Data Model</span></a></li>
+<li><a class="reference internal" href="#rfc2-detect"><span class="std std-ref">Detection</span></a></li>
+<li><a class="reference internal" href="#rfc2-binding"><span class="std std-ref">Binding</span></a></li>
+</ul>
+<div class="section" id="data-model">
+<span id="rfc2-model"></span><h3>Data Model<a class="headerlink" href="#data-model" title="Permalink to this headline">¶</a></h3>
+<p>The data model for the Extension Mechanism including dynamic binding is
+implemented primarily by the <a class="reference internal" href="#rfc2-registry"><span class="std std-ref">Registry</span></a>; for persistent
+information it relies on the configuration files and the database.</p>
+<p>As you’d expect, the Registry data model relies on interfaces and
+implementations. However, not all of them are registered, but only
+descendants of <code class="xref py py-class docutils literal"><span class="pre">RegisteredInterface</span></code> and their respective
+implementations. <code class="xref py py-class docutils literal"><span class="pre">RegisteredInterface</span></code> extends the configuration
+model for interfaces with information relevant to the registration and
+dynamic binding processes. This is an example for a valid
+configuration:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eoxserver.core.registry</span> <span class="k">import</span> <span class="n">RegisteredInterface</span>
+
+<span class="k">class</span> <span class="nc">SomeInterface</span><span class="p">(</span><span class="n">RegisteredInterface</span><span class="p">):</span>
+
+    <span class="n">REGISTRY_CONF</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Some Interface&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;intf_id&quot;</span><span class="p">:</span> <span class="s2">&quot;somemodule.SomeInterface&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;binding_method&quot;</span><span class="p">:</span> <span class="s2">&quot;direct&quot;</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p>The most important parts are the interface ID <code class="docutils literal"><span class="pre">intf_id</span></code> and the
+<code class="docutils literal"><span class="pre">binding_method</span></code> settings which will be used by the registry to find
+implementations of the interface and to determine how to bind to them.
+For more information see the <a class="reference internal" href="#rfc2-binding"><span class="std std-ref">Binding</span></a> section below.</p>
+<p>The registry model is accompanied by a database model that allows to
+store persistently which parts of the system (services, plugins, etc.)
+are enabled and which resources they have access to.</p>
+<div class="figure align-center" id="id1">
+<img alt="../_images/model_core.png" src="../_images/model_core.png" />
+<p class="caption"><span class="caption-text"><em>Database Model for the Registry</em></span></p>
+</div>
+<p>For every registered implementation an <code class="xref py py-class docutils literal"><span class="pre">Implementation</span></code> instance
+and database record are created. Implementations are subdivided into
+components and resource classes, each with their respective model
+deriving from <code class="xref py py-class docutils literal"><span class="pre">Implementation</span></code>. Components stand for the active
+parts of the system like Service Handlers. They can be enabled or
+disabled. Resource classes relate to a specific resource wrapper which
+in turn relate to some specific model derived from <code class="xref py py-class docutils literal"><span class="pre">Resource</span></code>.</p>
+<p>Furthermore, there is the possibility to create, enable and disable
+relations between components and  specific resource instances or
+resource classes. These relations are used to determine whether a given
+component has access to a given resource or resource class. They allow
+to configure the behaviour e.g. of certain services and protect parts
+of an EOxServer instance from unwanted access.</p>
+<p>As the number of registered components is quite large and as there are
+many interdependencies between them and to resource classes specific
+Component Managers shall be introduced in order to:</p>
+<ul class="simple">
+<li>group them to larger entities which are more easy to handle</li>
+<li>validate the configuration with respect to these interdependencies</li>
+<li>facilitate relation management</li>
+<li>automatically create the needed relations</li>
+</ul>
+<p>These managers shall implement the common
+<code class="xref py py-class docutils literal"><span class="pre">ComponentManagerInterface</span></code>.</p>
+</div>
+<div class="section" id="detection">
+<span id="rfc2-detect"></span><h3>Detection<a class="headerlink" href="#detection" title="Permalink to this headline">¶</a></h3>
+<p>The first step in the dynamic binding process provided by the registry
+is the detection of interfaces and implementations to be registered.
+For this end the registry loads the modules defined in the configuration
+files and searches them for descendants of <code class="xref py py-class docutils literal"><span class="pre">RegisteredInterface</span></code>
+and their implementations. The metadata of the detected interfaces and
+implementations (the contents of``REGISTRY_CONF``) is ingested into the
+registry. This metadata is used for binding to the implementations,
+see the following subsection <a class="reference internal" href="#rfc2-binding"><span class="std std-ref">Binding</span></a> for details.</p>
+<p>The main EOxServer configuration file <code class="docutils literal"><span class="pre">eoxserver.conf</span></code> contains
+options for determining which modules shall be scanned during the
+detection phase. The user can define single modules and whole
+directories to be searched for modules there.</p>
+</div>
+<div class="section" id="binding">
+<span id="rfc2-binding"></span><h3>Binding<a class="headerlink" href="#binding" title="Permalink to this headline">¶</a></h3>
+<p>The registry provides four binding methods:</p>
+<ul class="simple">
+<li>direct binding</li>
+<li>KVP binding</li>
+<li>test binding</li>
+<li>factory binding</li>
+</ul>
+<p>Direct binding means that the implementation to bind to is directly
+referenced by the caller using its implementation ID:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eoxserver.core.system</span> <span class="k">import</span> <span class="n">System</span>
+
+<span class="n">impl</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="n">getRegistry</span><span class="p">()</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span>
+    <span class="s2">&quot;somemodule.SomeImplementation&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Direct binding is available for every implementation. You can also set
+the <code class="docutils literal"><span class="pre">binding_method</span></code> in the <code class="docutils literal"><span class="pre">REGISTRY_CONF</span></code> of an interface to
+<code class="docutils literal"><span class="pre">direct</span></code>, meaning that its implementations are reachable only by
+this method. This is used e.g. for component managers and factories.</p>
+<p>The easiest method for parametrized dynamic binding is key-value-pair
+matching, or KVP binding. It is used if an interface defines <code class="docutils literal"><span class="pre">kvp</span></code> as
+its <code class="docutils literal"><span class="pre">binding_method</span></code>. The interface must then define in its
+<code class="docutils literal"><span class="pre">REGISTRY_CONF</span></code> one or more <code class="docutils literal"><span class="pre">registry_keys</span></code>, the implementations
+in turn must define <code class="docutils literal"><span class="pre">registry_values</span></code> for these keys. When looking
+up a matching implementation, the parameters given with the request
+are matched against these key-value-pairs. Finally, the registry returns
+an instance of the matching implementation:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eoxserver.core.system</span> <span class="k">import</span> <span class="n">System</span>
+
+<span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="n">service_name</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+
+    <span class="n">service</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="n">getRegistry</span><span class="p">()</span><span class="o">.</span><span class="n">findAndBind</span><span class="p">(</span>
+        <span class="n">intf_id</span> <span class="o">=</span> <span class="s2">&quot;services.interfaces.ServiceHandler&quot;</span><span class="p">,</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;services.interfaces.service&quot;</span><span class="p">:</span> <span class="n">service_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="n">handle</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">response</span>
+</pre></div>
+</div>
+<p>This binding method is used e.g. for binding to service, version
+and operation handlers for OGC Web Services based on the parameters
+sent with the request.</p>
+<p>A more flexible way to determine which implementation to bind to is
+the test binding method (<code class="docutils literal"><span class="pre">&quot;binding_method&quot;:</span> <span class="pre">&quot;testing&quot;</span></code>). In this case,
+the interface must be derived from <code class="xref py py-class docutils literal"><span class="pre">TestingInterface</span></code>. The
+implementation must provide a
+<code class="xref py py-meth docutils literal"><span class="pre">test()</span></code> method which will be
+invoked by the registry in order to determine if it is suitable for a given set
+of parameters. This can be used e.g. to determine which format handler
+to use for a given dataset:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eoxserver.core.system</span> <span class="k">import</span> <span class="n">System</span>
+
+<span class="nb">format</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="n">getRegistry</span><span class="p">()</span><span class="o">.</span><span class="n">findAndBind</span><span class="p">(</span>
+    <span class="n">intf_id</span> <span class="o">=</span> <span class="s2">&quot;resources.coverages.formats.FormatInterface&quot;</span><span class="p">,</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;filename&quot;</span><span class="p">:</span> <span class="n">filename</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>The fourth binding method is factory binding (
+<code class="docutils literal"><span class="pre">&quot;binding_method&quot;:</span> <span class="pre">&quot;factory&quot;</span></code>). In this case the registry invokes a
+factory that returns an instance of the desired implementation.
+Factories must be implementations of a descendant of
+<code class="xref py py-class docutils literal"><span class="pre">FactoryInterface</span></code>. Implementations and factories are linked
+together only at runtime, based on the metadata collected during the
+detection phase. This binding method is used e.g. for binding to
+instances of a resource wrapper:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eoxserver.core.system</span> <span class="k">import</span> <span class="n">System</span>
+
+<span class="n">resource</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="n">getRegistry</span><span class="p">()</span><span class="o">.</span><span class="n">getFromFactory</span><span class="p">(</span>
+    <span class="n">factory_id</span> <span class="o">=</span> <span class="s2">&quot;resources.coverages.wrappers.SomeResourceFactory&quot;</span><span class="p">,</span>
+    <span class="n">obj_id</span> <span class="o">=</span> <span class="s2">&quot;some_resource_id&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>In order to access other functions of the factory you can bind to it
+directly. For retrieving all resources that are accessible through a
+factory you would use code like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eoxserver.core.system</span> <span class="k">import</span> <span class="n">System</span>
+
+<span class="n">resource_factory</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="n">getRegistry</span><span class="p">()</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span>
+    <span class="s2">&quot;resources.coverages.wrappers.SomeResourceFactory&quot;</span>
+<span class="p">)</span>
+
+<span class="n">resources</span> <span class="o">=</span> <span class="n">resource_factory</span><span class="o">.</span><span class="n">find</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="voting-history">
+<h2>Voting History<a class="headerlink" href="#voting-history" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Motion:</th><td class="field-body">To accept RFC 2</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Voting Start:</th><td class="field-body">2011-07-25</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Voting End:</th><td class="field-body">2011-09-15</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result:</th><td class="field-body">+6 for ACCEPTED</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="traceability">
+<h2>Traceability<a class="headerlink" href="#traceability" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Requirements:</th><td class="field-body">N/A</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Tickets:</th><td class="field-body">N/A</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="rfc3.html" class="btn btn-neutral float-right" title="RFC 3: OGC Service Extensions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="rfc1.html" class="btn btn-neutral float-left" title="RFC 1: An Extensible Software Architecture for EOxServer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

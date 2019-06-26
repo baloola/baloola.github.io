@@ -1,0 +1,485 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Guidelines for Requests for Comments &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="RFC 0: Project Steering Committee Guidelines" href="rfc0.html" />
+    <link rel="prev" title="RFC Policies" href="policies.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Requests for Comments</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#rfc-procedures">RFC Procedures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#writing-rfcs">Writing RFCs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#rfcs">RFCs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="policies.html">RFC Policies</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Guidelines for Requests for Comments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#location-of-an-rfc">Location of an RFC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#discussion-page">Discussion Page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#structure-of-an-rfc">Structure of an RFC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#template-for-rfcs">Template for RFCs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#template-for-rfc-discussion-pages">Template for RFC Discussion Pages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rfc0.html">RFC 0: Project Steering Committee Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc1.html">RFC 1: An Extensible Software Architecture for EOxServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc2.html">RFC 2: Extension Mechanism for EOxServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc3.html">RFC 3: OGC Service Extensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc4.html">RFC 4: Data Packaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc5.html">RFC 5: Processing Chains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc6.html">RFC 6: Directory Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc7.html">RFC 7: Release Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc8.html">RFC 8: SVN Commit Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc9.html">RFC 9: SOAP Binding of WCS GetCoverage Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc10.html">RFC 10: SOAP Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc11.html">RFC 11: WPS 1.0.0 Interface Prototype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc12.html">RFC 12: Backends for the Data Access Layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc13.html">RFC 13: WCS-T 1.1 Interface Prototype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc14.html">RFC 14: Asynchronous Task Processing (ATP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc15.html">RFC 15: Access Control Support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc16.html">RFC 16: Referenceable Grid Coverages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc17.html">RFC 17: Configuration of Supported Output Formats and CRSes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc18.html">RFC 18: Operator Interface Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc19.html">RFC 19: Migrate project repository from svn to git</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Requests for Comments</a> &raquo;</li>
+        
+      <li>Guidelines for Requests for Comments</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/rfc/howto.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="guidelines-for-requests-for-comments">
+<span id="rfc-howto"></span><span id="index-0"></span><h1>Guidelines for Requests for Comments<a class="headerlink" href="#guidelines-for-requests-for-comments" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Stephan Krause</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body">2011-02-19</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Last Edit:</th><td class="field-body">$Date$</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Discussion:</th><td class="field-body"><a class="reference external" href="http://eoxserver.org/wiki/DiscussionRfcTemplate">http://eoxserver.org/wiki/DiscussionRfcTemplate</a></td>
+</tr>
+</tbody>
+</table>
+<p>This document contains instructions for writing RFCs as well as a
+template for RFCs. Please read it carefully before submitting your own
+requests.</p>
+<p>In this document the terms <em>shall</em>, <em>should</em> and <em>may</em> have a
+normative meaning that is well known from software engineering and
+standards definition:</p>
+<ul class="simple">
+<li><em>shall</em>: indicates an absolute requirement to be strictly followed</li>
+<li><em>should</em>: indicates a recommended item</li>
+<li><em>may</em>: indicates an optional item</li>
+</ul>
+<div class="section" id="location-of-an-rfc">
+<h2>Location of an RFC<a class="headerlink" href="#location-of-an-rfc" title="Permalink to this headline">¶</a></h2>
+<p>The text of an RFC shall be located in the EOxServer SVN Trunk in the
+directory <code class="docutils literal"><span class="pre">docs/en/rfc</span></code> under the file name <code class="docutils literal"><span class="pre">rfc&lt;number&gt;.rst</span></code>. It
+will be published automatically on the Request For Comments site once
+the documentation has been built anew.</p>
+</div>
+<div class="section" id="discussion-page">
+<h2>Discussion Page<a class="headerlink" href="#discussion-page" title="Permalink to this headline">¶</a></h2>
+<p>Once the RFC status has been moved to PENDING, it is required that
+the authors create a discussion page for the RFC on the EOxServer Trac
+Wiki. A <a class="reference internal" href="#disc-template"><span class="std std-ref">Template for RFC Discussion Pages</span></a> is included below.</p>
+</div>
+<div class="section" id="structure-of-an-rfc">
+<h2>Structure of an RFC<a class="headerlink" href="#structure-of-an-rfc" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="heading">
+<h3>Heading<a class="headerlink" href="#heading" title="Permalink to this headline">¶</a></h3>
+<p>The page heading shall be in the format “RFC &lt;number&gt;: &lt;title&gt;”.</p>
+</div>
+<div class="section" id="basic-information">
+<h3>Basic Information<a class="headerlink" href="#basic-information" title="Permalink to this headline">¶</a></h3>
+<p>The RFC shall start with a block containing the author(s) of the
+request, the creation date, the date of the last edit and its status,
+like in the following example:</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">John Doe</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Created:</th><td class="field-body">2011-02-18</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Last Edit:</th><td class="field-body">$Date$</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Status:</th><td class="field-body">PENDING</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Discussion:</th><td class="field-body"><a class="reference external" href="http://eoxserver.org/wiki/DiscussionRfcTemplate">http://eoxserver.org/wiki/DiscussionRfcTemplate</a></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="description-of-the-rfc">
+<h3>Description of the RFC<a class="headerlink" href="#description-of-the-rfc" title="Permalink to this headline">¶</a></h3>
+<p>The first one or two paragraphs shall contain a short description of the
+RFC. They should give a high-level overview of the propositions of the
+request.</p>
+</div>
+<div class="section" id="introduction">
+<h3>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
+<p>The first section of the RFC shall be called “Introduction”. It should
+contain a motivation for the RFC, describe the problem(s) the
+RFC addresses and give an overview of the proposed solution. It should
+contain forward references to the sections where specific items are
+discussed further where applicable.</p>
+<p>Keep the introduction short and simple! It is not the place to go into
+the details, this should be done in the sections of the body of the RFC.</p>
+</div>
+<div class="section" id="body-of-the-rfc">
+<h3>Body of the RFC<a class="headerlink" href="#body-of-the-rfc" title="Permalink to this headline">¶</a></h3>
+<p>The body of the RFC starts right after the introduction. It may start
+with a more in-depth description of the motivation for the RFC and the
+problems to address if this cannot be discussed exhaustively in the
+introduction. Following that the proposed solution should be described
+in detail and as vividly as possible.</p>
+<p>Use examples, tables and pictures where appropriate! Use references to
+external resources, to the documentation, to other RFCs, to the
+EOxServer Trac or to the source code.</p>
+<p>The body of the RFC may be contained in one section or structured
+in sections, subsections and subsubsections or even further.</p>
+</div>
+<div class="section" id="voting-history">
+<h3>Voting History<a class="headerlink" href="#voting-history" title="Permalink to this headline">¶</a></h3>
+<p>The penultimate section of the RFC shall be called “Voting History”. It
+shall contain the records of the votes held on subject of the RFC. As
+long as the RFC is in preparation or pending, the section body shall be
+“N/A”. Example of a voting record:</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Motion:</th><td class="field-body">To accept RFC 1</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Voting Start:</th><td class="field-body">2011-03-01</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Voting End:</th><td class="field-body">2011-03-02</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result:</th><td class="field-body">3 ACCEPTED, 0 PENDING</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="traceability">
+<h3>Traceability<a class="headerlink" href="#traceability" title="Permalink to this headline">¶</a></h3>
+<p>The last section of the RFC shall be called “Traceability”. It shall
+contain references to the requirements that have motivated the request
+if applicable. Furthermore, if the request was accepted, it shall
+contain references to the tickets in the EOxServer Trac system that
+concern its implementation. Example:</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Requirements:</th><td class="field-body">O3S_CAP_100</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Tickets:</th><td class="field-body">#1</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Where possible, the requirements and tickets shall be hyperlinked to the
+respective resources (e.g. requirements document, requirement tracing
+system, EOxServer Trac).</p>
+</div>
+</div>
+<div class="section" id="template-for-rfcs">
+<h2>Template for RFCs<a class="headerlink" href="#template-for-rfcs" title="Permalink to this headline">¶</a></h2>
+<p>Here is a template you should use for your RFCs. Please replace the
+items in brackets &lt;&gt; by the appropriate text:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">_rfc_</span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">:</span>
+
+<span class="n">RFC</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">title</span><span class="o">&gt;</span>
+<span class="o">=====================</span>
+
+<span class="p">:</span><span class="n">Author</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">author</span> <span class="n">name</span><span class="o">&gt;</span>
+<span class="p">:</span><span class="n">Created</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">date</span> <span class="n">when</span> <span class="n">RFC</span> <span class="n">was</span> <span class="n">created</span><span class="p">:</span> <span class="n">YYYY</span><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">DD</span><span class="o">&gt;</span>
+<span class="p">:</span><span class="n">Last</span> <span class="n">Edit</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">date</span> <span class="n">of</span> <span class="n">last</span> <span class="n">edit</span><span class="p">:</span> <span class="n">YYYY</span><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">DD</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">subversion</span> <span class="n">keyword</span> <span class="s2">&quot;Date&quot;</span><span class="o">&gt;</span>
+<span class="p">:</span><span class="n">Status</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">one</span> <span class="n">of</span><span class="p">:</span> <span class="n">IN</span> <span class="n">PREPARATION</span><span class="p">,</span> <span class="n">PENDING</span><span class="p">,</span> <span class="n">WITHDRWAWN</span><span class="p">,</span> <span class="n">VOTING</span> <span class="n">ACTIVE</span><span class="p">,</span>
+          <span class="n">ACCEPTED</span><span class="p">,</span> <span class="n">REJECTED</span><span class="p">,</span> <span class="n">POSTPONED</span><span class="p">,</span> <span class="n">OBSOLETE</span><span class="o">&gt;</span>
+<span class="p">:</span><span class="n">Discussion</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">external</span> <span class="n">link</span> <span class="n">to</span> <span class="n">discussion</span> <span class="n">page</span> <span class="n">on</span> <span class="n">EOxServer</span> <span class="n">Trac</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">short</span> <span class="n">description</span> <span class="n">of</span> <span class="n">the</span> <span class="n">RFC</span><span class="o">&gt;</span>
+
+<span class="n">Introduction</span>
+<span class="o">------------</span>
+
+<span class="o">&lt;</span><span class="n">Mandatory</span><span class="o">.</span> <span class="n">Overview</span> <span class="n">of</span> <span class="n">motivation</span><span class="p">,</span> <span class="n">addressed</span> <span class="n">problems</span> <span class="ow">and</span> <span class="n">proposed</span>
+ <span class="n">solution</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">Section</span> <span class="n">title</span><span class="o">&gt;</span>
+<span class="o">---------------</span>
+
+<span class="o">&lt;</span><span class="n">Any</span> <span class="n">number</span> <span class="n">of</span> <span class="n">sections</span> <span class="n">may</span> <span class="n">follow</span><span class="o">.&gt;</span>
+
+<span class="o">&lt;</span><span class="n">Subsection</span> <span class="n">title</span><span class="o">&gt;</span>
+<span class="o">~~~~~~~~~~~~~~~~~~</span>
+
+<span class="o">&lt;</span><span class="n">They</span> <span class="n">may</span> <span class="n">have</span> <span class="nb">any</span> <span class="n">number</span> <span class="n">of</span> <span class="n">subsections</span><span class="o">.&gt;</span>
+
+<span class="o">&lt;</span><span class="n">Subsubsection</span> <span class="n">title</span><span class="o">&gt;</span>
+<span class="o">^^^^^^^^^^^^^^^^^^^^^</span>
+
+<span class="o">&lt;</span><span class="n">And</span> <span class="n">even</span> <span class="n">subsubsections</span><span class="o">.&gt;</span>
+
+<span class="n">Voting</span> <span class="n">History</span>
+<span class="o">--------------</span>
+
+<span class="o">&lt;</span><span class="n">Voting</span> <span class="n">Records</span> <span class="ow">or</span> <span class="s2">&quot;N/A&quot;</span><span class="o">&gt;</span>
+
+<span class="p">:</span><span class="n">Motion</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">Text</span> <span class="n">of</span> <span class="n">the</span> <span class="n">motion</span><span class="o">&gt;</span>
+<span class="p">:</span><span class="n">Voting</span> <span class="n">Start</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">YYYY</span><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">DD</span><span class="o">&gt;</span>
+<span class="p">:</span><span class="n">Voting</span> <span class="n">End</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">YYYY</span><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">DD</span><span class="o">&gt;</span>
+<span class="p">:</span><span class="n">Result</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">Result</span><span class="o">&gt;</span>
+
+<span class="n">Traceability</span>
+<span class="o">------------</span>
+
+<span class="p">:</span><span class="n">Requirements</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">links</span> <span class="n">to</span> <span class="n">requirements</span> <span class="ow">or</span> <span class="s2">&quot;N/A&quot;</span><span class="o">&gt;</span>
+<span class="p">:</span><span class="n">Tickets</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">links</span> <span class="n">to</span> <span class="n">tickets</span> <span class="ow">or</span> <span class="s2">&quot;N/A&quot;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="template-for-rfc-discussion-pages">
+<span id="disc-template"></span><h2>Template for RFC Discussion Pages<a class="headerlink" href="#template-for-rfc-discussion-pages" title="Permalink to this headline">¶</a></h2>
+<p>RFC Discussion pages shall have the URL
+<code class="docutils literal"><span class="pre">http://eoxserver.org/wiki/DiscussionRfc&lt;number&gt;</span></code>. They shall be
+referenced on the page <a class="reference external" href="http://eoxserver.org/wiki/RfcDiscussions">http://eoxserver.org/wiki/RfcDiscussions</a>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">=</span> <span class="n">Discussion</span> <span class="n">Page</span> <span class="n">RFC</span> <span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">title</span><span class="o">&gt;</span> <span class="o">=</span>
+
+<span class="sd">&#39;&#39;&#39;RFC &lt;number&gt;:&#39;&#39;&#39;</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">link</span><span class="o">&gt;</span><span class="p">]</span>
+
+<span class="o">==</span> <span class="n">Template</span> <span class="n">Comment</span> <span class="o">==</span>
+
+<span class="o">&lt;</span><span class="n">comment</span> <span class="n">text</span><span class="o">&gt;</span>
+
+<span class="s1">&#39;&#39;</span><span class="n">Author</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">author</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">|</span> <span class="n">Created</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">date</span> <span class="ow">and</span> <span class="n">time</span> <span class="n">of</span> <span class="n">creation</span><span class="p">:</span> <span class="n">YYYY</span><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">DD</span> <span class="n">HH</span><span class="p">:</span><span class="n">MM</span><span class="p">:</span><span class="n">SS</span><span class="o">&gt;</span><span class="s1">&#39;&#39;</span>
+<span class="o">----</span>
+
+<span class="o">==</span> <span class="n">Discussion</span> <span class="o">==</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="rfc0.html" class="btn btn-neutral float-right" title="RFC 0: Project Steering Committee Guidelines" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="policies.html" class="btn btn-neutral float-left" title="RFC Policies" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,532 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>RFC 13: WCS-T 1.1 Interface Prototype &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="RFC 14: Asynchronous Task Processing (ATP)" href="rfc14.html" />
+    <link rel="prev" title="RFC 12: Backends for the Data Access Layer" href="rfc12.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Requests for Comments</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#rfc-procedures">RFC Procedures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#writing-rfcs">Writing RFCs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#rfcs">RFCs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="policies.html">RFC Policies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="howto.html">Guidelines for Requests for Comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc0.html">RFC 0: Project Steering Committee Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc1.html">RFC 1: An Extensible Software Architecture for EOxServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc2.html">RFC 2: Extension Mechanism for EOxServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc3.html">RFC 3: OGC Service Extensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc4.html">RFC 4: Data Packaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc5.html">RFC 5: Processing Chains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc6.html">RFC 6: Directory Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc7.html">RFC 7: Release Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc8.html">RFC 8: SVN Commit Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc9.html">RFC 9: SOAP Binding of WCS GetCoverage Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc10.html">RFC 10: SOAP Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc11.html">RFC 11: WPS 1.0.0 Interface Prototype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc12.html">RFC 12: Backends for the Data Access Layer</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">RFC 13: WCS-T 1.1 Interface Prototype</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wcs-transaction-operation">WCS Transaction Operation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#governance">Governance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#voting-history">Voting History</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#traceability">Traceability</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rfc14.html">RFC 14: Asynchronous Task Processing (ATP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc15.html">RFC 15: Access Control Support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc16.html">RFC 16: Referenceable Grid Coverages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc17.html">RFC 17: Configuration of Supported Output Formats and CRSes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc18.html">RFC 18: Operator Interface Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc19.html">RFC 19: Migrate project repository from svn to git</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Requests for Comments</a> &raquo;</li>
+        
+      <li>RFC 13: WCS-T 1.1 Interface Prototype</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/rfc/rfc13.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="rfc-13-wcs-t-1-1-interface-prototype">
+<span id="rfc-13"></span><h1>RFC 13: WCS-T 1.1 Interface Prototype<a class="headerlink" href="#rfc-13-wcs-t-1-1-interface-prototype" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Martin Paces</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Created:</th><td class="field-body">2011-09-13</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Last Edit:</th><td class="field-body">$Date$</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Status:</th><td class="field-body">ACCEPTED</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Discussion:</th><td class="field-body"><a class="reference external" href="http://www.eoxserver.org/wiki/DiscussionRfc13">http://www.eoxserver.org/wiki/DiscussionRfc13</a></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This RFC describes the design and implementation of the interface prototype
+of the <em>Open Geospatial Consortium</em> (OGC) <a class="reference external" href="http://portal.opengeospatial.org/files/?artifact_id=28506">Web Coverage Service - Transaction
+operation extension (WCS-T) [OGC 07-068r4]</a> standard.
+The WCS-T extends the baseline WCS (allowing download of coverages only) by additionally
+allowing modifications of the stored coverages, namely, it allows adding,
+deleting, or updating of the coverages’ data and their metadata.</p>
+</div>
+<div class="section" id="wcs-transaction-operation">
+<h2>WCS Transaction Operation<a class="headerlink" href="#wcs-transaction-operation" title="Permalink to this headline">¶</a></h2>
+<p>The WCS-T standard [OGC 07-068r4] defines an additional WCS <em>transaction</em> operation
+to perform modifications of the WCS Coverages. A single <em>transaction</em> contains one
+or more actions to be performed over coverages (coverage actions). The WCS-T standard
+requires that all WCS-T implementations shall support at least one action per request,
+multiple actions per request are optional.</p>
+<p>The possible coverage actions are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Add - inserts new coverage and its metadata (required by all WCS-T implementations)</li>
+<li>Delete - removes an existing coverage and its metadata (optional)</li>
+<li>UpdateAll - replace data and metadata of an existing coverage (optional)</li>
+<li>UpdateMetadata - replace metadata of an existing coverage (optional)</li>
+<li>UpdateDataPart - replace data subset of an existing coverage (optional)</li>
+</ul>
+</div></blockquote>
+<p>The supported optional features (multiple actions per request or optional coverage actions)
+shall be announced in the <em>ServiceIdentification</em> section of the WCS <em>Capabilities</em> XML document
+using the <em>Profile</em> XML element (see [OGC 07-068r4] for a detailed list of the applicable URNs).</p>
+<p>Although not explicitly mentioned by the WCS-T standard, we assume the <em>transaction</em> operation
+shall be present in the <em>OperationMetada</em> section of the WCS <em>Capabilities</em>.</p>
+<p>The WCS-T standard allows XML encoded requests submitted as HTTP/POST requests. The KVP encoding
+of HTTP/GET requests is not supported by WCS-T since “the KVP encoding appears impractical
+without significantly restricting Transaction requests” [OGC 07-068r4].
+Further, the [OGC 07-068r4] introduction mentions that the exchanged XML documents
+shall use the SOAP packaging, however, the examples are presented without the SOAP wrapping
+leaving this requirement in doubts.</p>
+<p>The WCS-T requests can be processed synchronously or asynchronously.
+In the first case, the request is processed immediately and the transaction response
+is returned once actions have been processed successfully.
+In the latter case, the request is validated and accepted by the server returning
+simple acknowledgement XML document. The request is than processed asynchronously
+possibly much later than the acknowledgement XML document has been returned to the client.
+The asynchronous operation is triggered by presence of the <em>responseHandler</em> element in the
+WCS-T request. This element contains an URL where the response document should be uploaded.</p>
+<p>All the data passed to the server by the WCS-T requests are in form of URL references.
+The support for direct data passing via MIME/multi-part encoded requests is not considered
+by the WCS-T standard.</p>
+<p>The format of the ingested coverage data is not considered by the WCS-T standard at all.
+Neither it can be annotated by the WCS-T request nor by the WCS-T <em>OperationMetadata</em>. Thus
+we assume the format selection is left at discretion of the WCS-T implementation.</p>
+<p>The WCS-T standard requires that certain metadata shall be provided by the client.
+These are geo-transformation, coverage description, and coverage summary. Apart
+from this mandatory metadata application specific metadata may be added by the
+implementation.</p>
+<p>The WCS-T standard allows clients to submit their request and (created) coverages
+identifiers. These identifiers do not need to be used by the WCS-T server as they
+may collide with the identifiers of other requests or coverages, respectively,
+or simply not follow the naming convention of the particular WCS server.
+Thus the client provided identifiers are not binding for the WCS server and
+they rather provide a naming hint. As result of this the WCS-T client shall never
+rely on the identifiers provided to the WCS-T server but it shall always read
+the identifier returned by the WCS-T XML response.</p>
+<div class="section" id="eoxserver-implementation">
+<h3>EOxServer Implementation<a class="headerlink" href="#eoxserver-implementation" title="Permalink to this headline">¶</a></h3>
+<p>The WCS <em>transaction</em> operations is implemented using the service handlers API
+of EOxServer. Since the WCS-T standard requires the version of the <em>transaction</em>
+operation to be ‘1.1’ (rather than the ‘1.1.0’ version used by other WCS operations)
+a specific WCS 1.1 version handler must have been employed.
+The operation itself is then implemented as a request handler.</p>
+<p>Since the presence of the WCS-T operation needs to be announced by the WCS <em>Capabilities</em>
+the WCS 1.1.x <em>getCapabilities</em> operation request handlers have to be modified.
+Since the <em>Capabilities</em> XML response is generated by the MapServer (external library)
+the only feasible way to introduce the additional information to the <em>getCapabilities</em>
+XML response is to: i) capture the MapServer’s response, ii) modify the XML document,
+and iii) send the modified XML instead of the MapServer’s one.</p>
+<p>The <em>transaction</em> request or response XML documents do not use the (presumably) required
+SOAP packaging. We have intentionally refused to follow this requirement in
+our implementation as the SOAP packing and unpacking is duty of EOxServer’s <em>SOAP  Proxy</em>
+component and our own implementation would rather duplicate the functionality
+implemented elsewhere.</p>
+<p>Our implementation, by default, offers the WCS-T core functionality only. All the optional
+features such as multiple coverage actions per request or the optional coverage actions
+shall be explicitly enabled by EOxServer’s configuration (see following section for
+details).</p>
+<p>Both synchronous and asynchronous modes of operation are available.
+While the synchronous request are processed within the context of the WCS-T request
+handler the asynchronous requests are parsed and validated within the context
+of the WCS-T request but the processing itself is performed by the Asynchronous Task
+Processing (ATP) subsystem of EOxServer. Namely, the processing task is enqueued to the
+task queue and than later executed by one of the employed Asynchronous Task Processing
+Daemons (ATPD). More details about the ATP can be found in [ATP-RFC].</p>
+<p>As it was already mentioned, the asynchronous mode of operation is triggered by presence
+of the <em>responseHandler</em> element in the WCS-T request and this element contains an URL where
+the response document should be uploaded. Our implementation supports following protocols:</p>
+<blockquote>
+<div><ul class="simple">
+<li>FTP - using the PUT command; username/password FTP authentication is possible</li>
+<li>HTTP - using POST HTTP request; username/password FTP authentication is possible</li>
+</ul>
+</div></blockquote>
+<p>Secured (SSL or TLS) versions of the protocols are currently not supported.</p>
+<p>The username/password required for authentication can be specified directly by the URL</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">scheme</span><span class="p">:</span><span class="o">//</span><span class="p">[</span><span class="n">username</span><span class="p">:</span><span class="n">password</span><span class="o">@</span><span class="p">]</span><span class="n">domain</span><span class="p">[:</span><span class="n">port</span><span class="p">]</span><span class="o">/</span><span class="n">path</span>
+</pre></div>
+</div>
+<p>In case of FTP, when the paths point to a directory a new file will be created taking the
+request ID as the base file-name and adding the ‘.xml’ extension. Otherwise a file given
+by the path will be created or rewritten.</p>
+<p>The WCS-T implementation uses always pairs of identifiers (internal and public) for both
+request and (created) coverage identifiers. The public identifiers are taken from the WCS-T
+request, provided they do not collide with identifiers in use. In case of not supplied or colliding
+identifiers the public identifiers are set from the internal ones.
+The public identifiers are used in the client/server communication or for naming of the
+newly created coverages. The internal identifiers are exclusively used for naming
+of the internal server resources (asynchronous tasks, directory and file names, etc.)</p>
+<p>Each WCS-T request, internally, gets a <em>context</em>, i.e. set of resources assigned to a particular
+request instance. These resources are: i) an isolated temporary workspace (a directory to store
+intermediate files deleted automatically once the request is finished), ii) an isolated permanent
+storage (a directory where the inserted coverages and their metadata is stored) and iii) in case of
+asynchronous mode of operation ATP task instance. These resources make use of the internal
+identifiers only.</p>
+</div>
+<div class="section" id="eoxserver-configuration">
+<h3>EOxServer Configuration<a class="headerlink" href="#eoxserver-configuration" title="Permalink to this headline">¶</a></h3>
+<p>The EOxServer’s WCS-T implementation need to be configured prior to the operation.
+The configuration is set in EOxServer’s ‘eoxserver.conf’ file.
+The WCS-T specific options are grouped together in the ‘services.ows.wcst11’ section.</p>
+<p>The WCS-T options are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>allow_multiple_actions (False|True) - allow multiple actions per single WCS-T request.</li>
+<li>allowed_optional_action (Delete,UpdateAll,UpdateMetadata,UpdateDataPart) -
+comma separated list of enabled optional WCS-T coverage action. Set empty if none.</li>
+<li>path_wcst_temp (<em>path</em>) - directory to use as temporary workspace</li>
+<li>path_wcst_perm (<em>path</em>) - directory to use as permanent workspace</li>
+</ul>
+</div></blockquote>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="c1"># WCS-T 1.1 settings</span>
+<span class="p">[</span><span class="n">services</span><span class="o">.</span><span class="n">ows</span><span class="o">.</span><span class="n">wcst11</span><span class="p">]</span>
+
+<span class="c1"># enble disable multiple actions per request</span>
+<span class="n">allow_multiple_actions</span><span class="o">=</span><span class="kc">False</span>
+
+<span class="c1"># list enabled optional actions {Delete,UpdateAll,UpdateMetadata,UpdateDataPart}</span>
+<span class="n">allowed_optional_actions</span><span class="o">=</span><span class="n">Delete</span><span class="p">,</span><span class="n">UpdateAll</span>
+
+<span class="c1"># temporary storage</span>
+<span class="n">path_wcst_temp</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">o3s</span><span class="o">/</span><span class="n">sandbox_wcst_instance</span><span class="o">/</span><span class="n">wcst_temp</span>
+
+<span class="c1"># permanent data storage</span>
+<span class="n">path_wcst_perm</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">o3s</span><span class="o">/</span><span class="n">sandbox_wcst_instance</span><span class="o">/</span><span class="n">wcst_perm</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="coverages-data-and-metadata">
+<h3>Coverages, Data and Metadata<a class="headerlink" href="#coverages-data-and-metadata" title="Permalink to this headline">¶</a></h3>
+<p>The one and only currently supported format of pixel data is GeoTIFF.</p>
+<p>All the necessary meta-data required by the EOxServer are extracted from the GeoTIFF
+annotation and (optionally) from the provided EO meta-data (see section below).</p>
+<p>Due to the limitations of the current Coverage Managers’ API of the EOxServer
+the current WCS-T implementation has following restrictions:</p>
+<ul class="simple">
+<li>only rectified grid coverages can be ingested;</li>
+<li><code class="docutils literal"><span class="pre">urn:ogc:def:role:WCS:1.1:CoverageDescription</span></code> metadata are ignored and
+even not required as this information cannot be inserted to EOxServer anyway;</li>
+<li><code class="docutils literal"><span class="pre">urn:ogc:def:role:WCS:1.1:CoverageSummary</span></code> metadata are ignored
+as this information cannot be inserted to EOxServer anyway;</li>
+<li><code class="docutils literal"><span class="pre">urn:ogc:def:role:WCS:1.1:GeoreferencingTransform</span></code> metadata are ignored
+as this information is relevant to referenced data only</li>
+<li><code class="docutils literal"><span class="pre">urn:ogc:def:role:WCS:1.1:OtherSource</span></code> metadata are ignored
+as this information cannot be inserted to EOxServer anyway.</li>
+</ul>
+</div>
+<div class="section" id="wcs-t-and-earth-observation-application-profile">
+<h3>WCS-T and Earth Observation Application Profile<a class="headerlink" href="#wcs-t-and-earth-observation-application-profile" title="Permalink to this headline">¶</a></h3>
+<p>In order to be able to ingest additional metadata as defined by the
+<em>WCS 2.0 - Earth Observation Application Profile</em> [EO-WCS]
+we allow the ingestion of client-defined EO-WCS metadata attached to
+the ingested pixel data. The EO-WCS XML is passed
+as coverage OWS Metadata XML element with
+‘xlink:role=”http://www.opengis.net/eop/2.0/EarthObservation”’.</p>
+</div>
+</div>
+<div class="section" id="governance">
+<h2>Governance<a class="headerlink" href="#governance" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="source-code-location">
+<h3>Source Code Location<a class="headerlink" href="#source-code-location" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://eoxserver.org/svn/sandbox/sandbox_wcst">http://eoxserver.org/svn/sandbox/sandbox_wcst</a></p>
+</div>
+<div class="section" id="rfcs-and-decision-process">
+<h3>RFCs and Decision Process<a class="headerlink" href="#rfcs-and-decision-process" title="Permalink to this headline">¶</a></h3>
+<p><em>TBD</em></p>
+</div>
+<div class="section" id="license">
+<h3>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h3>
+<p>The WCS-T implementation shall be distributed under the terms of <a class="reference internal" href="../copyright.html#eoxserver-open-license"><span class="std std-ref">EOxServer’s MapServer-like license</span></a>.</p>
+</div>
+<div class="section" id="wiki-trac-tickets">
+<h3>Wiki, Trac, Tickets<a class="headerlink" href="#wiki-trac-tickets" title="Permalink to this headline">¶</a></h3>
+<p><em>TBD</em></p>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">[OGC 07-068r4]:</th><td class="field-body"><a class="reference external" href="http://portal.opengeospatial.org/files/?artifact_id=28506">http://portal.opengeospatial.org/files/?artifact_id=28506</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">[ATP-RFC]:</th><td class="field-body"><a class="reference external" href="http://eoxserver.org/doc/en/rfc/rfc14.html">http://eoxserver.org/doc/en/rfc/rfc14.html</a></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">[EO-WCS]:</th><td class="field-body"><em>TBD</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="voting-history">
+<h2>Voting History<a class="headerlink" href="#voting-history" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Motion:</th><td class="field-body">To accept RFC 13</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Voting Start:</th><td class="field-body">2011-12-15</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Voting End:</th><td class="field-body">2011-12-22</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result:</th><td class="field-body">+3 for ACCEPTED</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="traceability">
+<h2>Traceability<a class="headerlink" href="#traceability" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Requirements:</th><td class="field-body"><em>N/A</em></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Tickets:</th><td class="field-body"><em>N/A</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="rfc14.html" class="btn btn-neutral float-right" title="RFC 14: Asynchronous Task Processing (ATP)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="rfc12.html" class="btn btn-neutral float-left" title="RFC 12: Backends for the Data Access Layer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

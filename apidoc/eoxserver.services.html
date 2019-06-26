@@ -1,0 +1,926 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>eoxserver.services package &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="eoxserver.services.auth package" href="eoxserver.services.auth.html" />
+    <link rel="prev" title="eoxserver.resources.processes package" href="eoxserver.resources.processes.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.backends.html">eoxserver.backends package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.contrib.html">eoxserver.contrib package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.core.html">eoxserver.core package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.processing.html">eoxserver.processing package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.resources.html">eoxserver.resources package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">eoxserver.services package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-eoxserver.services.exceptions">eoxserver.services.exceptions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eoxserver-services-models-module">eoxserver.services.models module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-eoxserver.services.parameters">eoxserver.services.parameters module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eoxserver-services-result-module">eoxserver.services.result module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eoxserver-services-subset-module">eoxserver.services.subset module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eoxserver-services-urls-module">eoxserver.services.urls module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eoxserver-services-views-module">eoxserver.services.views module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-eoxserver.services">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.testing.html">eoxserver.testing package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.webclient.html">eoxserver.webclient package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#module-eoxserver.views">eoxserver.views module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#module-eoxserver">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">API Reference</a> &raquo;</li>
+        
+      <li>eoxserver.services package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/apidoc/eoxserver.services.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="eoxserver-services-package">
+<h1>eoxserver.services package<a class="headerlink" href="#eoxserver-services-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eoxserver.services.auth.html">eoxserver.services.auth package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.auth.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.auth.html#eoxserver-services-auth-base-module">eoxserver.services.auth.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.auth.html#eoxserver-services-auth-charonpdp-module">eoxserver.services.auth.charonpdp module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.auth.html#eoxserver-services-auth-dummypdp-module">eoxserver.services.auth.dummypdp module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.auth.html#module-eoxserver.services.auth.exceptions">eoxserver.services.auth.exceptions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.auth.html#module-eoxserver.services.auth.interfaces">eoxserver.services.auth.interfaces module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.auth.html#eoxserver-services-auth-middleware-module">eoxserver.services.auth.middleware module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.auth.html#module-eoxserver.services.auth">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="eoxserver.services.gdal.html">eoxserver.services.gdal package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.gdal.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.services.gdal.wcs.html">eoxserver.services.gdal.wcs package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.gdal.wcs.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.gdal.wcs.html#eoxserver-services-gdal-wcs-referenceable-dataset-renderer-module">eoxserver.services.gdal.wcs.referenceable_dataset_renderer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.gdal.wcs.html#module-eoxserver.services.gdal.wcs">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.gdal.html#module-eoxserver.services.gdal">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="eoxserver.services.gml.html">eoxserver.services.gml package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.gml.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.services.gml.v32.html">eoxserver.services.gml.v32 package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.gml.v32.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.gml.v32.html#eoxserver-services-gml-v32-encoders-module">eoxserver.services.gml.v32.encoders module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.gml.v32.html#module-eoxserver.services.gml.v32">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.gml.html#module-eoxserver.services.gml">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="eoxserver.services.mapserver.html">eoxserver.services.mapserver package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.mapserver.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.services.mapserver.connectors.html">eoxserver.services.mapserver.connectors package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.mapserver.connectors.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.mapserver.connectors.html#eoxserver-services-mapserver-connectors-multifile-connector-module">eoxserver.services.mapserver.connectors.multifile_connector module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.mapserver.connectors.html#eoxserver-services-mapserver-connectors-polygonmask-connector-module">eoxserver.services.mapserver.connectors.polygonmask_connector module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.mapserver.connectors.html#eoxserver-services-mapserver-connectors-simple-connector-module">eoxserver.services.mapserver.connectors.simple_connector module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.mapserver.connectors.html#eoxserver-services-mapserver-connectors-tileindex-connector-module">eoxserver.services.mapserver.connectors.tileindex_connector module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.mapserver.connectors.html#module-eoxserver.services.mapserver.connectors">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.services.mapserver.wcs.html">eoxserver.services.mapserver.wcs package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.mapserver.wcs.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.mapserver.wcs.html#eoxserver-services-mapserver-wcs-base-renderer-module">eoxserver.services.mapserver.wcs.base_renderer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.mapserver.wcs.html#eoxserver-services-mapserver-wcs-capabilities-renderer-module">eoxserver.services.mapserver.wcs.capabilities_renderer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.mapserver.wcs.html#eoxserver-services-mapserver-wcs-coverage-description-renderer-module">eoxserver.services.mapserver.wcs.coverage_description_renderer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.mapserver.wcs.html#eoxserver-services-mapserver-wcs-coverage-renderer-module">eoxserver.services.mapserver.wcs.coverage_renderer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.mapserver.wcs.html#module-eoxserver.services.mapserver.wcs">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.services.mapserver.wms.html">eoxserver.services.mapserver.wms package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.mapserver.wms.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="eoxserver.services.mapserver.wms.layerfactories.html">eoxserver.services.mapserver.wms.layerfactories package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.mapserver.wms.layerfactories.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.mapserver.wms.layerfactories.html#eoxserver-services-mapserver-wms-layerfactories-base-module">eoxserver.services.mapserver.wms.layerfactories.base module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.mapserver.wms.layerfactories.html#eoxserver-services-mapserver-wms-layerfactories-colorized-mask-layer-factory-module">eoxserver.services.mapserver.wms.layerfactories.colorized_mask_layer_factory module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.mapserver.wms.layerfactories.html#eoxserver-services-mapserver-wms-layerfactories-coverage-bands-layer-factory-module">eoxserver.services.mapserver.wms.layerfactories.coverage_bands_layer_factory module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.mapserver.wms.layerfactories.html#eoxserver-services-mapserver-wms-layerfactories-coverage-layer-factory-module">eoxserver.services.mapserver.wms.layerfactories.coverage_layer_factory module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.mapserver.wms.layerfactories.html#eoxserver-services-mapserver-wms-layerfactories-coverage-mask-layer-factory-module">eoxserver.services.mapserver.wms.layerfactories.coverage_mask_layer_factory module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.mapserver.wms.layerfactories.html#eoxserver-services-mapserver-wms-layerfactories-coverage-masked-outlines-layer-factory-module">eoxserver.services.mapserver.wms.layerfactories.coverage_masked_outlines_layer_factory module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.mapserver.wms.layerfactories.html#eoxserver-services-mapserver-wms-layerfactories-coverage-outlines-layer-factory-module">eoxserver.services.mapserver.wms.layerfactories.coverage_outlines_layer_factory module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.mapserver.wms.layerfactories.html#module-eoxserver.services.mapserver.wms.layerfactories">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="eoxserver.services.mapserver.wms.styleapplicators.html">eoxserver.services.mapserver.wms.styleapplicators package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.mapserver.wms.styleapplicators.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.mapserver.wms.styleapplicators.html#eoxserver-services-mapserver-wms-styleapplicators-sld-module">eoxserver.services.mapserver.wms.styleapplicators.sld module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.mapserver.wms.styleapplicators.html#module-eoxserver.services.mapserver.wms.styleapplicators">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.mapserver.wms.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.mapserver.wms.html#eoxserver-services-mapserver-wms-capabilities-renderer-module">eoxserver.services.mapserver.wms.capabilities_renderer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.mapserver.wms.html#eoxserver-services-mapserver-wms-feature-info-renderer-module">eoxserver.services.mapserver.wms.feature_info_renderer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.mapserver.wms.html#eoxserver-services-mapserver-wms-legendgraphic-renderer-module">eoxserver.services.mapserver.wms.legendgraphic_renderer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.mapserver.wms.html#eoxserver-services-mapserver-wms-map-renderer-module">eoxserver.services.mapserver.wms.map_renderer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.mapserver.wms.html#eoxserver-services-mapserver-wms-util-module">eoxserver.services.mapserver.wms.util module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.mapserver.wms.html#module-eoxserver.services.mapserver.wms">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.mapserver.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.mapserver.html#module-eoxserver.services.mapserver.interfaces">eoxserver.services.mapserver.interfaces module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.mapserver.html#module-eoxserver.services.mapserver">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="eoxserver.services.native.html">eoxserver.services.native package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.native.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.services.native.wcs.html">eoxserver.services.native.wcs package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.native.wcs.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.native.wcs.html#eoxserver-services-native-wcs-capabilities-renderer-module">eoxserver.services.native.wcs.capabilities_renderer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.native.wcs.html#eoxserver-services-native-wcs-coverage-description-renderer-module">eoxserver.services.native.wcs.coverage_description_renderer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.native.wcs.html#module-eoxserver.services.native.wcs">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.native.html#module-eoxserver.services.native">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="eoxserver.services.ows.html">eoxserver.services.ows package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.services.ows.common.html">eoxserver.services.ows.common package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.common.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="eoxserver.services.ows.common.v11.html">eoxserver.services.ows.common.v11 package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.common.v11.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.common.v11.html#eoxserver-services-ows-common-v11-encoders-module">eoxserver.services.ows.common.v11.encoders module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.common.v11.html#module-eoxserver.services.ows.common.v11">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="eoxserver.services.ows.common.v20.html">eoxserver.services.ows.common.v20 package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.common.v20.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.common.v20.html#eoxserver-services-ows-common-v20-encoders-module">eoxserver.services.ows.common.v20.encoders module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.common.v20.html#module-eoxserver.services.ows.common.v20.exceptionhandler">eoxserver.services.ows.common.v20.exceptionhandler module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.common.v20.html#module-eoxserver.services.ows.common.v20">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.common.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.common.html#eoxserver-services-ows-common-config-module">eoxserver.services.ows.common.config module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.common.html#module-eoxserver.services.ows.common">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.services.ows.wcs.html">eoxserver.services.ows.wcs package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wcs.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="eoxserver.services.ows.wcs.v10.html">eoxserver.services.ows.wcs.v10 package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v10.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v10.html#eoxserver-services-ows-wcs-v10-describecoverage-module">eoxserver.services.ows.wcs.v10.describecoverage module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v10.html#eoxserver-services-ows-wcs-v10-exceptionhandler-module">eoxserver.services.ows.wcs.v10.exceptionhandler module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v10.html#eoxserver-services-ows-wcs-v10-getcapabilities-module">eoxserver.services.ows.wcs.v10.getcapabilities module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v10.html#eoxserver-services-ows-wcs-v10-getcoverage-module">eoxserver.services.ows.wcs.v10.getcoverage module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v10.html#eoxserver-services-ows-wcs-v10-parameters-module">eoxserver.services.ows.wcs.v10.parameters module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v10.html#eoxserver-services-ows-wcs-v10-util-module">eoxserver.services.ows.wcs.v10.util module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v10.html#module-eoxserver.services.ows.wcs.v10">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="eoxserver.services.ows.wcs.v11.html">eoxserver.services.ows.wcs.v11 package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v11.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v11.html#eoxserver-services-ows-wcs-v11-describecoverage-module">eoxserver.services.ows.wcs.v11.describecoverage module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v11.html#eoxserver-services-ows-wcs-v11-exceptionhandler-module">eoxserver.services.ows.wcs.v11.exceptionhandler module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v11.html#eoxserver-services-ows-wcs-v11-getcapabilities-module">eoxserver.services.ows.wcs.v11.getcapabilities module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v11.html#eoxserver-services-ows-wcs-v11-getcoverage-module">eoxserver.services.ows.wcs.v11.getcoverage module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v11.html#eoxserver-services-ows-wcs-v11-parameters-module">eoxserver.services.ows.wcs.v11.parameters module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v11.html#eoxserver-services-ows-wcs-v11-util-module">eoxserver.services.ows.wcs.v11.util module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v11.html#module-eoxserver.services.ows.wcs.v11">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="eoxserver.services.ows.wcs.v20.html">eoxserver.services.ows.wcs.v20 package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v20.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="eoxserver.services.ows.wcs.v20.encodings.html">eoxserver.services.ows.wcs.v20.encodings package</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="eoxserver.services.ows.wcs.v20.encodings.html#submodules">Submodules</a></li>
+<li class="toctree-l8"><a class="reference internal" href="eoxserver.services.ows.wcs.v20.encodings.html#eoxserver-services-ows-wcs-v20-encodings-geotiff-module">eoxserver.services.ows.wcs.v20.encodings.geotiff module</a></li>
+<li class="toctree-l8"><a class="reference internal" href="eoxserver.services.ows.wcs.v20.encodings.html#module-eoxserver.services.ows.wcs.v20.encodings">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="eoxserver.services.ows.wcs.v20.packages.html">eoxserver.services.ows.wcs.v20.packages package</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="eoxserver.services.ows.wcs.v20.packages.html#submodules">Submodules</a></li>
+<li class="toctree-l8"><a class="reference internal" href="eoxserver.services.ows.wcs.v20.packages.html#eoxserver-services-ows-wcs-v20-packages-tar-module">eoxserver.services.ows.wcs.v20.packages.tar module</a></li>
+<li class="toctree-l8"><a class="reference internal" href="eoxserver.services.ows.wcs.v20.packages.html#eoxserver-services-ows-wcs-v20-packages-zip-module">eoxserver.services.ows.wcs.v20.packages.zip module</a></li>
+<li class="toctree-l8"><a class="reference internal" href="eoxserver.services.ows.wcs.v20.packages.html#module-eoxserver.services.ows.wcs.v20.packages">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v20.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v20.html#eoxserver-services-ows-wcs-v20-describecoverage-module">eoxserver.services.ows.wcs.v20.describecoverage module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v20.html#eoxserver-services-ows-wcs-v20-describeeocoverageset-module">eoxserver.services.ows.wcs.v20.describeeocoverageset module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v20.html#eoxserver-services-ows-wcs-v20-encoders-module">eoxserver.services.ows.wcs.v20.encoders module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v20.html#eoxserver-services-ows-wcs-v20-exceptionhandler-module">eoxserver.services.ows.wcs.v20.exceptionhandler module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v20.html#eoxserver-services-ows-wcs-v20-getcapabilities-module">eoxserver.services.ows.wcs.v20.getcapabilities module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v20.html#eoxserver-services-ows-wcs-v20-getcoverage-module">eoxserver.services.ows.wcs.v20.getcoverage module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v20.html#eoxserver-services-ows-wcs-v20-geteocoverageset-module">eoxserver.services.ows.wcs.v20.geteocoverageset module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v20.html#eoxserver-services-ows-wcs-v20-parameters-module">eoxserver.services.ows.wcs.v20.parameters module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v20.html#eoxserver-services-ows-wcs-v20-util-module">eoxserver.services.ows.wcs.v20.util module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wcs.v20.html#module-eoxserver.services.ows.wcs.v20">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wcs.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wcs.html#eoxserver-services-ows-wcs-basehandlers-module">eoxserver.services.ows.wcs.basehandlers module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wcs.html#module-eoxserver.services.ows.wcs.interfaces">eoxserver.services.ows.wcs.interfaces module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wcs.html#module-eoxserver.services.ows.wcs.parameters">eoxserver.services.ows.wcs.parameters module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wcs.html#module-eoxserver.services.ows.wcs">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.services.ows.wms.html">eoxserver.services.ows.wms package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wms.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="eoxserver.services.ows.wms.v10.html">eoxserver.services.ows.wms.v10 package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wms.v10.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wms.v10.html#eoxserver-services-ows-wms-v10-getcapabilities-module">eoxserver.services.ows.wms.v10.getcapabilities module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wms.v10.html#eoxserver-services-ows-wms-v10-getfeatureinfo-module">eoxserver.services.ows.wms.v10.getfeatureinfo module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wms.v10.html#eoxserver-services-ows-wms-v10-getmap-module">eoxserver.services.ows.wms.v10.getmap module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wms.v10.html#module-eoxserver.services.ows.wms.v10">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="eoxserver.services.ows.wms.v11.html">eoxserver.services.ows.wms.v11 package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wms.v11.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wms.v11.html#eoxserver-services-ows-wms-v11-getcapabilities-module">eoxserver.services.ows.wms.v11.getcapabilities module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wms.v11.html#eoxserver-services-ows-wms-v11-getfeatureinfo-module">eoxserver.services.ows.wms.v11.getfeatureinfo module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wms.v11.html#eoxserver-services-ows-wms-v11-getmap-module">eoxserver.services.ows.wms.v11.getmap module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wms.v11.html#module-eoxserver.services.ows.wms.v11">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="eoxserver.services.ows.wms.v13.html">eoxserver.services.ows.wms.v13 package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wms.v13.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wms.v13.html#eoxserver-services-ows-wms-v13-exceptionhandler-module">eoxserver.services.ows.wms.v13.exceptionhandler module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wms.v13.html#eoxserver-services-ows-wms-v13-getcapabilities-module">eoxserver.services.ows.wms.v13.getcapabilities module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wms.v13.html#eoxserver-services-ows-wms-v13-getfeatureinfo-module">eoxserver.services.ows.wms.v13.getfeatureinfo module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wms.v13.html#eoxserver-services-ows-wms-v13-getlegendgraphic-module">eoxserver.services.ows.wms.v13.getlegendgraphic module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wms.v13.html#eoxserver-services-ows-wms-v13-getmap-module">eoxserver.services.ows.wms.v13.getmap module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wms.v13.html#module-eoxserver.services.ows.wms.v13">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wms.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wms.html#eoxserver-services-ows-wms-basehandlers-module">eoxserver.services.ows.wms.basehandlers module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wms.html#module-eoxserver.services.ows.wms.exceptions">eoxserver.services.ows.wms.exceptions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wms.html#module-eoxserver.services.ows.wms.interfaces">eoxserver.services.ows.wms.interfaces module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wms.html#eoxserver-services-ows-wms-util-module">eoxserver.services.ows.wms.util module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wms.html#module-eoxserver.services.ows.wms">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.services.ows.wps.html">eoxserver.services.ows.wps package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wps.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html">eoxserver.services.ows.wps.parameters package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#eoxserver-services-ows-wps-parameters-allowed-values-module">eoxserver.services.ows.wps.parameters.allowed_values module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#module-eoxserver.services.ows.wps.parameters.base">eoxserver.services.ows.wps.parameters.base module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#eoxserver-services-ows-wps-parameters-bboxdata-module">eoxserver.services.ows.wps.parameters.bboxdata module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#eoxserver-services-ows-wps-parameters-codecs-module">eoxserver.services.ows.wps.parameters.codecs module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#eoxserver-services-ows-wps-parameters-complexdata-module">eoxserver.services.ows.wps.parameters.complexdata module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#eoxserver-services-ows-wps-parameters-crs-module">eoxserver.services.ows.wps.parameters.crs module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#eoxserver-services-ows-wps-parameters-data-types-module">eoxserver.services.ows.wps.parameters.data_types module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#eoxserver-services-ows-wps-parameters-formats-module">eoxserver.services.ows.wps.parameters.formats module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#eoxserver-services-ows-wps-parameters-inputs-module">eoxserver.services.ows.wps.parameters.inputs module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#eoxserver-services-ows-wps-parameters-literaldata-module">eoxserver.services.ows.wps.parameters.literaldata module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#eoxserver-services-ows-wps-parameters-response-form-module">eoxserver.services.ows.wps.parameters.response_form module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#eoxserver-services-ows-wps-parameters-units-module">eoxserver.services.ows.wps.parameters.units module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="eoxserver.services.ows.wps.processes.html">eoxserver.services.ows.wps.processes package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.processes.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.processes.html#eoxserver-services-ows-wps-processes-get-time-data-module">eoxserver.services.ows.wps.processes.get_time_data module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.processes.html#module-eoxserver.services.ows.wps.processes">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="eoxserver.services.ows.wps.v10.html">eoxserver.services.ows.wps.v10 package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.v10.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="eoxserver.services.ows.wps.v10.encoders.html">eoxserver.services.ows.wps.v10.encoders package</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="eoxserver.services.ows.wps.v10.encoders.html#submodules">Submodules</a></li>
+<li class="toctree-l8"><a class="reference internal" href="eoxserver.services.ows.wps.v10.encoders.html#eoxserver-services-ows-wps-v10-encoders-base-module">eoxserver.services.ows.wps.v10.encoders.base module</a></li>
+<li class="toctree-l8"><a class="reference internal" href="eoxserver.services.ows.wps.v10.encoders.html#eoxserver-services-ows-wps-v10-encoders-capabilities-module">eoxserver.services.ows.wps.v10.encoders.capabilities module</a></li>
+<li class="toctree-l8"><a class="reference internal" href="eoxserver.services.ows.wps.v10.encoders.html#eoxserver-services-ows-wps-v10-encoders-execute-response-module">eoxserver.services.ows.wps.v10.encoders.execute_response module</a></li>
+<li class="toctree-l8"><a class="reference internal" href="eoxserver.services.ows.wps.v10.encoders.html#eoxserver-services-ows-wps-v10-encoders-execute-response-raw-module">eoxserver.services.ows.wps.v10.encoders.execute_response_raw module</a></li>
+<li class="toctree-l8"><a class="reference internal" href="eoxserver.services.ows.wps.v10.encoders.html#eoxserver-services-ows-wps-v10-encoders-parameters-module">eoxserver.services.ows.wps.v10.encoders.parameters module</a></li>
+<li class="toctree-l8"><a class="reference internal" href="eoxserver.services.ows.wps.v10.encoders.html#eoxserver-services-ows-wps-v10-encoders-process-description-module">eoxserver.services.ows.wps.v10.encoders.process_description module</a></li>
+<li class="toctree-l8"><a class="reference internal" href="eoxserver.services.ows.wps.v10.encoders.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.v10.html#submodules">Submodules</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.v10.html#eoxserver-services-ows-wps-v10-describeprocess-module">eoxserver.services.ows.wps.v10.describeprocess module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.v10.html#eoxserver-services-ows-wps-v10-exceptionhandler-module">eoxserver.services.ows.wps.v10.exceptionhandler module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.v10.html#eoxserver-services-ows-wps-v10-execute-module">eoxserver.services.ows.wps.v10.execute module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.v10.html#eoxserver-services-ows-wps-v10-execute-decoder-kvp-module">eoxserver.services.ows.wps.v10.execute_decoder_kvp module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.v10.html#eoxserver-services-ows-wps-v10-execute-decoder-xml-module">eoxserver.services.ows.wps.v10.execute_decoder_xml module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.v10.html#eoxserver-services-ows-wps-v10-getcapabilities-module">eoxserver.services.ows.wps.v10.getcapabilities module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.v10.html#eoxserver-services-ows-wps-v10-util-module">eoxserver.services.ows.wps.v10.util module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="eoxserver.services.ows.wps.v10.html#module-eoxserver.services.ows.wps.v10">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wps.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wps.html#module-eoxserver.services.ows.wps.exceptions">eoxserver.services.ows.wps.exceptions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wps.html#module-eoxserver.services.ows.wps.interfaces">eoxserver.services.ows.wps.interfaces module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wps.html#eoxserver-services-ows-wps-test-allowed-values-module">eoxserver.services.ows.wps.test_allowed_values module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wps.html#eoxserver-services-ows-wps-test-data-types-module">eoxserver.services.ows.wps.test_data_types module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wps.html#module-eoxserver.services.ows.wps">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.html#eoxserver-services-ows-component-module">eoxserver.services.ows.component module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.html#eoxserver-services-ows-decoders-module">eoxserver.services.ows.decoders module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.html#module-eoxserver.services.ows.interfaces">eoxserver.services.ows.interfaces module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.html#module-eoxserver.services.ows.version">eoxserver.services.ows.version module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.html#module-eoxserver.services.ows">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-eoxserver.services.exceptions">
+<span id="eoxserver-services-exceptions-module"></span><h2>eoxserver.services.exceptions module<a class="headerlink" href="#module-eoxserver.services.exceptions" title="Permalink to this headline">¶</a></h2>
+<dl class="exception">
+<dt id="eoxserver.services.exceptions.HTTPMethodNotAllowedError">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.exceptions.</code><code class="descname">HTTPMethodNotAllowedError</code><span class="sig-paren">(</span><em>msg</em>, <em>allowed_methods</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.exceptions.HTTPMethodNotAllowedError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<p>This exception is raised in case of a HTTP requires with unsupported
+HTTP method.
+This exception should always lead to the 405 Method not allowed HTTP error.</p>
+<p>The constructor takes two arguments, the error message <code class="docutils literal"><span class="pre">mgs</span></code> and the list
+of the accepted HTTP methods <code class="docutils literal"><span class="pre">allowed_methods</span></code>.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.exceptions.InterpolationMethodNotSupportedException">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.exceptions.</code><code class="descname">InterpolationMethodNotSupportedException</code><a class="headerlink" href="#eoxserver.services.exceptions.InterpolationMethodNotSupportedException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<p>This exception indicates a not supported interpolation method.</p>
+<dl class="attribute">
+<dt id="eoxserver.services.exceptions.InterpolationMethodNotSupportedException.code">
+<code class="descname">code</code><em class="property"> = 'InterpolationMethodNotSupported'</em><a class="headerlink" href="#eoxserver.services.exceptions.InterpolationMethodNotSupportedException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.services.exceptions.InterpolationMethodNotSupportedException.locator">
+<code class="descname">locator</code><em class="property"> = 'interpolation'</em><a class="headerlink" href="#eoxserver.services.exceptions.InterpolationMethodNotSupportedException.locator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.exceptions.InvalidAxisLabelException">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.exceptions.</code><code class="descname">InvalidAxisLabelException</code><span class="sig-paren">(</span><em>axis_label</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.exceptions.InvalidAxisLabelException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<p>This exception indicates that an invalid axis name was chosen in a WCS
+2.0 subsetting parameter.</p>
+<dl class="attribute">
+<dt id="eoxserver.services.exceptions.InvalidAxisLabelException.code">
+<code class="descname">code</code><em class="property"> = 'InvalidAxisLabel'</em><a class="headerlink" href="#eoxserver.services.exceptions.InvalidAxisLabelException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.exceptions.InvalidFieldSequenceException">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.exceptions.</code><code class="descname">InvalidFieldSequenceException</code><span class="sig-paren">(</span><em>msg</em>, <em>locator</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.exceptions.InvalidFieldSequenceException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<p>Error in RangeSubsetting for illegal intervals.</p>
+<dl class="attribute">
+<dt id="eoxserver.services.exceptions.InvalidFieldSequenceException.code">
+<code class="descname">code</code><em class="property"> = 'InvalidFieldSequence'</em><a class="headerlink" href="#eoxserver.services.exceptions.InvalidFieldSequenceException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.exceptions.InvalidOutputCrsException">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.exceptions.</code><code class="descname">InvalidOutputCrsException</code><a class="headerlink" href="#eoxserver.services.exceptions.InvalidOutputCrsException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<p>This exception indicates an invalid WCS 2.0 outputCrs parameter was
+submitted.</p>
+<dl class="attribute">
+<dt id="eoxserver.services.exceptions.InvalidOutputCrsException.code">
+<code class="descname">code</code><em class="property"> = 'OutputCrs-NotSupported'</em><a class="headerlink" href="#eoxserver.services.exceptions.InvalidOutputCrsException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.services.exceptions.InvalidOutputCrsException.locator">
+<code class="descname">locator</code><em class="property"> = 'outputCrs'</em><a class="headerlink" href="#eoxserver.services.exceptions.InvalidOutputCrsException.locator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.exceptions.InvalidRequestException">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.exceptions.</code><code class="descname">InvalidRequestException</code><span class="sig-paren">(</span><em>msg</em>, <em>code=None</em>, <em>locator=None</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.exceptions.InvalidRequestException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<p>This exception indicates that the request was invalid and an exception
+report shall be returned to the client.</p>
+<p>The constructor takes three arguments, namely <code class="docutils literal"><span class="pre">msg</span></code>, the error message,
+<code class="docutils literal"><span class="pre">code</span></code>, the error code, and <code class="docutils literal"><span class="pre">locator</span></code>, which is needed in OWS
+exception reports for indicating which part of the request produced the
+error.</p>
+<p>How exactly the exception reports are constructed is not defined by the
+exception, but by exception handlers.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.exceptions.InvalidScaleExtentException">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.exceptions.</code><code class="descname">InvalidScaleExtentException</code><span class="sig-paren">(</span><em>low</em>, <em>high</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.exceptions.InvalidScaleExtentException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<p>Error in ScaleExtent operations</p>
+<dl class="attribute">
+<dt id="eoxserver.services.exceptions.InvalidScaleExtentException.code">
+<code class="descname">code</code><em class="property"> = 'InvalidExtent'</em><a class="headerlink" href="#eoxserver.services.exceptions.InvalidScaleExtentException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.exceptions.InvalidScaleFactorException">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.exceptions.</code><code class="descname">InvalidScaleFactorException</code><span class="sig-paren">(</span><em>scalefactor</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.exceptions.InvalidScaleFactorException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<p>Error in ScaleFactor and ScaleAxis operations</p>
+<dl class="attribute">
+<dt id="eoxserver.services.exceptions.InvalidScaleFactorException.code">
+<code class="descname">code</code><em class="property"> = 'InvalidScaleFactor'</em><a class="headerlink" href="#eoxserver.services.exceptions.InvalidScaleFactorException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.exceptions.InvalidSubsettingCrsException">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.exceptions.</code><code class="descname">InvalidSubsettingCrsException</code><a class="headerlink" href="#eoxserver.services.exceptions.InvalidSubsettingCrsException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<p>This exception indicates an invalid WCS 2.0 subsettingCrs parameter was
+submitted.</p>
+<dl class="attribute">
+<dt id="eoxserver.services.exceptions.InvalidSubsettingCrsException.code">
+<code class="descname">code</code><em class="property"> = 'SubsettingCrs-NotSupported'</em><a class="headerlink" href="#eoxserver.services.exceptions.InvalidSubsettingCrsException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.services.exceptions.InvalidSubsettingCrsException.locator">
+<code class="descname">locator</code><em class="property"> = 'subsettingCrs'</em><a class="headerlink" href="#eoxserver.services.exceptions.InvalidSubsettingCrsException.locator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.exceptions.InvalidSubsettingException">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.exceptions.</code><code class="descname">InvalidSubsettingException</code><a class="headerlink" href="#eoxserver.services.exceptions.InvalidSubsettingException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<p>This exception indicates an invalid WCS 2.0 subsetting parameter was
+submitted.</p>
+<dl class="attribute">
+<dt id="eoxserver.services.exceptions.InvalidSubsettingException.code">
+<code class="descname">code</code><em class="property"> = 'InvalidSubsetting'</em><a class="headerlink" href="#eoxserver.services.exceptions.InvalidSubsettingException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.services.exceptions.InvalidSubsettingException.locator">
+<code class="descname">locator</code><em class="property"> = 'subset'</em><a class="headerlink" href="#eoxserver.services.exceptions.InvalidSubsettingException.locator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.exceptions.LocatorListException">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.exceptions.</code><code class="descname">LocatorListException</code><span class="sig-paren">(</span><em>items</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.exceptions.LocatorListException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<p>Base class for exceptions that report that a number of items are
+missing or invalid</p>
+<dl class="attribute">
+<dt id="eoxserver.services.exceptions.LocatorListException.locator">
+<code class="descname">locator</code><a class="headerlink" href="#eoxserver.services.exceptions.LocatorListException.locator" title="Permalink to this definition">¶</a></dt>
+<dd><p>This property provides a list of all missing/invalid items.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.exceptions.NoSuchCoverageException">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.exceptions.</code><code class="descname">NoSuchCoverageException</code><span class="sig-paren">(</span><em>items</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.exceptions.NoSuchCoverageException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#eoxserver.services.exceptions.LocatorListException" title="eoxserver.services.exceptions.LocatorListException"><code class="xref py py-class docutils literal"><span class="pre">eoxserver.services.exceptions.LocatorListException</span></code></a></p>
+<p>This exception indicates that the requested coverage(s) do not
+exist.</p>
+<dl class="attribute">
+<dt id="eoxserver.services.exceptions.NoSuchCoverageException.code">
+<code class="descname">code</code><em class="property"> = 'NoSuchCoverage'</em><a class="headerlink" href="#eoxserver.services.exceptions.NoSuchCoverageException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.exceptions.NoSuchDatasetSeriesOrCoverageException">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.exceptions.</code><code class="descname">NoSuchDatasetSeriesOrCoverageException</code><span class="sig-paren">(</span><em>items</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.exceptions.NoSuchDatasetSeriesOrCoverageException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#eoxserver.services.exceptions.LocatorListException" title="eoxserver.services.exceptions.LocatorListException"><code class="xref py py-class docutils literal"><span class="pre">eoxserver.services.exceptions.LocatorListException</span></code></a></p>
+<p>This exception indicates that the requested coverage(s) or dataset
+series do not exist.</p>
+<dl class="attribute">
+<dt id="eoxserver.services.exceptions.NoSuchDatasetSeriesOrCoverageException.code">
+<code class="descname">code</code><em class="property"> = 'NoSuchDatasetSeriesOrCoverage'</em><a class="headerlink" href="#eoxserver.services.exceptions.NoSuchDatasetSeriesOrCoverageException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.exceptions.NoSuchFieldException">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.exceptions.</code><code class="descname">NoSuchFieldException</code><span class="sig-paren">(</span><em>msg</em>, <em>locator</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.exceptions.NoSuchFieldException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<p>Error in RangeSubsetting when band does not exist.</p>
+<dl class="attribute">
+<dt id="eoxserver.services.exceptions.NoSuchFieldException.code">
+<code class="descname">code</code><em class="property"> = 'NoSuchField'</em><a class="headerlink" href="#eoxserver.services.exceptions.NoSuchFieldException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.exceptions.OperationNotSupportedException">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.exceptions.</code><code class="descname">OperationNotSupportedException</code><span class="sig-paren">(</span><em>message</em>, <em>operation=None</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.exceptions.OperationNotSupportedException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<p>Exception to be thrown when some operations are not supported or
+disabled.</p>
+<dl class="attribute">
+<dt id="eoxserver.services.exceptions.OperationNotSupportedException.code">
+<code class="descname">code</code><em class="property"> = 'OperationNotSupported'</em><a class="headerlink" href="#eoxserver.services.exceptions.OperationNotSupportedException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.services.exceptions.OperationNotSupportedException.locator">
+<code class="descname">locator</code><a class="headerlink" href="#eoxserver.services.exceptions.OperationNotSupportedException.locator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.exceptions.RenderException">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.exceptions.</code><code class="descname">RenderException</code><span class="sig-paren">(</span><em>message</em>, <em>locator</em>, <em>is_parameter=True</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.exceptions.RenderException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<p>Rendering related exception.</p>
+<dl class="attribute">
+<dt id="eoxserver.services.exceptions.RenderException.code">
+<code class="descname">code</code><a class="headerlink" href="#eoxserver.services.exceptions.RenderException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.exceptions.ScaleAxisUndefinedException">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.exceptions.</code><code class="descname">ScaleAxisUndefinedException</code><span class="sig-paren">(</span><em>axis</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.exceptions.ScaleAxisUndefinedException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<p>Error in all scaling operations involving an axis</p>
+<dl class="attribute">
+<dt id="eoxserver.services.exceptions.ScaleAxisUndefinedException.code">
+<code class="descname">code</code><em class="property"> = 'ScaleAxisUndefined'</em><a class="headerlink" href="#eoxserver.services.exceptions.ScaleAxisUndefinedException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.exceptions.ServiceNotSupportedException">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.exceptions.</code><code class="descname">ServiceNotSupportedException</code><span class="sig-paren">(</span><em>service</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.exceptions.ServiceNotSupportedException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#eoxserver.services.exceptions.OperationNotSupportedException" title="eoxserver.services.exceptions.OperationNotSupportedException"><code class="xref py py-class docutils literal"><span class="pre">eoxserver.services.exceptions.OperationNotSupportedException</span></code></a></p>
+<p>Exception to be thrown when a specific OWS service is not enabled.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.exceptions.VersionNegotiationException">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.exceptions.</code><code class="descname">VersionNegotiationException</code><a class="headerlink" href="#eoxserver.services.exceptions.VersionNegotiationException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<p>This exception indicates that version negotiation fails. Such errors can
+happen with OWS 2.0 compliant “new-style” version negotation.</p>
+<dl class="attribute">
+<dt id="eoxserver.services.exceptions.VersionNegotiationException.code">
+<code class="descname">code</code><em class="property"> = 'VersionNegotiationFailed'</em><a class="headerlink" href="#eoxserver.services.exceptions.VersionNegotiationException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.exceptions.VersionNotSupportedException">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.exceptions.</code><code class="descname">VersionNotSupportedException</code><span class="sig-paren">(</span><em>service</em>, <em>version</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.exceptions.VersionNotSupportedException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<p>Exception to be thrown when a specific OWS service version is not
+supported.</p>
+<dl class="attribute">
+<dt id="eoxserver.services.exceptions.VersionNotSupportedException.code">
+<code class="descname">code</code><em class="property"> = 'InvalidParameterValue'</em><a class="headerlink" href="#eoxserver.services.exceptions.VersionNotSupportedException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="eoxserver-services-models-module">
+<h2>eoxserver.services.models module<a class="headerlink" href="#eoxserver-services-models-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-eoxserver.services.parameters">
+<span id="eoxserver-services-parameters-module"></span><h2>eoxserver.services.parameters module<a class="headerlink" href="#module-eoxserver.services.parameters" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="eoxserver.services.parameters.CapabilitiesRenderParams">
+<em class="property">class </em><code class="descclassname">eoxserver.services.parameters.</code><code class="descname">CapabilitiesRenderParams</code><span class="sig-paren">(</span><em>coverages</em>, <em>version</em>, <em>sections=None</em>, <em>accept_languages=None</em>, <em>accept_formats=None</em>, <em>updatesequence=None</em>, <em>request=None</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.parameters.CapabilitiesRenderParams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dl class="attribute">
+<dt id="eoxserver.services.parameters.CapabilitiesRenderParams.accept_formats">
+<code class="descname">accept_formats</code><a class="headerlink" href="#eoxserver.services.parameters.CapabilitiesRenderParams.accept_formats" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.services.parameters.CapabilitiesRenderParams.accept_languages">
+<code class="descname">accept_languages</code><a class="headerlink" href="#eoxserver.services.parameters.CapabilitiesRenderParams.accept_languages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.services.parameters.CapabilitiesRenderParams.coverages">
+<code class="descname">coverages</code><a class="headerlink" href="#eoxserver.services.parameters.CapabilitiesRenderParams.coverages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.services.parameters.CapabilitiesRenderParams.request">
+<code class="descname">request</code><a class="headerlink" href="#eoxserver.services.parameters.CapabilitiesRenderParams.request" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.services.parameters.CapabilitiesRenderParams.sections">
+<code class="descname">sections</code><a class="headerlink" href="#eoxserver.services.parameters.CapabilitiesRenderParams.sections" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.services.parameters.CapabilitiesRenderParams.updatesequence">
+<code class="descname">updatesequence</code><a class="headerlink" href="#eoxserver.services.parameters.CapabilitiesRenderParams.updatesequence" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.services.parameters.CapabilitiesRenderParams.version">
+<code class="descname">version</code><a class="headerlink" href="#eoxserver.services.parameters.CapabilitiesRenderParams.version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="eoxserver.services.parameters.RenderParameters">
+<em class="property">class </em><code class="descclassname">eoxserver.services.parameters.</code><code class="descname">RenderParameters</code><a class="headerlink" href="#eoxserver.services.parameters.RenderParameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Abstract base class for render parameters</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="eoxserver.services.parameters.VersionedParams">
+<em class="property">class </em><code class="descclassname">eoxserver.services.parameters.</code><code class="descname">VersionedParams</code><span class="sig-paren">(</span><em>version</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.parameters.VersionedParams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dl class="attribute">
+<dt id="eoxserver.services.parameters.VersionedParams.version">
+<code class="descname">version</code><a class="headerlink" href="#eoxserver.services.parameters.VersionedParams.version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="eoxserver-services-result-module">
+<h2>eoxserver.services.result module<a class="headerlink" href="#eoxserver-services-result-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="eoxserver-services-subset-module">
+<h2>eoxserver.services.subset module<a class="headerlink" href="#eoxserver-services-subset-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="eoxserver-services-urls-module">
+<h2>eoxserver.services.urls module<a class="headerlink" href="#eoxserver-services-urls-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="eoxserver-services-views-module">
+<h2>eoxserver.services.views module<a class="headerlink" href="#eoxserver-services-views-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-eoxserver.services">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-eoxserver.services" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="eoxserver.services.auth.html" class="btn btn-neutral float-right" title="eoxserver.services.auth package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="eoxserver.resources.processes.html" class="btn btn-neutral float-left" title="eoxserver.resources.processes package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-25T19:09:25Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

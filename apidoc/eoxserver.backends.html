@@ -1,0 +1,478 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>eoxserver.backends package &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="eoxserver.backends.packages package" href="eoxserver.backends.packages.html" />
+    <link rel="prev" title="API Reference" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">eoxserver.backends package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eoxserver-backends-access-module">eoxserver.backends.access module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eoxserver-backends-cache-module">eoxserver.backends.cache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eoxserver-backends-component-module">eoxserver.backends.component module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eoxserver-backends-config-module">eoxserver.backends.config module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-eoxserver.backends.interfaces">eoxserver.backends.interfaces module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eoxserver-backends-middleware-module">eoxserver.backends.middleware module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eoxserver-backends-models-module">eoxserver.backends.models module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eoxserver-backends-testbase-module">eoxserver.backends.testbase module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-eoxserver.backends">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.contrib.html">eoxserver.contrib package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.core.html">eoxserver.core package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.processing.html">eoxserver.processing package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.resources.html">eoxserver.resources package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.services.html">eoxserver.services package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.testing.html">eoxserver.testing package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.webclient.html">eoxserver.webclient package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#module-eoxserver.views">eoxserver.views module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#module-eoxserver">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">API Reference</a> &raquo;</li>
+        
+      <li>eoxserver.backends package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/apidoc/eoxserver.backends.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="eoxserver-backends-package">
+<h1>eoxserver.backends package<a class="headerlink" href="#eoxserver-backends-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eoxserver.backends.packages.html">eoxserver.backends.packages package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.backends.packages.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.backends.packages.html#eoxserver-backends-packages-tar-module">eoxserver.backends.packages.tar module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.backends.packages.html#eoxserver-backends-packages-zip-module">eoxserver.backends.packages.zip module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.backends.packages.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="eoxserver.backends.storages.html">eoxserver.backends.storages package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.backends.storages.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.backends.storages.html#eoxserver-backends-storages-ftp-module">eoxserver.backends.storages.ftp module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.backends.storages.html#eoxserver-backends-storages-http-module">eoxserver.backends.storages.http module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.backends.storages.html#eoxserver-backends-storages-local-module">eoxserver.backends.storages.local module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.backends.storages.html#eoxserver-backends-storages-rasdaman-module">eoxserver.backends.storages.rasdaman module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.backends.storages.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="eoxserver-backends-access-module">
+<h2>eoxserver.backends.access module<a class="headerlink" href="#eoxserver-backends-access-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="eoxserver-backends-cache-module">
+<h2>eoxserver.backends.cache module<a class="headerlink" href="#eoxserver-backends-cache-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="eoxserver-backends-component-module">
+<h2>eoxserver.backends.component module<a class="headerlink" href="#eoxserver-backends-component-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="eoxserver-backends-config-module">
+<h2>eoxserver.backends.config module<a class="headerlink" href="#eoxserver-backends-config-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-eoxserver.backends.interfaces">
+<span id="eoxserver-backends-interfaces-module"></span><h2>eoxserver.backends.interfaces module<a class="headerlink" href="#module-eoxserver.backends.interfaces" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="eoxserver.backends.interfaces.AbstractStorageInterface">
+<em class="property">class </em><code class="descclassname">eoxserver.backends.interfaces.</code><code class="descname">AbstractStorageInterface</code><a class="headerlink" href="#eoxserver.backends.interfaces.AbstractStorageInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dl class="attribute">
+<dt id="eoxserver.backends.interfaces.AbstractStorageInterface.name">
+<code class="descname">name</code><a class="headerlink" href="#eoxserver.backends.interfaces.AbstractStorageInterface.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the storage implementation.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="eoxserver.backends.interfaces.AbstractStorageInterface.validate">
+<code class="descname">validate</code><span class="sig-paren">(</span><em>url</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.backends.interfaces.AbstractStorageInterface.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates the given storage locator and raises a
+<a class="reference external" href="https://docs.djangoproject.com/en/1.8/ref/exceptions/#django.core.exceptions.ValidationError" title="(in Django v1.8)"><code class="xref py py-exc docutils literal"><span class="pre">django.core.exceptions.ValidationError</span></code></a> if errors occurred.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="eoxserver.backends.interfaces.ConnectedStorageInterface">
+<em class="property">class </em><code class="descclassname">eoxserver.backends.interfaces.</code><code class="descname">ConnectedStorageInterface</code><a class="headerlink" href="#eoxserver.backends.interfaces.ConnectedStorageInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#eoxserver.backends.interfaces.AbstractStorageInterface" title="eoxserver.backends.interfaces.AbstractStorageInterface"><code class="xref py py-class docutils literal"><span class="pre">eoxserver.backends.interfaces.AbstractStorageInterface</span></code></a></p>
+<p>Interface for storages that do not store “files” but provide access to
+data in a different fashion.</p>
+<dl class="method">
+<dt id="eoxserver.backends.interfaces.ConnectedStorageInterface.connect">
+<code class="descname">connect</code><span class="sig-paren">(</span><em>url</em>, <em>location</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.backends.interfaces.ConnectedStorageInterface.connect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a connection string for a remote dataset residing on a
+storage specified by the given <cite>url</cite> and <cite>location</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>url</strong> – the URL denoting the storage itself</li>
+<li><strong>location</strong> – the location of the file to retrieve on the storage</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a connection string to open the stream to actually
+retrieve data</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="eoxserver.backends.interfaces.FileStorageInterface">
+<em class="property">class </em><code class="descclassname">eoxserver.backends.interfaces.</code><code class="descname">FileStorageInterface</code><a class="headerlink" href="#eoxserver.backends.interfaces.FileStorageInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#eoxserver.backends.interfaces.AbstractStorageInterface" title="eoxserver.backends.interfaces.AbstractStorageInterface"><code class="xref py py-class docutils literal"><span class="pre">eoxserver.backends.interfaces.AbstractStorageInterface</span></code></a></p>
+<p>Interface for storages that provide access to files and allow the
+retrieval of those.</p>
+<dl class="method">
+<dt id="eoxserver.backends.interfaces.FileStorageInterface.list_files">
+<code class="descname">list_files</code><span class="sig-paren">(</span><em>url</em>, <em>location</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.backends.interfaces.FileStorageInterface.list_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of retrievable files available on the storage located
+at the specified URL and given location.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>url</strong> – the URL denoting the storage itself</li>
+<li><strong>location</strong> – a template to find items on the storage</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">an iterable of the storage contents under the specified
+<code class="docutils literal"><span class="pre">location</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="eoxserver.backends.interfaces.FileStorageInterface.retrieve">
+<code class="descname">retrieve</code><span class="sig-paren">(</span><em>url</em>, <em>location</em>, <em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.backends.interfaces.FileStorageInterface.retrieve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a remote file from the storage specified by the given <cite>url</cite>
+and location and store it to the given <cite>path</cite>. Storages that don’t
+need to actually retrieve and store files, just need to return a
+path to a local file instead of storing it under <cite>path</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>url</strong> – the URL denoting the storage itself</li>
+<li><strong>location</strong> – the location of the file to retrieve on the storage</li>
+<li><strong>path</strong> – a local path where the file should be saved under;
+this is used as a <em>hint</em></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the actual path where the file was stored; in some cases
+this can be different than the passed <code class="docutils literal"><span class="pre">path</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="eoxserver.backends.interfaces.PackageInterface">
+<em class="property">class </em><code class="descclassname">eoxserver.backends.interfaces.</code><code class="descname">PackageInterface</code><a class="headerlink" href="#eoxserver.backends.interfaces.PackageInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dl class="method">
+<dt id="eoxserver.backends.interfaces.PackageInterface.extract">
+<code class="descname">extract</code><span class="sig-paren">(</span><em>package_filename</em>, <em>location</em>, <em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.backends.interfaces.PackageInterface.extract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract a file specified by the <code class="docutils literal"><span class="pre">location</span></code> from the package to the
+given <code class="docutils literal"><span class="pre">path</span></code> specification.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>package_filename</strong> – the local filename of the package</li>
+<li><strong>location</strong> – a location <em>within</em> the package to be extracted</li>
+<li><strong>path</strong> – a local path where the file should be saved under;
+this is used as a <em>hint</em></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the actual path where the file was stored; in some cases
+this can be different than the passed <code class="docutils literal"><span class="pre">path</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="eoxserver.backends.interfaces.PackageInterface.list_contents">
+<code class="descname">list_contents</code><span class="sig-paren">(</span><em>package_filename</em>, <em>location_regex=None</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.backends.interfaces.PackageInterface.list_contents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of item locations under the specified location in the
+given package.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>package_filename</strong> – the local filename of the package</li>
+<li><strong>location_regex</strong> – a template to find items within the package</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">an iterable of the package contents under the specified
+<code class="docutils literal"><span class="pre">location</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.backends.interfaces.PackageInterface.name">
+<code class="descname">name</code><a class="headerlink" href="#eoxserver.backends.interfaces.PackageInterface.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the package implementation.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="eoxserver-backends-middleware-module">
+<h2>eoxserver.backends.middleware module<a class="headerlink" href="#eoxserver-backends-middleware-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="eoxserver-backends-models-module">
+<h2>eoxserver.backends.models module<a class="headerlink" href="#eoxserver-backends-models-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="eoxserver-backends-testbase-module">
+<h2>eoxserver.backends.testbase module<a class="headerlink" href="#eoxserver-backends-testbase-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-eoxserver.backends">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-eoxserver.backends" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="eoxserver.backends.packages.html" class="btn btn-neutral float-right" title="eoxserver.backends.packages package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="modules.html" class="btn btn-neutral float-left" title="API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-25T19:09:25Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

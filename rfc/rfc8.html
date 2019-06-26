@@ -1,0 +1,435 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>RFC 8: SVN Commit Management &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="RFC 9: SOAP Binding of WCS GetCoverage Response" href="rfc9.html" />
+    <link rel="prev" title="RFC 7: Release Guidelines" href="rfc7.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Requests for Comments</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#rfc-procedures">RFC Procedures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#writing-rfcs">Writing RFCs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#rfcs">RFCs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="policies.html">RFC Policies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="howto.html">Guidelines for Requests for Comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc0.html">RFC 0: Project Steering Committee Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc1.html">RFC 1: An Extensible Software Architecture for EOxServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc2.html">RFC 2: Extension Mechanism for EOxServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc3.html">RFC 3: OGC Service Extensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc4.html">RFC 4: Data Packaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc5.html">RFC 5: Processing Chains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc6.html">RFC 6: Directory Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc7.html">RFC 7: Release Guidelines</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">RFC 8: SVN Commit Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#election-to-svn-commit-access">Election to SVN Commit Access</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#committer-tracking">Committer Tracking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#svn-administrator">SVN Administrator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#svn-commit-practices">SVN Commit Practices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#legal">Legal</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#voting-history">Voting History</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#traceability">Traceability</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rfc9.html">RFC 9: SOAP Binding of WCS GetCoverage Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc10.html">RFC 10: SOAP Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc11.html">RFC 11: WPS 1.0.0 Interface Prototype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc12.html">RFC 12: Backends for the Data Access Layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc13.html">RFC 13: WCS-T 1.1 Interface Prototype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc14.html">RFC 14: Asynchronous Task Processing (ATP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc15.html">RFC 15: Access Control Support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc16.html">RFC 16: Referenceable Grid Coverages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc17.html">RFC 17: Configuration of Supported Output Formats and CRSes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc18.html">RFC 18: Operator Interface Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc19.html">RFC 19: Migrate project repository from svn to git</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Requests for Comments</a> &raquo;</li>
+        
+      <li>RFC 8: SVN Commit Management</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/rfc/rfc8.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="rfc-8-svn-commit-management">
+<span id="rfc-8"></span><span id="index-0"></span><h1>RFC 8: SVN Commit Management<a class="headerlink" href="#rfc-8-svn-commit-management" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Stephan Meißl</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Created:</th><td class="field-body">2011-05-04</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Last Edit:</th><td class="field-body">2011-05-18</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Status:</th><td class="field-body">ACCEPTED</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Discussion:</th><td class="field-body"><a class="reference external" href="http://www.eoxserver.org/wiki/DiscussionRfc8">http://www.eoxserver.org/wiki/DiscussionRfc8</a></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This RFC documents the EOxServer guidelines for SVN commit access and specifies
+some guidelines for SVN committers.</p>
+<p>(Credit: Inspired by the MapServer SVN commit management guidelines at:
+<a class="reference external" href="http://mapserver.org/development/rfc/ms-rfc-7.1.html">http://mapserver.org/development/rfc/ms-rfc-7.1.html</a>)</p>
+</div>
+<div class="section" id="election-to-svn-commit-access">
+<h2>Election to SVN Commit Access<a class="headerlink" href="#election-to-svn-commit-access" title="Permalink to this headline">¶</a></h2>
+<p>Permission for SVN commit access shall be provided to new developers only
+if accepted by the EOxServer Project Steering Committee (PSC). A proposal
+should be written to the PSC for new committers and voted on normally. It
+is not necessary to write an RFC document for these votes. An e-mail to
+the dev mailing list is sufficient.</p>
+<p>Removal of SVN commit access should be handled by the same procedure.</p>
+<p>The new committer should have demonstrated commitment to EOxServer and
+knowledge of the EOxServer source code and processes to the committee’s
+satisfaction, usually by reporting tickets, submitting patches, and/or
+actively participating in the various EOxServer forums.</p>
+<p>The new committer should also be prepared to support any new feature or
+changes that he/she commits to the EOxServer source tree in future
+releases, or to find someone to which to delegate responsibility for
+them if he/she stops being available to support the portions of code
+that he/she is responsible for.</p>
+<p>All committers should also be a member of the dev mailing list
+so they can stay informed on policies, technical developments, and
+release preparation.</p>
+</div>
+<div class="section" id="committer-tracking">
+<h2>Committer Tracking<a class="headerlink" href="#committer-tracking" title="Permalink to this headline">¶</a></h2>
+<p>A list of all project committers will be kept in the main eoxserver
+directory (called COMMITTERS) listing for each SVN committer:</p>
+<ul class="simple">
+<li>Userid: the id that will appear in the SVN logs for this person.</li>
+<li>Full name: the users actual name.</li>
+<li>Email address: A current email address at which the committer can be
+reached.  It may be altered in normal ways to make it harder to
+auto-harvest.</li>
+<li>A brief indication of areas of responsibility.</li>
+</ul>
+</div>
+<div class="section" id="svn-administrator">
+<h2>SVN Administrator<a class="headerlink" href="#svn-administrator" title="Permalink to this headline">¶</a></h2>
+<p>One member of the PSC will be appointed the SVN Administrator. That person
+is responsible for giving SVN commit access to folks, updating the COMMITTERS
+file, and other SVN related management. Initially Stephan Meißl will be the
+SVN Administrator.</p>
+</div>
+<div class="section" id="svn-commit-practices">
+<h2>SVN Commit Practices<a class="headerlink" href="#svn-commit-practices" title="Permalink to this headline">¶</a></h2>
+<p>The following are considered good SVN commit practices for the EOxServer
+project.</p>
+<ul class="simple">
+<li>Use meaningful descriptions for SVN commit log entries.</li>
+<li>Add a ticket reference like “(#1232)” at the end of SVN commit log entries
+when committing changes related to a ticket in Trac.</li>
+<li>Include changeset revision numbers like “r7622” in tickets when discussing
+relevant changes to the codebase.</li>
+<li>Changes should not be committed in stable branches without a corresponding
+ticket. Any change worth pushing into a stable version is worth a Trac ticket.</li>
+<li>Never commit new features to a stable branch: only critical fixes. New
+features can only go in the main development trunk.</li>
+<li>Only ticket defects should be committed to the code during pre-release
+code freeze.</li>
+<li>Significant changes to the main development version should be
+discussed on the dev maling list before making them, and larger changes will
+require an RFC approved by the PSC.</li>
+<li>Do not create new branches without the approval of the PSC. A Release
+manager designated under <a class="reference internal" href="rfc7.html"><span class="doc">RFC 7: Release Guidelines</span></a> is automatically granted permission to
+create a branch, as defined by their role described in <a class="reference internal" href="rfc7.html"><span class="doc">RFC 7: Release Guidelines</span></a>.</li>
+<li>All source code in SVN should be in Unix text format as opposed to DOS
+text mode.</li>
+<li>When committing new features or significant changes to existing source
+code, the committer should take reasonable measures to insure that the
+source code continues to work.</li>
+<li>Include the standard EOxServer header in every new file and set the following
+SVN properties:<ul>
+<li>svn propset svn:keywords ‘Author Date Id Rev URL’ &lt;new_file&gt;</li>
+<li>svn propset svn:eol-style native &lt;new_file&gt;</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="legal">
+<h2>Legal<a class="headerlink" href="#legal" title="Permalink to this headline">¶</a></h2>
+<p>Commiters are the front line gatekeepers to keep the code base clear of
+improperly contributed code. It is important to the EOxServer users and
+developers to avoid contributing any code to the project without it being
+clearly licensed under the project license.</p>
+<p>Generally speaking the key issues are that those providing code to be included
+in the repository understand that the code will be released under the
+EOxServer License, and that the person providing the code has the right
+to contribute the code. For the committer themselves understanding about the
+license is hopefully clear. For other contributors, the committer should verify
+the understanding unless the committer is very comfortable that the contributor
+understands the license (for instance frequent contributors).</p>
+<p>If the contribution was developed on behalf of an employer (on work time, as
+part of a work project, etc) then it is important that an appropriate
+representative of the employer understand that the code will be contributed
+under the EOxServer License. The arrangement should be cleared with an
+authorized supervisor/manager, etc.</p>
+<p>The code should be developed by the contributor, or the code should be from a
+source which can be rightfully contributed such as from the public domain, or
+from an open source project under a compatible license.</p>
+<p>All unusual situations need to be discussed and/or documented.</p>
+<p>Committers should adhere to the following guidelines, and may be personally
+legally liable for improperly contributing code to the source repository:</p>
+<ul class="simple">
+<li>Make sure the contributor (and possibly employer) is aware of the
+contribution terms.</li>
+<li>Code coming from a source other than the contributor (such as adapted
+from another project) should be clearly marked as to the original
+source, copyright holders, license terms and so forth. This information
+can be in the file headers, but should also be added to the project
+licensing file if not exactly matching normal project licensing
+(eoxserver/COPYING and eoxserver/README).</li>
+<li>Existing copyright headers and license text should never be stripped
+from a file. If a copyright holder wishes to give up copyright they must
+do so in writing to the project before copyright messages are
+removed. If license terms are changed it has to be by agreement (written
+in email is ok) of the copyright holders.</li>
+<li>When substantial contributions are added to a file (such as substantial
+patches) the author/contributor should be added to the list of copyright
+holders for the file.</li>
+<li>If there is uncertainty about whether a change it proper to contribute
+to the code base, please seek more information from the PSC.</li>
+</ul>
+</div>
+<div class="section" id="voting-history">
+<h2>Voting History<a class="headerlink" href="#voting-history" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Motion:</th><td class="field-body">Adopted on 2011-05-17 with +1 from Arndt Bonitz, Stephan Krause, Stephan Meißl, Milan Novacek, Martin Paces, Fabian Schindler</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="traceability">
+<h2>Traceability<a class="headerlink" href="#traceability" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Requirements:</th><td class="field-body">N/A</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Tickets:</th><td class="field-body">N/A</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="rfc9.html" class="btn btn-neutral float-right" title="RFC 9: SOAP Binding of WCS GetCoverage Response" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="rfc7.html" class="btn btn-neutral float-left" title="RFC 7: Release Guidelines" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

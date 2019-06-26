@@ -1,0 +1,304 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Data Migrations &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Plugins" href="plugins.html" />
+    <link rel="prev" title="Data Model" href="data_model.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developers’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_model.html">Data Model</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Data Migrations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-are-migrations">What are migrations?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-migrations">Creating Migrations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#performing-a-migration">Performing a Migration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services.html">Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_formats.html">Data Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metadata_formats.html">Metadata Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autotest.html">The <em>autotest</em> instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="handling_coverages.html">Handling Coverages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="processes.html">Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_dev_guide.html">Asynchronous Task Processing - Developers Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-style-guide.html">EOxServer code style guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Developers’ Guide</a> &raquo;</li>
+        
+      <li>Data Migrations</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/developers/migrations.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="data-migrations">
+<h1>Data Migrations<a class="headerlink" href="#data-migrations" title="Permalink to this headline">¶</a></h1>
+<p>Over the time, the data models and thus the underlying database schema is
+changing to adapt new features or resolve bugs. Unfortunately Django cannot
+automatically detect and resolve those changes and upgrade existing instances
+for us.</p>
+<p>To solve this problem, EOxServer uses <a class="reference external" href="http://south.aeracode.org/">South</a> for
+schema and data migration management.</p>
+<div class="section" id="what-are-migrations">
+<h2>What are migrations?<a class="headerlink" href="#what-are-migrations" title="Permalink to this headline">¶</a></h2>
+<blockquote class="pull-quote">
+<div><p>For the uninitiated, migrations (also known as ‘schema evolution’ or
+‘mutations’) are a way of changing your database schema from one version
+into another. Django by itself can only do this by adding new models, but
+nearly all projects will find themselves changing other aspects of models -
+be it adding a new field to a model, or changing a database column to have
+null=True.</p>
+<p class="attribution">&mdash;from the <a class="reference external" href="http://south.readthedocs.org/en/latest/whataremigrations.html">South documentation</a></p>
+</div></blockquote>
+</div>
+<div class="section" id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p><cite>South</cite> needs to be initialized in every instance that wants to make use of the
+migration features.</p>
+<p>Setting up <cite>South</cite> is quite easy, as all you need to do is install <cite>South</cite> (most
+easily via <code class="docutils literal"><span class="pre">pip</span></code> or <code class="docutils literal"><span class="pre">easy_install</span></code>), add it to the <code class="docutils literal"><span class="pre">INSTALLED_APPS</span></code>
+setting in <code class="docutils literal"><span class="pre">settings.py</span></code> and run <code class="docutils literal"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">syncdb</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="o">...</span>
+    <span class="s1">&#39;eoxserver.testing&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;eoxserver.webclient&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;south&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>A complete guide on all installation and configuration options can be found
+<a class="reference external" href="http://south.readthedocs.org/en/latest/installation.html">here</a>.</p>
+</div>
+<div class="section" id="creating-migrations">
+<h2>Creating Migrations<a class="headerlink" href="#creating-migrations" title="Permalink to this headline">¶</a></h2>
+<p>To benefit from <cite>South</cite> it is important that <cite>every</cite> change in the data models
+concerning the actual database structure is tracked by a migration definition.
+Fortunately, for most of the small changes these can be created automatically by
+using <cite>Souths</cite> command <code class="docutils literal"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">schemamigration</span></code> and passing the
+app names which have changes in their models.</p>
+<p>A very good tutorial for <cite>South</cite> can be found <a class="reference external" href="http://south.readthedocs.org/en/latest/tutorial/part1.html">here</a>.</p>
+</div>
+<div class="section" id="performing-a-migration">
+<h2>Performing a Migration<a class="headerlink" href="#performing-a-migration" title="Permalink to this headline">¶</a></h2>
+<p>To use <cite>South</cite> for data migrations only one command needs to be executed:
+<code class="docutils literal"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">migrate</span></code>. This applies all necessary database schema changes
+to your database and converts all included data from the original schema to the
+new one. This command effectively replaces <code class="docutils literal"><span class="pre">syncdb</span></code> (apart from the initial
+call to setup <cite>South</cite>).</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="plugins.html" class="btn btn-neutral float-right" title="Plugins" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="data_model.html" class="btn btn-neutral float-left" title="Data Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

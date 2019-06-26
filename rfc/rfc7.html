@@ -1,0 +1,412 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>RFC 7: Release Guidelines &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="RFC 8: SVN Commit Management" href="rfc8.html" />
+    <link rel="prev" title="RFC 6: Directory Structure" href="rfc6.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Requests for Comments</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#rfc-procedures">RFC Procedures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#writing-rfcs">Writing RFCs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#rfcs">RFCs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="policies.html">RFC Policies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="howto.html">Guidelines for Requests for Comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc0.html">RFC 0: Project Steering Committee Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc1.html">RFC 1: An Extensible Software Architecture for EOxServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc2.html">RFC 2: Extension Mechanism for EOxServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc3.html">RFC 3: OGC Service Extensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc4.html">RFC 4: Data Packaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc5.html">RFC 5: Processing Chains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc6.html">RFC 6: Directory Structure</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">RFC 7: Release Guidelines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-eoxserver-release-manager-role">The EOxServer Release Manager Role</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-eoxserver-release-process">The EOxServer Release Process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eoxserver-version-numbering">EOxServer Version Numbering</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#voting-history">Voting History</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#traceability">Traceability</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rfc8.html">RFC 8: SVN Commit Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc9.html">RFC 9: SOAP Binding of WCS GetCoverage Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc10.html">RFC 10: SOAP Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc11.html">RFC 11: WPS 1.0.0 Interface Prototype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc12.html">RFC 12: Backends for the Data Access Layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc13.html">RFC 13: WCS-T 1.1 Interface Prototype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc14.html">RFC 14: Asynchronous Task Processing (ATP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc15.html">RFC 15: Access Control Support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc16.html">RFC 16: Referenceable Grid Coverages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc17.html">RFC 17: Configuration of Supported Output Formats and CRSes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc18.html">RFC 18: Operator Interface Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc19.html">RFC 19: Migrate project repository from svn to git</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Requests for Comments</a> &raquo;</li>
+        
+      <li>RFC 7: Release Guidelines</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/rfc/rfc7.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="rfc-7-release-guidelines">
+<span id="rfc-7"></span><span id="index-0"></span><h1>RFC 7: Release Guidelines<a class="headerlink" href="#rfc-7-release-guidelines" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Stephan Meißl</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Created:</th><td class="field-body">2011-05-04</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Last Edit:</th><td class="field-body">$Date$</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Status:</th><td class="field-body">ACCEPTED</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Discussion:</th><td class="field-body"><a class="reference external" href="http://eoxserver.org/wiki/DiscussionRfc7">http://eoxserver.org/wiki/DiscussionRfc7</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Id:</th><td class="field-body">$Id$</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This RFC documents the EOxServer release manager role and the phases of
+EOxServer’s release process.</p>
+<p>(Credit: Inspired by the MapServer release guidelines at:
+<a class="reference external" href="http://mapserver.org/development/rfc/ms-rfc-34.html">http://mapserver.org/development/rfc/ms-rfc-34.html</a>)</p>
+</div>
+<div class="section" id="the-eoxserver-release-manager-role">
+<h2>The EOxServer Release Manager Role<a class="headerlink" href="#the-eoxserver-release-manager-role" title="Permalink to this headline">¶</a></h2>
+<p>For every release of EOxServer, the PSC elects a release manager via motion
+and vote on the dev mailing list.</p>
+<p>The overall role of the release manager is to coordinate the efforts
+of the developers, testers, documentation, and other contributors to
+lead to a release of the best possible quality within the scheduled
+timeframe.</p>
+<p>The PSC delegates to the release manager the responsibility and
+authority to make certain final decisions for a release, including:</p>
+<ul class="simple">
+<li>Approving or not the release of each beta, release candidate, and
+final release</li>
+<li>Approving or rejecting non-trivial bug fixes or changes after the
+feature freeze</li>
+<li>Maintaining the release schedule (timeline) and making changes as required</li>
+</ul>
+<p>When in doubt or for tough decisions (e.g. pushing the release date by
+several weeks) the release manager is free to ask the PSC to vote in
+support of some decisions, but this is not a requirement for the areas of
+responsibility above.</p>
+<p>The release manager’s role also includes the following tasks:</p>
+<ul class="simple">
+<li>Setup and maintain a release plan wiki page for each release</li>
+<li>Coordinate with the developers team</li>
+<li>Coordinate with the QA/testers team</li>
+<li>Coordinate with the docs/website team</li>
+<li>Keep track of progress via Trac milestones and ensure tickets are properly
+targeted</li>
+<li>Organize IRC meetings if needed (including agenda and minutes)</li>
+<li>Tag source code in SVN for each beta, RC, and release</li>
+<li>Branch source code in SVN after the final release (trunk becomes the next
+dev version)</li>
+<li>Update version in files for each beta/RC/release</li>
+<li>Package source code distribution for each beta/RC/release</li>
+<li>Update appropriate website/download page for each beta/RC/release</li>
+<li>Make announcements on users and announce mailing lists for each release</li>
+<li>Produce and coordinate bugfix releases as needed after the final release</li>
+</ul>
+<p>Any of the above tasks can be delegated but they still remain the ultimate
+responsibility of the release manager.</p>
+</div>
+<div class="section" id="the-eoxserver-release-process">
+<h2>The EOxServer Release Process<a class="headerlink" href="#the-eoxserver-release-process" title="Permalink to this headline">¶</a></h2>
+<p>The normal development process of a EOxServer release consists of various
+phases.</p>
+<ul>
+<li><p class="first">Development phase</p>
+<p>The development phase usually lasts several months. New features are
+proposed via RFCs and voted by the EOxServer PSC.</p>
+</li>
+<li><p class="first">RFC freeze date</p>
+<p>For each release there is a certain date by which all new feature
+proposals (RFCs) must have been submitted for review. After this date no
+features will be accepted anymore for this particular release.</p>
+</li>
+<li><p class="first">Feature freeze date / Beta releases</p>
+<p>By this date all features must have been completed and all code has
+to be integrated. Only non-invasive changes, user interface work and
+bug fixes are done now. There are usually 3 to 4 betas and a couple of
+release candidates before the final release.</p>
+</li>
+<li><p class="first">Release Candidate</p>
+<p>Ideally, the last beta that is bug free. No changes to the code.
+Should not require any migration steps apart from the ones required
+in the betas. If any problems are found and fixed, a new release
+candidate is issued.</p>
+</li>
+<li><p class="first">Final release / Expected release date</p>
+<p>Normally the last release candidate that is issued without any
+show-stopper bugs.</p>
+</li>
+<li><p class="first">Bug fix releases</p>
+<p>No software is perfect. Once a sufficient large or critical number
+of bugs have been found for a certain release, the release manager
+releases a new bug fix release a.k.a. third-dot release.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="eoxserver-version-numbering">
+<h2>EOxServer Version Numbering<a class="headerlink" href="#eoxserver-version-numbering" title="Permalink to this headline">¶</a></h2>
+<p>EOxServer’s version numbering scheme is very similar to Linux’s. For
+example, a EOxServer version number of 1.2.5 can be decoded as such:</p>
+<ul>
+<li><p class="first">1: Major version number.</p>
+<p>The major version number usually changes when significant new features are
+added or when major architectural changes or backwards incompatibilities are
+introduced.</p>
+</li>
+<li><p class="first">2: Minor version number.</p>
+<p>Increments in minor version number almost always relate to additions
+in functionality.</p>
+</li>
+<li><p class="first">5: Revision number.</p>
+<p>Revisions are bug fixes only. No new functionality is provided in revisions.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="voting-history">
+<h2>Voting History<a class="headerlink" href="#voting-history" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Motion:</th><td class="field-body">Adopted on 2011-11-16 with +1 from Stephan Meißl, Milan Novacek, Martin Paces</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="traceability">
+<h2>Traceability<a class="headerlink" href="#traceability" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Requirements:</th><td class="field-body">N/A</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Tickets:</th><td class="field-body">N/A</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="rfc8.html" class="btn btn-neutral float-right" title="RFC 8: SVN Commit Management" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="rfc6.html" class="btn btn-neutral float-left" title="RFC 6: Directory Structure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

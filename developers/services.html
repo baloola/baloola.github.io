@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Services &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Data Formats" href="data_formats.html" />
+    <link rel="prev" title="Plugins" href="plugins.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developers’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_model.html">Data Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migrations.html">Data Migrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Services</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initial-setup">Initial Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="data_formats.html">Data Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metadata_formats.html">Metadata Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autotest.html">The <em>autotest</em> instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="handling_coverages.html">Handling Coverages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="processes.html">Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_dev_guide.html">Asynchronous Task Processing - Developers Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-style-guide.html">EOxServer code style guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Developers’ Guide</a> &raquo;</li>
+        
+      <li>Services</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/developers/services.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="services">
+<span id="id1"></span><h1>Services<a class="headerlink" href="#services" title="Permalink to this headline">¶</a></h1>
+<p>This section deals with the creation of new Hervices handlers that allow to process OGC web service requests and are easily exposed via the <code class="xref py py-func docutils literal"><span class="pre">ows</span></code> view.</p>
+<p>Service Handlers are <code class="xref py py-class docutils literal"><span class="pre">Components</span></code>
+that at least implement the <a class="reference internal" href="../apidoc/eoxserver.services.ows.html#eoxserver.services.ows.interfaces.ServiceHandlerInterface" title="eoxserver.services.ows.interfaces.ServiceHandlerInterface"><code class="xref py py-class docutils literal"><span class="pre">ServiceHandlerInterface</span></code></a>. For a Service
+Handler to be fully accessible it is also necessary to implement either or both
+of <a class="reference internal" href="../apidoc/eoxserver.services.ows.html#eoxserver.services.ows.interfaces.GetServiceHandlerInterface" title="eoxserver.services.ows.interfaces.GetServiceHandlerInterface"><code class="xref py py-class docutils literal"><span class="pre">GetServiceHandlerInterface</span></code></a> and
+<a class="reference internal" href="../apidoc/eoxserver.services.ows.html#eoxserver.services.ows.interfaces.PostServiceHandlerInterface" title="eoxserver.services.ows.interfaces.PostServiceHandlerInterface"><code class="xref py py-class docutils literal"><span class="pre">PostServiceHandlerInterface</span></code></a>.
+For general information about Plugins/Components please refer to the
+<a class="reference internal" href="plugins.html#plugins"><span class="std std-ref">Plugins</span></a> documentation.</p>
+<div class="section" id="initial-setup">
+<h2>Initial Setup<a class="headerlink" href="#initial-setup" title="Permalink to this headline">¶</a></h2>
+<p>Each service handler must provide the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li>The <code class="docutils literal"><span class="pre">service</span></code> the handler will contribute to</li>
+<li>The <code class="docutils literal"><span class="pre">versions</span></code> of the <code class="docutils literal"><span class="pre">service</span></code> the handler is capable of responding to</li>
+<li>The <code class="docutils literal"><span class="pre">request</span></code> of the <code class="docutils literal"><span class="pre">service</span></code> the handler is able to respond</li>
+<li>a <code class="docutils literal"><span class="pre">handle</span></code> method that takes a <a class="reference external" href="https://docs.djangoproject.com/en/1.8/ref/request-response/#django.http.HttpRequest" title="(in Django v1.8)"><code class="xref py py-class docutils literal"><span class="pre">django.http.HttpRequest</span></code></a> as
+parameter</li>
+</ul>
+</div></blockquote>
+<p>A service handler <em>can</em> provide an <code class="docutils literal"><span class="pre">index</span></code>, which allows the sorting of
+the handlers in a “GetCapabilities” response.</p>
+<p>The following is an example handler for the “GetCapabilities” handler of the
+fictional <code class="docutils literal"><span class="pre">WES</span></code> (Web Example Service):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eoxserver.core</span> <span class="k">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">implements</span><span class="p">,</span> <span class="n">ExtensionPoint</span>
+<span class="kn">from</span> <span class="nn">eoxserver.services.ows.interfaces</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">ServiceHandlerInterface</span><span class="p">,</span> <span class="n">GetServiceHandlerInterface</span><span class="p">,</span>
+    <span class="n">PostServiceHandlerInterface</span>
+<span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">WESGetCapabilitiesHandler</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+    <span class="n">implements</span><span class="p">(</span><span class="n">ServiceHandlerInterface</span><span class="p">)</span>
+    <span class="n">implements</span><span class="p">(</span><span class="n">GetServiceHandlerInterface</span><span class="p">)</span>
+    <span class="n">implements</span><span class="p">(</span><span class="n">PostServiceHandlerInterface</span><span class="p">)</span>
+
+    <span class="n">service</span> <span class="o">=</span> <span class="s2">&quot;WES&quot;</span>
+    <span class="n">request</span> <span class="o">=</span> <span class="s2">&quot;GetCapabilities&quot;</span>
+    <span class="n">versions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;1.0&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A word about versions: in EOxServer they are represented by the
+<code class="xref py py-class docutils literal"><span class="pre">Version</span></code> class. It follows OGC
+conventions on treating versions. So for example the versions “1.0” and
+“1.0.1” are considered equal. For our example this means that our handler
+will be able to respond to any request with a version “1.0.x”.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="data_formats.html" class="btn btn-neutral float-right" title="Data Formats" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="plugins.html" class="btn btn-neutral float-left" title="Plugins" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,441 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>RFC 11: WPS 1.0.0 Interface Prototype &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="RFC 12: Backends for the Data Access Layer" href="rfc12.html" />
+    <link rel="prev" title="RFC 10: SOAP Proxy" href="rfc10.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Requests for Comments</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#rfc-procedures">RFC Procedures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#writing-rfcs">Writing RFCs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#rfcs">RFCs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="policies.html">RFC Policies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="howto.html">Guidelines for Requests for Comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc0.html">RFC 0: Project Steering Committee Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc1.html">RFC 1: An Extensible Software Architecture for EOxServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc2.html">RFC 2: Extension Mechanism for EOxServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc3.html">RFC 3: OGC Service Extensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc4.html">RFC 4: Data Packaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc5.html">RFC 5: Processing Chains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc6.html">RFC 6: Directory Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc7.html">RFC 7: Release Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc8.html">RFC 8: SVN Commit Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc9.html">RFC 9: SOAP Binding of WCS GetCoverage Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc10.html">RFC 10: SOAP Proxy</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">RFC 11: WPS 1.0.0 Interface Prototype</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#governance">Governance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#voting-history">Voting History</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#traceability">Traceability</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rfc12.html">RFC 12: Backends for the Data Access Layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc13.html">RFC 13: WCS-T 1.1 Interface Prototype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc14.html">RFC 14: Asynchronous Task Processing (ATP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc15.html">RFC 15: Access Control Support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc16.html">RFC 16: Referenceable Grid Coverages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc17.html">RFC 17: Configuration of Supported Output Formats and CRSes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc18.html">RFC 18: Operator Interface Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc19.html">RFC 19: Migrate project repository from svn to git</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Requests for Comments</a> &raquo;</li>
+        
+      <li>RFC 11: WPS 1.0.0 Interface Prototype</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/rfc/rfc11.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="rfc-11-wps-1-0-0-interface-prototype">
+<span id="rfc-11"></span><h1>RFC 11: WPS 1.0.0 Interface Prototype<a class="headerlink" href="#rfc-11-wps-1-0-0-interface-prototype" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Martin Paces</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Created:</th><td class="field-body">2011-07-20</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Last Edit:</th><td class="field-body">2011-07-21</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Status:</th><td class="field-body">DRAFT</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Discussion:</th><td class="field-body"><a class="reference external" href="http://www.eoxserver.org/wiki/DiscussionRfc11">http://www.eoxserver.org/wiki/DiscussionRfc11</a></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This RFC describes the design and implementation of the OGC WPS 1.0.0
+Interface prototype.  The WPS (Web Processing Service) interface
+prototype adds the processing functionality to the EOX-Server
+and in capable of invocation of both synchronous ans
+asynchronous processes invoked using either XML or KVP
+encoding as described in  OGC 05-007r7 <em>OpenGIS Web Processing Service</em>
+document.</p>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>The implementation extends the set of EOX-Server’s OWS service handlers
+by the WPS specific interface. Namely, it ads following handlers</p>
+<blockquote>
+<div><ul class="simple">
+<li>WPS service handler</li>
+<li>WPS 1.0.0 version handler</li>
+<li>WPS <em>GetCapabilities</em> operation handler</li>
+<li>WPS <em>DescribeProcess</em> operation handler</li>
+<li>WPS <em>Execute operation</em> handler</li>
+</ul>
+</div></blockquote>
+<p>The added WPS functionality could be split three (currently separated)
+logical parts:</p>
+<blockquote>
+<div><ul class="simple">
+<li>WPS interface and operation logic (subject to this RFC)</li>
+<li>WPS data model and generic process class (loosely based on
+PyWPS, currently separated from the interface and operation logic)</li>
+<li>WPS process instances – user defined processes, ancestors of the generic
+service class (completely independent of the EOX-Server, not subject to this RFC)</li>
+</ul>
+</div></blockquote>
+<div class="section" id="wps-interface-and-operation-logic">
+<h3>WPS Interface and Operation Logic<a class="headerlink" href="#wps-interface-and-operation-logic" title="Permalink to this headline">¶</a></h3>
+<p>This part implements the actual OWS service handlers and it is tightly coupled with the EOX-Server.
+It parses and interprets the operation request and generates the operation responses reusing
+existing parts of the EOX-Server (primarily the XML and KVP request decoders).
+This interface has access to the installed WPS process instances (implemented as python modules)
+and it reads their descriptions. In case of the <em>Execute</em> operation it fetches the parsed input data
+to the selected process instance, triggers the actual execution of the process, and generates the status
+responses and handles output data XML packing and encoding.</p>
+<p>In case of a synchronous execution the WPS processes are executed in context of the EOX-Server’s OWS request.
+In case of an asynchronous WPS processes a dedicated OS process is started from the context of the EOX-Server’s OWS request.</p>
+<p>This part is distributed under the EOX-Server’s MapServer-like open source licence.</p>
+</div>
+<div class="section" id="wps-data-model-and-generic-process-class">
+<h3>WPS Data Model and Generic Process Class<a class="headerlink" href="#wps-data-model-and-generic-process-class" title="Permalink to this headline">¶</a></h3>
+<p>This part (not subject to this RFC) is loosely based on the WPS Process API of the :PyWPS:
+SW. Due to the flaws of the original data model and
+requirements of the EOX-Server integration the the original :PyWPS: code was substantially modified
+(practicall rewritten) leaving only traces of the generic (parent) WPS Process class.</p>
+<p>The work is based on the stable :PyWPS: version 3.1.0. The reason we have replaced the original
+data model was that it had several design and implantation flaws
+(e.g., the way how the multiple input and output
+data occurrences were handled, bounding box data handling and encoding, the way how input sequences
+were detected). After first initial correcting attempts we gave up and rewrote the model from scratch.
+The generic Process class was modified: (i) due to the the changes made to the data model,
+(ii) removing unused parts of code (e.g., useless class reinitialization, Grass integration,
+internationalization), (iii) and finally due to the needs of the EOX-Server integration.</p>
+<p>Despite the only fragments of the original :PyWPS:, this code was derived from the :PyWPS: and it
+is distributed under the terms of the original GPL licence.</p>
+</div>
+<div class="section" id="wps-process-instances">
+<h3>WPS Process Instances<a class="headerlink" href="#wps-process-instances" title="Permalink to this headline">¶</a></h3>
+<p>The process instances are not subject to this RFC and should be written by the WPS users
+to provide the desired functionality. The processes are created as separated python
+modules each containing a single customized sub-class of the generic process class.
+The unique process identifier is the same as the name of python module (file’s base name),
+the rest of the process description is defined by an implementer in the class definition.</p>
+<p>We provide set of sample demo process samples covering from basic to most advanced cases.
+This part is distributed under the terms of PyWPS GPL licence.</p>
+</div>
+<div class="section" id="transition-to-operation-issues-to-be-resolved">
+<h3>Transition to Operation - Issues to be resolved<a class="headerlink" href="#transition-to-operation-issues-to-be-resolved" title="Permalink to this headline">¶</a></h3>
+<p>The existing prototype has still a couple issues to be resolved before operational deployment.</p>
+<blockquote>
+<div><ul class="simple">
+<li>licence issues - the WPS Process’s data model and parent Process’s class shall be merged
+with the WPS Interface and Operation logic and distributed together under the same licence terms</li>
+<li>resource tracker - there should be a resource tracker looking after the used resources,
+i.e., stored files and executed asynhronous processes. Each of these resources shall be monitored
+and released (deleted in case of unused files, properly killed in case of “zombie” processes) once
+is not usefull anymore.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="governance">
+<h2>Governance<a class="headerlink" href="#governance" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="source-code-location">
+<h3>Source Code Location<a class="headerlink" href="#source-code-location" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="wps-interface">
+<h4>WPS Interface<a class="headerlink" href="#wps-interface" title="Permalink to this headline">¶</a></h4>
+<p>Currently the Interface code can be downloaded from the WPS sandbox:</p>
+<blockquote>
+<div><a class="reference external" href="http://eoxserver.org/svn/sandbox/sandbox_wps">http://eoxserver.org/svn/sandbox/sandbox_wps</a></div></blockquote>
+</div>
+<div class="section" id="id1">
+<h4>WPS - Data Model and Generic Process Class<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>The code derived from the PyWPS (only the parts needed for EOX-Server integration)
+can be found at:</p>
+<blockquote>
+<div><a class="reference external" href="http://o3s.eox.at/svn/deliverables/developments/wps/server">http://o3s.eox.at/svn/deliverables/developments/wps/server</a></div></blockquote>
+</div>
+<div class="section" id="wps-demo-processes">
+<h4>WPS - Demo Processes<a class="headerlink" href="#wps-demo-processes" title="Permalink to this headline">¶</a></h4>
+<p>The demo services are available at:</p>
+<blockquote>
+<div><a class="reference external" href="https://o3s.eox.at/svn/deliverables/developments/wps/wps_demo_services/">https://o3s.eox.at/svn/deliverables/developments/wps/wps_demo_services/</a></div></blockquote>
+</div>
+</div>
+<div class="section" id="initial-code-base">
+<h3>Initial Code Base<a class="headerlink" href="#initial-code-base" title="Permalink to this headline">¶</a></h3>
+<p>A first prototype implementing parts of the functionality has been developed under
+the O3S project.</p>
+</div>
+<div class="section" id="rfcs-and-decision-process">
+<h3>RFCs and Decision Process<a class="headerlink" href="#rfcs-and-decision-process" title="Permalink to this headline">¶</a></h3>
+<p><em>TBD</em></p>
+</div>
+<div class="section" id="license">
+<h3>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h3>
+<p><em>WPS Interface</em> prototype shall be distributed under the terms of the EOX-Server’s MapServer-like licence.</p>
+<p>The other parts required by the WPS functionality are available under the terms of the [PyWPS] GPL licence.</p>
+</div>
+<div class="section" id="wiki-trac-tickets">
+<h3>Wiki, Trac, Tickets<a class="headerlink" href="#wiki-trac-tickets" title="Permalink to this headline">¶</a></h3>
+<p><em>TBD</em></p>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">[PyWPS]:</th><td class="field-body"><a class="reference external" href="http://pywps.wald.intevation.org/">http://pywps.wald.intevation.org/</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="voting-history">
+<h2>Voting History<a class="headerlink" href="#voting-history" title="Permalink to this headline">¶</a></h2>
+<p><em>N/A</em></p>
+</div>
+<div class="section" id="traceability">
+<h2>Traceability<a class="headerlink" href="#traceability" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Requirements:</th><td class="field-body">“N/A”</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Tickets:</th><td class="field-body">“N/A”</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="rfc12.html" class="btn btn-neutral float-right" title="RFC 12: Backends for the Data Access Layer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="rfc10.html" class="btn btn-neutral float-left" title="RFC 10: SOAP Proxy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

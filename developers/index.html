@@ -1,0 +1,358 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Developers’ Guide &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Basics" href="basics.html" />
+    <link rel="prev" title="Web Coverage Service - Transaction Extension" href="../users/WCS-T_summary.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Developers’ Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basics.html">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_model.html">Data Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migrations.html">Data Migrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services.html">Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_formats.html">Data Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metadata_formats.html">Metadata Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autotest.html">The <em>autotest</em> instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="handling_coverages.html">Handling Coverages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="processes.html">Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_dev_guide.html">Asynchronous Task Processing - Developers Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-style-guide.html">EOxServer code style guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Developers’ Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/developers/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="developers-guide">
+<span id="eoxserver-developers-guide"></span><h1>Developers’ Guide<a class="headerlink" href="#developers-guide" title="Permalink to this headline">¶</a></h1>
+<p>The Developers’ Guide is intended for people who want to use EOxServer
+as a development framework for geospatial services, or do have to
+extend EOxServer’s functionality to implement specific data and metadata
+formats for instance.</p>
+<p>Users of the EOxServer software stack please refer to the
+<a class="reference internal" href="../users/index.html#eoxserver-users-guide"><span class="std std-ref">Users’ Guide</span></a>. Users range from administrators installing and
+configuring the software stack and operators registering the available <em>EO
+Data</em> on the <em>Provider</em> side to end users consuming the registered <em>EO Data</em>
+on the <em>User</em> side.</p>
+<div class="figure align-center">
+<img alt="../_images/Global_Use_Case.png" src="../_images/Global_Use_Case.png" />
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#architectural-layout">Architectural Layout</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="basics.html#django">Django</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basics.html#database">Database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basics.html#mapserver">MapServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basics.html#gdal-ogr">GDAL/OGR</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="core.html">Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_model.html">Data Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="data_model.html#data-integration-layer">Data Integration Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_model.html#data-access-layer">Data Access Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_model.html#task-tracker-data-model">Task Tracker Data Model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="migrations.html">Data Migrations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="migrations.html#what-are-migrations">What are migrations?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migrations.html#setup">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migrations.html#creating-migrations">Creating Migrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migrations.html#performing-a-migration">Performing a Migration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="plugins.html#important">Important</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins.html#loading-modules">Loading modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="services.html">Services</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="services.html#initial-setup">Initial Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="data_formats.html">Data Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metadata_formats.html">Metadata Formats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autotest.html">The <em>autotest</em> instance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autotest.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autotest.html#fixtures">Fixtures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autotest.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autotest.html#run-tests">Run tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="autotest.html#testing-configuration">Testing Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autotest.html#xml-schemas">XML Schemas</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html#architecture">Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="soap_proxy.html#supported-interfaces">Supported Interfaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="soap_proxy.html#overview">Overview</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html#implementation">Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="handling_coverages.html">Handling Coverages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="handling_coverages.html#creating-coverages">Creating Coverages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="handling_coverages.html#creating-collections">Creating Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="handling_coverages.html#accessing-coverages">Accessing Coverages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="handling_coverages.html#accessing-coverage-data">Accessing Coverage Data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="processes.html">Processes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="processes.html#creating-a-new-process">Creating a new Process</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="atp_dev_guide.html">Asynchronous Task Processing - Developers Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="atp_dev_guide.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_dev_guide.html#simple-atp-application">Simple ATP Application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="atp_dev_guide.html#step-1-handler-subroutine">Step 1 - Handler Subroutine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atp_dev_guide.html#step-2-new-task-type-registration">Step 2 - New Task Type Registration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atp_dev_guide.html#step-3-creating-new-task">Step 3 - Creating New Task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atp_dev_guide.html#step-4-polling-the-task-status">Step 4 - Polling the task status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atp_dev_guide.html#step-5-getting-the-logged-task-history">Step 5 - Getting the logged task history</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atp_dev_guide.html#step-6-getting-the-task-results">Step 6 - Getting the task results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atp_dev_guide.html#step-7-removing-the-task">Step 7 - Removing the task</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="atp_dev_guide.html#executing-atp-task">Executing ATP Task</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="atp_dev_guide.html#pulling-a-task-from-queue">Pulling a task from queue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atp_dev_guide.html#task-execution">Task Execution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atp_dev_guide.html#db-cleanup">DB Cleanup</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code-style-guide.html">EOxServer code style guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="code-style-guide.html#fundamentals">Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-style-guide.html#package-layout-and-namespacing">Package layout and namespacing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-style-guide.html#import-rules">Import rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-style-guide.html#coding-guidelines">Coding guidelines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="code-style-guide.html#minimizing-pitfalls">Minimizing pitfalls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="code-style-guide.html#improving-tests">Improving tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="basics.html" class="btn btn-neutral float-right" title="Basics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../users/WCS-T_summary.html" class="btn btn-neutral float-left" title="Web Coverage Service - Transaction Extension" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

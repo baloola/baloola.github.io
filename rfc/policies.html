@@ -1,0 +1,371 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>RFC Policies &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Guidelines for Requests for Comments" href="howto.html" />
+    <link rel="prev" title="Requests for Comments" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Requests for Comments</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#rfc-procedures">RFC Procedures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#writing-rfcs">Writing RFCs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#rfcs">RFCs</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">RFC Policies</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#status-of-rfcs">Status of RFCs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creation-of-rfcs">Creation of RFCs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#discussion-pages">Discussion Pages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pending-rfcs">Pending RFCs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#withdrawal-of-rfcs">Withdrawal of RFCs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#voting-on-rfcs">Voting on RFCs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="howto.html">Guidelines for Requests for Comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc0.html">RFC 0: Project Steering Committee Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc1.html">RFC 1: An Extensible Software Architecture for EOxServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc2.html">RFC 2: Extension Mechanism for EOxServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc3.html">RFC 3: OGC Service Extensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc4.html">RFC 4: Data Packaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc5.html">RFC 5: Processing Chains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc6.html">RFC 6: Directory Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc7.html">RFC 7: Release Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc8.html">RFC 8: SVN Commit Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc9.html">RFC 9: SOAP Binding of WCS GetCoverage Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc10.html">RFC 10: SOAP Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc11.html">RFC 11: WPS 1.0.0 Interface Prototype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc12.html">RFC 12: Backends for the Data Access Layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc13.html">RFC 13: WCS-T 1.1 Interface Prototype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc14.html">RFC 14: Asynchronous Task Processing (ATP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc15.html">RFC 15: Access Control Support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc16.html">RFC 16: Referenceable Grid Coverages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc17.html">RFC 17: Configuration of Supported Output Formats and CRSes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc18.html">RFC 18: Operator Interface Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc19.html">RFC 19: Migrate project repository from svn to git</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Requests for Comments</a> &raquo;</li>
+        
+      <li>RFC Policies</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/rfc/policies.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="rfc-policies">
+<span id="index-0"></span><span id="id1"></span><h1>RFC Policies<a class="headerlink" href="#rfc-policies" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Stephan Krause, Stephan Meißl</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body">2011-05-13</td>
+</tr>
+</tbody>
+</table>
+<p>This document contains the policies that govern the life cycle of
+Requests for Comments (RFCs). It may be changed by submitting an RFC for
+discussion and vote following the provisions of this document.</p>
+<p>In this document the terms <em>shall</em>, <em>should</em> and <em>may</em> have a
+normative meaning, that is well known from software engineering and
+standards definition:</p>
+<ul class="simple">
+<li><em>shall</em>: indicates an absolute requirement to be strictly followed</li>
+<li><em>should</em>: indicates a recommendation</li>
+<li><em>may</em>: indicates an option</li>
+</ul>
+<div class="section" id="status-of-rfcs">
+<h2>Status of RFCs<a class="headerlink" href="#status-of-rfcs" title="Permalink to this headline">¶</a></h2>
+<p>Every RFC has a status. That status may be one of:</p>
+<ul class="simple">
+<li><strong>IN PREPARATION</strong>: Some text for the RFC has been posted, but that is
+not the version to be submitted for discussion and voting. An RFC that
+has this status is still work in progress.</li>
+<li><strong>PENDING</strong>: The text of the RFC has been submitted for discussion. It
+may still be altered by the RFC authors in order to reflect the state
+of the discussion.</li>
+<li><strong>WITHDRAWN</strong>: The text of the RFC has been withdrawn.</li>
+<li><strong>VOTING ACTIVE</strong>: The text of the RFC has been frozen and voting is
+going on.</li>
+<li><strong>ACCEPTED</strong>: A vote has been held on the RFC and it has been
+accepted. Implementation has started.</li>
+<li><strong>REJECTED</strong>: A vote has been held on the RFC and it has been
+rejected. The RFC is not going to be implemented and the discussion
+is closed.</li>
+<li><strong>POSTPONED</strong>: A vote has been held on the RFC and it has been
+postponed to a later stage of development. The RFC may be reopened any
+time.</li>
+<li><strong>OBSOLETE</strong>: A vote has been held on the RFC and it has been declared
+obsolete. It has been superseded by another RFC or it is not
+considered applicable any more.</li>
+</ul>
+<p>The status IN PREPARATION may be declared by the authors of the
+RFC. They may move it to PENDING once they consider it ready for
+discussion and submission to a vote. Any further status changes shall
+be declared according to the results of the discussion and the voting
+(see <a class="reference internal" href="rfc0.html"><span class="doc">RFC 0: Project Steering Committee Guidelines</span></a>).</p>
+<p>The following status changes are possible:</p>
+<ul class="simple">
+<li>from IN PREPARATION to PENDING, WITHDRAWN</li>
+<li>from PENDING to WITHDRAWN or via VOTING ACTIVE to ACCEPTED, REJECTED,
+POSTPONED</li>
+<li>from ACCEPTED via VOTING ACTIVE to PENDING, POSTPONED, OBSOLETE</li>
+<li>from POSTPONED to PENDING or via VOTING ACTIVE to ACCEPTED, REJECTED,
+OBSOLETE</li>
+</ul>
+</div>
+<div class="section" id="creation-of-rfcs">
+<h2>Creation of RFCs<a class="headerlink" href="#creation-of-rfcs" title="Permalink to this headline">¶</a></h2>
+<p>Any one who has write access to the EOxServer SVN may submit an RFC. It
+shall obey the rules of the <a class="reference internal" href="howto.html"><span class="doc">Guidelines for Requests for Comments</span></a>. The initial status of the
+RFC is IN PREPARATION, lest the authors deem it to be mature for
+discussion from the start, in which case they may submit it as PENDING. The
+RFC shall be assigned the next possible consecutive number.</p>
+<p>When beginning work on an RFC the authors shall inform the PSC chair.</p>
+<p>As long as the RFC is IN PREPARATION or PENDING, only the authors of the
+RFC shall edit it. Anyone else who wants to contribute to the document
+shall submit his or her text to the discussion page. The authors may
+also decide to let him or her become a co-author who has all the rights
+of an author.</p>
+<p>Authors may choose to support their RFC by implementing the needed changes
+and committing them to a subdirectory of the sandbox directory for review.</p>
+</div>
+<div class="section" id="discussion-pages">
+<h2>Discussion Pages<a class="headerlink" href="#discussion-pages" title="Permalink to this headline">¶</a></h2>
+<p>Any RFC, especially those still IN PREPARATION, shall have a discussion page
+on the EOxServer Trac Wiki (<a class="reference external" href="http://eoxserver.org/wiki">http://eoxserver.org/wiki</a>). The design
+and the location of the discussion page is detailed in the <a class="reference internal" href="howto.html"><span class="doc">Guidelines for Requests for Comments</span></a>.</p>
+<p>The discussion page may include links to preliminary implementations
+which have been committed to a sandbox subdirectory.</p>
+</div>
+<div class="section" id="pending-rfcs">
+<h2>Pending RFCs<a class="headerlink" href="#pending-rfcs" title="Permalink to this headline">¶</a></h2>
+<p>PENDING RFCs are submitted for discussion. They may still be edited to
+reflect the state of the discussion or to correct errors. They should
+not be altered in a radical manner though, changing the proposed
+solution completely. In this case the authors may withdraw the RFC and
+propose another one.</p>
+<p>An RFC shall be PENDING for at least two business days (in Austria) till
+a vote can be held on it (see <a class="reference internal" href="rfc0.html"><span class="doc">RFC 0: Project Steering Committee Guidelines</span></a>).</p>
+</div>
+<div class="section" id="withdrawal-of-rfcs">
+<h2>Withdrawal of RFCs<a class="headerlink" href="#withdrawal-of-rfcs" title="Permalink to this headline">¶</a></h2>
+<p>The authors may withdraw an RFC at any time as long as it is IN
+PREPARATION or PENDING. The RFC status will change to WITHDRAWN. The
+authors may decide to leave the text as is or remove everything except
+for the basic information as defined in the <a class="reference internal" href="howto.html"><span class="doc">Guidelines for Requests for Comments</span></a>.</p>
+</div>
+<div class="section" id="voting-on-rfcs">
+<h2>Voting on RFCs<a class="headerlink" href="#voting-on-rfcs" title="Permalink to this headline">¶</a></h2>
+<p>The voting on RFCs is defined in the first RFC: <a class="reference internal" href="rfc0.html"><span class="doc">RFC 0: Project Steering Committee Guidelines</span></a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="howto.html" class="btn btn-neutral float-right" title="Guidelines for Requests for Comments" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Requests for Comments" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

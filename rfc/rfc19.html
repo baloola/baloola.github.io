@@ -1,0 +1,483 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>RFC 19: Migrate project repository from svn to git &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Release Notes" href="../release_notes/index.html" />
+    <link rel="prev" title="RFC 18: Operator Interface Architecture" href="rfc18.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Requests for Comments</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#rfc-procedures">RFC Procedures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#writing-rfcs">Writing RFCs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#rfcs">RFCs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="policies.html">RFC Policies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="howto.html">Guidelines for Requests for Comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc0.html">RFC 0: Project Steering Committee Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc1.html">RFC 1: An Extensible Software Architecture for EOxServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc2.html">RFC 2: Extension Mechanism for EOxServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc3.html">RFC 3: OGC Service Extensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc4.html">RFC 4: Data Packaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc5.html">RFC 5: Processing Chains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc6.html">RFC 6: Directory Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc7.html">RFC 7: Release Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc8.html">RFC 8: SVN Commit Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc9.html">RFC 9: SOAP Binding of WCS GetCoverage Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc10.html">RFC 10: SOAP Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc11.html">RFC 11: WPS 1.0.0 Interface Prototype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc12.html">RFC 12: Backends for the Data Access Layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc13.html">RFC 13: WCS-T 1.1 Interface Prototype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc14.html">RFC 14: Asynchronous Task Processing (ATP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc15.html">RFC 15: Access Control Support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc16.html">RFC 16: Referenceable Grid Coverages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc17.html">RFC 17: Configuration of Supported Output Formats and CRSes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc18.html">RFC 18: Operator Interface Architecture</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">RFC 19: Migrate project repository from svn to git</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github-hosting">Github hosting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#advantages">Advantages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#inconveniences">Inconveniences</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#git-workflows">Git Workflows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#upgrade-path-for-svn-users">Upgrade path for svn users</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tasks">Tasks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#voting-history">Voting History</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#traceability">Traceability</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Requests for Comments</a> &raquo;</li>
+        
+      <li>RFC 19: Migrate project repository from svn to git</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/rfc/rfc19.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="rfc-19-migrate-project-repository-from-svn-to-git">
+<span id="rfc-19"></span><h1>RFC 19: Migrate project repository from svn to git<a class="headerlink" href="#rfc-19-migrate-project-repository-from-svn-to-git" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Marko Locher</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Created:</th><td class="field-body">2013-04-05</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Last Edit:</th><td class="field-body">$Date$</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Status:</th><td class="field-body">ACCEPTED</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Discussion:</th><td class="field-body">n/a</td>
+</tr>
+</tbody>
+</table>
+<p>Migrating from Subversion to git and in the process also switch from Trac to
+github.</p>
+<p>(Credit: Inspired by MapServer’s RFC 84 at:
+<a class="reference external" href="http://mapserver.org/development/rfc/ms-rfc-84.html">http://mapserver.org/development/rfc/ms-rfc-84.html</a>)</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>While svn suits our needs as a collaborative source code version management
+system, it has shortcomings that make it difficult to work with for
+developpers working on multiple tasks in parallel. Git’s easy branching
+makes it possible to set up branches for individual task, isolating code
+changes from other branches, thus making the switch from one task to another
+possible without the risk of loosing or erroneously commiting
+work-in-progress code. Three-way merging of different branches means that
+merging code from one branch to another becomes a rapid task, by only having
+to deal with actual conflicts in the code. Offline committing and access to
+entire history make working offline possible.</p>
+<p>There is already somewhat of a consensus that the migration from svn to git
+is a good move. Discussion remains as to how this transition should be
+performed. This RFC outlines the different options available for hosting the
+official repository, and the different options available for our ticket
+tracking.</p>
+<p>Current investigation has retained two majors options that we could go down
+with:</p>
+<ul class="simple">
+<li>Repository migrated to github, use github provided issue tracking. This
+option will be referred to as “Github hosting”.</li>
+<li>Repository hosted by EOX, current trac instance migrated to hook on the
+new repository. This option will be referred to as “EOX hosting”</li>
+</ul>
+</div>
+<div class="section" id="github-hosting">
+<h2>Github hosting<a class="headerlink" href="#github-hosting" title="Permalink to this headline">¶</a></h2>
+<p>This option consists in moving our entire code+ticket infrastructure
+to github. The current trac instance becomes nearly read-only, new
+tickets cannot be created on it. Existing tickets are migrated to github
+with a script taking a trac postgresql dump (once the migration starts,
+our trac instance becomes read-only).</p>
+</div>
+<div class="section" id="advantages">
+<h2>Advantages<a class="headerlink" href="#advantages" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Code hosting:</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>No need to worry about hosting infrastructure</li>
+<li>Can be up and running with a short delay</li>
+<li>Support for pull requests, allowing external contributions to be rapidly
+merged into our repository</li>
+<li>Online code editing for quick fixups</li>
+<li>Github visualization tools, for example to check which branches are likely
+to contain conflicting code sections</li>
+<li>Code and patch commenting make collaboratively working on a given feature
+very lightweight, i.e. just add your comment on the code line which seems
+problematic to you</li>
+<li>Documentation contributions highly simplified for one-shot contributions</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Issue tracking:</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Integration of ticket state with commit messages (e.g: “fix mem allocation
+in mapDraw(), closes issue #1234</li>
+<li>Email replies to ticket notifications</li>
+<li>The free-form label tagging of issues might open up some interesting usages</li>
+<li>Versionned text-base attachments (gists), with commenting</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="inconveniences">
+<h2>Inconveniences<a class="headerlink" href="#inconveniences" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Hosting by a private company, which might become an issue if their TOS evolve
+or if they go out of business. The source code availability is not an
+issue as is possible to maintain a mirror on any server, and each
+developer has a checkout of the full source control history. Ticket
+migration would be an issue, but there are APIs available to extract
+existing tickets.</li>
+<li>Issue tracker is in some ways less feature full than trac. The only hard
+coded attributes are the assignee and the milestone. All the other
+triaging information goes into free formed labels, a la gmail.</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>No way to automatically assign a ticket owner given a component</li>
+<li>No support for image attachments, can be referenced by url but must be
+hosted elsewhere.</li>
+<li>No support for private security tickets</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Administering committer access will be done through github, old
+credentials do not apply. Git does not support fine-grained commit
+permissions per directory, there will be a separate repository for the
+docs to account for the larger number of committers there.</li>
+</ul>
+</div>
+<div class="section" id="git-workflows">
+<h2>Git Workflows<a class="headerlink" href="#git-workflows" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="stable-branches">
+<h3>Stable Branches<a class="headerlink" href="#stable-branches" title="Permalink to this headline">¶</a></h3>
+<p>This document outlines a workflow for fixing bugs in our stable branches:
+<a class="reference external" href="http://www.net-snmp.org/wiki/index.php/Git_Workflow">http://www.net-snmp.org/wiki/index.php/Git_Workflow</a> I believe it is a very
+good match for our stable release management:</p>
+<ul class="simple">
+<li>pick the oldest branch where the fix should be applied</li>
+<li>commit the fix to this oldest branch</li>
+<li>merge the old branch down to all the more recent ones, including master</li>
+</ul>
+</div>
+<div class="section" id="release-management">
+<h3>Release Management<a class="headerlink" href="#release-management" title="Permalink to this headline">¶</a></h3>
+<p>Instead of freezing development during our beta cycle, a new release branch
+is created once the feature freeze is decided, and our betas, releases and
+subsequent bugfix releases are tagged off of this branch. Bug fixes are
+committed to this new stable branch, and merged into master. New features
+can continue to be added to master during all the beta phase.
+<a class="reference external" href="http://nvie.com/posts/a-successful-git-branching-model/">http://nvie.com/posts/a-successful-git-branching-model/</a> is an interesting
+read even if it does not fit our stable release branches exactly.</p>
+</div>
+</div>
+<div class="section" id="upgrade-path-for-svn-users">
+<h2>Upgrade path for svn users<a class="headerlink" href="#upgrade-path-for-svn-users" title="Permalink to this headline">¶</a></h2>
+<p>For those users who do not wish to change their workflow and continue with
+svn commands. This is not the recommended way to work with git, as local or
+remote changes might end up in having conflicts to resolve, like with svn.</p>
+<p>Checkout the project</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">EOX</span><span class="o">-</span><span class="n">A</span><span class="o">/</span><span class="n">eoxserver</span>
+</pre></div>
+</div>
+<p>Update</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">pull</span> <span class="n">origin</span> <span class="n">master</span>
+</pre></div>
+</div>
+<p>Commit changes</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>git add [list of files]
+git commit -m “Commit message”
+git push origin master
+</pre></div>
+</div>
+<p>Fix a bug in a branch, and merge the fix into master</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>git checkout feature-branch
+git add [list of files]
+git commit -m “Commit message”
+git push origin feature-branch
+git checkout master
+git merge feature-branch
+git push origin master
+</pre></div>
+</div>
+</div>
+<div class="section" id="tasks">
+<h2>Tasks<a class="headerlink" href="#tasks" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>import svn to git</li>
+<li>assign github users</li>
+<li>split into sub-projects:</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>eoxserver</li>
+<li>autotest</li>
+<li>docs</li>
+<li>soap_proxy</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>document release process</li>
+<li>migrate website scripts</li>
+<li>switch trac site to read-only</li>
+</ul>
+</div>
+<div class="section" id="voting-history">
+<h2>Voting History<a class="headerlink" href="#voting-history" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Motion:</th><td class="field-body">Adopted on 2013-05-15 with +1 from Stephan Meißl, Fabian Schindler,
+and Martin Paces</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="traceability">
+<h2>Traceability<a class="headerlink" href="#traceability" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Requirements:</th><td class="field-body">N/A</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Tickets:</th><td class="field-body">N/A</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../release_notes/index.html" class="btn btn-neutral float-right" title="Release Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="rfc18.html" class="btn btn-neutral float-left" title="RFC 18: Operator Interface Architecture" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

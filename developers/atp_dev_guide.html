@@ -1,0 +1,525 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Asynchronous Task Processing - Developers Guide &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Testing" href="testing.html" />
+    <link rel="prev" title="Processes" href="processes.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developers’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_model.html">Data Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migrations.html">Data Migrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services.html">Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_formats.html">Data Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metadata_formats.html">Metadata Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autotest.html">The <em>autotest</em> instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="handling_coverages.html">Handling Coverages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="processes.html">Processes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Asynchronous Task Processing - Developers Guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#simple-atp-application">Simple ATP Application</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#step-1-handler-subroutine">Step 1 - Handler Subroutine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-2-new-task-type-registration">Step 2 - New Task Type Registration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-3-creating-new-task">Step 3 - Creating New Task</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-4-polling-the-task-status">Step 4 - Polling the task status</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-5-getting-the-logged-task-history">Step 5 - Getting the logged task history</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-6-getting-the-task-results">Step 6 - Getting the task results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-7-removing-the-task">Step 7 - Removing the task</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#executing-atp-task">Executing ATP Task</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pulling-a-task-from-queue">Pulling a task from queue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#task-execution">Task Execution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#db-cleanup">DB Cleanup</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-style-guide.html">EOxServer code style guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Developers’ Guide</a> &raquo;</li>
+        
+      <li>Asynchronous Task Processing - Developers Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/developers/atp_dev_guide.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="asynchronous-task-processing-developers-guide">
+<span id="atp-dev-guide"></span><h1><a class="toc-backref" href="#table-of-contents">Asynchronous Task Processing - Developers Guide</a><a class="headerlink" href="#asynchronous-task-processing-developers-guide" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#asynchronous-task-processing-developers-guide" id="id1">Asynchronous Task Processing - Developers Guide</a><ul>
+<li><a class="reference internal" href="#introduction" id="id2">Introduction</a></li>
+<li><a class="reference internal" href="#simple-atp-application" id="id3">Simple ATP Application</a><ul>
+<li><a class="reference internal" href="#step-1-handler-subroutine" id="id4">Step 1 - Handler Subroutine</a></li>
+<li><a class="reference internal" href="#step-2-new-task-type-registration" id="id5">Step 2 - New Task Type Registration</a></li>
+<li><a class="reference internal" href="#step-3-creating-new-task" id="id6">Step 3 - Creating New Task</a></li>
+<li><a class="reference internal" href="#step-4-polling-the-task-status" id="id7">Step 4 - Polling the task status</a></li>
+<li><a class="reference internal" href="#step-5-getting-the-logged-task-history" id="id8">Step 5 - Getting the logged task history</a></li>
+<li><a class="reference internal" href="#step-6-getting-the-task-results" id="id9">Step 6 - Getting the task results</a></li>
+<li><a class="reference internal" href="#step-7-removing-the-task" id="id10">Step 7 - Removing the task</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#executing-atp-task" id="id11">Executing ATP Task</a><ul>
+<li><a class="reference internal" href="#pulling-a-task-from-queue" id="id12">Pulling a task from queue</a></li>
+<li><a class="reference internal" href="#task-execution" id="id13">Task Execution</a></li>
+<li><a class="reference internal" href="#db-cleanup" id="id14">DB Cleanup</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#table-of-contents">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This guide is intended to help with the creation of applications using the
+<em>Asynchronous Task Processing</em> subsystem of EOxServer.</p>
+<p>The first part is guiding creation of the simple task producer, i.e., an
+application needing the asynchronous processing capabilities.</p>
+<p>The second part helps with creation of a task consumer, i.e., the part
+of code pulling tasks from the work queue and executing them. The task
+consumer is part of Asynchronous Task Processing Daemon.</p>
+<p>An overview of the ATP capabilities is presented in “<a class="reference internal" href="../users/atp_sum.html#atp-sum"><span class="std std-ref">Asynchronous Task Processing</span></a>”. The
+database model used in by the ATP subsystem is described in “<a class="reference internal" href="data_model.html#atp-data-model"><span class="std std-ref">Task Tracker Data Model</span></a>”. The complete API reference can be found in
+“<code class="xref py py-mod docutils literal"><span class="pre">eoxserver.resources.processes.tracker</span></code>”.</p>
+</div>
+<div class="section" id="simple-atp-application">
+<h2><a class="toc-backref" href="#table-of-contents">Simple ATP Application</a><a class="headerlink" href="#simple-atp-application" title="Permalink to this headline">¶</a></h2>
+<p>Here in this section we will prepare step-by-step a simple demo application
+making use of the ATP subsystem. The complete application is available at
+location:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">EOxServer</span> <span class="n">instal</span><span class="o">.</span><span class="n">dir</span><span class="o">.&gt;/</span><span class="n">tools</span><span class="o">/</span><span class="n">atp_demo</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>The prerequisite of starting the application is that the correct
+path to the <em>EOxServer</em> installation and instance is set together with the
+correct <em>Django</em> <code class="docutils literal"><span class="pre">settings</span></code> module.</p>
+<p>Initially the application must import the right python objects
+from the <code class="xref py py-func docutils literal"><span class="pre">tracker()</span></code> module:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eoxserver.resources.processes.tracker</span> <span class="k">import</span> \
+    <span class="n">registerTaskType</span><span class="p">,</span> <span class="n">enqueueTask</span><span class="p">,</span> <span class="n">QueueFull</span><span class="p">,</span> \
+    <span class="n">getTaskStatusByIdentifier</span><span class="p">,</span> <span class="n">getTaskResponse</span><span class="p">,</span> <span class="n">deleteTaskByIdentifier</span>
+</pre></div>
+</div>
+<p>By this command we imported following
+objects: i) task type registration function, ii) the task creation (enqueue)
+subroutine, iii) an exception class risen in case of full task queue unable
+to accept (most likely temporarily) new tasks, iv) task’s status polling
+subroutine, v) the response getter function and finally vi) the subroutine
+deleting an existing task. These are the ATP Python objects needed by our
+little demo application.</p>
+<div class="section" id="step-1-handler-subroutine">
+<h3><a class="toc-backref" href="#table-of-contents">Step 1 - Handler Subroutine</a><a class="headerlink" href="#step-1-handler-subroutine" title="Permalink to this headline">¶</a></h3>
+<p>Let’s start with preparation of an example of subroutine to be executed -
+handler subroutine. The example handler below sums sequence of numbers and
+stores the result:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">handler</span><span class="p">(</span> <span class="n">taskStatus</span> <span class="p">,</span> <span class="nb">input</span> <span class="p">)</span> <span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; example ATP handler subroutine &quot;&quot;&quot;</span>
+    <span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># sum the values</span>
+    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">input</span> <span class="p">:</span>
+        <span class="k">try</span> <span class="p">:</span>
+            <span class="nb">sum</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span> <span class="n">val</span> <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="c1"># stop in case on ivalid input</span>
+            <span class="n">taskStatus</span><span class="o">.</span><span class="n">setFailure</span><span class="p">(</span><span class="s2">&quot;Input must be a sequence of numbers!&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+    <span class="c1"># store the response and terminate</span>
+    <span class="n">taskStatus</span><span class="o">.</span><span class="n">storeResponse</span><span class="p">(</span> <span class="nb">str</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Any handler subroutine (see also
+<code class="xref py py-func docutils literal"><span class="pre">dummyHandler()</span></code>)
+receives two parameters: i) an instance of the
+<code class="xref py py-class docutils literal"><span class="pre">TaskStatus</span></code> class
+and an input parameter. The input parameter is set during the task creation and
+can be any Python object serialisable by the <code class="docutils literal"><span class="pre">pickle</span></code> module.</p>
+</div>
+<div class="section" id="step-2-new-task-type-registration">
+<h3><a class="toc-backref" href="#table-of-contents">Step 2 - New Task Type Registration</a><a class="headerlink" href="#step-2-new-task-type-registration" title="Permalink to this headline">¶</a></h3>
+<p>Once we have prepared the handler subroutine we can register the task type
+to be performed by this subroutine:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">registerTaskType</span><span class="p">(</span> <span class="s2">&quot;SequenceSum&quot;</span> <span class="p">,</span> <span class="s2">&quot;tools.atp_demo.handler&quot;</span> <span class="p">,</span> <span class="mi">60</span> <span class="p">,</span> <span class="mi">600</span> <span class="p">,</span> <span class="mi">3</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">registerTaskType()</span></code> subroutine
+registers a new task type named “SequenceSum”. Any task instance of this task
+type will be processed by the <code class="docutils literal"><span class="pre">handler</span></code> subroutine. The handler subroutine
+is specified as importable module path. Any task instance not
+processed by an ATPD within 60 seconds (measured from the moment the ATPD pulls
+a task from the queue) is considered to be abandoned and it is automatically
+re-enqueued for new processing. The number of the re-enqueue attempts is limited
+to 3. Once a task instance is finished it will be stored for min. 10 minutes
+(600 seconds) before it gets removed.</p>
+</div>
+<div class="section" id="step-3-creating-new-task">
+<h3><a class="toc-backref" href="#table-of-contents">Step 3 - Creating New Task</a><a class="headerlink" href="#step-3-creating-new-task" title="Permalink to this headline">¶</a></h3>
+<p>Once the task handler has been registered as a new task type we can create a
+task’s instance:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="kc">True</span> <span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">enqueueTask</span><span class="p">(</span> <span class="s2">&quot;SequenceSum&quot;</span> <span class="p">,</span> <span class="s2">&quot;Task001&quot;</span> <span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="p">)</span>
+        <span class="k">break</span>
+    <span class="k">except</span> <span class="n">QueueFull</span> <span class="p">:</span> <span class="c1"># retry if queue full</span>
+        <span class="nb">print</span> <span class="s2">&quot;QueueFull!&quot;</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span> <span class="mi">5</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">enqueueTask()</span></code> creates a new
+task instance “Task001” of task type “SequenceSum”. The tuple <code class="docutils literal"><span class="pre">(1,2,3,4,5)</span></code>
+is the input to the handler subroutine. In case of full task queue
+new task cannot be accepted and the
+<code class="xref py py-func docutils literal"><span class="pre">QueueFull()</span></code> is risen.
+Since we want the task to be enqueued a simple re-try loop must be employed.</p>
+</div>
+<div class="section" id="step-4-polling-the-task-status">
+<h3><a class="toc-backref" href="#table-of-contents">Step 4 - Polling the task status</a><a class="headerlink" href="#step-4-polling-the-task-status" title="Permalink to this headline">¶</a></h3>
+<p>After task has been created enqueued for processing its status can be
+polled:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="kc">True</span> <span class="p">:</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">getTaskStatusByIdentifier</span><span class="p">(</span> <span class="s2">&quot;SequenceSum&quot;</span> <span class="p">,</span> <span class="s2">&quot;Task001&quot;</span> <span class="p">)</span>
+    <span class="nb">print</span> <span class="n">time</span><span class="o">.</span><span class="n">asctime</span><span class="p">()</span> <span class="p">,</span> <span class="s2">&quot;Status: &quot;</span> <span class="p">,</span> <span class="n">status</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">status</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span> <span class="s2">&quot;FINISHED&quot;</span> <span class="p">,</span> <span class="s2">&quot;FAILED&quot;</span> <span class="p">)</span> <span class="p">:</span> <span class="k">break</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span> <span class="mi">5</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>The task status is polled until the final status (<code class="docutils literal"><span class="pre">FINISHED</span></code> or <code class="docutils literal"><span class="pre">FAILED</span></code>) is
+reached. The task must be identified by unique pair of task type and task
+instance identifiers.</p>
+<p>NOTE: The task instance is guaranteed to be unique for given task type
+identifier, i.e., there might be two task with the same instance identifier but
+different type identifier.</p>
+</div>
+<div class="section" id="step-5-getting-the-logged-task-history">
+<h3><a class="toc-backref" href="#table-of-contents">Step 5 - Getting the logged task history</a><a class="headerlink" href="#step-5-getting-the-logged-task-history" title="Permalink to this headline">¶</a></h3>
+<p>The history of the task processing is logged and the log messages
+can be extracted by <code class="xref py py-func docutils literal"><span class="pre">getTaskLog()</span></code>
+function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="s2">&quot;Processing history:&quot;</span>
+<span class="k">for</span> <span class="n">rec</span> <span class="ow">in</span> <span class="n">getTaskLog</span><span class="p">(</span> <span class="s2">&quot;SequenceSum&quot;</span> <span class="p">,</span> <span class="s2">&quot;Task001&quot;</span> <span class="p">)</span> <span class="p">:</span>
+    <span class="nb">print</span> <span class="s2">&quot;-&quot;</span> <span class="p">,</span> <span class="n">rec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="s2">&quot;Status: &quot;</span> <span class="p">,</span> <span class="n">rec</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="p">,</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span> <span class="p">,</span> <span class="n">rec</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This function returns list of log records sorted by time (older first).</p>
+</div>
+<div class="section" id="step-6-getting-the-task-results">
+<h3><a class="toc-backref" href="#table-of-contents">Step 6 - Getting the task results</a><a class="headerlink" href="#step-6-getting-the-task-results" title="Permalink to this headline">¶</a></h3>
+<p>Once the task has been finished the task response can be retrieved:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">status</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;FINISHED&quot;</span> <span class="p">:</span>
+    <span class="nb">print</span> <span class="s2">&quot;Result: &quot;</span> <span class="p">,</span> <span class="n">getTaskResponse</span><span class="p">(</span> <span class="s2">&quot;SequenceSum&quot;</span> <span class="p">,</span> <span class="s2">&quot;Task001&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="step-7-removing-the-task">
+<h3><a class="toc-backref" href="#table-of-contents">Step 7 - Removing the task</a><a class="headerlink" href="#step-7-removing-the-task" title="Permalink to this headline">¶</a></h3>
+<p>Finally, the result task is not needed any more and can be removed from DB:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">deleteTaskByIdentifier</span><span class="p">(</span> <span class="s2">&quot;SequenceSum&quot;</span> <span class="p">,</span> <span class="s2">&quot;Task001&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="executing-atp-task">
+<h2><a class="toc-backref" href="#table-of-contents">Executing ATP Task</a><a class="headerlink" href="#executing-atp-task" title="Permalink to this headline">¶</a></h2>
+<p>In this section we will briefly describe all the steps necessary to pull and
+execute task instance from the queue. As working example we encourage you the
+source Python code of the ATPD located at:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">EOxServer</span> <span class="n">instal</span><span class="o">.</span><span class="n">dir</span><span class="o">.&gt;/</span><span class="n">tools</span><span class="o">/</span><span class="n">asyncProcServer</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>The invocation of the ATP server is described in “<a class="reference internal" href="../users/atp_sum.html#atp-sum"><span class="std std-ref">Asynchronous Task Processing</span></a>”.</p>
+<p>Initially the application must import the python objects
+from the <code class="xref py py-mod docutils literal"><span class="pre">tracker</span></code> module:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eoxserver.resources.processes.tracker</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>For convenience we have made available whole content of the module.</p>
+<div class="section" id="pulling-a-task-from-queue">
+<h3><a class="toc-backref" href="#table-of-contents">Pulling a task from queue</a><a class="headerlink" href="#pulling-a-task-from-queue" title="Permalink to this headline">¶</a></h3>
+<p>The ATPD is expected to pull task from the queue repeatedly. For simplicity
+we avoid the loop definition and we will rather focus on the loop body.
+Following command pulls a list of tasks from queue:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="c1"># get a pending task from the queue</span>
+    <span class="n">taskIds</span> <span class="o">=</span> <span class="n">dequeueTask</span><span class="p">(</span> <span class="n">SERVER_ID</span> <span class="p">)</span>
+<span class="k">except</span> <span class="n">QueueEmpty</span> <span class="p">:</span> <span class="c1"># no task to be processed</span>
+    <span class="c1"># wait some ammount of time</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span> <span class="n">QUEUE_EMPTY_QUERY_DELAY</span> <span class="p">)</span>
+    <span class="k">continue</span>
+</pre></div>
+</div>
+<p>This command tries to pull exactly one task at time from the DB queue but the
+applied mechanism of pulling does not guaranties that none or more than one
+task would be return. Thus the dequeuing function returns a list of tasks
+and the implementation must take this fact into account. Further, the dequeue
+function requires unique ATPD identifier (<code class="docutils literal"><span class="pre">SERVER_ID</span></code>).</p>
+<p>The <code class="xref py py-func docutils literal"><span class="pre">dequeueTask()</span></code> function
+changes automatically the status from <code class="docutils literal"><span class="pre">ENQUEUED</span></code> to <code class="docutils literal"><span class="pre">SCHEDULED</span></code> and
+log the state transition. The optional logging message can be provided.</p>
+</div>
+<div class="section" id="task-execution">
+<h3><a class="toc-backref" href="#table-of-contents">Task Execution</a><a class="headerlink" href="#task-execution" title="Permalink to this headline">¶</a></h3>
+<p>In case we have picked one of the pulled tasks and stored it to <code class="docutils literal"><span class="pre">taskId</span></code>
+variable we can proceed with the task execution:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># create instance of TaskStatus class</span>
+<span class="n">pStatus</span> <span class="o">=</span> <span class="n">TaskStatus</span><span class="p">(</span> <span class="n">taskId</span> <span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># get task parameters and change status to STARTED</span>
+    <span class="n">requestType</span> <span class="p">,</span> <span class="n">requestID</span> <span class="p">,</span> <span class="n">requestHandler</span> <span class="p">,</span> <span class="n">inputs</span> <span class="o">=</span> <span class="n">startTask</span><span class="p">(</span> <span class="n">taskId</span> <span class="p">)</span>
+    <span class="c1"># load the handler</span>
+    <span class="n">module</span> <span class="p">,</span> <span class="n">_</span> <span class="p">,</span> <span class="n">funct</span> <span class="o">=</span> <span class="n">requestHandler</span><span class="o">.</span><span class="n">rpartition</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+    <span class="n">handler</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span> <span class="nb">__import__</span><span class="p">(</span><span class="n">module</span><span class="p">,</span><span class="n">fromlist</span><span class="o">=</span><span class="p">[</span><span class="n">funct</span><span class="p">])</span> <span class="p">,</span> <span class="n">funct</span> <span class="p">)</span>
+    <span class="c1"># execute handler</span>
+    <span class="n">handler</span><span class="p">(</span> <span class="n">pStatus</span> <span class="p">,</span> <span class="n">inputs</span> <span class="p">)</span>
+    <span class="c1"># if no terminating status has been set do it right now</span>
+    <span class="n">stopTaskSuccessIfNotFinished</span><span class="p">(</span> <span class="n">taskId</span> <span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span> <span class="p">:</span>
+    <span class="n">pStatus</span><span class="o">.</span><span class="n">setFailure</span><span class="p">(</span> <span class="n">unicode</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>In order to execute the task couple of actions must be performed. First an
+instance of the <code class="xref py py-class docutils literal"><span class="pre">TaskStatus</span></code> class
+must be created.</p>
+<p>The parameters of the task (task type identifier, task instance identifier,
+request handler and task inputs) must be retrieved by the
+<code class="xref py py-func docutils literal"><span class="pre">dequeueTask()</span></code> function.
+The function also changes the status of the task from <code class="docutils literal"><span class="pre">SCHEDULED</span></code> to
+<code class="docutils literal"><span class="pre">RUNNING</span></code> and logs the state transition automatically.</p>
+<p>The handler “dot-path” must be split to module and function name and loaded
+dynamically by the <code class="docutils literal"><span class="pre">__import__()</span></code> function.</p>
+<p>Once imported the handler function is executed passing the TaskStatus and inputs
+as the arguments.</p>
+<p>The handler function is allowed but not required to set the successful terminal
+state of the processing (<code class="docutils literal"><span class="pre">FINISHED</span></code>) and if not set it is done by the
+<code class="xref py py-func docutils literal"><span class="pre">stopTaskSuccessIfNotFinished()</span></code>
+function.</p>
+<p>Obviously, the implementation must catch any possible Python exception and
+record the failure (<code class="docutils literal"><span class="pre">try-except</span></code> block).</p>
+</div>
+<div class="section" id="db-cleanup">
+<h3><a class="toc-backref" href="#table-of-contents">DB Cleanup</a><a class="headerlink" href="#db-cleanup" title="Permalink to this headline">¶</a></h3>
+<p>In addition to the normal operation each ATPD implementation is responsible for
+maintenance of the ATPD subsystem in a consistent state. Namely, i) the ATPD
+must repeatedly check for the abandoned “zombie” tasks and restart them by
+calling <code class="xref py py-func docutils literal"><span class="pre">reenqueueZombieTasks()</span></code>
+function and ii) the ATPD must remove DB records of the finished “retired”
+tasks by calling
+<code class="xref py py-func docutils literal"><span class="pre">deleteRetiredTasks()</span></code> function.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="testing.html" class="btn btn-neutral float-right" title="Testing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="processes.html" class="btn btn-neutral float-left" title="Processes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

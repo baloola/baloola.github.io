@@ -1,0 +1,972 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>RFC 1: An Extensible Software Architecture for EOxServer &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="RFC 2: Extension Mechanism for EOxServer" href="rfc2.html" />
+    <link rel="prev" title="RFC 0: Project Steering Committee Guidelines" href="rfc0.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Requests for Comments</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#rfc-procedures">RFC Procedures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#writing-rfcs">Writing RFCs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#rfcs">RFCs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="policies.html">RFC Policies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="howto.html">Guidelines for Requests for Comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc0.html">RFC 0: Project Steering Committee Guidelines</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">RFC 1: An Extensible Software Architecture for EOxServer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#architecture-overview">Architecture Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#distribution-core">Distribution Core</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#service-layer">Service Layer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#processing-layer">Processing Layer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data-integration-layer">Data Integration Layer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data-access-layer">Data Access Layer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#instances">Instances</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#voting-history">Voting History</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#traceability">Traceability</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rfc2.html">RFC 2: Extension Mechanism for EOxServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc3.html">RFC 3: OGC Service Extensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc4.html">RFC 4: Data Packaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc5.html">RFC 5: Processing Chains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc6.html">RFC 6: Directory Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc7.html">RFC 7: Release Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc8.html">RFC 8: SVN Commit Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc9.html">RFC 9: SOAP Binding of WCS GetCoverage Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc10.html">RFC 10: SOAP Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc11.html">RFC 11: WPS 1.0.0 Interface Prototype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc12.html">RFC 12: Backends for the Data Access Layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc13.html">RFC 13: WCS-T 1.1 Interface Prototype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc14.html">RFC 14: Asynchronous Task Processing (ATP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc15.html">RFC 15: Access Control Support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc16.html">RFC 16: Referenceable Grid Coverages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc17.html">RFC 17: Configuration of Supported Output Formats and CRSes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc18.html">RFC 18: Operator Interface Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc19.html">RFC 19: Migrate project repository from svn to git</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Requests for Comments</a> &raquo;</li>
+        
+      <li>RFC 1: An Extensible Software Architecture for EOxServer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/rfc/rfc1.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="rfc-1-an-extensible-software-architecture-for-eoxserver">
+<span id="rfc1"></span><span id="index-0"></span><h1>RFC 1: An Extensible Software Architecture for EOxServer<a class="headerlink" href="#rfc-1-an-extensible-software-architecture-for-eoxserver" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Stephan Krause</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Created:</th><td class="field-body">2011-02-18</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Last Edit:</th><td class="field-body">2011-07-20</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Status:</th><td class="field-body">ACCEPTED</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Discussion:</th><td class="field-body"><a class="reference external" href="http://www.eoxserver.org/wiki/DiscussionRfc1">http://www.eoxserver.org/wiki/DiscussionRfc1</a></td>
+</tr>
+</tbody>
+</table>
+<p>This RFC proposes an extensible software architecture for EOxServer that
+is based on the following ideas:</p>
+<ul class="simple">
+<li>Separation of instance and distribution code</li>
+<li>Structuring of the distribution in layers</li>
+<li>Extensibility through a plugin system</li>
+</ul>
+<div class="section" id="introduction">
+<span id="rfc1-intro"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>EOxServer development has been initiated in the course of two ESA
+projects that aim at providing a harmonized standard interface to
+access Earth Observation (EO) products, namely:</p>
+<ul class="simple">
+<li>Heterogeneous Mission Accessibility - Follow-On Open Data Access
+(HMA-FO ODA)</li>
+<li>Open-standard Online Observation Service (O3S)</li>
+</ul>
+<p>The specification of a software architecture is required by these
+projects. From a practical point of view, EOxServer has reached a point
+where a common framework for a rapidly evolving project is needed.</p>
+<p>Summarizing the requirements in a nutshell EOxServer has to integrate:</p>
+<ul class="simple">
+<li>different OGC Web Services</li>
+<li>different data and processing resources</li>
+<li>heterogeneous data and metadata formats</li>
+</ul>
+<p>This leads to the conclusion that an extensible software architecture
+is needed. The problems to address are discussed in further detail in
+the <a class="reference internal" href="#rfc1-req"><span class="std std-ref">Requirements</span></a> section.</p>
+<p>The <a class="reference internal" href="#rfc1-prop-arch"><span class="std std-ref">proposed architecture</span></a> is modular, extensible
+and flexible and structured in layers. The following separate components
+are identified:</p>
+<ul class="simple">
+<li>Distribution<ul>
+<li><a class="reference internal" href="#rfc1-core"><span class="std std-ref">Distribution Core</span></a></li>
+<li><a class="reference internal" href="#rfc1-svc-lyr"><span class="std std-ref">Service Layer</span></a></li>
+<li><a class="reference internal" href="#rfc1-proc-lyr"><span class="std std-ref">Processing Layer</span></a></li>
+<li><a class="reference internal" href="#rfc1-dint-lyr"><span class="std std-ref">Data Integration Layer</span></a></li>
+<li><a class="reference internal" href="#rfc1-dacc-lyr"><span class="std std-ref">Data Access Layer</span></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rfc1-inst"><span class="std std-ref">Instances</span></a></li>
+</ul>
+<p>In this architecture the Core shall provide the central logic for
+the extension mechanism while the layers shall contain interface
+definitions based on the extension model of the Core that can be
+implemented by extending modules and plugins.</p>
+</div>
+<div class="section" id="requirements">
+<span id="rfc1-req"></span><span id="index-1"></span><h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>The main sources of requirements for EOxServer at the moment of writing
+this RFC are:</p>
+<ul class="simple">
+<li>the <a class="reference external" href="http://wiki.services.eoportal.org/tiki-download_wiki_attachment.php?attId=957&amp;download=y">HMA-FO Open Data Access Sofware Requirements Specification (SRS)</a></li>
+<li>the O3S Software System Specification (SSS)</li>
+<li>the feature requests posted on the <a class="reference external" href="http://www.eoxserver.org">EOxServer Trac</a></li>
+</ul>
+<p>Most of the requirements are related to the features EOxServer shall
+implement. There is one requirement, however, in the O3S SSS that is
+directly related to the software architecture;
+<a class="reference external" href="https://o3s.eox.at/requirements/ticket/122">O3S_QUA_004</a> states:</p>
+<blockquote>
+<div><p>The O3S3 shall sustain maintainability and reusability by using a
+modular system architecture</p>
+<p>This shall facilitate</p>
+<ul class="simple">
+<li>isolation and removal of code defects</li>
+<li>integration of new functionality, such as the implementation of new
+interface standard versions</li>
+<li>extension of the system functionality according to new or modified
+requirements</li>
+</ul>
+</div></blockquote>
+<p>Thus, modularity as well as integration and extension of functionality
+are central issues in the drafting of the EOxServer software
+architecture. The question remains what considerations shall govern the
+structuring of the software into modules, what functionality it shall
+implement and in what way the system shall be able to be extended.</p>
+<p>Our approach to this question is to identify different topics of concern
+for the EOxServer development that shall structure the requirements
+analysis and give a first hint on the architectural design.</p>
+<p>The main goal of EOxServer is to furnish an implementation of <a class="reference external" href="http://www.opengeospatial.org">OGC</a> Web Services (OWS) intended for use
+within the Earth Observation (EO) domain. These <a class="reference internal" href="#rfc1-req-svc"><span class="std std-ref">services</span></a> shall provide access to different kinds of
+<a class="reference internal" href="#rfc1-req-res"><span class="std std-ref">resources</span></a> and to <a class="reference internal" href="#rfc1-req-proc"><span class="std std-ref">processes</span></a>
+operating on these resources. The requirements cite different
+<a class="reference internal" href="#rfc1-req-backend"><span class="std std-ref">backends</span></a> that the software shall implement in
+order to allow access to local and remote content. Finally, we discuss
+where and how the software is going to be <a class="reference internal" href="#rfc1-req-deploy"><span class="std std-ref">deployed</span></a>.</p>
+<div class="section" id="services">
+<span id="rfc1-req-svc"></span><h3>Services<a class="headerlink" href="#services" title="Permalink to this headline">¶</a></h3>
+<p>The following OGC Web Services shall be implemented:</p>
+<p><a class="reference external" href="http://www.opengeospatial.org/standards/wcs">Web Coverage Service (WCS)</a> (requirement
+<a class="reference external" href="https://o3s.eox.at/requirements/ticket/7">O3S_CAP_001</a>)</p>
+<blockquote>
+<div><p>The Web Coverage Service shall be able to present Earth Observation
+data, e.g. optical satellite imagery, SAR data, etc. The following
+extensions shall be implemented:</p>
+<p>Earth Observation Application Profile for WCS (EO-WCS) (requirement
+<a class="reference external" href="https://o3s.eox.at/requirements/ticket/8">O3S_CAP_100</a>)</p>
+<blockquote>
+<div>This application profile is intended to ease access to large
+collections of Earth Observation data.</div></blockquote>
+<p>Transactional WCS (WCS-T) (requirement
+<a class="reference external" href="https://o3s.eox.at/requirements/ticket/198">O3S_CAP_150</a>)</p>
+<blockquote>
+<div>This extension of WCS introduces a Transaction operation that
+supports transfer of data <em>to</em> a WCS server.</div></blockquote>
+</div></blockquote>
+<p><a class="reference external" href="http://www.opengeospatial.org/standards/wms">Web Map Service (WMS)</a>
+(requirement
+<a class="reference external" href="https://o3s.eox.at/requirements/ticket/204">O3S_CAP_220</a>)</p>
+<blockquote>
+<div><p>This service shall be used to give to portrayals of the coverages
+the system presents. The following extension shall be implemented:</p>
+<p>WMS Profile for EO Products (EO-WMS) (requirement
+<a class="reference external" href="https://o3s.eox.at/requirements/ticket/210">O3S_CAP_240</a>)</p>
+<blockquote>
+<div>The extension allows access to portrayals of large dataset series.</div></blockquote>
+</div></blockquote>
+<p><a class="reference external" href="http://www.opengeospatial.org/standards/wfs">Web Feature Service (WFS)</a> (requirement
+<a class="reference external" href="https://o3s.eox.at/requirements/ticket/214">O3S_CAP_260</a>)</p>
+<blockquote>
+<div>This service shall be used to present vector data.</div></blockquote>
+<p><a class="reference external" href="http://www.opengeospatial.org/standards/wps">Web Processing Service (WPS)</a> (requirement
+<a class="reference external" href="https://o3s.eox.at/requirements/ticket/9">O3S_CAP_200</a>)</p>
+<blockquote>
+<div>This service shall be used to make processing resources accessible
+online.</div></blockquote>
+</div>
+<div class="section" id="processes">
+<span id="rfc1-req-proc"></span><h3>Processes<a class="headerlink" href="#processes" title="Permalink to this headline">¶</a></h3>
+<p>EOxServer shall present various processes to the public using WPS. The
+processes planned for implementation at the moment of writing this RFC
+are specific to the use cases to be handled in the course of the O3S
+project. The capability to publish a variety of processes on the other
+hand is a general requirement for EOxServer.</p>
+<p>Being a project focussing on the EO domain EOxServer concentrates on
+the processing of EO coverage (raster) data. So, the considerations
+made for coverages regarding the variety of data and metadata
+<a class="reference internal" href="#rfc1-formats"><span class="std std-ref">formats</span></a> are valid for processes as well.</p>
+</div>
+<div class="section" id="resources">
+<span id="rfc1-req-res"></span><h3>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h3>
+<p>EOxServer shall enable public access to different kinds of geo-spatial
+resources in the Earth Observation domain. These are:</p>
+<ul class="simple">
+<li>Coverages</li>
+<li>Vector Data</li>
+<li>Processes</li>
+</ul>
+<div class="section" id="coverages">
+<h4>Coverages<a class="headerlink" href="#coverages" title="Permalink to this headline">¶</a></h4>
+<p>Coverages are defined in a very abstract way. What EOxServer focusses on
+are coverages dealt with by the Earth Observation Application Profile
+for WCS (EO-WCS) which is a draft OGC Best Practice Paper as of writing
+this RFC. The main categories of resources defined in that paper are:</p>
+<dl class="docutils">
+<dt>Datasets</dt>
+<dd>Datasets are the atomic components EO-WCS objects are composed of.
+They are coverages that are associated with EO Metadata. EO satellite
+mission scenes are a good example of Datasets. They can be accessed
+individually even when being part of a Stitched Mosaic or Dataset
+Series.</dd>
+<dt>Stitched Mosaics</dt>
+<dd>Stitched Mosaics are made up from a collection of Datasets that share
+a common range type and grid. Other than Dataset Series they are not
+merely a container for Datasets but coverages themselves. The coverage
+values are generated from the contributing datasets. This process must
+follow some rule to decide what value to take into account in the
+areas where the contributing Datasets overlap. The most common rule
+is “latest-on-top”.</dd>
+<dt>Dataset Series</dt>
+<dd>Dataset Series represent collections of Datasets or Stitched Mosaics.
+They do not impose any constraints on the contained objects, so very
+heterogeneous data can be included in the same series.</dd>
+</dl>
+<p id="rfc1-formats">A major problem for the EOxServer implementation is that raster data
+coverages originating from EO satellite missions are very heterogeneous.
+They can use a vide variety of data and metadata formats and are often
+associated with additional data like bitmasks, etc. that should be
+presented by EOxServer as well. Furthermore, the data packaging is
+different for every mission.</p>
+</div>
+<div class="section" id="vector-data">
+<h4>Vector Data<a class="headerlink" href="#vector-data" title="Permalink to this headline">¶</a></h4>
+<p>Support for Vector Data handling is required by O3S Use Case 2. In that
+use case road network data shall be generated from Pléiades satellite
+data using automated feature detection algorithms. The road network data
+shall be presented using WFS and WMS.</p>
+</div>
+</div>
+<div class="section" id="backends">
+<span id="rfc1-req-backend"></span><h3>Backends<a class="headerlink" href="#backends" title="Permalink to this headline">¶</a></h3>
+<p>EOxServer shall implement various backends to access data it presents
+to the public via the OGC Web Services:</p>
+<ul class="simple">
+<li>Backend for local data (requirement <a class="reference external" href="https://o3s.eox.at/requirements/ticket/68">O3S_CAP_013</a>)</li>
+<li>Backends for remote data (requirements: HMA-FO SR_ODA_IF_070,
+<a class="reference external" href="https://o3s.eox.at/requirements/ticket/69">O3S_CAP_014</a>)<ul>
+<li>using HTTP/HTTPS</li>
+<li>using FTP</li>
+<li>using WCS</li>
+</ul>
+</li>
+<li>Backend for retrieving data from <a class="reference external" href="http://www.rasdaman.com">rasdaman</a>
+(requirement <a class="reference external" href="https://o3s.eox.at/requirements/ticket/183">O3S_CAP_017</a>)</li>
+</ul>
+</div>
+<div class="section" id="deployment">
+<span id="rfc1-req-deploy"></span><h3>Deployment<a class="headerlink" href="#deployment" title="Permalink to this headline">¶</a></h3>
+<p>The only requirements originating from the HMA-FO ODA and O3S projects
+regarding deployment concern the implementation of the O3S Use Cases.
+Every use case requires one or more instances of EOxServer to be
+deployed. The instances have different purposes and thus shall present
+different services and different resources.</p>
+<p>The fact that EOxServer shall be deployed many times in different
+configurations (possibly on the same server) calls for a strict
+separation of distribution and instance data.</p>
+<p>The ability to activate or deactivate various components of the system
+implies not only that the architecture must be modular but also that it
+must be configurable to use different combinations of modules.</p>
+</div>
+<div class="section" id="summary">
+<span id="rfc1-req-summary"></span><h3>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h3>
+<p>The conclusion of the requirements review is that the EOxServer
+Architecture shall be:</p>
+<ul class="simple">
+<li>modular</li>
+<li>extensible</li>
+<li>flexible in the sense that it must be possible to select different
+combinations of modules to deploy and activate</li>
+<li>able to present resources using different OGC Web Services</li>
+<li>able to access data from different backends</li>
+<li>able to handle different data, metadata and packaging formats</li>
+<li>separating distribution and instance data</li>
+</ul>
+<p>The development of the software architecture will be based on these
+considerations.</p>
+</div>
+</div>
+<div class="section" id="architecture-overview">
+<h2>Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permalink to this headline">¶</a></h2>
+<p>The software architecture development for EOxServer does not start at
+zero. There are already considerations made in the proposal phase of
+the O3S project and there is the status quo of version 0.1.0. Taking
+into account this preparational work and the outcomes of the
+requirements review, the outlines of the <a class="reference internal" href="#rfc1-prop-arch"><span class="std std-ref">Proposed Architecture</span></a> will be
+developed in the last subsection and the following sections.</p>
+<div class="section" id="draft-architecture">
+<h3>Draft Architecture<a class="headerlink" href="#draft-architecture" title="Permalink to this headline">¶</a></h3>
+<p id="index-2">The O3S draft Architectural Design Document (ADD/SDD) has already
+proposed a software architecture which is, however, outdated in certain
+aspects due to changes made in the requirements phase of O3S. Here is an
+overview of the O3S draft architecture:</p>
+<div class="figure align-center" id="id17">
+<a class="reference internal image-reference" href="../_images/O3S_Server_Software_Components.png"><img alt="../_images/O3S_Server_Software_Components.png" src="../_images/O3S_Server_Software_Components.png" style="width: 75%;" /></a>
+<p class="caption"><span class="caption-text"><em>Draft architecture from O3S Proposal</em></span></p>
+</div>
+<p>This identifies four servers and extending modules:</p>
+<ul class="simple">
+<li>WPS Server</li>
+<li>WCS Server<ul>
+<li>WCS Earth Observation Application Profile Module</li>
+<li>WCS-T Module</li>
+<li>WCPS Module (not included in the requirements any more)</li>
+</ul>
+</li>
+<li>WFS Server<ul>
+<li>WFS-T Module (not included in the requirements any more)</li>
+</ul>
+</li>
+<li>WMS Server<ul>
+<li>WMS Profile for EO Products Module</li>
+</ul>
+</li>
+</ul>
+<p>Furthermore the architecture proposes to use <a class="reference external" href="http://pywps.wald.intevation.org/">PyWPS</a> and <a class="reference external" href="http://www.mapserver.org">MapServer</a> as middleware for handling OGC Web Service
+requests.</p>
+<p>An additional integrating Data Access Layer is foreseen that
+shall implement storage patterns such as image pyramids and offer an API
+to read and write data that hides the internal details of data storage
+from the service and extension modules using it.</p>
+<p><a class="reference external" href="http://www.postgresql.org">PostgreSQL</a> with its geo-spatial extension
+<a class="reference external" href="http://postgis.refractions.net">PostGIS</a> has been planned as
+relational database backend. Finally, the system relies on the local
+filesystem as its only storage backend.</p>
+<p>During the requirements phase of O3S and the early development of
+EOxServer many deviations from this original design have been made
+necessary. Most importantly:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.djangoproject.com">Django</a> has been added as dependency</li>
+<li><a class="reference external" href="http://www.gdal.org">GDAL</a> has been added as dependency</li>
+<li>the implementation of WCPS has been postponed</li>
+<li>the implementation of WFS-T has been postponed</li>
+<li>Django has made use of different geo-spatial database backends possible</li>
+<li>requirements for remote storage backends have been added</li>
+</ul>
+<p>Although the basic concepts of the draft architecture remain valid, an
+updated version is needed for EOxServer to fulfill its requirements and
+evolve beyond the project horizon of O3S.</p>
+</div>
+<div class="section" id="status-quo-of-release-0-1-1">
+<h3>Status Quo of Release 0.1.1<a class="headerlink" href="#status-quo-of-release-0-1-1" title="Permalink to this headline">¶</a></h3>
+<p id="index-3">As of release 0.1.1 EOxServer is an integrated Django project including
+a single Django application and additional modules that support OGC Web
+Service (OWS) request handling and data integration.</p>
+<p>The data model is contained in the <code class="docutils literal"><span class="pre">eoxserver.server</span></code> application. So
+is the <code class="docutils literal"><span class="pre">ows</span></code> view, the central entrance point for OWS requests, and
+the administration client view as well as tools for automatic data
+ingestion.</p>
+<p>Supporting modules are gathered in the <code class="docutils literal"><span class="pre">eoxserver.lib</span></code> module. These
+contain the core application logic for OWS request handling, coverage
+and metadata manipulation as well as utilities e.g. for XML processing.</p>
+<p>EOxServer 0.1.1 includes an extension mechanism already which so far is
+restricted to services. The <code class="docutils literal"><span class="pre">eoxserver.lib.registry</span></code> module maintains
+a central registry for the concrete implementations of OWS interfaces
+which may be published in the <code class="docutils literal"><span class="pre">eoxserver.modules</span></code> namespace. At the
+moment there are implementations for WMS 1.0, 1.1 and 1.3, WCS 1.0, 1.1
+and 2.0 as well as a preliminary version of EO-WCS. All these modules
+use MapServer MapScript for image manipulation and part of the request
+handling in the backend.</p>
+<p>This approach fulfills some of the requirements summarized <a class="reference internal" href="#rfc1-req-summary"><span class="std std-ref">above</span></a> already, but further development of the architecture
+and the code is necessary to be fully compliant. Most
+importantly:</p>
+<ul class="simple">
+<li>extensibility and flexibility have to be enhanced</li>
+<li>WPS must be implemented</li>
+<li>WFS must be implemented</li>
+<li>support for remote backends is necessary</li>
+</ul>
+</div>
+<div class="section" id="proposed-architecture">
+<span id="rfc1-prop-arch"></span><span id="index-4"></span><h3>Proposed Architecture<a class="headerlink" href="#proposed-architecture" title="Permalink to this headline">¶</a></h3>
+<p>The proposed architecture for EOxServer shall be based on the following
+principles:</p>
+<ul class="simple">
+<li><strong>Separation of Instance and Distribution</strong>: instance applications
+shall be separated from EOxServer distribution code in order to
+facilitate deployment of multiple services on the same machine and to
+support flexible configurations of services</li>
+<li><strong>Layered Architecture of the Distribution</strong>: The software
+architecture shall be structured in layers and a core that contains
+basic common functionality; each layer builds on the capabilities of
+the underlying ones to fulfill its tasks</li>
+<li><strong>Extensibility</strong>: the EOxServer distribution shall be extensible by
+additional modules and plugins; the distribution core shall provide
+functionality to enable dynamic binding to extending modules</li>
+</ul>
+<p>The identification of different layers is performed based on the
+structuring of the system components underlying the requirements
+analysis.</p>
+<div class="section" id="dependencies">
+<h4>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h4>
+<p>The implementation of EOxServer shall use the following
+dependencies:</p>
+<ul class="simple">
+<li><strong>Python</strong>: <a class="reference external" href="http://www.python.org">Python</a> shall serve as the
+implementation language; it has been chosen because<ul>
+<li>it facilitates rapid development</li>
+<li>the geospatial libraries used all have Python bindings</li>
+</ul>
+</li>
+<li><strong>Django</strong>: <a class="reference external" href="http://www.djangoproject.com">Django</a> has been
+selected as development framework because<ul>
+<li>it provides an object-relational mapper that supports various
+database backends</li>
+<li>it supports geospatial databases and integrates vector data handling
+functionality in the GeoDjango extension</li>
+<li>it allows for rapid web application development</li>
+</ul>
+</li>
+<li><strong>Spatial Database Backend</strong>: using GeoDjango, EOxServer shall support
+at least the <a class="reference external" href="http://www.gaia-gis.it/spatialite/">SpatiaLite</a> and
+<a class="reference external" href="http://postgis.refractions.net">PostGIS</a> geospatially enabled
+RDBMS backends.</li>
+<li><strong>MapServer</strong>: EOxServer shall build on <a class="reference external" href="http://www.mapserver.org">MapServer</a> MapScript in order to facilitate OGC
+Web Service handling</li>
+<li><strong>GDAL/OGR</strong>: For image processing tasks and vector data manipulation
+the Python binding of the <a class="reference external" href="http://www.gdal.org">GDAL/OGR</a> libraries
+shall be used</li>
+</ul>
+<p>Concerning the software architecture, the use of Django enforces a
+Model-View-Controller (MVC) substructure of the distribution layers of
+EOxServer.</p>
+</div>
+<div class="section" id="distribution-core-and-layers">
+<h4>Distribution Core and Layers<a class="headerlink" href="#distribution-core-and-layers" title="Permalink to this headline">¶</a></h4>
+<p>The breakdown of the distribution into core and layers is as follows:</p>
+<dl class="docutils">
+<dt>Core</dt>
+<dd>The Core shall contain modules for common use throughout the different
+components of EOxServer. This includes the global configuration data
+model, the implementation of the extension mechanism as well as the
+basic functionality for the EOxServer administration client</dd>
+<dt>Service Layer</dt>
+<dd>This layer contains the core request handling logic as well as the
+implementation of services and service extensions</dd>
+<dt>Processing Layer</dt>
+<dd>This layer contains the processing models used internally by EOxServer
+as well as the data model and the basic handling routines for
+processes to be published using WPS</dd>
+<dt>Data Integration Layer</dt>
+<dd>This layer shall provide data models for resources as well as an
+abstraction layer for different data formats and data packaging
+formats</dd>
+<dt>Data Access Layer</dt>
+<dd>This layer shall provide backends for local and remote data access</dd>
+</dl>
+<div class="figure align-center" id="id18">
+<a class="reference internal image-reference" href="../_images/EOxServer_Distribution_Breakdown.png"><img alt="../_images/EOxServer_Distribution_Breakdown.png" src="../_images/EOxServer_Distribution_Breakdown.png" style="width: 75%;" /></a>
+<p class="caption"><span class="caption-text"><em>EOxServer Distribution Breakdown</em></span></p>
+</div>
+<p>Each of the four layers shall be sub-structured in:</p>
+<ul class="simple">
+<li>data model</li>
+<li>views<ul>
+<li>for public access (if applicable)</li>
+<li>for the administration client</li>
+</ul>
+</li>
+<li>core handling logic</li>
+<li>interface definitions for extensions</li>
+<li>modules implementing the interface definitions</li>
+</ul>
+</div>
+<div class="section" id="structure-of-the-architecture-specification">
+<h4>Structure of the Architecture Specification<a class="headerlink" href="#structure-of-the-architecture-specification" title="Permalink to this headline">¶</a></h4>
+<p>The further specification of the proposed architecture is subdivided
+into several sections and separate RFCs. This RFC 1 contains a
+description of the different architectural layers and of EOxServer
+instances:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#rfc1-core"><span class="std std-ref">Distribution Core</span></a></li>
+<li><a class="reference internal" href="#rfc1-svc-lyr"><span class="std std-ref">Service Layer</span></a></li>
+<li><a class="reference internal" href="#rfc1-proc-lyr"><span class="std std-ref">Processing Layer</span></a></li>
+<li><a class="reference internal" href="#rfc1-dint-lyr"><span class="std std-ref">Data Integration Layer</span></a></li>
+<li><a class="reference internal" href="#rfc1-dacc-lyr"><span class="std std-ref">Data Access Layer</span></a></li>
+<li><a class="reference internal" href="#rfc1-inst"><span class="std std-ref">Instances</span></a></li>
+</ul>
+<p>The following RFCs discuss different aspects of the architecture in
+further detail:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="rfc2.html">RFC 2: Extension Mechanism for EOxServer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rfc3.html">RFC 3: OGC Service Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rfc4.html">RFC 4: Data Packaging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rfc5.html">RFC 5: Processing Chains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rfc6.html">RFC 6: Directory Structure</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="distribution-core">
+<span id="rfc1-core"></span><span id="index-5"></span><h2>Distribution Core<a class="headerlink" href="#distribution-core" title="Permalink to this headline">¶</a></h2>
+<p>The Core shall act as a “glue” for EOxServer that links the different
+parts of the software together and provides functionality used
+throughout the EOxServer project.</p>
+<p>It defines the core of the configuration data model which is extended
+by the layers and implementing modules. The configuration is partly
+stored in the database and partly in files. Both parts need to be
+easily modifiable and extensible.</p>
+<p>Therefore the Core also includes an administration client that can be
+used by system operators to edit the part of the configuration
+stored in the database. The basic functionality of the administrator,
+the entry view and its extension mechanisms shall be part of the Core.</p>
+<p>The Core includes modules for common use, for instance utilities for the
+handling of spatio-temporal metadata as well as for decoding and
+encoding of XML documents.</p>
+<p>Most importantly, the Core contains the central logic that enables the
+dynamic extension of system functionality. The layers shall provide
+interface definitions based on the extension model of the Core that can
+be implemented by extending modules and plugins. For more details see
+<a class="reference internal" href="rfc2.html"><span class="doc">RFC 2: Extension Mechanism for EOxServer</span></a>.</p>
+</div>
+<div class="section" id="service-layer">
+<span id="rfc1-svc-lyr"></span><span id="index-6"></span><h2>Service Layer<a class="headerlink" href="#service-layer" title="Permalink to this headline">¶</a></h2>
+<p>The Service Layer contains the OWS request handling logic as well as the
+implementation of services and service extensions.</p>
+<p>It defines a configuration <strong>data model</strong> for OGC Web Services and for
+their metadata. The model includes:</p>
+<ul class="simple">
+<li>service metadata to be published in the GetCapabilities response</li>
+<li>options to enable or disable a specific service or service extension
+for a given data source</li>
+<li>options to configure the services themselves, e.g. enabling or
+disabling certain non-mandatory features</li>
+</ul>
+<p>The Service Layer provides <strong>views</strong> for public access, namely the
+central entrance point for OWS requests. It also contains views for the
+administration client that allow to configure services and service
+metadata.</p>
+<p>The <strong>core handling logic</strong> for OGC Web Services is part of the Service
+Layer. It implements the behaviour defined by OWS Common and defines
+a structured approach to request handling that discerns different
+levels:</p>
+<ul class="simple">
+<li>services</li>
+<li>service versions</li>
+<li>service extensions</li>
+<li>service operations</li>
+</ul>
+<p>The way services and service extensions interact is described in further
+detail in <a class="reference internal" href="rfc3.html"><span class="doc">RFC 3: OGC Service Extensions</span></a>.</p>
+<p>The Service Layer defines request handler <strong>interfaces</strong> for each of
+these levels that are <strong>implemented</strong> by modules for:</p>
+<ul class="simple">
+<li>WPS</li>
+<li>WCS<ul>
+<li>EO-WCS</li>
+<li>WCS-T</li>
+</ul>
+</li>
+<li>WMS<ul>
+<li>EO-WMS</li>
+</ul>
+</li>
+<li>WFS</li>
+</ul>
+</div>
+<div class="section" id="processing-layer">
+<span id="rfc1-proc-lyr"></span><span id="index-7"></span><h2>Processing Layer<a class="headerlink" href="#processing-layer" title="Permalink to this headline">¶</a></h2>
+<p>The Processing Layer contains the processing models used internally by
+EOxServer as well as the data model and the basic handling routines for
+processes to be published using WPS.</p>
+<p>In its <strong>data model</strong> it defines the configuration options and metadata
+for processes. The model shall also support processing chains as
+described in further detail in <a class="reference internal" href="rfc5.html"><span class="doc">RFC 5: Processing Chains</span></a>. The Processing Layer
+publishes administration client <strong>views</strong> to support the configuration
+of processes and processing chains.</p>
+<p>The Processing Layer defines <strong>interfaces</strong> for processes. It also
+contains implementations of the processes used internally by EOxServer;
+these include:</p>
+<ul class="simple">
+<li>coverage tiling</li>
+<li>coverage mosaicking</li>
+</ul>
+<p>Further processes as required e.g. by the O3S Use Cases will be added as
+plugins based on the data model and interface definitions of the
+Processing Layer.</p>
+</div>
+<div class="section" id="data-integration-layer">
+<span id="rfc1-dint-lyr"></span><span id="index-8"></span><h2>Data Integration Layer<a class="headerlink" href="#data-integration-layer" title="Permalink to this headline">¶</a></h2>
+<p>The Data Integration Layer shall provide data models for resources as
+well as an abstraction layer for different data formats and data
+packaging formats.</p>
+<p>Data packaging formats are explained in greater detail in <a class="reference internal" href="rfc4.html"><span class="doc">RFC 4: Data Packaging</span></a>.
+Roughly speaking, they represent the way data and metadata for an
+EO product or derived product are packaged. They shall abstract from the
+actual substructure of the packaging format in directories and files
+so these resources can be handled transparently by EOxServer.</p>
+<p>Its <strong>data model</strong> shall include items common to all types of data as
+well as individual models for:</p>
+<ul class="simple">
+<li>coverages</li>
+<li>vector data</li>
+<li>metadata</li>
+</ul>
+<p>Just as the other layers the Data Integration Layer shall publish
+administration client <strong>views</strong> that support adding, modifying and
+removal of resources and their respective metadata.</p>
+<p>The <strong>interface definitions</strong> of the Data Integration Layer shall
+provide an abstraction layer for:</p>
+<ul class="simple">
+<li>various data formats</li>
+<li>various metadata formats</li>
+<li>various data packaging formats</li>
+</ul>
+<p>The modules <strong>implementing</strong> these interfaces shall support:</p>
+<ul class="simple">
+<li>coverage data formats supported by:<ul>
+<li><a class="reference external" href="http://www.gdal.org">GDAL</a></li>
+<li><a class="reference external" href="http://www.array.ca/nest">NEST</a> (optional)</li>
+</ul>
+</li>
+<li>vector data formats supported by <a class="reference external" href="http://www.gdal.org/ogr/">OGR</a></li>
+<li>metadata formats:<ul>
+<li>EO-GML</li>
+<li>DIMAP (optional)</li>
+<li>INSPIRE (optional)</li>
+<li>GSC-DA (optional)</li>
+</ul>
+</li>
+<li>data packaging formats:<ul>
+<li>directories</li>
+<li>ZIP archives</li>
+<li>TAR archives</li>
+<li>compressed file formats:<ul>
+<li>ZIP</li>
+<li>GZIP</li>
+<li>BZ2</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="data-access-layer">
+<span id="rfc1-dacc-lyr"></span><span id="index-9"></span><h2>Data Access Layer<a class="headerlink" href="#data-access-layer" title="Permalink to this headline">¶</a></h2>
+<p>The Data Access Layer shall provide transparent access to local and
+remote data using different backends. It constitutes an abstraction
+layer for data sources.</p>
+<p>Its <strong>data model</strong> therefore provides configuration options for the
+backends. It contains <strong>views</strong> for the administration client to
+configure different data sources.</p>
+<p>The Data Access Layer is built around the <strong>interface definitions</strong> of
+backends and data sources stored by them. The following backends need to
+be <strong>implemented</strong>:</p>
+<ul class="simple">
+<li>local backends:<ul>
+<li>file system</li>
+<li><a class="reference external" href="http://www.rasdaman.com">rasdaman</a> backend</li>
+</ul>
+</li>
+<li>remote backends:<ul>
+<li>using HTTP/HTTPS</li>
+<li>using FTP</li>
+<li>using WCS</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="instances">
+<span id="rfc1-inst"></span><span id="index-10"></span><h2>Instances<a class="headerlink" href="#instances" title="Permalink to this headline">¶</a></h2>
+<p>EOxServer instances are Django projects that import different EOxServer
+modules as Django applications.</p>
+<p>Like every Django project they contain a settings file that governs
+the Django configuration and in addition the most basic parts of
+EOxServer configuration. Specifically:</p>
+<ul class="simple">
+<li>the connection details for the database containing the EOxServer
+configuration is defined in the settings file</li>
+<li>the Django <code class="docutils literal"><span class="pre">INSTALLED_APPS</span></code> setting must be used to define the
+parts of the EOxServer data model that shall be loaded</li>
+<li>some EOxServer configuration settings that are needed in the startup
+phase will be appended to the Django settings file</li>
+</ul>
+<p>Apart from the settings, every Django project has an “urlconf” that
+defines which URLs shall point to the different views of the project.
+For using the full EOxServer functionality there have to be URLs
+pointing to the Service Layer OWS entrance point and the administration
+client entrance point defined by the EOxServer core.</p>
+<p>Furthermore the instance contains the Django configuration files whose
+content is defined by the configuration data model of the Core and the
+layers.</p>
+<p>Optionally, the instance directory may include subdirectories for the
+data (if stored locally) and the database (if using the file-based
+SpatiaLite spatial database backend).</p>
+<p>Finally, in a production setting, it shall contain the modules needed to
+deploy the instance. The favourite deployment method is WSGI (see
+<span class="target" id="index-11"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0333"><strong>PEP 333</strong></a>). These must be configured as well to include the path to the
+instance.</p>
+<p>The Django project may or may not contain applications itself, which
+may or may not use EOxServer functionality. Writing an own application
+is not necessary to use EOxServer, though; placing links to EOxServer
+views in the urlconf is sufficient.</p>
+</div>
+<div class="section" id="voting-history">
+<h2>Voting History<a class="headerlink" href="#voting-history" title="Permalink to this headline">¶</a></h2>
+<p>Moved to ACCEPTED by unanimous consent without a formal vote on July
+20th, 2011.</p>
+</div>
+<div class="section" id="traceability">
+<h2>Traceability<a class="headerlink" href="#traceability" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Requirements:</th><td class="field-body">HMA-FO SR_ODA_IF_070,
+<a class="reference external" href="https://o3s.eox.at/requirements/ticket/7">O3S_CAP_001</a>,
+<a class="reference external" href="https://o3s.eox.at/requirements/ticket/68">O3S_CAP_013</a>,
+<a class="reference external" href="https://o3s.eox.at/requirements/ticket/69">O3S_CAP_014</a>,
+<a class="reference external" href="https://o3s.eox.at/requirements/ticket/183">O3S_CAP_017</a>,
+<a class="reference external" href="https://o3s.eox.at/requirements/ticket/8">O3S_CAP_100</a>,
+<a class="reference external" href="https://o3s.eox.at/requirements/ticket/198">O3S_CAP_150</a>,
+<a class="reference external" href="https://o3s.eox.at/requirements/ticket/9">O3S_CAP_200</a>,
+<a class="reference external" href="https://o3s.eox.at/requirements/ticket/204">O3S_CAP_220</a>,
+<a class="reference external" href="https://o3s.eox.at/requirements/ticket/210">O3S_CAP_240</a>,
+<a class="reference external" href="https://o3s.eox.at/requirements/ticket/214">O3S_CAP_260</a>,
+<a class="reference external" href="https://o3s.eox.at/requirements/ticket/122">O3S_QUA_004</a></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Tickets:</th><td class="field-body">N/A</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="rfc2.html" class="btn btn-neutral float-right" title="RFC 2: Extension Mechanism for EOxServer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="rfc0.html" class="btn btn-neutral float-left" title="RFC 0: Project Steering Committee Guidelines" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

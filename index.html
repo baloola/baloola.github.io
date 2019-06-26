@@ -1,267 +1,260 @@
+
+
 <!DOCTYPE html>
-<html>
-
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset=utf-8 />
-  <title>A simple map</title>
-  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.js'></script>
-  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.43.0/mapbox-gl.css' rel='stylesheet' />
-  <!-- <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.8/mapbox.js'></script>
-<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-hash/v0.2.1/leaflet-hash.js'></script>
-<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.8/mapbox.css' rel='stylesheet' /> -->
-  <!-- <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/leaflet.fullscreen.css' rel='stylesheet' />
-<script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/Leaflet.fullscreen.min.js'></script> -->
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-    }
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>EOxServer’s Documentation &mdash; EOxServer 0.04 documentation</title>
+  
 
-    #map {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 100%;
-    }
-  </style>
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="copyright" title="Copyright" href="copyright.html" />
+    <link rel="next" title="Users’ Guide" href="users/index.html" /> 
 </head>
 
-<body>
-  <style>
-    .marker-description img {
-      width: 100%;
-      height: auto;
-    }
+<body class="wy-body-for-nav">
 
-    .legend {
-      background-color: #fff;
-      border-radius: 3px;
-      bottom: 30px;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-      font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-      padding: 10px;
-      position: absolute;
-      right: 10px;
-      z-index: 1;
-    }
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
 
-    .legend a {
-      cursor: pointer;
-    }
+          
+            <a href="#" class="icon icon-home"> EOxServer
+          
 
-    .hidden-legend-wrapper {
-      padding-bottom: 0.5em;
-    }
+          
+            
+            <img src="_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
 
-    #toggle_legend {
-      color: #ccc;
-      float: right;
-    }
+          
+            
+            
+          
 
-    #toggle_legend.active {
-      margin-top: 0.5em;
-    }
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
 
-    #toggle_legend:hover,
-    #toggle_legend:focus {
-      color: #3887be;
-    }
+          
+        </div>
 
-    .search-box {
-      clear: both;
-    }
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+</ul>
 
-    .search-box img {
-      float: left;
-      width: 20%;
-    }
-
-    .search-box input {
-      float: left;
-      width: 77%;
-      display: block;
-      height: auto;
-      font-weight: 200;
-      font-size: 16px;
-      line-height: 1.2em;
-      background-image: none;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      padding: 0.3em 0.5em;
-      font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    }
-
-    .search-box #searchbtn {
-      float: left;
-      width: 14.6666%;
-      margin-left: 2.33333%;
-      display: block;
-      position: relative;
-      font-size: 16px;
-      font-weight: 200;
-      border-radius: 4px;
-      background: #2c3e50;
-      text-align: center;
-      color: white;
-      padding: 0.3em 0;
-      border: 1px solid transparent;
-      font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    }
-
-    .search-box #searchbtn span {
-      background: url("./search_white.svg") no-repeat;
-      background-size: contain;
-      background-position: center;
-      display: block;
-      font-size: 16px;
-      height: 1.2em;
-      width: 100%;
-    }
-
-    .search-box #searchbtn:hover {
-      background: #3498DB;
-    }
-
-    .clearit,
-    .showmore {
-      float: right;
-      color: #aaa;
-    }
-
-    .clearit #show_more,
-    .clearit button,
-    .showmore #show_more,
-    .showmore button {
-      background: none;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      color: #aaa;
-    }
-
-    .clearit #show_more:hover,
-    .clearit #show_more:focus,
-    .clearit #show_more:active,
-    .clearit button:hover,
-    .clearit button:focus,
-    .clearit button:active,
-    .showmore #show_more:hover,
-    .showmore #show_more:focus,
-    .showmore #show_more:active,
-    .showmore button:hover,
-    .showmore button:focus,
-    .showmore button:active {
-      outline: none;
-      color: #3887BE;
-    }
-
-    .showmore {
-      float: left;
-    }
-
-    .showmore #show_more {
-      color: #ccc;
-    }
-
-    .clearer {
-      clear: both;
-      padding: 0 0 .25em;
-    }
-
-    .legend label,
-    .legend span {
-      display: block;
-      float: left;
-      height: 16px;
-      width: 16.6666%;
-      text-align: center;
-      font-size: 9px;
-      color: #808080;
-      cursor: pointer;
-    }
-
-    .legend span.active {
-      box-shadow: inset 1px 2px 3px rgba(0, 0, 0, 0.4);
-    }
-
-    .marker {
-      display: block;
-
-      cursor: pointer;
-      padding: 0;
-    }
-
-    .mapboxgl-popup {
-      max-width: 320px;
-      max-height: 500px;
-    }
-
-    .clearfix {
-      position: relative;
-      bottom: 1px;
-    }
-
-    .clearfix nav {
-      padding-top: 20rem;
-    }
-
-    .mapboxgl-popup-content {
-
-      text-align: left;
-      font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    }
-
-    .mapboxgl-popup-content img {
-      max-width: 302px;
-      max-height: 302px;
-      margin-bottom: 10px;
-    }
-  </style>
-  <div id="map"></div>
-  <div id='hidden_legend' style='display:none;'>
-    <p class="hidden-legend-wrapper">
-      <a id="toggle_legend">+</a>
-    </p>
-  </div>
-
-  <div id='legend' style='display:block;' class='legend'>
-    <div class="search-box">
-      <!-- <img src="https://s3.amazonaws.com/bikeindex/stored/logo_striped_short.svg"> -->
-      <input type="text" id="thefts-location">
-      <button id="searchbtn">
-        <span></span>
-      </button>
-    </div>
-    <small class="clearit">(
-      <button id="clear_map">clear map</button>)</small>
-    <small class="showmore">
-      <a id="show_more">show 500 (slower)</a>
-    </small>
-    <div class="clearer"></div>
-    <nav class='clearfix'>
-      <span style='background:#F6B9B3;' class="active" id="time_6"></span>
-      <span style='background:#F29D94;' class="active" id="time_5"></span>
-      <span style='background:#EE8276;' class="active" id="time_4"></span>
-      <span style='background:#EB6759;' class="active" id="time_3"></span>
-      <span style='background:#E74C3C;' class="active" id="time_2"></span>
-      <span style='background:#BD1622;' class="active" id="time_1"></span>
-      <label>> 5 years</label>
-      <label>1 year</label>
-      <label>6 months</label>
-      <label>1 month</label>
-      <label>1 week</label>
-      <label>
-        < 1 day</label>
-          <small>When theft occurred (click to select time frame)</small>
-          <a id="toggle_legend" class="active">x</a>
+            
+          
+        </div>
+      </div>
     </nav>
 
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>EOxServer’s Documentation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="eoxserver-s-documentation">
+<h1>EOxServer’s Documentation<a class="headerlink" href="#eoxserver-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>EOxServer is a Python application and framework for presenting Earth
+Observation (EO) data and metadata.</p>
+<p><script type="text/javascript" src="http://www.ohloh.net/p/489120/widgets/project_partner_badge.js"></script></p><p>EOxServer implements the <a class="reference external" href="http://www.opengeospatial.org/">OGC</a>
+Implementation Specifications EO-WCS and EO-WMS on top of
+<a class="reference external" href="http://mapserver.org">MapServer’s</a>
+<a class="reference external" href="http://www.opengeospatial.org/standards/wcs">WCS</a> and
+<a class="reference external" href="http://www.opengeospatial.org/standards/wms">WMS</a> implementations.</p>
+<p>EOxServer is released under the
+<a class="reference internal" href="copyright.html#eoxserver-open-license"><span class="std std-ref">EOxServer Open License</span></a> a MIT-style
+license and written in <a class="reference external" href="http://www.python.org/">Python</a> and entirely based on
+Open Source software including <a class="reference external" href="http://mapserver.org">MapServer</a>,
+<a class="reference external" href="https://www.djangoproject.com">Django/GeoDjango</a>,
+<a class="reference external" href="http://www.gdal.org">GDAL</a>,
+<a class="reference external" href="http://www.gaia-gis.it/spatialite/">SpatiaLite</a>, or
+<a class="reference external" href="http://postgis.refractions.net/">PostGIS</a>, and
+<a class="reference external" href="http://trac.osgeo.org/proj/">PROJ.4</a>.</p>
+<p>Here you find the documentation for users and developers of EOxServer
+written in English.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="credits.html">Credits</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="users/index.html" class="btn btn-neutral float-right" title="Users’ Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-25T19:09:25Z.
+      </span>
+
+    </p>
   </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
 
 </body>
-<script src="./mapping.js"></script>
-
-
 </html>

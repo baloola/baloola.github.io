@@ -1,0 +1,647 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>eoxserver.services.ows.wps package &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="eoxserver.services.ows.wps.parameters package" href="eoxserver.services.ows.wps.parameters.html" />
+    <link rel="prev" title="eoxserver.services.ows.wms.v13 package" href="eoxserver.services.ows.wms.v13.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="modules.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.backends.html">eoxserver.backends package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.contrib.html">eoxserver.contrib package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.core.html">eoxserver.core package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.processing.html">eoxserver.processing package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.resources.html">eoxserver.resources package</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="eoxserver.services.html">eoxserver.services package</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="eoxserver.services.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.html#module-eoxserver.services.exceptions">eoxserver.services.exceptions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.html#eoxserver-services-models-module">eoxserver.services.models module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.html#module-eoxserver.services.parameters">eoxserver.services.parameters module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.html#eoxserver-services-result-module">eoxserver.services.result module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.html#eoxserver-services-subset-module">eoxserver.services.subset module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.html#eoxserver-services-urls-module">eoxserver.services.urls module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.html#eoxserver-services-views-module">eoxserver.services.views module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.html#module-eoxserver.services">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.testing.html">eoxserver.testing package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.webclient.html">eoxserver.webclient package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#module-eoxserver.views">eoxserver.views module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html#module-eoxserver">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">API Reference</a> &raquo;</li>
+        
+          <li><a href="eoxserver.services.html">eoxserver.services package</a> &raquo;</li>
+        
+          <li><a href="eoxserver.services.ows.html">eoxserver.services.ows package</a> &raquo;</li>
+        
+      <li>eoxserver.services.ows.wps package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/apidoc/eoxserver.services.ows.wps.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="eoxserver-services-ows-wps-package">
+<h1>eoxserver.services.ows.wps package<a class="headerlink" href="#eoxserver-services-ows-wps-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html">eoxserver.services.ows.wps.parameters package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#eoxserver-services-ows-wps-parameters-allowed-values-module">eoxserver.services.ows.wps.parameters.allowed_values module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#module-eoxserver.services.ows.wps.parameters.base">eoxserver.services.ows.wps.parameters.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#eoxserver-services-ows-wps-parameters-bboxdata-module">eoxserver.services.ows.wps.parameters.bboxdata module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#eoxserver-services-ows-wps-parameters-codecs-module">eoxserver.services.ows.wps.parameters.codecs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#eoxserver-services-ows-wps-parameters-complexdata-module">eoxserver.services.ows.wps.parameters.complexdata module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#eoxserver-services-ows-wps-parameters-crs-module">eoxserver.services.ows.wps.parameters.crs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#eoxserver-services-ows-wps-parameters-data-types-module">eoxserver.services.ows.wps.parameters.data_types module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#eoxserver-services-ows-wps-parameters-formats-module">eoxserver.services.ows.wps.parameters.formats module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#eoxserver-services-ows-wps-parameters-inputs-module">eoxserver.services.ows.wps.parameters.inputs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#eoxserver-services-ows-wps-parameters-literaldata-module">eoxserver.services.ows.wps.parameters.literaldata module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#eoxserver-services-ows-wps-parameters-response-form-module">eoxserver.services.ows.wps.parameters.response_form module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#eoxserver-services-ows-wps-parameters-units-module">eoxserver.services.ows.wps.parameters.units module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.parameters.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="eoxserver.services.ows.wps.processes.html">eoxserver.services.ows.wps.processes package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.processes.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.processes.html#eoxserver-services-ows-wps-processes-get-time-data-module">eoxserver.services.ows.wps.processes.get_time_data module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.processes.html#module-eoxserver.services.ows.wps.processes">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="eoxserver.services.ows.wps.v10.html">eoxserver.services.ows.wps.v10 package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.v10.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="eoxserver.services.ows.wps.v10.encoders.html">eoxserver.services.ows.wps.v10.encoders package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wps.v10.encoders.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wps.v10.encoders.html#eoxserver-services-ows-wps-v10-encoders-base-module">eoxserver.services.ows.wps.v10.encoders.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wps.v10.encoders.html#eoxserver-services-ows-wps-v10-encoders-capabilities-module">eoxserver.services.ows.wps.v10.encoders.capabilities module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wps.v10.encoders.html#eoxserver-services-ows-wps-v10-encoders-execute-response-module">eoxserver.services.ows.wps.v10.encoders.execute_response module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wps.v10.encoders.html#eoxserver-services-ows-wps-v10-encoders-execute-response-raw-module">eoxserver.services.ows.wps.v10.encoders.execute_response_raw module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wps.v10.encoders.html#eoxserver-services-ows-wps-v10-encoders-parameters-module">eoxserver.services.ows.wps.v10.encoders.parameters module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wps.v10.encoders.html#eoxserver-services-ows-wps-v10-encoders-process-description-module">eoxserver.services.ows.wps.v10.encoders.process_description module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eoxserver.services.ows.wps.v10.encoders.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.v10.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.v10.html#eoxserver-services-ows-wps-v10-describeprocess-module">eoxserver.services.ows.wps.v10.describeprocess module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.v10.html#eoxserver-services-ows-wps-v10-exceptionhandler-module">eoxserver.services.ows.wps.v10.exceptionhandler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.v10.html#eoxserver-services-ows-wps-v10-execute-module">eoxserver.services.ows.wps.v10.execute module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.v10.html#eoxserver-services-ows-wps-v10-execute-decoder-kvp-module">eoxserver.services.ows.wps.v10.execute_decoder_kvp module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.v10.html#eoxserver-services-ows-wps-v10-execute-decoder-xml-module">eoxserver.services.ows.wps.v10.execute_decoder_xml module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.v10.html#eoxserver-services-ows-wps-v10-getcapabilities-module">eoxserver.services.ows.wps.v10.getcapabilities module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.v10.html#eoxserver-services-ows-wps-v10-util-module">eoxserver.services.ows.wps.v10.util module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eoxserver.services.ows.wps.v10.html#module-eoxserver.services.ows.wps.v10">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-eoxserver.services.ows.wps.exceptions">
+<span id="eoxserver-services-ows-wps-exceptions-module"></span><h2>eoxserver.services.ows.wps.exceptions module<a class="headerlink" href="#module-eoxserver.services.ows.wps.exceptions" title="Permalink to this headline">¶</a></h2>
+<dl class="exception">
+<dt id="eoxserver.services.ows.wps.exceptions.ExecuteError">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.ows.wps.exceptions.</code><code class="descname">ExecuteError</code><span class="sig-paren">(</span><em>message=''</em>, <em>locator='process.execute()'</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.exceptions.ExecuteError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#eoxserver.services.ows.wps.exceptions.NoApplicableCode" title="eoxserver.services.ows.wps.exceptions.NoApplicableCode"><code class="xref py py-class docutils literal"><span class="pre">eoxserver.services.ows.wps.exceptions.NoApplicableCode</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.ows.wps.exceptions.FileSizeExceeded">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.ows.wps.exceptions.</code><code class="descname">FileSizeExceeded</code><span class="sig-paren">(</span><em>message</em>, <em>locator</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.exceptions.FileSizeExceeded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#eoxserver.services.ows.wps.exceptions.OWS10Exception" title="eoxserver.services.ows.wps.exceptions.OWS10Exception"><code class="xref py py-class docutils literal"><span class="pre">eoxserver.services.ows.wps.exceptions.OWS10Exception</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.ows.wps.exceptions.InvalidInputError">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.ows.wps.exceptions.</code><code class="descname">InvalidInputError</code><span class="sig-paren">(</span><em>input_id</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.exceptions.InvalidInputError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#eoxserver.services.ows.wps.exceptions.InvalidParameterValue" title="eoxserver.services.ows.wps.exceptions.InvalidParameterValue"><code class="xref py py-class docutils literal"><span class="pre">eoxserver.services.ows.wps.exceptions.InvalidParameterValue</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.ows.wps.exceptions.InvalidInputReferenceError">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.ows.wps.exceptions.</code><code class="descname">InvalidInputReferenceError</code><span class="sig-paren">(</span><em>input_id</em>, <em>message=''</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.exceptions.InvalidInputReferenceError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#eoxserver.services.ows.wps.exceptions.InvalidParameterValue" title="eoxserver.services.ows.wps.exceptions.InvalidParameterValue"><code class="xref py py-class docutils literal"><span class="pre">eoxserver.services.ows.wps.exceptions.InvalidParameterValue</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.ows.wps.exceptions.InvalidInputValueError">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.ows.wps.exceptions.</code><code class="descname">InvalidInputValueError</code><span class="sig-paren">(</span><em>input_id</em>, <em>message=''</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.exceptions.InvalidInputValueError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#eoxserver.services.ows.wps.exceptions.InvalidParameterValue" title="eoxserver.services.ows.wps.exceptions.InvalidParameterValue"><code class="xref py py-class docutils literal"><span class="pre">eoxserver.services.ows.wps.exceptions.InvalidParameterValue</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.ows.wps.exceptions.InvalidOutputDefError">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.ows.wps.exceptions.</code><code class="descname">InvalidOutputDefError</code><span class="sig-paren">(</span><em>output_id</em>, <em>message=''</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.exceptions.InvalidOutputDefError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#eoxserver.services.ows.wps.exceptions.InvalidParameterValue" title="eoxserver.services.ows.wps.exceptions.InvalidParameterValue"><code class="xref py py-class docutils literal"><span class="pre">eoxserver.services.ows.wps.exceptions.InvalidParameterValue</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.ows.wps.exceptions.InvalidOutputError">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.ows.wps.exceptions.</code><code class="descname">InvalidOutputError</code><span class="sig-paren">(</span><em>output_id</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.exceptions.InvalidOutputError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#eoxserver.services.ows.wps.exceptions.InvalidParameterValue" title="eoxserver.services.ows.wps.exceptions.InvalidParameterValue"><code class="xref py py-class docutils literal"><span class="pre">eoxserver.services.ows.wps.exceptions.InvalidParameterValue</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.ows.wps.exceptions.InvalidOutputValueError">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.ows.wps.exceptions.</code><code class="descname">InvalidOutputValueError</code><span class="sig-paren">(</span><em>output_id</em>, <em>message=''</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.exceptions.InvalidOutputValueError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#eoxserver.services.ows.wps.exceptions.NoApplicableCode" title="eoxserver.services.ows.wps.exceptions.NoApplicableCode"><code class="xref py py-class docutils literal"><span class="pre">eoxserver.services.ows.wps.exceptions.NoApplicableCode</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.ows.wps.exceptions.InvalidParameterValue">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.ows.wps.exceptions.</code><code class="descname">InvalidParameterValue</code><span class="sig-paren">(</span><em>message</em>, <em>locator</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.exceptions.InvalidParameterValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#eoxserver.services.ows.wps.exceptions.OWS10Exception" title="eoxserver.services.ows.wps.exceptions.OWS10Exception"><code class="xref py py-class docutils literal"><span class="pre">eoxserver.services.ows.wps.exceptions.OWS10Exception</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.ows.wps.exceptions.MissingParameterValue">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.ows.wps.exceptions.</code><code class="descname">MissingParameterValue</code><span class="sig-paren">(</span><em>message</em>, <em>locator</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.exceptions.MissingParameterValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#eoxserver.services.ows.wps.exceptions.OWS10Exception" title="eoxserver.services.ows.wps.exceptions.OWS10Exception"><code class="xref py py-class docutils literal"><span class="pre">eoxserver.services.ows.wps.exceptions.OWS10Exception</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.ows.wps.exceptions.MissingRequiredInputError">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.ows.wps.exceptions.</code><code class="descname">MissingRequiredInputError</code><span class="sig-paren">(</span><em>input_id</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.exceptions.MissingRequiredInputError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#eoxserver.services.ows.wps.exceptions.InvalidParameterValue" title="eoxserver.services.ows.wps.exceptions.InvalidParameterValue"><code class="xref py py-class docutils literal"><span class="pre">eoxserver.services.ows.wps.exceptions.InvalidParameterValue</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.ows.wps.exceptions.NoApplicableCode">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.ows.wps.exceptions.</code><code class="descname">NoApplicableCode</code><span class="sig-paren">(</span><em>message</em>, <em>locator=None</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.exceptions.NoApplicableCode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#eoxserver.services.ows.wps.exceptions.OWS10Exception" title="eoxserver.services.ows.wps.exceptions.OWS10Exception"><code class="xref py py-class docutils literal"><span class="pre">eoxserver.services.ows.wps.exceptions.OWS10Exception</span></code></a></p>
+<dl class="attribute">
+<dt id="eoxserver.services.ows.wps.exceptions.NoApplicableCode.http_status_code">
+<code class="descname">http_status_code</code><em class="property"> = 500</em><a class="headerlink" href="#eoxserver.services.ows.wps.exceptions.NoApplicableCode.http_status_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.ows.wps.exceptions.NoSuchProcessError">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.ows.wps.exceptions.</code><code class="descname">NoSuchProcessError</code><span class="sig-paren">(</span><em>identifier</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.exceptions.NoSuchProcessError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#eoxserver.services.ows.wps.exceptions.InvalidParameterValue" title="eoxserver.services.ows.wps.exceptions.InvalidParameterValue"><code class="xref py py-class docutils literal"><span class="pre">eoxserver.services.ows.wps.exceptions.InvalidParameterValue</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.ows.wps.exceptions.NotEnoughStorage">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.ows.wps.exceptions.</code><code class="descname">NotEnoughStorage</code><span class="sig-paren">(</span><em>message</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.exceptions.NotEnoughStorage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#eoxserver.services.ows.wps.exceptions.OWS10Exception" title="eoxserver.services.ows.wps.exceptions.OWS10Exception"><code class="xref py py-class docutils literal"><span class="pre">eoxserver.services.ows.wps.exceptions.OWS10Exception</span></code></a></p>
+<dl class="attribute">
+<dt id="eoxserver.services.ows.wps.exceptions.NotEnoughStorage.http_status_code">
+<code class="descname">http_status_code</code><em class="property"> = 507</em><a class="headerlink" href="#eoxserver.services.ows.wps.exceptions.NotEnoughStorage.http_status_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.ows.wps.exceptions.OWS10Exception">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.ows.wps.exceptions.</code><code class="descname">OWS10Exception</code><span class="sig-paren">(</span><em>code</em>, <em>locator</em>, <em>message</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.exceptions.OWS10Exception" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<p>Base OWS 1.0 exception of the WPS 1.0.0 exceptions</p>
+<dl class="attribute">
+<dt id="eoxserver.services.ows.wps.exceptions.OWS10Exception.http_status_code">
+<code class="descname">http_status_code</code><em class="property"> = 400</em><a class="headerlink" href="#eoxserver.services.ows.wps.exceptions.OWS10Exception.http_status_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.ows.wps.exceptions.ServerBusy">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.ows.wps.exceptions.</code><code class="descname">ServerBusy</code><span class="sig-paren">(</span><em>message</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.exceptions.ServerBusy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#eoxserver.services.ows.wps.exceptions.OWS10Exception" title="eoxserver.services.ows.wps.exceptions.OWS10Exception"><code class="xref py py-class docutils literal"><span class="pre">eoxserver.services.ows.wps.exceptions.OWS10Exception</span></code></a></p>
+<dl class="attribute">
+<dt id="eoxserver.services.ows.wps.exceptions.ServerBusy.http_status_code">
+<code class="descname">http_status_code</code><em class="property"> = 503</em><a class="headerlink" href="#eoxserver.services.ows.wps.exceptions.ServerBusy.http_status_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.ows.wps.exceptions.StorageNotSupported">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.ows.wps.exceptions.</code><code class="descname">StorageNotSupported</code><span class="sig-paren">(</span><em>message</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.exceptions.StorageNotSupported" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#eoxserver.services.ows.wps.exceptions.OWS10Exception" title="eoxserver.services.ows.wps.exceptions.OWS10Exception"><code class="xref py py-class docutils literal"><span class="pre">eoxserver.services.ows.wps.exceptions.OWS10Exception</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="eoxserver.services.ows.wps.exceptions.VersionNegotiationFailed">
+<em class="property">exception </em><code class="descclassname">eoxserver.services.ows.wps.exceptions.</code><code class="descname">VersionNegotiationFailed</code><span class="sig-paren">(</span><em>message</em>, <em>locator</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.exceptions.VersionNegotiationFailed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#eoxserver.services.ows.wps.exceptions.OWS10Exception" title="eoxserver.services.ows.wps.exceptions.OWS10Exception"><code class="xref py py-class docutils literal"><span class="pre">eoxserver.services.ows.wps.exceptions.OWS10Exception</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-eoxserver.services.ows.wps.interfaces">
+<span id="eoxserver-services-ows-wps-interfaces-module"></span><h2>eoxserver.services.ows.wps.interfaces module<a class="headerlink" href="#module-eoxserver.services.ows.wps.interfaces" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="eoxserver.services.ows.wps.interfaces.AsyncBackendInterface">
+<em class="property">class </em><code class="descclassname">eoxserver.services.ows.wps.interfaces.</code><code class="descname">AsyncBackendInterface</code><a class="headerlink" href="#eoxserver.services.ows.wps.interfaces.AsyncBackendInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Interface class for an asynchronous WPS back-end.
+NOTE: Only one asynchronous back-end at time is allowed to be configured.</p>
+<dl class="method">
+<dt id="eoxserver.services.ows.wps.interfaces.AsyncBackendInterface.cancel">
+<code class="descname">cancel</code><span class="sig-paren">(</span><em>job_id</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.interfaces.AsyncBackendInterface.cancel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cancel the job execution.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="eoxserver.services.ows.wps.interfaces.AsyncBackendInterface.execute">
+<code class="descname">execute</code><span class="sig-paren">(</span><em>process</em>, <em>raw_inputs</em>, <em>resp_form</em>, <em>extra_parts=None</em>, <em>job_id=None</em>, <em>version='1.0.0'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.interfaces.AsyncBackendInterface.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute process asynchronously.
+The request is defined by the process’s identifier <code class="docutils literal"><span class="pre">process_id</span></code>,
+<code class="docutils literal"><span class="pre">raw_inputs</span></code> (before the decoding and resolution
+of the references), and the <code class="docutils literal"><span class="pre">resp_form</span></code> (holding
+the outputs’ parameters).  The <code class="docutils literal"><span class="pre">version</span></code> of the WPS standard
+to be used.  Optionally, the user defined <code class="docutils literal"><span class="pre">job_id</span></code> can be passed.
+If the <code class="docutils literal"><span class="pre">job_id</span></code> cannot be used the execute shall fail.</p>
+<p>The <code class="docutils literal"><span class="pre">extra_parts</span></code> should contain a dictionary of named request parts
+should the request contain multi-part/related CID references.</p>
+<p>On success, the method returns the <code class="docutils literal"><span class="pre">job_id</span></code> assigned to the
+executed job.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="eoxserver.services.ows.wps.interfaces.AsyncBackendInterface.get_response_url">
+<code class="descname">get_response_url</code><span class="sig-paren">(</span><em>job_id</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.interfaces.AsyncBackendInterface.get_response_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get URL of the execute response for the given job id</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="eoxserver.services.ows.wps.interfaces.AsyncBackendInterface.get_status">
+<code class="descname">get_status</code><span class="sig-paren">(</span><em>job_id</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.interfaces.AsyncBackendInterface.get_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get status of a job. Allowed responses and their meanings are:
+ACCEPTED  - job scheduled for execution
+STARTED   - job in progress
+PAUSED    - job is stopped and it can be resumed
+CANCELLED - job was terminated by the user
+FAILED    - job ended with an error
+SUCCEEDED - job ended successfully</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="eoxserver.services.ows.wps.interfaces.AsyncBackendInterface.pause">
+<code class="descname">pause</code><span class="sig-paren">(</span><em>job_id</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.interfaces.AsyncBackendInterface.pause" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pause the job execution.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="eoxserver.services.ows.wps.interfaces.AsyncBackendInterface.purge">
+<code class="descname">purge</code><span class="sig-paren">(</span><em>job_id</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.interfaces.AsyncBackendInterface.purge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Purge the job from the system by removing all the resources
+occupied by the job.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="eoxserver.services.ows.wps.interfaces.AsyncBackendInterface.resume">
+<code class="descname">resume</code><span class="sig-paren">(</span><em>job_id</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.interfaces.AsyncBackendInterface.resume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resume the job execution.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.services.ows.wps.interfaces.AsyncBackendInterface.supported_versions">
+<code class="descname">supported_versions</code><a class="headerlink" href="#eoxserver.services.ows.wps.interfaces.AsyncBackendInterface.supported_versions" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of versions of the WPS standard supported by the back-end.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="eoxserver.services.ows.wps.interfaces.ProcessInterface">
+<em class="property">class </em><code class="descclassname">eoxserver.services.ows.wps.interfaces.</code><code class="descname">ProcessInterface</code><a class="headerlink" href="#eoxserver.services.ows.wps.interfaces.ProcessInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2.7/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Interface class for processes offered, described and executed by
+the WPS.</p>
+<dl class="attribute">
+<dt id="eoxserver.services.ows.wps.interfaces.ProcessInterface.asynchronous">
+<code class="descname">asynchronous</code><a class="headerlink" href="#eoxserver.services.ows.wps.interfaces.ProcessInterface.asynchronous" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optional boolean flag indicating whether the process can be executed
+asynchronously. If missing False is assumed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.services.ows.wps.interfaces.ProcessInterface.description">
+<code class="descname">description</code><a class="headerlink" href="#eoxserver.services.ows.wps.interfaces.ProcessInterface.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>A human-readable detailed description of the process. Optional.
+(Content of the the abstract in the WPS process description.)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="eoxserver.services.ows.wps.interfaces.ProcessInterface.execute">
+<code class="descname">execute</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#eoxserver.services.ows.wps.interfaces.ProcessInterface.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>The main execution function for the process. The <code class="docutils literal"><span class="pre">kwargs</span></code> are the
+parsed input inputs (using the keys as defined by the <code class="docutils literal"><span class="pre">inputs</span></code>)
+and the Complex Data format requests (using the keys as defined by
+the <code class="docutils literal"><span class="pre">outputs</span></code>).
+The method is expected to return a dictionary of the output values
+(using the keys as defined by the <code class="docutils literal"><span class="pre">outputs</span></code>). In case of only
+one output item defined by the <code class="docutils literal"><span class="pre">outputs</span></code>, one output value
+is allowed to be returned directly.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.services.ows.wps.interfaces.ProcessInterface.identifier">
+<code class="descname">identifier</code><a class="headerlink" href="#eoxserver.services.ows.wps.interfaces.ProcessInterface.identifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>An identifier (URI) of the process. Optional.
+When omitted it defaults to the process’ class-name.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.services.ows.wps.interfaces.ProcessInterface.inputs">
+<code class="descname">inputs</code><a class="headerlink" href="#eoxserver.services.ows.wps.interfaces.ProcessInterface.inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dict mapping the inputs’ identifiers to their respective types.
+The type can be either one of the supported native python types
+(automatically converted to a <code class="docutils literal"><span class="pre">LiteralData</span></code> object) or an instance
+of one of the data-specification classes (<code class="docutils literal"><span class="pre">LiteralData</span></code>,
+<code class="docutils literal"><span class="pre">BoundingBoxData</span></code>, or <code class="docutils literal"><span class="pre">ComplexData</span></code>).  Mandatory.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.services.ows.wps.interfaces.ProcessInterface.metadata">
+<code class="descname">metadata</code><a class="headerlink" href="#eoxserver.services.ows.wps.interfaces.ProcessInterface.metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dict of title/URL meta-data pairs associated with the process.
+Optional.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.services.ows.wps.interfaces.ProcessInterface.outputs">
+<code class="descname">outputs</code><a class="headerlink" href="#eoxserver.services.ows.wps.interfaces.ProcessInterface.outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dict mapping the outputs’ identifiers to their respective types.
+The type can be either one of the supported native python types
+(automatically converted to a <code class="docutils literal"><span class="pre">LiteralData</span></code> object) or an instance
+of one of the data-specification classes (<code class="docutils literal"><span class="pre">LiteralData</span></code>,
+<code class="docutils literal"><span class="pre">BoundingBoxData</span></code>, or <code class="docutils literal"><span class="pre">ComplexData</span></code>).  Mandatory.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.services.ows.wps.interfaces.ProcessInterface.profiles">
+<code class="descname">profiles</code><a class="headerlink" href="#eoxserver.services.ows.wps.interfaces.ProcessInterface.profiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>A iterable of URNs of WPS application profiles this process
+adheres to. Optional.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.services.ows.wps.interfaces.ProcessInterface.retention_period">
+<code class="descname">retention_period</code><a class="headerlink" href="#eoxserver.services.ows.wps.interfaces.ProcessInterface.retention_period" title="Permalink to this definition">¶</a></dt>
+<dd><p>This optional property (<cite>datetime.timedelta</cite>) indicates the minimum
+time the process results shall be retained after the completion.
+If omitted the default server retention policy is applied.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.services.ows.wps.interfaces.ProcessInterface.synchronous">
+<code class="descname">synchronous</code><a class="headerlink" href="#eoxserver.services.ows.wps.interfaces.ProcessInterface.synchronous" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optional boolean flag indicating whether the process can be executed
+synchronously. If missing True is assumed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.services.ows.wps.interfaces.ProcessInterface.title">
+<code class="descname">title</code><a class="headerlink" href="#eoxserver.services.ows.wps.interfaces.ProcessInterface.title" title="Permalink to this definition">¶</a></dt>
+<dd><p>A human-readable title of the process. Optional. When omitted it
+defaults to the process identifier.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.services.ows.wps.interfaces.ProcessInterface.version">
+<code class="descname">version</code><a class="headerlink" href="#eoxserver.services.ows.wps.interfaces.ProcessInterface.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>The version of the process, if applicable. Optional.
+When omitted it defaults to ‘1.0.0’.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="eoxserver.services.ows.wps.interfaces.ProcessInterface.wsdl">
+<code class="descname">wsdl</code><a class="headerlink" href="#eoxserver.services.ows.wps.interfaces.ProcessInterface.wsdl" title="Permalink to this definition">¶</a></dt>
+<dd><p>A URL of WSDL document describing this process. Optional.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="eoxserver-services-ows-wps-test-allowed-values-module">
+<h2>eoxserver.services.ows.wps.test_allowed_values module<a class="headerlink" href="#eoxserver-services-ows-wps-test-allowed-values-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="eoxserver-services-ows-wps-test-data-types-module">
+<h2>eoxserver.services.ows.wps.test_data_types module<a class="headerlink" href="#eoxserver-services-ows-wps-test-data-types-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-eoxserver.services.ows.wps">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-eoxserver.services.ows.wps" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="eoxserver.services.ows.wps.parameters.html" class="btn btn-neutral float-right" title="eoxserver.services.ows.wps.parameters package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="eoxserver.services.ows.wms.v13.html" class="btn btn-neutral float-left" title="eoxserver.services.ows.wms.v13 package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-25T19:09:25Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

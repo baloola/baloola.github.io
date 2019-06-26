@@ -1,0 +1,431 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>RFC 14: Asynchronous Task Processing (ATP) &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="RFC 15: Access Control Support" href="rfc15.html" />
+    <link rel="prev" title="RFC 13: WCS-T 1.1 Interface Prototype" href="rfc13.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Requests for Comments</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#rfc-procedures">RFC Procedures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#writing-rfcs">Writing RFCs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#rfcs">RFCs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="policies.html">RFC Policies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="howto.html">Guidelines for Requests for Comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc0.html">RFC 0: Project Steering Committee Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc1.html">RFC 1: An Extensible Software Architecture for EOxServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc2.html">RFC 2: Extension Mechanism for EOxServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc3.html">RFC 3: OGC Service Extensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc4.html">RFC 4: Data Packaging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc5.html">RFC 5: Processing Chains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc6.html">RFC 6: Directory Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc7.html">RFC 7: Release Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc8.html">RFC 8: SVN Commit Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc9.html">RFC 9: SOAP Binding of WCS GetCoverage Response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc10.html">RFC 10: SOAP Proxy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc11.html">RFC 11: WPS 1.0.0 Interface Prototype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc12.html">RFC 12: Backends for the Data Access Layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc13.html">RFC 13: WCS-T 1.1 Interface Prototype</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">RFC 14: Asynchronous Task Processing (ATP)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#asynchronous-task-processing">Asynchronous Task Processing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#governance">Governance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#voting-history">Voting History</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#traceability">Traceability</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rfc15.html">RFC 15: Access Control Support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc16.html">RFC 16: Referenceable Grid Coverages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc17.html">RFC 17: Configuration of Supported Output Formats and CRSes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc18.html">RFC 18: Operator Interface Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc19.html">RFC 19: Migrate project repository from svn to git</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Requests for Comments</a> &raquo;</li>
+        
+      <li>RFC 14: Asynchronous Task Processing (ATP)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/rfc/rfc14.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="rfc-14-asynchronous-task-processing-atp">
+<span id="rfc-14"></span><h1>RFC 14: Asynchronous Task Processing (ATP)<a class="headerlink" href="#rfc-14-asynchronous-task-processing-atp" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Author:</th><td class="field-body">Martin Paces</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Created:</th><td class="field-body">2011-10-25</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Last Edit:</th><td class="field-body">2011-12-09</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Status:</th><td class="field-body">ACCEPTED</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Discussion:</th><td class="field-body"><a class="reference external" href="http://www.eoxserver.org/wiki/DiscussionRfc14">http://www.eoxserver.org/wiki/DiscussionRfc14</a></td>
+</tr>
+</tbody>
+</table>
+<p>This RFC describes the Asynchronous Task Processing subsystem of the <em>EOxServer</em>.</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The <em>Asynchronous Task Processing</em> (ATP) subsystem, as the name suggests, extends the EOxServer functionality
+by ability to process tasks asynchronously, i.e., on background independently of the default EOxServer’s
+synchronous client requests processing.</p>
+<p>Although the ATP is designed primarily to support asynchronous request processing of OGC Web Services such
+as the Web Coverage Service transaction extension and/or the Web Processing Service, it is not limited
+to these and other application may use it as well.</p>
+<p>The ATP employs the model of a single central task queue and one or more
+<em>Asynchronous Task Processing Daemons</em> (APTD) executing the pending tasks
+pulled from the task queue. A single ATPD is not restricted
+to a single processed task at time and can internally process multiple tasks concurrently,
+e.g., by employing a pool of worker processes assigned to multiple CPU cores.</p>
+<p>The ATP subsystem is implemented as Django application using the DB model as the task queue.
+The underlying DB storage although it may be seen as suboptimal in terms of the performance
+and latency it assure tolerance of the subsystem to possible failures or maintenance
+shut-downs of both EOxServer or APTDs.</p>
+<p>The ATP can be shared by multiple application at time as each task has its type (application
+to which it belongs) and each type of the task has a predefined handler subroutine. The
+shared nature of the APT subsystem allows fine control over the processing resources, e.g.,
+the number of concurrently running task matching number of available CPU cores.</p>
+<p>The ATP is primarily designed for resource demanding longer running tasks (10 seconds and more)
+which in case of synchronous operation could clog the system or lead to connection time-outs.
+On contrary, <em>light</em> tasks (less than 1 sec.) should preferably be executed synchronously
+as the extra ATP latency might be unfavourable.</p>
+</div>
+<div class="section" id="asynchronous-task-processing">
+<h2>Asynchronous Task Processing<a class="headerlink" href="#asynchronous-task-processing" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center" id="id1">
+<img alt="../_images/processes_task_state.png" src="../_images/processes_task_state.png" />
+<p class="caption"><span class="caption-text"><em>Fig.1: ATP Task State Diagram</em></span></p>
+</div>
+<p>The ATP subsystem is capable of tracking of the tasks during their life cycle depicted
+by the Task state diagram Fig.1. The task can be in one of the following states:</p>
+<blockquote>
+<div><ul class="simple">
+<li>ACCEPTED  - a new enqueued task waiting to be pulled by the processing daemon</li>
+<li>SCHEDULED - a task pulled (dequeued) by the processing daemon but not yet stared</li>
+<li>RUNNING   - a task being processed by the processing daemon</li>
+<li>PAUSED    - a task which has been put on hold by the processing daemon and which is waiting to be resumed</li>
+<li>FINISHED  - a task which has been finished successfully (terminal state)</li>
+<li>FAILED    - a task which has been finished by a failure (terminal state)</li>
+</ul>
+</div></blockquote>
+<p>When a task becomes identified as staled (by exceeding the type specific time-out) it may be re-enqueued,
+i.e., the processing shall be terminated, enqueued as a new task again changing its status from
+one of the non-terminal states (SCHEDULED, RUNNING, PAUSED) to ACCEPTED. This procedure is implemented
+to avoid abandoned “zombie” tasks left, e.g., by an aborted processing daemon. However, this procedure
+is repeated only limited times (the count is task type specific, three by default), once the allowed
+restart’s count is exceeded the task is marked as FAILED.</p>
+<p>The history of the task’s state transition is logged in order to provide information to the system operator.</p>
+<p>The finished tasks are kept recorded for ever by default, however, this can changed by a task type (application)
+specific retention time, which allow automatic removal of out-dated tasks, e.g., one day, week or month after
+their finish.</p>
+<p>To inspect the state of the APT subsystem, a couple of simple DJango html views has been created.</p>
+<div class="section" id="atp-db-model">
+<h3>ATP DB Model<a class="headerlink" href="#atp-db-model" title="Permalink to this headline">¶</a></h3>
+<div class="figure align-center" id="id2">
+<img alt="../_images/processes_db_model.png" src="../_images/processes_db_model.png" />
+<p class="caption"><span class="caption-text"><em>Fig.2: ATP DB model</em></span></p>
+</div>
+<p>The APT Django DB model consists of six classes as depicted in Fig.2.</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt>Type - defining the type of task instance, its unique identifier, task handler (python subroutine),</dt>
+<dd>and the type specific parameters such as maximum unsuccessful attempts to start the task execution,
+time-out after the which the task is considered to be abandoned and re-enqueued for processing
+(e.g., due to ATPD failure), retention time to keep the record of the finished task.</dd>
+</dl>
+</li>
+<li>Instance - defining a single task instance, its identifier and current state.</li>
+<li>Inputs - record holding input parameters stored serialized (pickled) Python object</li>
+<li>Response - record holding the optional tasks output (most likely an XML response document or serialized Python object)</li>
+<li>LogRecord - single log entry. The log keeps history of the task’s state transition.</li>
+<li>Task - single task queue record. The task table holds the accepted tasks, their enqueuetime, ATPD assignment.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="atp-api">
+<h3>ATP API<a class="headerlink" href="#atp-api" title="Permalink to this headline">¶</a></h3>
+<p>The ATP subsystem provides simple API which allows:</p>
+<blockquote>
+<div><ul class="simple">
+<li>registering of new task type and its parameters (repeated registration updates the parameters)</li>
+<li>removal of unused task types (provided there is no instance of the removed type)</li>
+<li>enqueueing of new task instance and input parameters (implies creation of new task instance)</li>
+<li>dequeueing of enqueued instance (used by APTD)</li>
+<li>removal of finished tasks</li>
+<li>re-enqueueing of a non terminal state task</li>
+<li>changing of the task status</li>
+<li>adding and retrieval of the response (output)</li>
+</ul>
+</div></blockquote>
+<p>Further the mandatory function prototype to define new handlers is given.</p>
+</div>
+</div>
+<div class="section" id="governance">
+<h2>Governance<a class="headerlink" href="#governance" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="source-code-location">
+<h3>Source Code Location<a class="headerlink" href="#source-code-location" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://eoxserver.org/svn/sandbox/sandbox_wcst">http://eoxserver.org/svn/sandbox/sandbox_wcst</a></p>
+</div>
+<div class="section" id="rfcs-and-decision-process">
+<h3>RFCs and Decision Process<a class="headerlink" href="#rfcs-and-decision-process" title="Permalink to this headline">¶</a></h3>
+<p><em>TBD</em></p>
+</div>
+<div class="section" id="license">
+<h3>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h3>
+<p>The APT implementation shall be distributed under the terms of <a class="reference internal" href="../copyright.html#eoxserver-open-license"><span class="std std-ref">EOxServer’s MapServer-like license</span></a>.</p>
+</div>
+<div class="section" id="wiki-trac-tickets">
+<h3>Wiki, Trac, Tickets<a class="headerlink" href="#wiki-trac-tickets" title="Permalink to this headline">¶</a></h3>
+<p><em>TBD</em></p>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="voting-history">
+<h2>Voting History<a class="headerlink" href="#voting-history" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Motion:</th><td class="field-body">To accept RFC 14</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Voting Start:</th><td class="field-body">2011-12-15</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Voting End:</th><td class="field-body">2011-12-22</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result:</th><td class="field-body">+4 for ACCEPTED</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="traceability">
+<h2>Traceability<a class="headerlink" href="#traceability" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Requirements:</th><td class="field-body"><em>N/A</em></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Tickets:</th><td class="field-body"><em>N/A</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="rfc15.html" class="btn btn-neutral float-right" title="RFC 15: Access Control Support" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="rfc13.html" class="btn btn-neutral float-left" title="RFC 13: WCS-T 1.1 Interface Prototype" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

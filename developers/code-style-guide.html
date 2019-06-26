@@ -1,0 +1,395 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>EOxServer code style guide &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Requests for Comments" href="../rfc/index.html" />
+    <link rel="prev" title="Testing" href="testing.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developers’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_model.html">Data Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migrations.html">Data Migrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services.html">Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_formats.html">Data Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metadata_formats.html">Metadata Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autotest.html">The <em>autotest</em> instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="handling_coverages.html">Handling Coverages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="processes.html">Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_dev_guide.html">Asynchronous Task Processing - Developers Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">EOxServer code style guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fundamentals">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#package-layout-and-namespacing">Package layout and namespacing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#import-rules">Import rules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#coding-guidelines">Coding guidelines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#minimizing-pitfalls">Minimizing pitfalls</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#improving-tests">Improving tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Developers’ Guide</a> &raquo;</li>
+        
+      <li>EOxServer code style guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/developers/code-style-guide.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="eoxserver-code-style-guide">
+<span id="styleguide"></span><h1>EOxServer code style guide<a class="headerlink" href="#eoxserver-code-style-guide" title="Permalink to this headline">¶</a></h1>
+<p>This document tries to establish a set of rules to help harmonizing the source
+code written by many contributors. The goal is to improve compatibility and
+maintainability.</p>
+<div class="section" id="fundamentals">
+<h2>Fundamentals<a class="headerlink" href="#fundamentals" title="Permalink to this headline">¶</a></h2>
+<p>Above all rules, adhere the rules defined in the <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">Python PEP 8</a>. Please try to adhere the
+mentioned code styles. You can check if you compliant to the style guide with
+the <code class="docutils literal"><span class="pre">pylint</span></code> or <code class="docutils literal"><span class="pre">pep8</span></code> command line utilities.</p>
+<p>Then:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">this</span>
+<span class="go">The Zen of Python, by Tim Peters</span>
+
+<span class="go">Beautiful is better than ugly.</span>
+<span class="go">Explicit is better than implicit.</span>
+<span class="go">Simple is better than complex.</span>
+<span class="go">Complex is better than complicated.</span>
+<span class="go">Flat is better than nested.</span>
+<span class="go">Sparse is better than dense.</span>
+<span class="go">Readability counts.</span>
+<span class="go">Special cases aren&#39;t special enough to break the rules.</span>
+<span class="go">Although practicality beats purity.</span>
+<span class="go">Errors should never pass silently.</span>
+<span class="go">Unless explicitly silenced.</span>
+<span class="go">In the face of ambiguity, refuse the temptation to guess.</span>
+<span class="go">There should be one-- and preferably only one --obvious way to do it.</span>
+<span class="go">Although that way may not be obvious at first unless you&#39;re Dutch.</span>
+<span class="go">Now is better than never.</span>
+<span class="go">Although never is often better than *right* now.</span>
+<span class="go">If the implementation is hard to explain, it&#39;s a bad idea.</span>
+<span class="go">If the implementation is easy to explain, it may be a good idea.</span>
+<span class="go">Namespaces are one honking great idea -- let&#39;s do more of those!</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="package-layout-and-namespacing">
+<h2>Package layout and namespacing<a class="headerlink" href="#package-layout-and-namespacing" title="Permalink to this headline">¶</a></h2>
+<p>Use Python package structures to enable hierarchical namespaces. Do not encode
+the namespace in function or class names.</p>
+<p>E.g: don’t do this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># somemodule.py</span>
+
+<span class="k">def</span> <span class="nf">myNS_FunctionA</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">myNS_ClassB</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>Instead, do this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># somemodule/myNS.py</span>
+
+<span class="k">def</span> <span class="nf">functionA</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">ClassB</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>A developer using these functions can choose to use the namespace explicitly:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">somepackage</span> <span class="k">import</span> <span class="n">myNS</span>
+
+<span class="n">myNS</span><span class="o">.</span><span class="n">functionA</span><span class="p">()</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">myNS</span><span class="o">.</span><span class="n">ClassB</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="import-rules">
+<h2>Import rules<a class="headerlink" href="#import-rules" title="Permalink to this headline">¶</a></h2>
+<p>As defined in Python PEP 8, place all imports in the top of the file. This makes
+it easier to trace dependencies and allows to see and resolve importing issues.</p>
+<p>Try to use the following importing order:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Standard library imports or libraries that can be seen as industry
+standard (like numpy).</li>
+<li>Third party libraries (or libraries that are not directly associated
+with the current project). E.g: GDAL, Django, etc.</li>
+<li>Imports that are directly associated with the current project. In case of
+EOxServer, everything that is under the <a class="reference internal" href="../apidoc/modules.html#module-eoxserver" title="eoxserver"><code class="xref py py-mod docutils literal"><span class="pre">eoxserver</span></code></a> package root.</li>
+</ol>
+</div></blockquote>
+<p>Use single empty lines to separate these import groups.</p>
+</div>
+<div class="section" id="coding-guidelines">
+<h2>Coding guidelines<a class="headerlink" href="#coding-guidelines" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="minimizing-pitfalls">
+<h3>Minimizing pitfalls<a class="headerlink" href="#minimizing-pitfalls" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="don-t-use-mutable-types-as-default-arguments">
+<h4>Don’t use mutable types as default arguments<a class="headerlink" href="#don-t-use-mutable-types-as-default-arguments" title="Permalink to this headline">¶</a></h4>
+<p>As default arguments are evaluated at the time the module is imported and not
+when the function/method is called, default arguments are a sort of global
+variable and calling the function can have unintended side effects. Consider the
+following example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_one</span><span class="p">(</span><span class="n">arg</span><span class="o">=</span><span class="p">[]):</span>
+    <span class="n">arg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="n">arg</span>
+</pre></div>
+</div>
+<p>When called with no arguments, the function will print different results every
+time it is invoked. Also, since the list will never be released, this is also a
+memory leak, as the list grows with the time.</p>
+</div>
+<div class="section" id="don-t-put-code-in-the-init-py-of-a-package">
+<h4>Don’t put code in the <code class="docutils literal"><span class="pre">__init__.py</span></code> of a package<a class="headerlink" href="#don-t-put-code-in-the-init-py-of-a-package" title="Permalink to this headline">¶</a></h4>
+<p>When importing a package or a module from a package, the packages
+<code class="docutils literal"><span class="pre">__init__.py</span></code> will first be imported. If there is production code included
+(which will likely be accompanied by imports) this can lead to unintended
+circular imports. Try to put all production code in modules instead, and use the
+<code class="docutils literal"><span class="pre">__init__.py</span></code> only for really necessary stuff.</p>
+</div>
+<div class="section" id="use-abbreviations-sparingly">
+<h4>Use abbreviations sparingly<a class="headerlink" href="#use-abbreviations-sparingly" title="Permalink to this headline">¶</a></h4>
+<p>Try not to use abbreviations, unless the meaning is commonly known. Examples
+are HTTP, URL, WCS, BBox or the like.</p>
+<p>Don’t use leading double underscores to specify ‘private’ fields or methods or
+module functions, unless <em>really</em> necessary (which it isn’t, usually). Using
+double underscores makes it unnecessarily hard to debug methods/fields and is
+still not really private, as compared to other languages like C++ or Java. Use
+single leading underscores instead. The meaning is clear to any programmer and
+it does not impose any unnecessary comlications during debugging.</p>
+</div>
+</div>
+<div class="section" id="improving-tests">
+<h3>Improving tests<a class="headerlink" href="#improving-tests" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="general-rules">
+<h4>General rules<a class="headerlink" href="#general-rules" title="Permalink to this headline">¶</a></h4>
+<p>Implementing new features shall <em>always</em> incorporate writing new tests! Try to
+find corner/special cases and also try to find cases that shall provoke
+exceptions.</p>
+</div>
+<div class="section" id="where-to-add-the-tests">
+<h4>Where to add the tests?<a class="headerlink" href="#where-to-add-the-tests" title="Permalink to this headline">¶</a></h4>
+<p>Try to let tests <em>fail</em> by calling the correct assertion or the
+<code class="docutils literal"><span class="pre">fail</span></code> functions. Don’t use exceptions (apart from <code class="docutils literal"><span class="pre">AssertionError</span></code>),
+because when running the tests, this will be visible as “Error” and not a simple
+failure. Test errors should indicate that something completely unexpected
+happened that broke the testing code.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../rfc/index.html" class="btn btn-neutral float-right" title="Requests for Comments" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="testing.html" class="btn btn-neutral float-left" title="Testing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

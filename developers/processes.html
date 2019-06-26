@@ -1,0 +1,364 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Processes &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Asynchronous Task Processing - Developers Guide" href="atp_dev_guide.html" />
+    <link rel="prev" title="Handling Coverages" href="handling_coverages.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../users/index.html">Users’ Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Developers’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html">Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_model.html">Data Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migrations.html">Data Migrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="services.html">Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_formats.html">Data Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metadata_formats.html">Metadata Formats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autotest.html">The <em>autotest</em> instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="handling_coverages.html">Handling Coverages</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Processes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-new-process">Creating a new Process</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="atp_dev_guide.html">Asynchronous Task Processing - Developers Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-style-guide.html">EOxServer code style guide</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Developers’ Guide</a> &raquo;</li>
+        
+      <li>Processes</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/developers/processes.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="processes">
+<span id="id1"></span><h1>Processes<a class="headerlink" href="#processes" title="Permalink to this headline">¶</a></h1>
+<p>This section deals with the creation of new Processes to be exposed via the WPS
+interface.</p>
+<p>Processes are simply <code class="xref py py-class docutils literal"><span class="pre">Components</span></code>
+that implement the <a class="reference internal" href="../apidoc/eoxserver.services.ows.wps.html#eoxserver.services.ows.wps.interfaces.ProcessInterface" title="eoxserver.services.ows.wps.interfaces.ProcessInterface"><code class="xref py py-class docutils literal"><span class="pre">ProcessInterface</span></code></a>. For general
+information about Plugins/Components please refer to the <a class="reference internal" href="plugins.html#plugins"><span class="std std-ref">Plugins</span></a>
+documentation.</p>
+<div class="section" id="creating-a-new-process">
+<h2>Creating a new Process<a class="headerlink" href="#creating-a-new-process" title="Permalink to this headline">¶</a></h2>
+<p>As we already mentioned, Processes are <code class="xref py py-class docutils literal"><span class="pre">Components</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eoxserver.core</span> <span class="k">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">implements</span>
+<span class="kn">from</span> <span class="nn">eoxserver.services.ows.wps.interfaces</span> <span class="k">import</span> <span class="n">ProcessInterface</span>
+
+<span class="k">class</span> <span class="nc">ExampleProcess</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+    <span class="n">implements</span><span class="p">(</span><span class="n">ProcessInterface</span><span class="p">)</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>Apart from some optional metadata and a mandatory identifier, each Process has
+specific input parameters and output items. Those can be of various formats and
+complexity. Each input and output must be declared in the processes section.
+Let’s start with a simple example, using <a class="reference external" href="eoxserver.services.ows.wps.parameters.LiteralData">LiteralData</a> inputs and outputs:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eoxserver.services.ows.wps.parameters</span> <span class="k">import</span> <span class="n">LiteralData</span>
+
+<span class="k">class</span> <span class="nc">ExampleProcess</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+    <span class="n">implements</span><span class="p">(</span><span class="n">ProcessInterface</span><span class="p">)</span>
+
+    <span class="n">identifier</span> <span class="o">=</span> <span class="s2">&quot;ExampleProcess&quot;</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Example Title.&quot;</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;example-metadata&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.metadata.com/example-metadata&quot;</span><span class="p">}</span>
+    <span class="n">profiles</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;example_profile&quot;</span><span class="p">]</span>
+
+    <span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;example_input&quot;</span><span class="p">,</span> <span class="n">LiteralData</span><span class="p">(</span>
+            <span class="s1">&#39;example_input&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">abstract</span><span class="o">=</span><span class="s2">&quot;Example string input.&quot;</span><span class="p">,</span>
+        <span class="p">))</span>
+    <span class="p">]</span>
+
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;example_output&quot;</span><span class="p">,</span> <span class="n">LiteralData</span><span class="p">(</span>
+            <span class="s1">&#39;example_output&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">abstract</span><span class="o">=</span><span class="s2">&quot;Example string output.&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;n/a&quot;</span>
+        <span class="p">)),</span>
+    <span class="p">]</span>
+
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p><code class="xref py py-class docutils literal"><span class="pre">LiteralData</span></code>
+inputs will always try to parse the input to the defined type. E.g: if you
+defined your input type to <code class="docutils literal"><span class="pre">float</span></code>, an error will be raised if the supplied
+parameters could not be passed. On the other hand, all your outputs will be
+properly encoded and even translated to a specific unit if requested. Your
+execute function will not need to hassle with type conversions of any kind for
+your inputs/outputs.</p>
+<p>Now that we have defined a Process with metadata, inputs and outputs we can
+start writing the <code class="docutils literal"><span class="pre">execute</span></code> method of our Process. Each input parsed before it
+is passed to our <code class="docutils literal"><span class="pre">execute</span></code> method where it is mapped to a named parameter</p>
+<p>Our <code class="docutils literal"><span class="pre">execute</span></code> method is expected to return either a normal Python object if
+we only declared a single output, or a <a class="reference external" href="https://docs.python.org/2.7/library/stdtypes.html#dict" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">dict</span></code></a> of outputs where the
+<code class="docutils literal"><span class="pre">keys</span></code> are the names of our declared outputs:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ExampleProcess</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+    <span class="n">implements</span><span class="p">(</span><span class="n">ProcessInterface</span><span class="p">)</span>
+
+    <span class="o">...</span>
+
+    <span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;example_input&quot;</span><span class="p">,</span> <span class="n">LiteralData</span><span class="p">(</span>
+            <span class="s1">&#39;example_input&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">abstract</span><span class="o">=</span><span class="s2">&quot;Example string input.&quot;</span><span class="p">,</span>
+        <span class="p">))</span>
+    <span class="p">]</span>
+
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;example_output&quot;</span><span class="p">,</span> <span class="n">LiteralData</span><span class="p">(</span>
+            <span class="s1">&#39;example_output&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">abstract</span><span class="o">=</span><span class="s2">&quot;Example string output.&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;n/a&quot;</span>
+        <span class="p">)),</span>
+    <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">inputs</span><span class="p">):</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;example_output&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Echo &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;example_input&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">outputs</span>
+</pre></div>
+</div>
+<p>Another often used type for Processes are <code class="xref py py-class docutils literal"><span class="pre">BoundingBoxes</span></code>. They are declared as
+follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eoxserver.core</span> <span class="k">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">implements</span>
+<span class="kn">from</span> <span class="nn">eoxserver.services.ows.wps.interfaces</span> <span class="k">import</span> <span class="n">ProcessInterface</span>
+<span class="kn">from</span> <span class="nn">eoxserver.services.ows.wps.parameters</span> <span class="k">import</span> <span class="p">(</span>
+    <span class="n">BoundingBoxData</span><span class="p">,</span> <span class="n">BoundingBox</span>
+<span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">ExampleProcess</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+    <span class="n">implements</span><span class="p">(</span><span class="n">ProcessInterface</span><span class="p">)</span>
+
+    <span class="o">...</span>
+
+    <span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;example_bbox_input&quot;</span><span class="p">,</span> <span class="n">BoundingBoxData</span><span class="p">(</span>
+            <span class="s2">&quot;example_bbox_input&quot;</span><span class="p">,</span> <span class="n">crss</span><span class="o">=</span><span class="p">(</span><span class="mi">4326</span><span class="p">,</span> <span class="mi">3857</span><span class="p">),</span>
+            <span class="n">default</span><span class="o">=</span><span class="n">BoundingBox</span><span class="p">([[</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="mi">180</span><span class="p">],</span> <span class="p">[</span><span class="o">+</span><span class="mi">90</span><span class="p">,</span> <span class="o">+</span><span class="mi">180</span><span class="p">]]),</span>
+        <span class="p">)),</span>
+    <span class="p">]</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;example_bbox_output&quot;</span><span class="p">,</span> <span class="n">BoundingBoxData</span><span class="p">(</span>
+            <span class="s2">&quot;example_bbox_output&quot;</span><span class="p">,</span> <span class="n">crss</span><span class="o">=</span><span class="p">(</span><span class="mi">4326</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">)),</span>
+    <span class="p">]</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>The third kind of input and output is <code class="xref py py-class docutils literal"><span class="pre">ComplexData</span></code> which can come in various formats,
+binary or textual representation and either raw or base64 encoding.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="atp_dev_guide.html" class="btn btn-neutral float-right" title="Asynchronous Task Processing - Developers Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="handling_coverages.html" class="btn btn-neutral float-left" title="Handling Coverages" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
