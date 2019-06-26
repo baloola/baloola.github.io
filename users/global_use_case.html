@@ -1,0 +1,610 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Global Use Case &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Installation" href="install.html" />
+    <link rel="prev" title="EOxServer Basics" href="basics.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Users’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">EOxServer Basics</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Global Use Case</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-general-provider-view">The General <em>Provider</em> View</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#environment-software-configuration">Environment &amp; Software Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data-registration">Data Registration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#the-general-user-view">The General <em>User</em> View</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#web-browser">Web Browser</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gis-tool">GIS Tool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos_installation.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instance_creation.html">Service Instance Creation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operational_install.html">Recommendations for Operational Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailing_lists.html">Mailing Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demonstration.html">Demonstration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EO-WCS_request_parameters.html">EO-WCS Request Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opensearch.html">OpenSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html">EOxServer Operators’ Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webclient.html">The Webclient Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="idm/index.html">Identity Management System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html">EOxServer Presentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html">Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crss.html">Supported CRSs and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html">Supported Raster File Formats and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html">Asynchronous Task Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WCS-T_summary.html">Web Coverage Service - Transaction Extension</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Users’ Guide</a> &raquo;</li>
+        
+      <li>Global Use Case</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/users/global_use_case.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="global-use-case">
+<span id="index-0"></span><span id="id1"></span><h1><a class="toc-backref" href="#table-of-contents">Global Use Case</a><a class="headerlink" href="#global-use-case" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#global-use-case" id="id12">Global Use Case</a><ul>
+<li><a class="reference internal" href="#the-general-provider-view" id="id13">The General <em>Provider</em> View</a><ul>
+<li><a class="reference internal" href="#environment-software-configuration" id="id14">Environment &amp; Software Configuration</a></li>
+<li><a class="reference internal" href="#data-registration" id="id15">Data Registration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-general-user-view" id="id16">The General <em>User</em> View</a><ul>
+<li><a class="reference internal" href="#web-browser" id="id17">Web Browser</a></li>
+<li><a class="reference internal" href="#gis-tool" id="id18">GIS Tool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>This section describes the global Use Case of EOxServer including concrete
+usage scenarios as examples.</p>
+<p>Figure: “<a class="reference internal" href="#fig-global-use-case-1"><span class="std std-ref">Parties involved in the EOxServer Global Use Case</span></a>” introduces the involved parties in this
+global Use Case.</p>
+<div class="figure align-center" id="id2">
+<span id="fig-global-use-case-1"></span><img alt="../_images/Global_Use_Case1.png" src="../_images/Global_Use_Case1.png" />
+<p class="caption"><span class="caption-text"><em>Parties involved in the EOxServer Global Use Case</em></span></p>
+</div>
+<p>On the one side there is a provider of Earth Observation (EO) data. The
+provider has a possibly huge, in terms of storage size, archive of EO data and
+wants to provide this data to users. Of course the data provision has to follow
+certain constraints and requirements like technical, managerial, or security
+frame conditions but in general the provider wants to reach as many users as
+possible with minimal efforts.</p>
+<p>On the other side there is a user of EO data. The user has the need of certain
+EO data as input to some processing which varies from simple viewing to complex
+data analysis and generation of derived data. The user wants to obtain the
+needed EO data as easily as possible which includes finding the right data from
+the right provider at the right time at the right location and retrieving it in
+the right representation e.g. format.</p>
+<p>Already from this simple constellation the need for standardized interfaces is
+evident. Thus EOxServer implements the open publicly available interface
+standards defined by the Open Geospatial Consortium (OGC). In particular
+EOxServer contains an implementation of the Web Coverage Service (WCS)
+including its Earth Observation Application Profile (EO-WCS) and the Web Map
+Service (WMS) again including its EO extension (EO-WMS).</p>
+<p>These interface standards have been chosen to support the new paradigm of
+“zooming to the data”. This means looking at previews of the data rather than
+searching in a catalogue in order to find the right data. WMS together with its
+EO extension is used for the previews whereas WCS with its EO extensions is
+used to download the previously viewed data and metadata. Of course a provider
+is free to operate a catalogue in parallel including references to the EO-WMS
+and EO-WCS.</p>
+<p>The EOxServer software stack is a collection of Open Source Software designed
+to enhance a wide range of legacy systems of EO data archives with controlled
+Web-based access (“online data access”) with minimal efforts for the provider.
+The user not only significantly benefits from the provider’s enhanced online
+data access but also from the client functionalities included in the EOxServer
+software stack.</p>
+<p>In particular the EOxServer software stack provides the following features:</p>
+<ul class="simple">
+<li>easy to install</li>
+<li>simple yet powerful web interface for data registration for the provider</li>
+<li>standardized way to access geographic data i.e. via EO-WMS and EO-WCS</li>
+<li>download of subsets of data</li>
+<li>on the fly re-projection, re-sampling, and format conversion</li>
+<li>visual preview of data</li>
+<li>integrated usage of EO-WMS and EO-WCS to view and download the same data</li>
+<li>intelligent automated handling of EO collections and mosaics</li>
+<li>homogeneous way to access different data, metadata, and packaging formats</li>
+<li>homogeneous access to different storage systems i.e. file system, ftp, and
+rasdaman</li>
+</ul>
+<p>These features result in the general benefit for the provider to be more
+attractive to the user.</p>
+<p>The following sub-sections provide details from the provider and user point of
+view highlighting the possible usage of the EOxServer software stack.</p>
+<div class="section" id="the-general-provider-view">
+<h2><a class="toc-backref" href="#table-of-contents">The General <em>Provider</em> View</a><a class="headerlink" href="#the-general-provider-view" title="Permalink to this headline">¶</a></h2>
+<p>The provider operates an archive of EO data with different ways of actually
+accessing the data. For simplicity let’s assume the data archived in this
+legacy system can be accessed in two ways. First there is the local access
+directly to the file system via operating system capabilities. Second there is
+an online access by exposing certain directories via FTP.</p>
+<p>The EOxServer software stack acts as a middle-ware layer in front of the legacy
+archive system that expands the offered functionality and thus widens the
+potential user or customer base. The additional functionality compared to plain
+FTP access includes:</p>
+<ul class="simple">
+<li>interoperable online access via a standard interface defined by an accepted
+international industry consortium</li>
+<li>domain and range sub-setting of coverages allowing to download only the
+needed parts of a coverage and thus saving bandwidth</li>
+<li>spatial-temporal search within the offered coverages</li>
+<li>on-the-fly mosaicking</li>
+<li>on-the-fly re-projection</li>
+<li>delivery in multiple encoding formats i.e. on-the-fly format conversion</li>
+<li>on-the-fly scaling and re-sampling</li>
+<li>preview via EO-WMS</li>
+<li>embedding of metadata (EO-O&amp;M) adjusted to the actual delivered coverage</li>
+</ul>
+<p>Figure: “<a class="reference internal" href="#fig-global-use-case-provider"><span class="std std-ref">Provider View</span></a>” provides an overview of the
+provider environment showing the provider’s legacy system and the extending
+EOxServer software stack.</p>
+<div class="figure align-center" id="id3">
+<span id="fig-global-use-case-provider"></span><img alt="../_images/Global_Use_Case_Provider.png" src="../_images/Global_Use_Case_Provider.png" />
+<p class="caption"><span class="caption-text"><em>Provider View</em></span></p>
+</div>
+<p>The recommended way for the installation of the EOxServer software stack is to
+use a host which has direct read access to the data via the file system using
+operating system capabilities. If this file system is physically located on the
+same hardware host or if it is mounted from some remote storage e.g. via NFS or
+Samba doesn’t matter in terms of functionality. However, in terms of
+performance the actual configuration has some impact as big data might have to
+be transferred over the network with different bandwidths.</p>
+<p>The other option is to use the read access via FTP which is a practical
+configuration in terms of functionality. However, in terms of performance this
+isn’t the recommended configuration because of  the need to always transfer
+whole files even if only a subset is needed. Various caching strategies will
+significantly improve this configuration, though.</p>
+<p>After the installation of all software components needed for the EOxServer
+software stack there are two main activities left for the provider:</p>
+<ul class="simple">
+<li>Configure the environment (e.g. register service endpoint(s) in a web server)
+and EOxServer (e.g. enable or disable components like services)</li>
+<li>Register data</li>
+</ul>
+<p>Figure: “<a class="reference internal" href="#fig-global-use-case-provider-activities"><span class="std std-ref">Activities to Enhance the Provider’s Environment</span></a>” shows these activities
+needed to enhance the provider’s environment with online data access to the EO
+data archive legacy system.</p>
+<div class="figure align-center" id="id4">
+<span id="fig-global-use-case-provider-activities"></span><img alt="../_images/Global_Use_Case_Provider_Activity.png" src="../_images/Global_Use_Case_Provider_Activity.png" />
+<p class="caption"><span class="caption-text"><em>Activities to Enhance the Provider’s Environment</em></span></p>
+</div>
+<div class="section" id="environment-software-configuration">
+<h3><a class="toc-backref" href="#table-of-contents">Environment &amp; Software Configuration</a><a class="headerlink" href="#environment-software-configuration" title="Permalink to this headline">¶</a></h3>
+<p>The EOxServer software stack consists of the EOxServer, the Identity
+Management, and the Applications Interface software components.</p>
+<p>The Identity Management layer is an optional layer on top of EOxServer. Thus
+and because its configuration is extensively discussed in section
+<a class="reference internal" href="idm/index.html#identity-management-system"><span class="std std-ref">Identity Management System</span></a> we skip it here.</p>
+<p>The Applications Interface software components are discussed in detail in
+section <a class="reference internal" href="#the-general-user-view">The General User View</a> below.</p>
+<p>As EOxServer is based on Python, MapServer, GDAL/OGR, and Django these software
+components need to be installed first. The base configuration of EOxServer
+consists of the generation of an EOxServer instance and registering it in a web
+server.</p>
+<p>The EOxServer instance generation includes the configuration of various
+parameters like database name, type, and connection info, instance id, paths to
+logfiles, temporary directories, etc. as well as the initialization of its
+database. There are two options for the database management system (DBMS). The
+first is SQLite together with SpatialLite which is a single file DBMS and thus
+best suited for testing purposes. The second is PostgreSQL together with
+PostGIS which is a full fledged DBMS with numerous management functionalities
+and thus best suited for operational environments.</p>
+<p>The database itself holds the configuration of components and resources (e.g.
+is WCS 1.0.0 enabled) as well as the coverage metadata ingested during
+registration (see section <a class="reference internal" href="#data-registration">Data Registration</a>).</p>
+<p>EOxServer can be operated with any web server that supports the <a class="reference external" href="https://docs.djangoproject.com/en/1.11/howto/deployment/">Python WSGI
+standards</a>. For
+testing and implementation purposes the Django framework directly provides a
+simple web server. However, in operational environments the recommended
+deployment of EOxServer is to use the well-known <a class="reference external" href="http://httpd.apache.org">Apache web server</a> together with <a class="reference external" href="http://code.google.com/p/modwsgi/">mod_wsgi</a>. In most cases it will be the easiest,
+fastest, and most stable deployment choice.</p>
+<p>At this point the provider’s administrator or operator can actually run the
+software stack and configure the remainder via EOxServer’s admin app. This app
+is accessed via a standard web browser and, when using Django’s internal web
+server, available at the URL: “<a class="reference external" href="http://localhost:8000/admin">http://localhost:8000/admin</a>”. Use the user
+credentials that have been set in the database initialization step.</p>
+<p>Figure: “<a class="reference internal" href="#fig-admin-app-start"><span class="std std-ref">Admin app - Start</span></a>” shows the admin app after successful
+login. On the left side the four modules “Auth”, “Backends”, “Core”, and
+“Coverages” are shown. “Auth” is the internal Django user management module
+which is at the moment only used for the admin app itself. “Backends” and
+“Coverages” are the modules for data registration which is described in section
+<a class="reference internal" href="#data-registration">Data Registration</a> below.</p>
+<p>The “Core” module is used to enable or disable EOxServer components like
+services. The provider can decide which services and even which versions of
+which services EOxServer shall expose. A possible configuration is to expose
+WCS 2.0 and WMS 1.3.0 which are the latest versions but not any older version.
+In the default database initialization all services are enabled.</p>
+<div class="figure align-center" id="id5">
+<span id="fig-admin-app-start"></span><img alt="../_images/Admin_app_Start.png" src="../_images/Admin_app_Start.png" />
+<p class="caption"><span class="caption-text"><em>Admin app - Start</em></span></p>
+</div>
+</div>
+<div class="section" id="data-registration">
+<h3><a class="toc-backref" href="#table-of-contents">Data Registration</a><a class="headerlink" href="#data-registration" title="Permalink to this headline">¶</a></h3>
+<p>The data registration is done via the functionalities provided by the
+“Backends” and “Coverages” modules of the admin app. Figure:
+“<a class="reference internal" href="#fig-admin-app-start"><span class="std std-ref">Admin app - Start</span></a>” shows for which data types, or models in Django
+terminology, instances can be added or changed in these modules. These data
+types correspond to tables in the database. Only a subset of the full data
+model (see Figure: “<a class="reference internal" href="../developers/data_model.html#fig-model-coverages"><span class="std std-ref">EOxServer Data Model for Coverage Resources</span></a>)” is shown in the admin app
+because some are filled automatically upon saving and some are included in the
+available ones like TileIndex in Stitched Mosaics.</p>
+<p>The Dataset Series provides a convenient way to register a complete dataset
+series or collection at once. Figure:
+“<a class="reference internal" href="#fig-admin-app-change-dataset-series"><span class="std std-ref">Admin app - Add/Change Dataset Series</span></a>” shows the admin app when changing
+a Dataset Series instance. The operator has to provide an “EO ID” and an “EO
+Metadata Entry”. All other parameters are optional as can be seen by the usage
+of normal instead of bold face text. However, in order to actually register
+coverages either one or multiple “Data sources”, consisting of a “Location”
+e.g. a data directory and a “Search pattern”, have to be added. Alternatively,
+the administrator can decide to register single coverages and link them to the
+Dataset Series via the “Advanced coverage handling” module (see Figure:
+“<a class="reference internal" href="#fig-admin-app-change-dataset-series-advanced"><span class="std std-ref">Admin app - Add/Change Dataset Series Advanced</span></a>”).</p>
+<div class="figure align-center" id="id6">
+<span id="fig-admin-app-change-dataset-series"></span><img alt="../_images/Admin_app_Change_Dataset_Series.png" src="../_images/Admin_app_Change_Dataset_Series.png" />
+<p class="caption"><span class="caption-text"><em>Admin app - Add/Change Dataset Series</em></span></p>
+</div>
+<p>Figure: “<a class="reference internal" href="#fig-admin-app-change-eo-metadata"><span class="std std-ref">Admin app - Add/Change EO Meatadata</span></a>” shows the screen for adding
+or changing an EO metadata entry. The operator has to provide the “Begin of
+acquisition”, “End of acquisition”, and “Footprint” of the overall Dataset
+Series in the same way as for any EO Coverage. Calendar, clock, and map widgets
+are provided to ease the provision of these parameters. Optionally a full EO
+O&amp;M metadata record can be supplied.</p>
+<div class="figure align-center" id="id7">
+<span id="fig-admin-app-change-eo-metadata"></span><img alt="../_images/Admin_app_Change_EO_Meatadata.png" src="../_images/Admin_app_Change_EO_Meatadata.png" />
+<p class="caption"><span class="caption-text"><em>Admin app - Add/Change EO Meatadata</em></span></p>
+</div>
+<p>Saving a Dataset Series triggers a synchronization process. This process scans
+the Locations, e.g. directories and included sub-directories, of all configured
+Data Sources for files that follow the configured search pattern e.g. “*.tif”.
+All files found are evaluated using GDAL and for any valid and readable raster
+file a Dataset instance is generated in the database holding all metadata
+including EO metadata for the raster file. Of course the raster file itself
+remains unchanged in the file system.</p>
+<p>Let’s look in more detail at the synchronization process and assume a plain
+GeoTIFF file with name “demo.tif” was found. The synchronization process
+extracts the necessary geographic metadata i.e. the domainSet or extent
+consisting of CRS, size, and bounding box directly from the GeoTIFF file. Where
+does the metadata come from? In order to retrieve the EO metadata at the moment
+the process looks for a file called “demo.xml” accompanying the GeoTIFF file.
+In future this may be expanded to automatically retrieve the metadata from
+catalogues like the ones the EOLI-SA connects to but for the moment the files
+have to be generated before the registration. The content of this file can
+either be a complete EO-O&amp;M metadata record or a simple native metadata record
+containing only the mandatory parameters which are: “EOID”, “Begin of
+acquisition”, “End of acquisition”, and “Footprint”. If no “demo.xml” is found
+the process uses default values which are: file name without extension, current
+date and time, and full bounding box of raster file. Of course, the
+synchronization process can be re-run at any time e.g. from a daily, hourly,
+etc. cronjob.</p>
+<p>This configuration is sufficient to bring online a complete EO data archive
+accessible via the file system.</p>
+<p>A comparable synchronization process is available for FTP and rasdaman
+back-ends as well as for Stitched Mosaics. However, mostly these processes
+require more complex synchronization steps. For example, via the FTP back-end
+it is better to not inspect the raster files itself which would mean to
+completely transfer them but to retrieve the geographic information together
+with the EO metadata. Please refer to the remainder of this <a class="reference internal" href="index.html#eoxserver-users-guide"><span class="std std-ref">Users’ Guide</span></a> for detailed information and usage instructions.</p>
+<div class="figure align-center" id="id8">
+<span id="fig-admin-app-change-dataset-series-advanced"></span><img alt="../_images/Admin_app_Change_Dataset_Series_Advanced.png" src="../_images/Admin_app_Change_Dataset_Series_Advanced.png" />
+<p class="caption"><span class="caption-text"><em>Admin app - Add/Change Dataset Series Advanced</em></span></p>
+</div>
+</div>
+</div>
+<div class="section" id="the-general-user-view">
+<h2><a class="toc-backref" href="#table-of-contents">The General <em>User</em> View</a><a class="headerlink" href="#the-general-user-view" title="Permalink to this headline">¶</a></h2>
+<p>The user needs certain EO data as input to some processing. This processing
+ranges from simply viewing certain parameters of EO data to complex data
+analysis and generation of derived data. The user has an environment with the
+software installed needed for the processing. For simplicity let’s assume the
+user has two different software tools installed to process the data. First
+there is a standard web browser which manages the HTTP protocol and is capable
+of viewing HTML web pages. Second there is a GIS software which shall be QGis
+in our example.</p>
+<p>Figure: “<a class="reference internal" href="#fig-global-use-case-user"><span class="std std-ref">User View</span></a>” shows the user environment and its
+installed software.</p>
+<div class="figure align-center" id="id9">
+<span id="fig-global-use-case-user"></span><img alt="../_images/Global_Use_Case_User.png" src="../_images/Global_Use_Case_User.png" />
+<p class="caption"><span class="caption-text"><em>User View</em></span></p>
+</div>
+<p>First of all the user needs to find an EO data provider who has data that fit
+the user’s purpose and who offers the data via a mechanism the user can handle.
+Luckily the user happens to know a provider who is running the EOxServer
+software stack on an EO data archive holding the required data. Thus the user
+can decide between several ways how to retrieve the data. Some involve client
+side components of the EOxServer software stack but because of the strict
+adherence to open standards various other ways are possible in parallel.
+However, we’ll focus below on two ways involving EOxServer software components.</p>
+<div class="section" id="web-browser">
+<h3><a class="toc-backref" href="#table-of-contents">Web Browser</a><a class="headerlink" href="#web-browser" title="Permalink to this headline">¶</a></h3>
+<p>In the first case the provider offers a dedicated app using EOxServer’s Web
+API. This app consists of HTML and Javascript files and is served via a web
+server from the provider’s environment. In our case the app provides access to
+one dataset series holding some MERIS scenes over Europe.</p>
+<p>Figure: “<a class="reference internal" href="#fig-client-openlayers"><span class="std std-ref">Browser app featuring EOxServer’s Web API</span></a>” shows a screen shot of this app. The app
+implements the paradigm of “zooming to the data” i.e. the user directly looks
+at previews of the data served via EO-WMS rather than having to search in a
+catalogue first. After zooming to and therewith setting the Area of Interest
+(AoI) and setting the Time of Interest (ToI) the user following the download
+button is presented with the metadata of the included datasets retrieved from
+the offered EO-WCS. The metadata includes grid, bands, CRS, nil values, etc. of
+the datasets but also formats, CRSs, and interpolation methods the dataset can
+be retrieved in. Based on this information the user decides which datasets to
+download and specifies parameters of the download like spatial sub-setting,
+band sub-setting, CRS, size/resolution, interpolation method, format, and
+format specific parameters like compression. The app guides the user to specify
+all these parameters and downloads only the really needed data to the user’s
+environment. The EO-WCS protocol is used by the app transparently to the user
+i.e. most of the complexity of the EO-WCS protocol is hidden.</p>
+<p>This app shows the benefit of the integrated usage of EO-WMS and EO-WCS for the
+online data access to the EO data archive.</p>
+<div class="figure align-center" id="id10">
+<span id="fig-client-openlayers"></span><img alt="../_images/webclient_autotest.png" src="../_images/webclient_autotest.png" />
+<p class="caption"><span class="caption-text"><em>Browser app featuring EOxServer’s Web API</em></span></p>
+</div>
+<p><a class="reference internal" href="webclient.html#webclient"><span class="std std-ref">The Webclient Interface</span></a> section of the documentation provides more
+details about the Web API.</p>
+</div>
+<div class="section" id="gis-tool">
+<h3><a class="toc-backref" href="#table-of-contents">GIS Tool</a><a class="headerlink" href="#gis-tool" title="Permalink to this headline">¶</a></h3>
+<p>Note, that the Python Client API is not yet implemented and only available as
+concept.</p>
+<p>In the second case the user wants to use the full-fledged GIS software tool
+QGis and thus decides to use the handy EO-WCS plug-in provided by the provider.
+This plug-in makes extensive use of EOxServer’s Python Client API.</p>
+<p>Figure: “<a class="reference internal" href="#fig-client-qgis"><span class="std std-ref">QGis EO-WCS Plug-in featuring EOxServer’s Python Client API</span></a>” shows a screen shot how the usage of the
+EO-WCS plug-in for QGis might look like. The user first has to connect to the
+provider’s EO-WCS endpoint. Once connected the plug-in retrieves the metadata
+about the available dataset series and shows them as a list to the user
+together with the tools to specify AoI and ToI. Metadata of datasets and
+stitched mosaics might also be retrieved in this step if the provider
+configured some to be directly visible in the capabilities of the EO-WCS.</p>
+<p>The selected dataset series are transparently searched within the set
+spatio-temporal bounding box and available datasets and stitched mosaics
+presented to the user. After exploring and setting the download parameters
+like in the first case the EO-WCS plug-in downloads again only the required
+data sub-sets. In addition to the previous case the EO-WCS plug-in applies
+various strategies to limit the data download. For example if a dataset is
+added to the current list of layers only the currently viewed area needs to be
+filled with data at the resolution of the screen. In addition the data can be
+sub-setted to one or three bands that are shown i.e. there’s no need to
+download numerous float32 bands just to preview the data.</p>
+<p>With using the EOxServer software stack on the provider side the plug-in
+includes the possibility to exploit the integrated usage of EO-WMS and EO-WCS.
+This exploitation includes the displaying of previews in the two steps
+described above. Another feature is, that the possibly nicer looking images are
+retrieved from the performance optimized EO-WMS to fill the current view.</p>
+<p>Once the user starts some sophisticated processing the plug-in retrieves the
+required sub-sets of the original data. Again strategies to limit the data
+download are applied.</p>
+<div class="figure align-center" id="id11">
+<span id="fig-client-qgis"></span><img alt="../_images/Client_QGis_Add_WCS.png" src="../_images/Client_QGis_Add_WCS.png" />
+<p class="caption"><span class="caption-text"><em>QGis EO-WCS Plug-in featuring EOxServer’s Python Client API</em></span></p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="install.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="basics.html" class="btn btn-neutral float-left" title="EOxServer Basics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

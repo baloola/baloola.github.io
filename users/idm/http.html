@@ -1,0 +1,970 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>HTTP Components &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="SOAP Components" href="soap.html" />
+    <link rel="prev" title="Identity Management System" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Users’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../basics.html">EOxServer Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../global_use_case.html">Global Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../centos_installation.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../instance_creation.html">Service Instance Creation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../operational_install.html">Recommendations for Operational Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mailing_lists.html">Mailing Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../demonstration.html">Demonstration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../EO-WCS_request_parameters.html">EO-WCS Request Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../opensearch.html">OpenSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../operators.html">EOxServer Operators’ Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../webclient.html">The Webclient Interface</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Identity Management System</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="index.html#installation-and-configuration">Installation and Configuration</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html#http-and-soap-specific-components">HTTP and SOAP Specific Components</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">HTTP Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="soap.html">SOAP Components</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentations.html">EOxServer Presentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration_options.html">Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../crss.html">Supported CRSs and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../formats.html">Supported Raster File Formats and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../atp_sum.html">Asynchronous Task Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../WCS-T_summary.html">Web Coverage Service - Transaction Extension</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Users’ Guide</a> &raquo;</li>
+        
+          <li><a href="index.html">Identity Management System</a> &raquo;</li>
+        
+      <li>HTTP Components</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/users/idm/http.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="http-components">
+<span id="identity-management-system-http"></span><h1><a class="toc-backref" href="#table-of-contents">HTTP Components</a><a class="headerlink" href="#http-components" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#http-components" id="id1">HTTP Components</a><ul>
+<li><a class="reference internal" href="#shibboleth-identity-provider" id="id2">Shibboleth Identity Provider</a></li>
+<li><a class="reference internal" href="#shibboleth-service-provider" id="id3">Shibboleth Service Provider</a></li>
+<li><a class="reference internal" href="#configure-shibboleth-sp-and-idp" id="id4">Configure Shibboleth SP and IdP</a></li>
+<li><a class="reference internal" href="#configure-the-eoxserver-security-components" id="id5">Configure the EOxServer Security Components</a><ul>
+<li><a class="reference internal" href="#general-configuration-options" id="id6">General Configuration Options</a></li>
+<li><a class="reference internal" href="#adding-new-subject-attributes-to-the-eoxserver-security-components" id="id7">Adding new Subject attributes to the EOxServer Security Components</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The following services are needed for the HTTP security part:</p>
+<ul class="simple">
+<li>Charon Authorisation Service</li>
+<li>Shibboleth Service Provider</li>
+<li>Shibboleth Identity Provider</li>
+<li>EOxServer</li>
+</ul>
+<p>To install and configure the HTTP secuirty components, you have to follow these
+steps:</p>
+<ol class="arabic simple">
+<li>Install the Charon <a class="reference internal" href="index.html#authorisation-service"><span class="std std-ref">Authorisation Service</span></a>.</li>
+<li>Install the <a class="reference internal" href="#idp"><span class="std std-ref">Shibboleth Identity Provider</span></a>.</li>
+<li>Install the <a class="reference internal" href="#sp"><span class="std std-ref">Shibboleth Service Provider</span></a>.</li>
+<li>Follow the documentation of section <a class="reference internal" href="#sp-idp"><span class="std std-ref">Configure Shibboleth SP and IdP</span></a>.</li>
+<li>Follow the documentation of section <a class="reference internal" href="#eoxserver-secconfig"><span class="std std-ref">Configure the EOxServer Security Components</span></a>.</li>
+</ol>
+<div class="section" id="shibboleth-identity-provider">
+<span id="idp"></span><h2><a class="toc-backref" href="#table-of-contents">Shibboleth Identity Provider</a><a class="headerlink" href="#shibboleth-identity-provider" title="Permalink to this headline">¶</a></h2>
+<p>The Shibboleth IdP is implemented as an Java Servlet, thus it needs an
+installed Servlet container. The Shibboleth project offers <a class="reference external" href="https://wiki.shibboleth.net/confluence/display/SHIB2/IdPInstall">an installation
+manual for the Shibboleth IdP on their website</a>. This documentation will provide help
+for the basic configuration to get the authentication process working with your
+EOxServer instance and also the installation process for the use with Tomcat
+and Apache HTTPD. Before you begin with your installation, set up your Tomcat
+servlet container and install and configure an LDAP service.</p>
+<p>Important URLs for your Shibboleth IDP:</p>
+<ul class="simple">
+<li>Status message: <code class="docutils literal"><span class="pre">https://${IDPHOST}/idp/profile/Status</span></code></li>
+<li>Information page: <code class="docutils literal"><span class="pre">https://${IDPHOST}/idp/status</span></code></li>
+<li>Metadata: <code class="docutils literal"><span class="pre">https://${IDPHOST}/idp/profile/Metadata/SAML</span></code></li>
+</ul>
+<p><cite>Warning: IdP resource paths are case sensitive!</cite></p>
+<ul class="simple">
+<li><a class="reference external" href="http://shibboleth.internet2.edu/downloads.html">Download</a> the IdP and
+unzip the archive.</li>
+<li>Run either ./install.sh (on Linxu/Unix systems) or install.bat (on Windows
+systems).</li>
+<li>Follow the on-screen instructions of the script.</li>
+</ul>
+<p>Your <code class="docutils literal"><span class="pre">${IDP_HOME}</span></code> directory contains the following directories:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">bin</span></code>:  This directory contains various tools useful in running, testing,
+or deploying the IdP</li>
+<li><code class="docutils literal"><span class="pre">conf</span></code>: This directory contains all the configuration files for the IdP</li>
+<li><code class="docutils literal"><span class="pre">credentials</span></code>: This is were the IdP’s signing and encryption credential,
+called idp.key and idp.crt, is stored</li>
+<li><code class="docutils literal"><span class="pre">lib</span></code>: This directory contains various code libraries used by the tools in
+bin/</li>
+<li><code class="docutils literal"><span class="pre">logs</span></code>: This directory contains the log files for the IdP . <strong>Don’t forget
+to make this writeable for your Tomcat server!</strong></li>
+<li><code class="docutils literal"><span class="pre">metadata</span></code>: This is the directory in which the IdP will store its metadata,
+in a file called idp-metadata.xml. It is recommend you store any other
+retrieved metadata here as well.</li>
+<li><code class="docutils literal"><span class="pre">war</span></code>: This contains the web application archive (war) file that you will
+deploy into the servlet container</li>
+</ul>
+<p>The next step is to deploy the IdP into your Tomcat:</p>
+<ul>
+<li><p class="first">Increase the memory reserved for Tomcat. Recommended values are
+<code class="docutils literal"><span class="pre">-Xmx512m</span> <span class="pre">-XX:MaxPermSize=128m</span></code>.</p>
+</li>
+<li><p class="first">Add the libraries endorsed by the Shibboleth project to your endorsed Tomcat
+directories: <code class="docutils literal"><span class="pre">-Djava.endorsed.dirs=${IDP_HOME}/lib/endorsed/</span></code></p>
+</li>
+<li><p class="first">Create a new XML document <code class="docutils literal"><span class="pre">idp.xml</span></code> in <code class="docutils literal"><span class="pre">${TOMCAT_HOME}/conf/Catalina/</span>
+<span class="pre">localhost/</span></code>.</p>
+</li>
+<li><p class="first">Insert the following content:</p>
+<blockquote>
+<div><div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;Context</span> <span class="na">docBase=</span><span class="s">&quot;${IDP_HOME}/war/idp.war&quot;</span>
+         <span class="na">privileged=</span><span class="s">&quot;true&quot;</span>
+         <span class="na">antiResourceLocking=</span><span class="s">&quot;false&quot;</span>
+         <span class="na">antiJARLocking=</span><span class="s">&quot;false&quot;</span>
+         <span class="na">unpackWAR=</span><span class="s">&quot;false&quot;</span>
+         <span class="na">swallowOutput=</span><span class="s">&quot;true&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Dont’t forget to replace <code class="docutils literal"><span class="pre">${IDP_HOME}</span></code> with the appropriate path.</p>
+</li>
+</ul>
+<p>To use the Apache HTTP server as an proxy for your IdP, you have to generate a
+certificate and a key file for SSL/TLS first.</p>
+<ul>
+<li><p class="first">Generate a private key:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">openssl</span> <span class="pre">genrsa</span> <span class="pre">-des3</span> <span class="pre">-out</span> <span class="pre">server.key</span> <span class="pre">1024</span></code></p>
+</div></blockquote>
+</li>
+<li><p class="first">Generate a CSR (Certificate Signing Request):</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">openssl</span> <span class="pre">req</span> <span class="pre">-new</span> <span class="pre">-key</span> <span class="pre">server.key</span> <span class="pre">-out</span> <span class="pre">server.csr</span></code></p>
+</div></blockquote>
+</li>
+<li><p class="first">Make a copy from the the original server key:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">cp</span> <span class="pre">server.key</span> <span class="pre">copy_of_server.key</span></code></p>
+</div></blockquote>
+</li>
+<li><p class="first">Remove the Passphrase from your Key:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">openssl</span> <span class="pre">rsa</span> <span class="pre">-in</span> <span class="pre">copy_of_server.key</span> <span class="pre">-out</span> <span class="pre">server.key</span></code></p>
+</div></blockquote>
+</li>
+<li><p class="first">Generating a Self-Signed Certificate:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">openssl</span> <span class="pre">x509</span> <span class="pre">-req</span> <span class="pre">-days</span> <span class="pre">365</span> <span class="pre">-in</span> <span class="pre">server.csr</span> <span class="pre">-signkey</span> <span class="pre">server.key</span> <span class="pre">-out</span>
+<span class="pre">server.crt</span></code></p>
+</div></blockquote>
+</li>
+</ul>
+<p>The next step is to configure your Apache HTTP Server:</p>
+<ul>
+<li><p class="first">First you have to enable <code class="docutils literal"><span class="pre">mod_proxy_ajp</span></code>, <code class="docutils literal"><span class="pre">mod_proxy</span></code> and <code class="docutils literal"><span class="pre">mod_ssl</span></code>.</p>
+</li>
+<li><p class="first">Create a new configuration file for your SSL hosts (for example
+<code class="docutils literal"><span class="pre">ssl_hosts.conf</span></code>).</p>
+</li>
+<li><p class="first">Add a new virtual host in your new hosts file. Please note the comments in
+the virtual host configuration.</p>
+<blockquote>
+<div><div class="highlight-apache"><div class="highlight"><pre><span></span><span class="nt">&lt;VirtualHost</span> <span class="s">_default_:443</span><span class="nt">&gt;</span>
+
+    <span class="c"># Set appropriate document root here</span>
+    <span class="nb">DocumentRoot</span> <span class="s2">&quot;/var/www/&quot;</span>
+
+    <span class="c"># Set your designated IDP host here</span>
+    <span class="nb">ServerName</span> ${IDP_HOST}
+
+    <span class="c"># Set your designated logging directory here</span>
+    <span class="nb">ErrorLog</span> logs/ssl_error_log
+    <span class="nb">TransferLog</span> logs/ssl_access_log
+    <span class="nb">LogLevel</span> <span class="k">warn</span>
+
+    <span class="nb">SSLEngine</span> <span class="k">on</span>
+
+    <span class="nb">SSLProtocol</span> <span class="k">all</span> -SSLv2
+
+     <span class="c"># Important: mod_ssl should not verify the provided certificates</span>
+    <span class="nb">SSLVerifyClient</span> optional_no_ca
+
+    <span class="nb">SSLCipherSuite</span> <span class="k">ALL</span>:!ADH:!EXPORT:!SSLv2:RC4+RSA:+HIGH:+MEDIUM:+LOW
+
+    <span class="c"># Set the correct paths to your certificate and key here</span>
+    <span class="nb">SSLCertificateFile</span>    ${IDP_HOST_CERTIFICATE}
+    <span class="nb">SSLCertificateKeyFile</span> ${IDP_HOST_CERTIFICATE_KEY}
+
+    <span class="nt">&lt;Files</span> <span class="s">~ &quot;\.(cgi|shtml|phtml|php3?)$&quot;</span><span class="nt">&gt;</span>
+        <span class="nb">SSLOptions</span> +StdEnvVars
+    <span class="nt">&lt;/Files&gt;</span>
+    <span class="nt">&lt;Directory</span> <span class="s">&quot;/var/www/cgi-bin&quot;</span><span class="nt">&gt;</span>
+        <span class="nb">SSLOptions</span> +StdEnvVars
+    <span class="nt">&lt;/Directory&gt;</span>
+
+    <span class="c"># AJP Proxy to your IDP servlet</span>
+    <span class="nb">ProxyPass</span> <span class="sx">/idp/</span> ajp://localhost:8009/idp/
+    <span class="nb">ProxyPassReverse</span> <span class="sx">/idp</span> ajp://localhost:8009/idp
+
+    <span class="nb">SetEnvIf</span> <span class="k">User</span>-Agent <span class="s2">&quot;.*MSIE.*&quot;</span> nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0
+
+    <span class="nb">CustomLog</span> logs/ssl_request_log <span class="s2">&quot;%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \&quot;%r\&quot; %b&quot;</span>
+
+<span class="nt">&lt;/VirtualHost&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Restart your HTTP server.</p>
+</li>
+</ul>
+<p>The next step is to configure our IdP Service with an LDAP service. Please keep
+in mind that this documentation can only give a small insight into all
+configuration possibilities of Shibboleth.</p>
+<p>Open the <code class="docutils literal"><span class="pre">handler.xml</span></code></p>
+<ul>
+<li><p class="first">Add a new LoginHandler</p>
+<blockquote>
+<div><div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;LoginHandler</span> <span class="na">xsi:type=</span><span class="s">&quot;UsernamePassword&quot;</span>
+              <span class="na">jaasConfigurationLocation=</span><span class="s">&quot;file://${IDP_HOME}/conf/login.config&quot;</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;AuthenticationMethod&gt;</span>urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport<span class="nt">&lt;/AuthenticationMethod&gt;</span>
+<span class="nt">&lt;/LoginHandler&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Remove (or comment out) the LoginHandler element of type RemoteUser.</p>
+</li>
+</ul>
+<p>Open the <code class="docutils literal"><span class="pre">login.config</span></code> and comment out or delete the other entries that
+might exist. Add your own LDAP configuration:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ShibUserPassAuth</span> <span class="p">{</span>
+  <span class="n">edu</span><span class="o">.</span><span class="n">vt</span><span class="o">.</span><span class="n">middleware</span><span class="o">.</span><span class="n">ldap</span><span class="o">.</span><span class="n">jaas</span><span class="o">.</span><span class="n">LdapLoginModule</span> <span class="n">required</span>
+     <span class="n">host</span><span class="o">=</span><span class="s2">&quot;$</span><span class="si">{LDAP_HOST}</span><span class="s2">&quot;</span>
+     <span class="n">port</span><span class="o">=</span><span class="s2">&quot;$</span><span class="si">{LDAP_PORT}</span><span class="s2">&quot;</span>
+     <span class="n">serviceUser</span><span class="o">=</span><span class="s2">&quot;$</span><span class="si">{LDAP_ADMIN}</span><span class="s2">&quot;</span>
+     <span class="n">serviceCredential</span><span class="o">=</span><span class="s2">&quot;$</span><span class="si">{LDAP_ADMIN_PASSWORD}</span><span class="s2">&quot;</span>
+     <span class="n">base</span><span class="o">=</span><span class="s2">&quot;$</span><span class="si">{LDAP_USER_BASE}</span><span class="s2">&quot;</span>
+     <span class="n">ssl</span><span class="o">=</span><span class="s2">&quot;false&quot;</span>
+     <span class="n">userField</span><span class="o">=</span><span class="s2">&quot;uid&quot;</span>
+     <span class="n">subtreeSearch</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Enable your LDAP directory as attribute provider:</p>
+<ul>
+<li><p class="first">Open the <code class="docutils literal"><span class="pre">attribute-resolver.xml</span></code>.</p>
+</li>
+<li><p class="first">Add your LDAP:</p>
+<blockquote>
+<div><div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;resolver:DataConnector</span> <span class="na">id=</span><span class="s">&quot;localLDAP&quot;</span> <span class="na">xsi:type=</span><span class="s">&quot;LDAPDirectory&quot;</span>
+          <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:resolver:dc&quot;</span> <span class="na">ldapURL=</span><span class="s">&quot;ldap://${LDAP_HOST}:${LDAP_PORT}&quot;</span>
+          <span class="na">baseDN=</span><span class="s">&quot;${LDAP_USER_BASE}&quot;</span> <span class="na">principal=</span><span class="s">&quot;${LDAP_ADMIN}&quot;</span>
+          <span class="na">principalCredential=</span><span class="s">&quot;${LDAP_ADMIN_PASSWORD}&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;FilterTemplate&gt;</span>
+    <span class="cp">&lt;![CDATA[</span>
+<span class="cp">          (uid=$requestContext.principalName)</span>
+<span class="cp">    ]]&gt;</span>
+<span class="nt">&lt;/FilterTemplate&gt;</span>
+<span class="nt">&lt;/resolver:DataConnector&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Configure the IdP to retrieve the attributes by adding new attribute
+definitions:</p>
+<blockquote>
+<div><div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;resolver:AttributeDefinition</span> <span class="na">id=</span><span class="s">&quot;transientId&quot;</span> <span class="na">xsi:type=</span><span class="s">&quot;ad:TransientId&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;resolver:AttributeEncoder</span> <span class="na">xsi:type=</span><span class="s">&quot;enc:SAML1StringNameIdentifier&quot;</span>
+        <span class="na">nameFormat=</span><span class="s">&quot;urn:mace:shibboleth:1.0:nameIdentifier&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;resolver:AttributeEncoder</span> <span class="na">xsi:type=</span><span class="s">&quot;enc:SAML2StringNameID&quot;</span>
+        <span class="na">nameFormat=</span><span class="s">&quot;urn:oasis:names:tc:SAML:2.0:nameid-format:transient&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/resolver:AttributeDefinition&gt;</span>
+
+<span class="nt">&lt;resolver:AttributeDefinition</span> <span class="na">id=</span><span class="s">&quot;displayName&quot;</span> <span class="na">xsi:type=</span><span class="s">&quot;Simple&quot;</span>
+    <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:resolver:ad&quot;</span> <span class="na">sourceAttributeID=</span><span class="s">&quot;displayName&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;resolver:Dependency</span> <span class="na">ref=</span><span class="s">&quot;localLDAP&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;resolver:AttributeEncoder</span> <span class="na">xsi:type=</span><span class="s">&quot;SAML1String&quot;</span>
+        <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:attribute:encoder&quot;</span>
+        <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:displayName&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;resolver:AttributeEncoder</span> <span class="na">xsi:type=</span><span class="s">&quot;SAML2String&quot;</span>
+        <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:attribute:encoder&quot;</span>
+        <span class="na">name=</span><span class="s">&quot;urn:oid:2.16.840.1.113730.3.1.241&quot;</span> <span class="na">friendlyName=</span><span class="s">&quot;displayName&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/resolver:AttributeDefinition&gt;</span>
+
+<span class="nt">&lt;resolver:AttributeDefinition</span> <span class="na">id=</span><span class="s">&quot;givenName&quot;</span> <span class="na">xsi:type=</span><span class="s">&quot;Simple&quot;</span>
+    <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:resolver:ad&quot;</span> <span class="na">sourceAttributeID=</span><span class="s">&quot;givenName&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;resolver:Dependency</span> <span class="na">ref=</span><span class="s">&quot;localLDAP&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;resolver:AttributeEncoder</span> <span class="na">xsi:type=</span><span class="s">&quot;SAML1String&quot;</span>
+        <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:attribute:encoder&quot;</span>
+        <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:givenName&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;resolver:AttributeEncoder</span> <span class="na">xsi:type=</span><span class="s">&quot;SAML2String&quot;</span>
+        <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:attribute:encoder&quot;</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.42&quot;</span>
+        <span class="na">friendlyName=</span><span class="s">&quot;givenName&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/resolver:AttributeDefinition&gt;</span>
+
+<span class="nt">&lt;resolver:AttributeDefinition</span> <span class="na">id=</span><span class="s">&quot;description&quot;</span> <span class="na">xsi:type=</span><span class="s">&quot;Simple&quot;</span>
+    <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:resolver:ad&quot;</span> <span class="na">sourceAttributeID=</span><span class="s">&quot;description&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;resolver:Dependency</span> <span class="na">ref=</span><span class="s">&quot;localLDAP&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;resolver:AttributeEncoder</span> <span class="na">xsi:type=</span><span class="s">&quot;SAML1String&quot;</span>
+        <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:attribute:encoder&quot;</span>
+        <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:description&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;resolver:AttributeEncoder</span> <span class="na">xsi:type=</span><span class="s">&quot;SAML2String&quot;</span>
+        <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:attribute:encoder&quot;</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.13&quot;</span>
+        <span class="na">friendlyName=</span><span class="s">&quot;description&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/resolver:AttributeDefinition&gt;</span>
+
+<span class="nt">&lt;resolver:AttributeDefinition</span> <span class="na">id=</span><span class="s">&quot;cn&quot;</span> <span class="na">xsi:type=</span><span class="s">&quot;Simple&quot;</span>
+    <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:resolver:ad&quot;</span> <span class="na">sourceAttributeID=</span><span class="s">&quot;cn&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;resolver:Dependency</span> <span class="na">ref=</span><span class="s">&quot;localLDAP&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;resolver:AttributeEncoder</span> <span class="na">xsi:type=</span><span class="s">&quot;SAML1String&quot;</span>
+        <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:attribute:encoder&quot;</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:cn&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;resolver:AttributeEncoder</span> <span class="na">xsi:type=</span><span class="s">&quot;SAML2String&quot;</span>
+        <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:attribute:encoder&quot;</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.3&quot;</span>
+        <span class="na">friendlyName=</span><span class="s">&quot;cn&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/resolver:AttributeDefinition&gt;</span>
+
+<span class="nt">&lt;resolver:AttributeDefinition</span> <span class="na">id=</span><span class="s">&quot;sn&quot;</span> <span class="na">xsi:type=</span><span class="s">&quot;Simple&quot;</span>
+    <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:resolver:ad&quot;</span> <span class="na">sourceAttributeID=</span><span class="s">&quot;sn&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;resolver:Dependency</span> <span class="na">ref=</span><span class="s">&quot;localLDAP&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;resolver:AttributeEncoder</span> <span class="na">xsi:type=</span><span class="s">&quot;SAML1String&quot;</span>
+        <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:attribute:encoder&quot;</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:sn&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;resolver:AttributeEncoder</span> <span class="na">xsi:type=</span><span class="s">&quot;SAML2String&quot;</span>
+        <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:attribute:encoder&quot;</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.4&quot;</span>
+        <span class="na">friendlyName=</span><span class="s">&quot;sn&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/resolver:AttributeDefinition&gt;</span>
+
+<span class="nt">&lt;resolver:AttributeDefinition</span> <span class="na">id=</span><span class="s">&quot;uid&quot;</span> <span class="na">xsi:type=</span><span class="s">&quot;Simple&quot;</span>
+    <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:resolver:ad&quot;</span> <span class="na">sourceAttributeID=</span><span class="s">&quot;uid&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;resolver:Dependency</span> <span class="na">ref=</span><span class="s">&quot;localLDAP&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;resolver:AttributeEncoder</span> <span class="na">xsi:type=</span><span class="s">&quot;SAML1String&quot;</span>
+        <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:attribute:encoder&quot;</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:uid&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;resolver:AttributeEncoder</span> <span class="na">xsi:type=</span><span class="s">&quot;SAML2String&quot;</span>
+        <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:attribute:encoder&quot;</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.45&quot;</span>
+        <span class="na">friendlyName=</span><span class="s">&quot;uid&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/resolver:AttributeDefinition&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p>Add the new attributes to your <code class="docutils literal"><span class="pre">attribute-filter.xml</span></code> by adding a new
+AttributeFilterPolicy:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;afp:AttributeFilterPolicy</span> <span class="na">id=</span><span class="s">&quot;attribFilter&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;afp:PolicyRequirementRule</span> <span class="na">xsi:type=</span><span class="s">&quot;basic:ANY&quot;</span><span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;afp:AttributeRule</span> <span class="na">attributeID=</span><span class="s">&quot;givenName&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;afp:PermitValueRule</span> <span class="na">xsi:type=</span><span class="s">&quot;basic:ANY&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/afp:AttributeRule&gt;</span>
+
+    <span class="nt">&lt;afp:AttributeRule</span> <span class="na">attributeID=</span><span class="s">&quot;displayName&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;afp:PermitValueRule</span> <span class="na">xsi:type=</span><span class="s">&quot;basic:ANY&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/afp:AttributeRule&gt;</span>
+
+    <span class="nt">&lt;afp:AttributeRule</span> <span class="na">attributeID=</span><span class="s">&quot;description&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;afp:PermitValueRule</span> <span class="na">xsi:type=</span><span class="s">&quot;basic:ANY&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/afp:AttributeRule&gt;</span>
+
+    <span class="nt">&lt;afp:AttributeRule</span> <span class="na">attributeID=</span><span class="s">&quot;cn&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;afp:PermitValueRule</span> <span class="na">xsi:type=</span><span class="s">&quot;basic:ANY&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/afp:AttributeRule&gt;</span>
+
+    <span class="nt">&lt;afp:AttributeRule</span> <span class="na">attributeID=</span><span class="s">&quot;sn&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;afp:PermitValueRule</span> <span class="na">xsi:type=</span><span class="s">&quot;basic:ANY&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/afp:AttributeRule&gt;</span>
+
+    <span class="nt">&lt;afp:AttributeRule</span> <span class="na">attributeID=</span><span class="s">&quot;uid&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;afp:PermitValueRule</span> <span class="na">xsi:type=</span><span class="s">&quot;basic:ANY&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/afp:AttributeRule&gt;</span>
+
+<span class="nt">&lt;/afp:AttributeFilterPolicy&gt;</span>
+</pre></div>
+</div>
+<p>Now you have to check if the generated metadata is correct. To do this, open
+the <code class="docutils literal"><span class="pre">idp-metadata.xml</span></code> file. Known issues are:</p>
+<ul class="simple">
+<li>Incorrect ports: For example port 8443 at the AttributeService Bindings
+instead of no specific port.</li>
+<li>Wrong X509Certificate for Attribute Resolver. Use your previously generated
+SSL/TLS <code class="docutils literal"><span class="pre">${IDP_HOST_CERTIFICATE}</span></code> instead.</li>
+</ul>
+<p>After this, restart your Shibboleth IdP.</p>
+</div>
+<div class="section" id="shibboleth-service-provider">
+<span id="sp"></span><h2><a class="toc-backref" href="#table-of-contents">Shibboleth Service Provider</a><a class="headerlink" href="#shibboleth-service-provider" title="Permalink to this headline">¶</a></h2>
+<p>The installation procedure for the Shibboleth SP is different for all
+supported Operating Systems. The project describes the different installation
+methods in an <a class="reference external" href="https://wiki.shibboleth.net/confluence/display/SHIB2/Installation">own installation manual</a>. This documentation will provide help for the
+basic configuration to get the authentication process working with your
+EOxServer instance.</p>
+<p>Important URLs for your Shibboleth SP:</p>
+<ul class="simple">
+<li>Status page: <code class="docutils literal"><span class="pre">https://${SPHOST}/Shibboleth.sso/Status</span></code></li>
+<li>Metadata: <code class="docutils literal"><span class="pre">https://${SPHOST}/Shibboleth.sso/Metadata</span></code></li>
+<li>Session summary: <code class="docutils literal"><span class="pre">https://${SPHOST}/Shibboleth.sso/Session</span></code></li>
+<li>Local logout: <code class="docutils literal"><span class="pre">https://${SPHOST}/Shibboleth.sso/Logout</span></code></li>
+</ul>
+<p><cite>Warning: SP resource paths are case sensitive!</cite></p>
+<p><strong>STEP 1</strong></p>
+<p>The Shibboleth SP has two relevant configuration files. We begin with the
+<code class="docutils literal"><span class="pre">attribute-map.xml</span></code> file, where we configure the mapping of the attributes
+received from the IdP to the secured service (in our case the EOxServer):</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;Attributes</span> <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:attribute-map&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="nt">&gt;</span>
+
+    <span class="c">&lt;!-- First some useful eduPerson attributes that many sites might use. --&gt;</span>
+
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:eduPersonPrincipalName&quot;</span> <span class="na">id=</span><span class="s">&quot;eppn&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;AttributeDecoder</span> <span class="na">xsi:type=</span><span class="s">&quot;ScopedAttributeDecoder&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Attribute&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:1.3.6.1.4.1.5923.1.1.1.6&quot;</span> <span class="na">id=</span><span class="s">&quot;eppn&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;AttributeDecoder</span> <span class="na">xsi:type=</span><span class="s">&quot;ScopedAttributeDecoder&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Attribute&gt;</span>
+
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:eduPersonScopedAffiliation&quot;</span> <span class="na">id=</span><span class="s">&quot;affiliation&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;AttributeDecoder</span> <span class="na">xsi:type=</span><span class="s">&quot;ScopedAttributeDecoder&quot;</span> <span class="na">caseSensitive=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Attribute&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:1.3.6.1.4.1.5923.1.1.1.9&quot;</span> <span class="na">id=</span><span class="s">&quot;affiliation&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;AttributeDecoder</span> <span class="na">xsi:type=</span><span class="s">&quot;ScopedAttributeDecoder&quot;</span> <span class="na">caseSensitive=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Attribute&gt;</span>
+
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:eduPersonAffiliation&quot;</span> <span class="na">id=</span><span class="s">&quot;unscoped-affiliation&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;AttributeDecoder</span> <span class="na">xsi:type=</span><span class="s">&quot;StringAttributeDecoder&quot;</span> <span class="na">caseSensitive=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Attribute&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:1.3.6.1.4.1.5923.1.1.1.1&quot;</span> <span class="na">id=</span><span class="s">&quot;unscoped-affiliation&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;AttributeDecoder</span> <span class="na">xsi:type=</span><span class="s">&quot;StringAttributeDecoder&quot;</span> <span class="na">caseSensitive=</span><span class="s">&quot;false&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Attribute&gt;</span>
+
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:eduPersonEntitlement&quot;</span> <span class="na">id=</span><span class="s">&quot;entitlement&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:1.3.6.1.4.1.5923.1.1.1.7&quot;</span> <span class="na">id=</span><span class="s">&quot;entitlement&quot;</span><span class="nt">/&gt;</span>
+
+    <span class="c">&lt;!-- A persistent id attribute that supports personalized anonymous access. --&gt;</span>
+
+    <span class="c">&lt;!-- First, the deprecated/incorrect version, decoded as a scoped string: --&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:eduPersonTargetedID&quot;</span> <span class="na">id=</span><span class="s">&quot;targeted-id&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;AttributeDecoder</span> <span class="na">xsi:type=</span><span class="s">&quot;ScopedAttributeDecoder&quot;</span><span class="nt">/&gt;</span>
+        <span class="c">&lt;!-- &lt;AttributeDecoder xsi:type=&quot;NameIDFromScopedAttributeDecoder&quot; formatter=&quot;$NameQualifier!$SPNameQualifier!$Name&quot; defaultQualifiers=&quot;true&quot;/&gt; --&gt;</span>
+    <span class="nt">&lt;/Attribute&gt;</span>
+
+    <span class="c">&lt;!-- Second, an alternate decoder that will decode the incorrect form into the newer form. --&gt;</span>
+    <span class="c">&lt;!--</span>
+<span class="c">    &lt;Attribute name=&quot;urn:mace:dir:attribute-def:eduPersonTargetedID&quot; id=&quot;persistent-id&quot;&gt;</span>
+<span class="c">        &lt;AttributeDecoder xsi:type=&quot;NameIDFromScopedAttributeDecoder&quot; formatter=&quot;$NameQualifier!$SPNameQualifier!$Name&quot; defaultQualifiers=&quot;true&quot;/&gt;</span>
+<span class="c">    &lt;/Attribute&gt;</span>
+<span class="c">    --&gt;</span>
+
+    <span class="c">&lt;!-- Third, the new version (note the OID-style name): --&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:1.3.6.1.4.1.5923.1.1.1.10&quot;</span> <span class="na">id=</span><span class="s">&quot;persistent-id&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;AttributeDecoder</span> <span class="na">xsi:type=</span><span class="s">&quot;NameIDAttributeDecoder&quot;</span> <span class="na">formatter=</span><span class="s">&quot;$NameQualifier!$SPNameQualifier!$Name&quot;</span> <span class="na">defaultQualifiers=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Attribute&gt;</span>
+
+    <span class="c">&lt;!-- Fourth, the SAML 2.0 NameID Format: --&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oasis:names:tc:SAML:2.0:nameid-format:persistent&quot;</span> <span class="na">id=</span><span class="s">&quot;persistent-id&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;AttributeDecoder</span> <span class="na">xsi:type=</span><span class="s">&quot;NameIDAttributeDecoder&quot;</span> <span class="na">formatter=</span><span class="s">&quot;$NameQualifier!$SPNameQualifier!$Name&quot;</span> <span class="na">defaultQualifiers=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/Attribute&gt;</span>
+
+    <span class="c">&lt;!--Examples of LDAP-based attributes, uncomment to use these... --&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:cn&quot;</span> <span class="na">id=</span><span class="s">&quot;cn&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:sn&quot;</span> <span class="na">id=</span><span class="s">&quot;sn&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:givenName&quot;</span> <span class="na">id=</span><span class="s">&quot;givenName&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:mail&quot;</span> <span class="na">id=</span><span class="s">&quot;mail&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:telephoneNumber&quot;</span> <span class="na">id=</span><span class="s">&quot;telephoneNumber&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:title&quot;</span> <span class="na">id=</span><span class="s">&quot;title&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:initials&quot;</span> <span class="na">id=</span><span class="s">&quot;initials&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:description&quot;</span> <span class="na">id=</span><span class="s">&quot;description&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:carLicense&quot;</span> <span class="na">id=</span><span class="s">&quot;carLicense&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:departmentNumber&quot;</span> <span class="na">id=</span><span class="s">&quot;departmentNumber&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:displayName&quot;</span> <span class="na">id=</span><span class="s">&quot;displayName&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:employeeNumber&quot;</span> <span class="na">id=</span><span class="s">&quot;employeeNumber&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:employeeType&quot;</span> <span class="na">id=</span><span class="s">&quot;employeeType&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:preferredLanguage&quot;</span> <span class="na">id=</span><span class="s">&quot;preferredLanguage&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:manager&quot;</span> <span class="na">id=</span><span class="s">&quot;manager&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:seeAlso&quot;</span> <span class="na">id=</span><span class="s">&quot;seeAlso&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:facsimileTelephoneNumber&quot;</span> <span class="na">id=</span><span class="s">&quot;facsimileTelephoneNumber&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:street&quot;</span> <span class="na">id=</span><span class="s">&quot;street&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:postOfficeBox&quot;</span> <span class="na">id=</span><span class="s">&quot;postOfficeBox&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:postalCode&quot;</span> <span class="na">id=</span><span class="s">&quot;postalCode&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:st&quot;</span> <span class="na">id=</span><span class="s">&quot;st&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:l&quot;</span> <span class="na">id=</span><span class="s">&quot;l&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:o&quot;</span> <span class="na">id=</span><span class="s">&quot;o&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:ou&quot;</span> <span class="na">id=</span><span class="s">&quot;ou&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:businessCategory&quot;</span> <span class="na">id=</span><span class="s">&quot;businessCategory&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:physicalDeliveryOfficeName&quot;</span> <span class="na">id=</span><span class="s">&quot;physicalDeliveryOfficeName&quot;</span><span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.3&quot;</span> <span class="na">id=</span><span class="s">&quot;cn&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.4&quot;</span> <span class="na">id=</span><span class="s">&quot;sn&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.42&quot;</span> <span class="na">id=</span><span class="s">&quot;givenName&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:0.9.2342.19200300.100.1.3&quot;</span> <span class="na">id=</span><span class="s">&quot;mail&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.20&quot;</span> <span class="na">id=</span><span class="s">&quot;telephoneNumber&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.12&quot;</span> <span class="na">id=</span><span class="s">&quot;title&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.43&quot;</span> <span class="na">id=</span><span class="s">&quot;initials&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.13&quot;</span> <span class="na">id=</span><span class="s">&quot;description&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.16.840.1.113730.3.1.1&quot;</span> <span class="na">id=</span><span class="s">&quot;carLicense&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.16.840.1.113730.3.1.2&quot;</span> <span class="na">id=</span><span class="s">&quot;departmentNumber&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.16.840.1.113730.3.1.3&quot;</span> <span class="na">id=</span><span class="s">&quot;employeeNumber&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.16.840.1.113730.3.1.4&quot;</span> <span class="na">id=</span><span class="s">&quot;employeeType&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.16.840.1.113730.3.1.39&quot;</span> <span class="na">id=</span><span class="s">&quot;preferredLanguage&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.16.840.1.113730.3.1.241&quot;</span> <span class="na">id=</span><span class="s">&quot;displayName&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:0.9.2342.19200300.100.1.10&quot;</span> <span class="na">id=</span><span class="s">&quot;manager&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.34&quot;</span> <span class="na">id=</span><span class="s">&quot;seeAlso&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.23&quot;</span> <span class="na">id=</span><span class="s">&quot;facsimileTelephoneNumber&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.9&quot;</span> <span class="na">id=</span><span class="s">&quot;street&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.18&quot;</span> <span class="na">id=</span><span class="s">&quot;postOfficeBox&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.17&quot;</span> <span class="na">id=</span><span class="s">&quot;postalCode&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.8&quot;</span> <span class="na">id=</span><span class="s">&quot;st&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.7&quot;</span> <span class="na">id=</span><span class="s">&quot;l&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.10&quot;</span> <span class="na">id=</span><span class="s">&quot;o&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.11&quot;</span> <span class="na">id=</span><span class="s">&quot;ou&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.15&quot;</span> <span class="na">id=</span><span class="s">&quot;businessCategory&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.19&quot;</span> <span class="na">id=</span><span class="s">&quot;physicalDeliveryOfficeName&quot;</span><span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;urn:oid:2.5.4.45&quot;</span> <span class="na">id=</span><span class="s">&quot;uid&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/Attributes&gt;</span>
+</pre></div>
+</div>
+<p>The next step is to edit the <code class="docutils literal"><span class="pre">shibboleth2.xml</span></code> file: Locate the element
+<code class="docutils literal"><span class="pre">ApplicationDefaults</span></code> and set the value of the attribute <code class="docutils literal"><span class="pre">entityID</span></code> to
+<code class="docutils literal"><span class="pre">${SP_HOST}\Shibboleth</span></code>.</p>
+<p><strong>STEP 2</strong></p>
+<p>The next step is to configure your Apache HTTP Server. To do this, you have to
+generate a certificate and a key file for your SSL/TLS Shibboleth SP Host first
+(see Shibboleth IdP section). Then add a virtual host to your Apache HTTP
+Server:</p>
+<div class="highlight-apache"><div class="highlight"><pre><span></span> <span class="nt">&lt;VirtualHost</span> <span class="s">_default_:443</span><span class="nt">&gt;</span>
+
+    <span class="c"># Include the apache22.conf from Shibboleth</span>
+    <span class="nb">include</span> ${SP_HOME}/apache22.config
+
+    <span class="c"># Set appropriate document root here</span>
+    <span class="nb">DocumentRoot</span> <span class="s2">&quot;/var/www/&quot;</span>
+
+    <span class="c"># Set your designated IDP host here</span>
+    <span class="nb">ServerName</span> ${IDP_HOST}
+
+    <span class="c"># Set your designated logging directory here</span>
+    <span class="nb">ErrorLog</span> logs/ssl_error_log
+    <span class="nb">TransferLog</span> logs/ssl_access_log
+    <span class="nb">LogLevel</span> <span class="k">warn</span>
+
+    <span class="nb">SSLEngine</span> <span class="k">on</span>
+
+    <span class="nb">SSLProtocol</span> <span class="k">all</span> -SSLv2
+
+     <span class="c"># Important: mod_ssl should not verify the provided certificates</span>
+    <span class="nb">SSLVerifyClient</span> optional_no_ca
+
+    <span class="nb">SSLCipherSuite</span> <span class="k">ALL</span>:!ADH:!EXPORT:!SSLv2:RC4+RSA:+HIGH:+MEDIUM:+LOW
+
+    <span class="c"># Set the correct paths to your certificate and key here</span>
+    <span class="nb">SSLCertificateFile</span>    ${SP_HOST_CERTIFICATE}
+    <span class="nb">SSLCertificateKeyFile</span> ${SP_HOST_CERTIFICATE_KEY}
+
+    <span class="nt">&lt;Files</span> <span class="s">~ &quot;\.(cgi|shtml|phtml|php3?)$&quot;</span><span class="nt">&gt;</span>
+        <span class="nb">SSLOptions</span> +StdEnvVars
+    <span class="nt">&lt;/Files&gt;</span>
+    <span class="nt">&lt;Directory</span> <span class="s">&quot;/var/www/cgi-bin&quot;</span><span class="nt">&gt;</span>
+        <span class="nb">SSLOptions</span> +StdEnvVars
+    <span class="nt">&lt;/Directory&gt;</span>
+
+
+    <span class="nb">SetEnvIf</span> <span class="k">User</span>-Agent <span class="s2">&quot;.*MSIE.*&quot;</span> nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0
+
+    <span class="nb">CustomLog</span> logs/ssl_request_log <span class="s2">&quot;%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \&quot;%r\&quot; %b&quot;</span>
+
+<span class="nt">&lt;/VirtualHost&gt;</span>
+</pre></div>
+</div>
+<p><strong>STEP 3</strong></p>
+<p>Open <code class="docutils literal"><span class="pre">shibboleth2.xml</span></code> and change the <code class="docutils literal"><span class="pre">entityID</span></code> in the element
+<code class="docutils literal"><span class="pre">ApplicationDefaults</span></code> to your <code class="docutils literal"><span class="pre">${SP_HOST}</span></code>. Restart your SP and try to access
+your SP Metadata <code class="docutils literal"><span class="pre">https://${SPHOST}/Shibboleth.sso/Metadata</span></code></p>
+</div>
+<div class="section" id="configure-shibboleth-sp-and-idp">
+<span id="sp-idp"></span><h2><a class="toc-backref" href="#table-of-contents">Configure Shibboleth SP and IdP</a><a class="headerlink" href="#configure-shibboleth-sp-and-idp" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p class="first">Download SP Metadata and store it locally as <code class="docutils literal"><span class="pre">${SP_METADATA_FILE}</span></code>.</p>
+</li>
+<li><p class="first">Open the <code class="docutils literal"><span class="pre">relying-party.xml</span></code> of the Shibboleth IdP and change the Metadata
+Provider entry to</p>
+<blockquote>
+<div><div class="highlight-xml"><div class="highlight"><pre><span></span><span class="c">&lt;!-- MetadataProvider the combining other MetadataProviders --&gt;</span>
+<span class="nt">&lt;metadata:MetadataProvider</span> <span class="na">id=</span><span class="s">&quot;ShibbolethMetadata&quot;</span> <span class="na">xsi:type=</span><span class="s">&quot;metadata:ChainingMetadataProvider&quot;</span><span class="nt">&gt;</span>
+
+
+    <span class="nt">&lt;metadata:MetadataProvider</span> <span class="na">id=</span><span class="s">&quot;IdPMD&quot;</span> <span class="na">xsi:type=</span><span class="s">&quot;metadata:ResourceBackedMetadataProvider&quot;</span><span class="nt">&gt;</span>
+        <span class="c">&lt;!-- This is usually set correctly by the IdP installation script --&gt;</span>
+        <span class="nt">&lt;metadata:MetadataResource</span> <span class="na">xsi:type=</span><span class="s">&quot;resource:FilesystemResource&quot;</span>
+            <span class="na">file=</span><span class="s">&quot;${IDP_METADATA_FILE}&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/metadata:MetadataProvider&gt;</span>
+
+     <span class="c">&lt;!-- This is the new MetadataProvider for your SP metadata --&gt;</span>
+    <span class="nt">&lt;MetadataProvider</span> <span class="na">id=</span><span class="s">&quot;URLMD&quot;</span> <span class="na">xsi:type=</span><span class="s">&quot;FilesystemMetadataProvider&quot;</span>
+        <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:metadata&quot;</span>
+        <span class="na">metadataFile=</span><span class="s">&quot;${SP_METADATA_FILE}&quot;</span><span class="nt">&gt;</span>
+
+
+        <span class="nt">&lt;MetadataFilter</span> <span class="na">xsi:type=</span><span class="s">&quot;ChainingFilter&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:metadata&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;MetadataFilter</span> <span class="na">xsi:type=</span><span class="s">&quot;EntityRoleWhiteList&quot;</span>
+                <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:metadata&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;RetainedRole&gt;</span>samlmd:SPSSODescriptor<span class="nt">&lt;/RetainedRole&gt;</span>
+            <span class="nt">&lt;/MetadataFilter&gt;</span>
+        <span class="nt">&lt;/MetadataFilter&gt;</span>
+
+
+    <span class="nt">&lt;/MetadataProvider&gt;</span>
+
+<span class="nt">&lt;/metadata:MetadataProvider&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Add the <code class="docutils literal"><span class="pre">${SP_HOST_CERTIFICATE}</span></code> to your Java Keystore:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">keytool</span> <span class="pre">-import</span> <span class="pre">-file</span> <span class="pre">${SP_HOST_CERTIFICATE}</span> <span class="pre">-alias</span> <span class="pre">${SP_HOST}</span>&#160; <span class="pre">-keystore</span> <span class="pre">${JAVA_JRE_HOME}\lib\security\cacerts</span></code></p>
+</div></blockquote>
+</li>
+<li><p class="first">Open <code class="docutils literal"><span class="pre">shibboleth2.xml</span></code> of your Shibboleth SP add a new SessionInitiator to
+the <code class="docutils literal"><span class="pre">Sessions</span></code> element:</p>
+<blockquote>
+<div><div class="highlight-xml"><div class="highlight"><pre><span></span><span class="c">&lt;!-- Default example directs to a specific IdP&#39;s SSO service (favoring SAML 2 over Shib 1). --&gt;</span>
+<span class="nt">&lt;SessionInitiator</span> <span class="na">type=</span><span class="s">&quot;Chaining&quot;</span> <span class="na">Location=</span><span class="s">&quot;/Login&quot;</span>
+            <span class="na">isDefault=</span><span class="s">&quot;true&quot;</span> <span class="na">id=</span><span class="s">&quot;Intranet&quot;</span> <span class="na">relayState=</span><span class="s">&quot;cookie&quot;</span>
+            <span class="na">entityID=</span><span class="s">&quot;https://{IDP_HOST}/idp/shibboleth&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;SessionInitiator</span> <span class="na">type=</span><span class="s">&quot;SAML2&quot;</span> <span class="na">acsIndex=</span><span class="s">&quot;1&quot;</span>
+              <span class="na">template=</span><span class="s">&quot;bindingTemplate.html&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;SessionInitiator</span> <span class="na">type=</span><span class="s">&quot;Shib1&quot;</span> <span class="na">acsIndex=</span><span class="s">&quot;5&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/SessionInitiator&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Then add a new MetadataProvider:</p>
+<blockquote>
+<div><div class="highlight-xml"><div class="highlight"><pre><span></span><span class="c">&lt;!-- Chains together all your metadata sources. --&gt;</span>
+<span class="nt">&lt;MetadataProvider</span> <span class="na">type=</span><span class="s">&quot;Chaining&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;MetadataProvider</span> <span class="na">type=</span><span class="s">&quot;XML&quot;</span>
+                        <span class="na">uri=</span><span class="s">&quot;https://{IDP_HOST}/idp/profile/Metadata/SAML&quot;</span>
+                        <span class="na">backingFilePath=</span><span class="s">&quot;federation-metadata.xml&quot;</span>
+                        <span class="na">reloadInterval=</span><span class="s">&quot;7200&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;/MetadataProvider&gt;</span>
+<span class="nt">&lt;/MetadataProvider&gt;</span>
+</pre></div>
+</div>
+<p>Alternatively you can reference the metadata from your local IdP:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span>&lt;!-- Chains together all your metadata sources. --&gt;
+&lt;MetadataProvider type=&quot;Chaining&quot;&gt;
+            &lt;MetadataProvider type=&quot;XML&quot;
+                        path=&quot;${IDP_HOME}/metadata/idp-metadata.xml&quot;
+            &lt;/MetadataProvider&gt;
+&lt;/MetadataProvider&gt;
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">Restart your IdP, the SP and the Apache HTTPD</p>
+</li>
+</ul>
+</div>
+<div class="section" id="configure-the-eoxserver-security-components">
+<span id="eoxserver-secconfig"></span><h2><a class="toc-backref" href="#table-of-contents">Configure the EOxServer Security Components</a><a class="headerlink" href="#configure-the-eoxserver-security-components" title="Permalink to this headline">¶</a></h2>
+<p>This section describes the configuration of the EOxServer security components.</p>
+<div class="section" id="general-configuration-options">
+<h3><a class="toc-backref" href="#table-of-contents">General Configuration Options</a><a class="headerlink" href="#general-configuration-options" title="Permalink to this headline">¶</a></h3>
+<p>The configuration of the EOxServer security components is done in the
+<code class="docutils literal"><span class="pre">eoxserver.conf</span></code> configuration file of your EOxServer instance. All security
+related configuration is done in the section <code class="docutils literal"><span class="pre">[services.auth.base]</span></code>:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">pdp_type</span></code>: Determines the Policy Decision Point type; defaults to <code class="docutils literal"><span class="pre">none</span></code>
+which deactivates authorisation. Currently, only the type <code class="docutils literal"><span class="pre">charonpdp</span></code> is
+implemented.</li>
+<li><code class="docutils literal"><span class="pre">authz_service</span></code>: The URL of the Authorisation Service.</li>
+<li><code class="docutils literal"><span class="pre">attribute_mapping</span></code>: The file path to a dictionary with a mapping from
+identity attributes received from the Shibboleth IdP to a
+XACMLAuthzDecisionQuery. If the key is set to <code class="docutils literal"><span class="pre">default</span></code>, a standard
+dictionary is used.</li>
+<li><code class="docutils literal"><span class="pre">serviceID</span></code>: Identifier for the EOxServer instance to an external
+Authorisation Service. Is used as resource ID in an XACMLAuthzDecisionQuery.
+If the key is set to <code class="docutils literal"><span class="pre">default</span></code>, the host name will be used.</li>
+<li><code class="docutils literal"><span class="pre">allowLocal</span></code>: If set to <code class="docutils literal"><span class="pre">True</span></code>, the security components will alloways allow
+access to requests from the local machine. <em>Use with care!</em></li>
+</ul>
+</div>
+<div class="section" id="adding-new-subject-attributes-to-the-eoxserver-security-components">
+<h3><a class="toc-backref" href="#table-of-contents">Adding new Subject attributes to the EOxServer Security Components</a><a class="headerlink" href="#adding-new-subject-attributes-to-the-eoxserver-security-components" title="Permalink to this headline">¶</a></h3>
+<p>In order to register new Subject attributes from your LDAP to the IDMS, you
+have to configure the Shibboleth IdP, the Shibboleth SP, and the EOxServer.
+Let’s assume we want to add the new attribute <cite>foo</cite>.</p>
+<p><strong>Shibboleth IdP</strong></p>
+<p>Add a new AttributeResolver to your <code class="docutils literal"><span class="pre">attribute-resolver.xml</span></code> configuration
+file:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;resolver:AttributeDefinition</span> <span class="na">id=</span><span class="s">&quot;foo&quot;</span> <span class="na">xsi:type=</span><span class="s">&quot;Simple&quot;</span>
+    <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:resolver:ad&quot;</span> <span class="na">sourceAttributeID=</span><span class="s">&quot;description&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;resolver:Dependency</span> <span class="na">ref=</span><span class="s">&quot;localLDAP&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;resolver:AttributeEncoder</span> <span class="na">xsi:type=</span><span class="s">&quot;SAML1String&quot;</span>
+        <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:attribute:encoder&quot;</span>
+        <span class="na">name=</span><span class="s">&quot;urn:mace:dir:attribute-def:description&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;resolver:AttributeEncoder</span> <span class="na">xsi:type=</span><span class="s">&quot;SAML2String&quot;</span>
+        <span class="na">xmlns=</span><span class="s">&quot;urn:mace:shibboleth:2.0:attribute:encoder&quot;</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span>
+        <span class="na">friendlyName=</span><span class="s">&quot;foo&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/resolver:AttributeDefinition&gt;</span>
+</pre></div>
+</div>
+<p>Add or extend a AttributeFilterPolicy in your <code class="docutils literal"><span class="pre">attribute-filter.xml</span></code>
+configuration file:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;afp:AttributeFilterPolicy</span> <span class="na">id=</span><span class="s">&quot;fooFilter&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;afp:PolicyRequirementRule</span> <span class="na">xsi:type=</span><span class="s">&quot;basic:ANY&quot;</span><span class="nt">/&gt;</span>
+
+    <span class="nt">&lt;afp:AttributeRule</span> <span class="na">attributeID=</span><span class="s">&quot;foo&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;afp:PermitValueRule</span> <span class="na">xsi:type=</span><span class="s">&quot;basic:ANY&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/afp:AttributeRule&gt;</span>
+
+<span class="nt">&lt;/afp:AttributeFilterPolicy&gt;</span>
+</pre></div>
+</div>
+<p><strong>Shibboleth SP</strong></p>
+<p>Add the new attribute to the <code class="docutils literal"><span class="pre">attribute-map.xml</span></code></p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;Attribute</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span> <span class="na">id=</span><span class="s">&quot;foo&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p><strong>EOxServer</strong></p>
+<ul>
+<li><p class="first">Make a copy of the default attribute dictionary
+(<code class="docutils literal"><span class="pre">{$EOXSERVER_CODE_DIRECTORY)/conf/defaultAttributeDictionary</span></code>).</p>
+</li>
+<li><p class="first">Add the attribute:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">foo</span><span class="o">=</span><span class="n">foo</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Register the new dictionary in the EOxServer configuration.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="soap.html" class="btn btn-neutral float-right" title="SOAP Components" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Identity Management System" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,405 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SOAP Components &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="SOAP Proxy" href="../soap_proxy.html" />
+    <link rel="prev" title="HTTP Components" href="http.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Users’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../basics.html">EOxServer Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../global_use_case.html">Global Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../centos_installation.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../instance_creation.html">Service Instance Creation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../operational_install.html">Recommendations for Operational Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mailing_lists.html">Mailing Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../demonstration.html">Demonstration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../EO-WCS_request_parameters.html">EO-WCS Request Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../opensearch.html">OpenSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../operators.html">EOxServer Operators’ Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../webclient.html">The Webclient Interface</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Identity Management System</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="index.html#installation-and-configuration">Installation and Configuration</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html#http-and-soap-specific-components">HTTP and SOAP Specific Components</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="http.html">HTTP Components</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">SOAP Components</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentations.html">EOxServer Presentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration_options.html">Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../crss.html">Supported CRSs and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../formats.html">Supported Raster File Formats and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../atp_sum.html">Asynchronous Task Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../WCS-T_summary.html">Web Coverage Service - Transaction Extension</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Users’ Guide</a> &raquo;</li>
+        
+          <li><a href="index.html">Identity Management System</a> &raquo;</li>
+        
+      <li>SOAP Components</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/users/idm/soap.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="soap-components">
+<span id="identity-management-system-soap"></span><h1><a class="toc-backref" href="#table-of-contents">SOAP Components</a><a class="headerlink" href="#soap-components" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#soap-components" id="id1">SOAP Components</a><ul>
+<li><a class="reference internal" href="#security-token-service" id="id2">Security Token Service</a></li>
+<li><a class="reference internal" href="#policy-enforcement-point-service" id="id3">Policy Enforcement Point Service</a></li>
+<li><a class="reference internal" href="#soap-security-proxy" id="id4">SOAP Security Proxy</a><ul>
+<li><a class="reference internal" href="#generating-the-proxy" id="id5">Generating the Proxy</a></li>
+<li><a class="reference internal" href="#installing-the-proxy" id="id6">Installing the Proxy</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The following services are needed for the SOAP security part:
+The following services are needed for the SOAP security part:</p>
+<ul class="simple">
+<li>Security Token Service</li>
+<li>Charon Authorisation Service</li>
+<li>Policy Enforcement Point Service</li>
+<li>SOAP Security Proxy</li>
+</ul>
+<p>To install and configure the HTTP secuirty components, you have to follow these
+steps:</p>
+<ol class="arabic simple">
+<li>Install the Charon <a class="reference internal" href="index.html#authorisation-service"><span class="std std-ref">Authorisation Service</span></a>.</li>
+<li>Install the <a class="reference internal" href="#sts"><span class="std std-ref">Security Token Service</span></a>.</li>
+<li>Install the <a class="reference internal" href="#pep"><span class="std std-ref">Policy Enforcement Point Service</span></a>.</li>
+<li>Install the <a class="reference internal" href="#secproxy"><span class="std std-ref">SOAP Security Proxy</span></a>.</li>
+</ol>
+<div class="section" id="security-token-service">
+<span id="sts"></span><h2><a class="toc-backref" href="#table-of-contents">Security Token Service</a><a class="headerlink" href="#security-token-service" title="Permalink to this headline">¶</a></h2>
+<p>The Security Token Service (STS) is responsible for the authentication of users
+and is documented and specified in the OASIS <a class="reference external" href="http://docs.oasis-open.org/ws-sx/ws-trust/200512/ws-trust-1.3-os.html">WS-Trust</a>
+specification. The authentication assertion produced by the STS is formulated
+in the <a class="reference external" href="http://www.oasis-open.org/committees/download.php/3406/oasis-sstc-saml-core-1.1.pdf">Security Assertion Markup Language</a>. A client trying to access a
+service secured by the IDMS has to embed this assertion in every service
+request.</p>
+<p>The STS implementation used by the IDMS is the <a class="reference external" href="http://wiki.services.eoportal.org/tiki-index.php?page=HMA+Authentication+Service">HMA Authentication Service</a>. Please refer to the documentation included in the <code class="docutils literal"><span class="pre">\docs</span></code> folder
+of the HMA Authentication Service package how to compile the service. This
+document will only deal on how to install the service. To deploy the service
+successfully, you first have to install and configure an LDAP service. Then
+proceed with the following steps:</p>
+<ul class="simple">
+<li>Put the <code class="docutils literal"><span class="pre">authentication_v2.1.aar</span></code> folder in the
+<code class="docutils literal"><span class="pre">${AXIS2_HOME}/WEB-INF/services/</span></code> folder. The <code class="docutils literal"><span class="pre">authentication_v2.1.aar</span></code>
+folder contains all configuration files for the STS.</li>
+<li>The main configuration of the service takes place in the
+<code class="docutils literal"><span class="pre">authentication-service.properties</span></code>.</li>
+<li>Using the <code class="docutils literal"><span class="pre">saml-ldap-attributes-mapping.properties</span></code>, you can map your LDAP
+attributes to SAML attributes if necessary.</li>
+<li>You may configure the logging behaviour in the Log4J configuration file in
+<code class="docutils literal"><span class="pre">authentication-service-log4j.properties</span></code>.</li>
+</ul>
+<p>Following properties can be set in the <code class="docutils literal"><span class="pre">authentication-service.properties</span></code>
+configuration file:</p>
+<dl class="docutils">
+<dt><code class="docutils literal"><span class="pre">LDAPURL</span></code></dt>
+<dd>URL to the LDAP service.</dd>
+<dt><code class="docutils literal"><span class="pre">LDAPSearchContext</span></code></dt>
+<dd>Search context for users.</dd>
+<dt><code class="docutils literal"><span class="pre">LDAPPrincipal</span></code></dt>
+<dd>The <em>“user name”</em> used by the STS to access the LDAP service.</dd>
+<dt><code class="docutils literal"><span class="pre">LDAPCredentials</span></code></dt>
+<dd>The password used in combination with <code class="docutils literal"><span class="pre">LDAPPrincipal</span></code></dd>
+<dt><code class="docutils literal"><span class="pre">KEYSTORE_LOCATION</span></code></dt>
+<dd>Path to the Keystore file containing the certificate used for signing the
+SAML tokens.</dd>
+<dt><code class="docutils literal"><span class="pre">KEYSTORE_PASSWORD</span></code></dt>
+<dd>The keystore password.</dd>
+<dt><code class="docutils literal"><span class="pre">AUTHENTICATION_CERTIFICATE_ALIAS</span></code></dt>
+<dd>Alias of the keystore entry wich is used for signing the SAML tokens.</dd>
+<dt><code class="docutils literal"><span class="pre">AUTHENTICATION_CERTIFICATE_PASSWORD</span></code></dt>
+<dd>Password corresponding to the <code class="docutils literal"><span class="pre">AUTHENTICATION_CERTIFICATE_ALIAS</span></code></dd>
+<dt><code class="docutils literal"><span class="pre">CLIENT_CERTIFICATE_ALIASES</span></code></dt>
+<dd>Comma serperated list with keystore aliases of trusted clients.</dd>
+<dt><code class="docutils literal"><span class="pre">SAML_TOKEN_EXPIRY_PERIOD</span></code></dt>
+<dd>Defines how long a SAML token is valid.</dd>
+<dt><code class="docutils literal"><span class="pre">SAML_ASSERTION_ISSUER</span></code></dt>
+<dd>SAML Token issure.</dd>
+<dt><code class="docutils literal"><span class="pre">SAML_ASSERTION_ID_PREFIX</span></code></dt>
+<dd>SAML Token prefix.</dd>
+<dt><code class="docutils literal"><span class="pre">SAML_ASSERTION_NODE_NAMESPACE</span></code></dt>
+<dd>Namespace for attribute assertions.</dd>
+<dt><code class="docutils literal"><span class="pre">ENCRYTION_ENABLE</span></code></dt>
+<dd>Enables or disables encryption of SAML tokens.</dd>
+<dt><code class="docutils literal"><span class="pre">INCLUDE_CERTIFICATE</span></code></dt>
+<dd>Enables or disables inclusion of SAML tokens.</dd>
+<dt><code class="docutils literal"><span class="pre">LOG4J_CONFIG_LOCATION</span></code></dt>
+<dd>Path to the Log4J configuration file.</dd>
+</dl>
+</div>
+<div class="section" id="policy-enforcement-point-service">
+<span id="pep"></span><h2><a class="toc-backref" href="#table-of-contents">Policy Enforcement Point Service</a><a class="headerlink" href="#policy-enforcement-point-service" title="Permalink to this headline">¶</a></h2>
+<p>Before installing the Policy Enforcement Point Service, refer to the
+<a class="reference internal" href="index.html#charon-configuration"><span class="std std-ref">General Configuration for CHARON services</span></a>.</p>
+<p>The Policy Enforcement Point enforces the authorisation decisions made by the
+Authorisation Service.</p>
+<p>The next step is deploying the PEP Service, therefore extract the ZIP archive
+into the directory of your <code class="docutils literal"><span class="pre">${AXIS2_HOME}</span></code>.</p>
+<p>Now you have to configure the service. The configuration files are in the
+<code class="docutils literal"><span class="pre">${AXIS2_HOME}/WEB-INF/classes</span></code> folder. Open the <code class="docutils literal"><span class="pre">PEPConfiguration.xml</span></code> to
+configure the service. The configuration file already contains documentation of
+the single elements.</p>
+</div>
+<div class="section" id="soap-security-proxy">
+<span id="secproxy"></span><h2><a class="toc-backref" href="#table-of-contents">SOAP Security Proxy</a><a class="headerlink" href="#soap-security-proxy" title="Permalink to this headline">¶</a></h2>
+<p>Before installing the SOAP Security Proxy, refer to the <a class="reference internal" href="index.html#charon-configuration"><span class="std std-ref">General Configuration for CHARON services</span></a>.
+If you want to secure a Web Coverage Service, you can use the provided WCS Security
+Proxy. In this case, jump to <a class="reference internal" href="#installsecproxy"><span class="std std-ref">Installing the Proxy</span></a>.</p>
+<div class="section" id="generating-the-proxy">
+<span id="generatesecproxy"></span><h3><a class="toc-backref" href="#table-of-contents">Generating the Proxy</a><a class="headerlink" href="#generating-the-proxy" title="Permalink to this headline">¶</a></h3>
+<p>The SOAP Proxy is used as a proxy for a secured service. This means a user
+client does not communicate directly with a secured service, instead it sends
+all requests to the proxy service.</p>
+<p>First, you have to generate the proxy service. In order to do this, open a
+shell and navigate to the <code class="docutils literal"><span class="pre">${ProxyCodeGen_HOME}/bin</span></code> directory. Run the
+script to generate the proxy service:</p>
+<ul>
+<li><p class="first">Linux, Unices:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">./ProxyGen.sh</span> <span class="pre">-wsdl</span> <span class="pre">path/to/wsdl</span></code></p>
+</div></blockquote>
+</li>
+<li><p class="first">Windows:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">.\ProxyGen.bat</span> <span class="pre">-wsdl</span> <span class="pre">path\to\wsdl</span></code></p>
+</div></blockquote>
+</li>
+</ul>
+<p>The parameter <code class="docutils literal"><span class="pre">-wsdl</span></code> points to a file with the WSDL of the secured service.</p>
+<p>After a successful service generation, the folder <code class="docutils literal"><span class="pre">${ProxyCodeGen_HOME}/tmp/</span>
+<span class="pre">dist</span></code> contains the new proxy service.</p>
+</div>
+<div class="section" id="installing-the-proxy">
+<span id="installsecproxy"></span><h3><a class="toc-backref" href="#table-of-contents">Installing the Proxy</a><a class="headerlink" href="#installing-the-proxy" title="Permalink to this headline">¶</a></h3>
+<p>Take the service zip and deploy it by unpacking its content to the <code class="docutils literal"><span class="pre">${AXIS2_HOME}</span></code>
+folder. For MTOM support, please make sure that the parameter <code class="docutils literal"><span class="pre">enableMTOM</span></code> in
+the file <code class="docutils literal"><span class="pre">${AXIS2_HOME}/axis2.xml</span></code> is enabled.</p>
+<p>Edit the <code class="docutils literal"><span class="pre">ProxyConfiguration_${SERVICE_NAME}.xml</span></code> to configure the service.
+The configuration file already contains documentation of the single elements.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../soap_proxy.html" class="btn btn-neutral float-right" title="SOAP Proxy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="http.html" class="btn btn-neutral float-left" title="HTTP Components" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

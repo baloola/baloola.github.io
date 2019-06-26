@@ -1,0 +1,754 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Recommendations for Operational Installation &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Migration" href="migration.html" />
+    <link rel="prev" title="Service Instance Creation and Configuration" href="instance_creation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Users’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">EOxServer Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="global_use_case.html">Global Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos_installation.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instance_creation.html">Service Instance Creation and Configuration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Recommendations for Operational Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction-eoxserver">Introduction EOxServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#directory-structure">Directory Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#user-management">User Management</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#operating-system-users">Operating System Users</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#database-user">Database User</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#django-sysadmin">Django Sysadmin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application-user-management">Application User Management</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#eoxserver-configuration-step-by-step">EOxServer Configuration Step-by-step</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#step-1-web-server-installation">Step 1 - Web Server Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-2-database-backend">Step 2 - Database Backend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-3-creating-users-and-directories-for-instance-and-data">Step 3 - Creating Users and Directories for Instance and Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-4-instance-creation">Step 4 - Instance Creation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-5-database-setup">Step 5 - Database Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-6-web-server-integration">Step 6 - Web Server Integration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#step-7-start-operating-the-instance">Step 7 - Start Operating the Instance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailing_lists.html">Mailing Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demonstration.html">Demonstration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EO-WCS_request_parameters.html">EO-WCS Request Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opensearch.html">OpenSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html">EOxServer Operators’ Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webclient.html">The Webclient Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="idm/index.html">Identity Management System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html">EOxServer Presentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html">Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crss.html">Supported CRSs and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html">Supported Raster File Formats and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html">Asynchronous Task Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WCS-T_summary.html">Web Coverage Service - Transaction Extension</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Users’ Guide</a> &raquo;</li>
+        
+      <li>Recommendations for Operational Installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/users/operational_install.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="recommendations-for-operational-installation">
+<span id="operationalinstallation"></span><span id="index-0"></span><h1><a class="toc-backref" href="#table-of-contents">Recommendations for Operational Installation</a><a class="headerlink" href="#recommendations-for-operational-installation" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#recommendations-for-operational-installation" id="id1">Recommendations for Operational Installation</a><ul>
+<li><a class="reference internal" href="#introduction-eoxserver" id="id2">Introduction EOxServer</a></li>
+<li><a class="reference internal" href="#directory-structure" id="id3">Directory Structure</a></li>
+<li><a class="reference internal" href="#user-management" id="id4">User Management</a><ul>
+<li><a class="reference internal" href="#operating-system-users" id="id5">Operating System Users</a></li>
+<li><a class="reference internal" href="#database-user" id="id6">Database User</a></li>
+<li><a class="reference internal" href="#django-sysadmin" id="id7">Django Sysadmin</a></li>
+<li><a class="reference internal" href="#application-user-management" id="id8">Application User Management</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#eoxserver-configuration-step-by-step" id="id9">EOxServer Configuration Step-by-step</a><ul>
+<li><a class="reference internal" href="#step-1-web-server-installation" id="id10">Step 1 - Web Server Installation</a></li>
+<li><a class="reference internal" href="#step-2-database-backend" id="id11">Step 2 - Database Backend</a></li>
+<li><a class="reference internal" href="#step-3-creating-users-and-directories-for-instance-and-data" id="id12">Step 3 - Creating Users and Directories for Instance and Data</a></li>
+<li><a class="reference internal" href="#step-4-instance-creation" id="id13">Step 4 - Instance Creation</a></li>
+<li><a class="reference internal" href="#step-5-database-setup" id="id14">Step 5 - Database Setup</a></li>
+<li><a class="reference internal" href="#step-6-web-server-integration" id="id15">Step 6 - Web Server Integration</a></li>
+<li><a class="reference internal" href="#step-7-start-operating-the-instance" id="id16">Step 7 - Start Operating the Instance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>This section provides a set of recommendations and a step-by-step guide
+for the installation and configuration of EOxServer as an operational system.
+This guide goes beyond the basic installation presented in previous sections.</p>
+<p>Unless stated otherwise this guide considers installing on CentOS GNU/Linux
+operating systems although the guide is applicable for other distributions as
+well.</p>
+<p>We assume that the reader of this guide <em>knows</em> what the presented
+commands are doing and he/she understands the possible consequences. This guide
+is intended to help the administrator to setup the EOxServer quickly by
+extracting the salient information but the administrator must be able
+to alter the procedure to fit the particular needs of
+the administered system. We bear no responsibility for any possible harms caused
+by mindless following of this guide by a non-qualified person.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<ul class="last simple">
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="install.html#installation"><span class="std std-ref">Installation</span></a></dt>
+<dd>generic installation procedure for GNU/Linux operating systems.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="centos_installation.html#centosinstallation"><span class="std std-ref">Installation on CentOS</span></a></dt>
+<dd>for specific installation on CentOS.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="instance_creation.html#instancecreation"><span class="std std-ref">Service Instance Creation and Configuration</span></a></dt>
+<dd>to configure an instance of EOxServer after successful installation.</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="introduction-eoxserver">
+<span id="operationalinstallation-user"></span><h2><a class="toc-backref" href="#table-of-contents">Introduction EOxServer</a><a class="headerlink" href="#introduction-eoxserver" title="Permalink to this headline">¶</a></h2>
+<p>When installing and configuring EOxServer a clear distinction should be made
+between the common EOxServer installation (the installed code implementing
+the software functionality) and EOxServer instances. An instance is a
+collection of data and configuration files that enables the deployment of a
+specific service. A single server will typically contain a single software
+installation and one or more specific instances.</p>
+<p>While the EOxServer installation is straightforward and typically does not
+require much effort (see the <a class="reference internal" href="install.html#installation"><span class="std std-ref">generic</span></a> and
+<a class="reference internal" href="centos_installation.html#centosinstallation"><span class="std std-ref">CentOS</span></a> installation guides) the
+<a class="reference internal" href="instance_creation.html#instancecreation"><span class="std std-ref">configuration</span></a> requires more attention of the
+administrator and a bit of planning as well.</p>
+<p>Closely related to EOxServer is the (possibly large) served EO data. It
+should be borne in mind, that EOxServer as such is not a data management
+system, i.e., it can register the stored data but does neither control nor
+require any specific data storage locations itself. Where and how the data
+is stored is thus in the responsibility of the administrator.</p>
+<p>EOxServer registers the EO data and keeps only the essential metadata (data
+and full metadata location, geographic extent, acquisition time, etc.)
+in a database.</p>
+</div>
+<div class="section" id="directory-structure">
+<h2><a class="toc-backref" href="#table-of-contents">Directory Structure</a><a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h2>
+<p>First, the administrator has to decide in which directory each instance
+should be located. Each of the EOxServer instances is represented by a
+dedicated directory.</p>
+<p>For system wide installation we recommend to create a single specific directory
+to hold all instances in one location compliant with the <a class="reference external" href="http://www.pathname.com/fhs/pub/fhs-2.3.html#SRVDATAFORSERVICESPROVIDEDBYSYSTEM">filesystem hierarchy
+standard</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">srv</span><span class="o">/</span><span class="n">eoxserver</span>
+</pre></div>
+</div>
+<p>Optionally, for user defined instances a folder in the user’s home directory is
+acceptable as well:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">eoxserver</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We <strong>strongly discourage</strong> to keep the instance configuration in system
+locations not suited for this purpose such as <code class="docutils literal"><span class="pre">/root</span></code> or <code class="docutils literal"><span class="pre">/tmp</span></code>!</p>
+</div>
+<p>A dedicated directory should also be considered for the served EO data, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">srv</span><span class="o">/</span><span class="n">eodata</span>
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">~/</span><span class="n">eodata</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="user-management">
+<h2><a class="toc-backref" href="#table-of-contents">User Management</a><a class="headerlink" href="#user-management" title="Permalink to this headline">¶</a></h2>
+<p>The EOxServer administrator has to deal with four different user management
+subsystems:</p>
+<blockquote>
+<div><ul class="simple">
+<li>system user (operating system),</li>
+<li>database user (SQL server),</li>
+<li>django user (Django user management), and</li>
+<li>application user (e.g., Single Sign On authentication).</li>
+</ul>
+</div></blockquote>
+<p>Each of them is described hereafter.</p>
+<div class="section" id="operating-system-users">
+<h3><a class="toc-backref" href="#table-of-contents">Operating System Users</a><a class="headerlink" href="#operating-system-users" title="Permalink to this headline">¶</a></h3>
+<p>On a typical mutli-user operating system several users exist each of them
+owning some files and each of them is given some right to access other files
+and run executables.</p>
+<p>In a typical EOxServer setup, the installed executables are owned by the
+<em>root</em> user and when executed they are granted the rights of the invoking
+process owner. When executed as a WGSI application, the running EOxServer
+executables run with the same ID as the web server (for Apache server this
+is typically the <em>apache</em> or <em>www-data</em> system user). This need to be
+considered when specifying access rights for the files which are expected to
+be changed or read by a running application.</p>
+<p>The database back-end has usually its own dedicated system user (for
+PostgreSQL this is typically <em>postgres</em>).</p>
+<p>Coming back, for EOxServer instances’ configuration we recommend both
+instance and data to be owned by one or (preferably) two distinct system or
+ordinary users. These users can by existing (e.g., the <em>apache</em> user) or new
+dedicated users.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We <strong>strongly discourage</strong> to keep the EOxService instances
+(i.e., configuration data) and the served EO data owned by the system
+administrator (<em>root</em>).</p>
+</div>
+</div>
+<div class="section" id="database-user">
+<h3><a class="toc-backref" href="#table-of-contents">Database User</a><a class="headerlink" href="#database-user" title="Permalink to this headline">¶</a></h3>
+<p>The Django framework (which EOxSerevr is build upon) requires access to a
+Database Management System (DBMS) which is typically protected by
+user-name/password based authentication. Specification of these DBMS
+credential is part of the service instance <a class="reference internal" href="instance_creation.html#instancecreation-dbsetup"><span class="std std-ref">configuration</span></a>.</p>
+<p>The sole purpose of the DBMS credentials is to access the database.</p>
+<p>It should be mentioned that user-name/password is not the only possible way how
+to secure the database access. The various authentication options for PosgreSQL
+are covered, e.g., <a class="reference external" href="http://www.postgresql.org/docs/devel/static/auth-pg-hba-conf.html">here</a>.</p>
+</div>
+<div class="section" id="django-sysadmin">
+<h3><a class="toc-backref" href="#table-of-contents">Django Sysadmin</a><a class="headerlink" href="#django-sysadmin" title="Permalink to this headline">¶</a></h3>
+<p>The Django framework provides its own user management subsystem. EOxServer
+uses the Django user management system for granting access to the system
+administrator to the low level <a class="reference internal" href="operators.html#ops-admin"><span class="std std-ref">Admin Web GUI.</span></a>. The Django
+user management is neither used to protect access to the provided Web
+Service interfaces nor to restrict access via the command line tools.</p>
+</div>
+<div class="section" id="application-user-management">
+<h3><a class="toc-backref" href="#table-of-contents">Application User Management</a><a class="headerlink" href="#application-user-management" title="Permalink to this headline">¶</a></h3>
+<p>EOxServer is based on the assumption that the authentication and
+authorisation of an operational system would be performed by an external
+security system (such as the Shibboleth based <a class="reference internal" href="idm/index.html#identity-management-system"><span class="std std-ref">Single Sign On</span></a> infrastructure). This access control would be
+transparent from EOxServer’s point of view.</p>
+<p>It is beyond the scope of this document to explain how to configure a Single
+Sign On (SSO) infrastructure but principally the configuration does not
+differ from securing plain apache web server.</p>
+</div>
+</div>
+<div class="section" id="eoxserver-configuration-step-by-step">
+<h2><a class="toc-backref" href="#table-of-contents">EOxServer Configuration Step-by-step</a><a class="headerlink" href="#eoxserver-configuration-step-by-step" title="Permalink to this headline">¶</a></h2>
+<p>The guidelines presented in this section assume a successful installation of
+EOxServer and of the essential dependencies performed either from the
+available RPM packages (see CentOS <a class="reference internal" href="centos_installation.html#centosinstallation-repos"><span class="std std-ref">Installation from RPM Packages</span></a>) or via
+the Python Package Index (see <a class="reference internal" href="centos_installation.html#centosinstallation-pip"><span class="std std-ref">Alternate installation method using pip</span></a>).</p>
+<p>This guide assume that the <a class="reference external" href="http://www.centos.org/docs/4/4.5/Security_Guide/s3-wstation-privileges-limitroot-sudo.html">sudo</a>
+command is installed and configured on the system.</p>
+<p>In case of installation from RPM repositories it is necessary to install the
+required repositories first:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">rpm</span> <span class="o">-</span><span class="n">Uvh</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">elgis</span><span class="o">.</span><span class="n">argeo</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="mi">6</span><span class="o">/</span><span class="n">elgis</span><span class="o">-</span><span class="n">release</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="mi">6</span><span class="n">_0</span><span class="o">.</span><span class="n">noarch</span><span class="o">.</span><span class="n">rpm</span>
+<span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">epel</span><span class="o">-</span><span class="n">release</span>
+<span class="n">sudo</span> <span class="n">rpm</span> <span class="o">-</span><span class="n">Uvh</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">yum</span><span class="o">.</span><span class="n">packages</span><span class="o">.</span><span class="n">eox</span><span class="o">.</span><span class="n">at</span><span class="o">/</span><span class="n">el</span><span class="o">/</span><span class="n">eox</span><span class="o">-</span><span class="n">release</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="mf">2.</span><span class="n">noarch</span><span class="o">.</span><span class="n">rpm</span>
+</pre></div>
+</div>
+<p>and then install EOxServer’s package:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">EOxServer</span>
+</pre></div>
+</div>
+<div class="section" id="step-1-web-server-installation">
+<h3><a class="toc-backref" href="#table-of-contents">Step 1 - Web Server Installation</a><a class="headerlink" href="#step-1-web-server-installation" title="Permalink to this headline">¶</a></h3>
+<p>EOxServer is a Django based web application and as such it needs a web
+server (the simple Django provided server is not an option for an
+operational system). Any instance of EOxServer receives HTTP requests via
+the WSGI interface. EOxServer is tested to work with the <a class="reference external" href="http://www.apache.org/">Apache</a> web server using the <a class="reference external" href="http://en.wikipedia.org/wiki/Web_Server_Gateway_Interface">WSGI</a> module. The
+server can be installed using:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">httpd</span> <span class="n">mod_wsgi</span>
+</pre></div>
+</div>
+<p>EOxServer itself is not equipped by any authentication or authorisation
+mechanism. In order to secure the resources an external tool must be used to
+control access to the resources (e.g., the Shibboleth Apache module or the
+Shibboleth based <a class="reference internal" href="idm/index.html#identity-management-system"><span class="std std-ref">Single Sign On</span></a>).</p>
+<p>To start the apache server automatically at the boot-time run following
+command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">chkconfig</span> <span class="n">httpd</span> <span class="n">on</span>
+</pre></div>
+</div>
+<p>The status of the web server can be checked by:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">service</span> <span class="n">httpd</span> <span class="n">status</span>
+</pre></div>
+</div>
+<p>and if not running the service can be started as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">service</span> <span class="n">httpd</span> <span class="n">start</span>
+</pre></div>
+</div>
+<p>It is likely the ports offered by the web service are blocked by the firewall.
+To allow access to port 80 used by the web service it should be mostly
+sufficient to call:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">iptables</span> <span class="o">-</span><span class="n">I</span> <span class="n">INPUT</span> <span class="o">-</span><span class="n">m</span> <span class="n">state</span> <span class="o">--</span><span class="n">state</span> <span class="n">NEW</span> <span class="o">-</span><span class="n">m</span> <span class="n">tcp</span> <span class="o">-</span><span class="n">p</span> <span class="n">tcp</span> <span class="o">--</span><span class="n">dport</span> <span class="mi">80</span> <span class="o">-</span><span class="n">j</span> <span class="n">ACCEPT</span>
+</pre></div>
+</div>
+<p>Setting up access to any other port than 80 (such as port 443 used by HTTPS)
+is the same, just change the port number in the previous command.</p>
+<p>To make these <strong>iptable</strong> firewall settings permanent (preserved throughout
+reboots) run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">service</span> <span class="n">iptables</span> <span class="n">save</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="step-2-database-backend">
+<h3><a class="toc-backref" href="#table-of-contents">Step 2 - Database Backend</a><a class="headerlink" href="#step-2-database-backend" title="Permalink to this headline">¶</a></h3>
+<p>EOxServer requires a Database Management System (DBMS) for the storage of its
+internal data. For an operational system a local or remote installation of
+<a class="reference external" href="http://www.postgresql.org/">PostgreSQL</a>
+with <a class="reference external" href="http://postgis.net/">PostGIS</a> extension is recommended over the simple
+file-based SQLite backend. To install the DBMS run following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">postgresql</span> <span class="n">postgresql</span><span class="o">-</span><span class="n">server</span> <span class="n">postgis</span> <span class="n">python</span><span class="o">-</span><span class="n">psycopg2</span>
+</pre></div>
+</div>
+<p>PostgreSQL comes with reasonable default settings which are often sufficient.
+For details on more advanced configuration options (like changing the default
+database location) see, e.g., PosgreSQL’s
+<a class="reference external" href="http://wiki.postgresql.org/wiki/Main_Page">wiki</a></p>
+<p>On some Linux distributions like recent RHEL and its clones such as CentOS,
+the PostgreSQL database must be initialized manually by:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">service</span> <span class="n">postgresql</span> <span class="n">initdb</span>
+</pre></div>
+</div>
+<p>To start the service automatically at boot time run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">chkconfig</span> <span class="n">postgresql</span> <span class="n">on</span>
+</pre></div>
+</div>
+<p>You can check if the PostgreSQL database is running or not via:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">service</span> <span class="n">postgresql</span> <span class="n">status</span>
+</pre></div>
+</div>
+<p>If not start the PostgreSQL server:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">service</span> <span class="n">postgresql</span> <span class="n">start</span>
+</pre></div>
+</div>
+<p>Once the PostgreSQL deamon is running we have to setup a database template
+including the required PostGIS extension:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>sudo -u postgres createdb template_postgis
+sudo -u postgres createlang plpgsql template_postgis
+PG_SHARE=/usr/share/pgsql
+sudo -u postgres psql -q -d template_postgis -f $PG_SHARE/contrib/postgis.sql
+sudo -u postgres psql -q -d template_postgis -f $PG_SHARE/contrib/spatial_ref_sys.sql
+psql -d postgres psql -q -d template_postgis -c &quot;GRANT ALL ON geometry_columns TO PUBLIC;&quot;
+psql -d postgres psql -q -d template_postgis -c &quot;GRANT ALL ON geography_columns TO PUBLIC;&quot;
+psql -d postgres psql -q -d template_postgis -c &quot;GRANT ALL ON spatial_ref_sys TO PUBLIC;&quot;
+</pre></div>
+</div>
+<p>Please note that the <code class="docutils literal"><span class="pre">PG_SHARE</span></code> directory can vary for each Linux distribution
+or custom PostgreSQL installation. For CentOS <code class="docutils literal"><span class="pre">/usr/share/pgsql</span></code> happens to
+be the default location. The proper path can be found, e.g., by:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">locate</span> <span class="n">contrib</span><span class="o">/</span><span class="n">postgis</span><span class="o">.</span><span class="n">sql</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="step-3-creating-users-and-directories-for-instance-and-data">
+<h3><a class="toc-backref" href="#table-of-contents">Step 3 - Creating Users and Directories for Instance and Data</a><a class="headerlink" href="#step-3-creating-users-and-directories-for-instance-and-data" title="Permalink to this headline">¶</a></h3>
+<p>To create the users and directories for the EOxServer instances and the served
+EO Data run the following commands:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">useradd</span> <span class="o">-</span><span class="n">r</span> <span class="o">-</span><span class="n">m</span> <span class="o">-</span><span class="n">g</span> <span class="n">apache</span> <span class="o">-</span><span class="n">d</span> <span class="o">/</span><span class="n">srv</span><span class="o">/</span><span class="n">eoxserver</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;EOxServer&#39;s administrator&quot;</span> <span class="n">eoxserver</span>
+<span class="n">sudo</span> <span class="n">useradd</span> <span class="o">-</span><span class="n">r</span> <span class="o">-</span><span class="n">m</span> <span class="o">-</span><span class="n">g</span> <span class="n">apache</span> <span class="o">-</span><span class="n">d</span> <span class="o">/</span><span class="n">srv</span><span class="o">/</span><span class="n">eodata</span> <span class="o">-</span><span class="n">c</span> <span class="s2">&quot;EO data provider&quot;</span> <span class="n">eodata</span>
+</pre></div>
+</div>
+<p>For meaning of the used options see documentation of
+<a class="reference external" href="http://unixhelp.ed.ac.uk/CGI/man-cgi?useradd+8">useradd</a> command.</p>
+<p>Since we are going to access the files through the Apache web server, for
+convenience, we set the default group to <code class="docutils literal"><span class="pre">apache</span></code>. In addition, to make the
+directories readable by other users run the following commands:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">chmod</span> <span class="n">o</span><span class="o">+=</span><span class="n">rx</span> <span class="o">/</span><span class="n">srv</span><span class="o">/</span><span class="n">eoxserver</span>
+<span class="n">sudo</span> <span class="n">chmod</span> <span class="n">o</span><span class="o">+=</span><span class="n">rx</span> <span class="o">/</span><span class="n">srv</span><span class="o">/</span><span class="n">eodata</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="step-4-instance-creation">
+<h3><a class="toc-backref" href="#table-of-contents">Step 4 - Instance Creation</a><a class="headerlink" href="#step-4-instance-creation" title="Permalink to this headline">¶</a></h3>
+<p>Now it’s time to setup a sample instance of EOxServer. Create a new instance
+e.g., named <code class="docutils literal"><span class="pre">instance00</span></code>, using the <code class="docutils literal"><span class="pre">eoxserver-instance.py</span></code> command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">-</span><span class="n">u</span> <span class="n">eoxserver</span> <span class="n">mkdir</span> <span class="o">/</span><span class="n">srv</span><span class="o">/</span><span class="n">eoxserver</span><span class="o">/</span><span class="n">instance00</span>
+<span class="n">sudo</span> <span class="o">-</span><span class="n">u</span> <span class="n">eoxserver</span> <span class="n">eoxserver</span><span class="o">-</span><span class="n">instance</span><span class="o">.</span><span class="n">py</span> <span class="n">instance00</span> <span class="o">/</span><span class="n">srv</span><span class="o">/</span><span class="n">eoxserver</span><span class="o">/</span><span class="n">instance00</span>
+</pre></div>
+</div>
+<p>Now our first bare instance exists and needs to be configured.</p>
+</div>
+<div class="section" id="step-5-database-setup">
+<h3><a class="toc-backref" href="#table-of-contents">Step 5 - Database Setup</a><a class="headerlink" href="#step-5-database-setup" title="Permalink to this headline">¶</a></h3>
+<p>As the first to animate the instance it is necessary to  setup a database.
+Assuming the Postgress DBMS is up an running, we start by creating a
+database user (replace <code class="docutils literal"><span class="pre">&lt;db_username&gt;</span></code> by a user-name of your own choice):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">-</span><span class="n">u</span> <span class="n">postgres</span> <span class="n">createuser</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">createdb</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">superuser</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">createrole</span> <span class="o">--</span><span class="n">encrypted</span> <span class="o">--</span><span class="n">password</span> <span class="o">&lt;</span><span class="n">db_username</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The user’s password is requested interactively. Once we have the database user
+we can create the database for our instance:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">-</span><span class="n">u</span> <span class="n">postgres</span> <span class="n">createdb</span> <span class="o">--</span><span class="n">owner</span> <span class="o">&lt;</span><span class="n">db_username</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">template</span> <span class="n">template_postgis</span> <span class="o">--</span><span class="n">encoding</span> <span class="n">UTF</span><span class="o">-</span><span class="mi">8</span> <span class="n">eoxs_instance00</span>
+</pre></div>
+</div>
+<p>Where <code class="docutils literal"><span class="pre">eoxs_instance00</span></code> is the name of the new database. As there may be more
+EOxServer instances, each of them having its own database, it is a good practice
+to set a DB name containing the name of the instance.</p>
+<p>In addition the PostgreSQL access policy must be set to allow access to the
+newly created database. To get access to the database, insert the
+following lines (replace <code class="docutils literal"><span class="pre">&lt;db_username&gt;</span></code> by your actual DB user-name):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">local</span> <span class="n">eoxs_instance00</span> <span class="o">&lt;</span><span class="n">db_username</span><span class="o">&gt;</span> <span class="n">md5</span>
+</pre></div>
+</div>
+<p>to the file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">pgsql</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">pg_hba</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This allows <em>local</em> database access only.</p>
+</div>
+<p>When inserting the line make sure you put this line <strong>before</strong> the default
+access policy:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">local</span> <span class="nb">all</span> <span class="nb">all</span> <span class="n">ident</span>
+</pre></div>
+</div>
+<p>In case of an SQL server running on a separate machine please see PosgreSQL
+<a class="reference external" href="http://www.postgresql.org/docs/devel/static/auth-pg-hba-conf.html">documentation</a>.</p>
+<p>The location of the <code class="docutils literal"><span class="pre">pg_hba.conf</span></code> file varies from one system to another.
+In case of troubles to locate this file try, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">locate</span> <span class="n">pg_hba</span><span class="o">.</span><span class="n">conf</span>
+</pre></div>
+</div>
+<p>Once we created and configured the database we need to update the EOxServer
+settings stored, in our case, in file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">srv</span><span class="o">/</span><span class="n">eoxserver</span><span class="o">/</span><span class="n">instance00</span><span class="o">/</span><span class="n">instance00</span><span class="o">/</span><span class="n">settings</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>Make sure the database is configured in <code class="docutils literal"><span class="pre">settings.py</span></code> as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.contrib.gis.db.backends.postgis&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;eoxs_instance00&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;USER&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;db_username&gt;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PASSWORD&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;bd_password&gt;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;HOST&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="c1"># keep empty for local DBMS</span>
+        <span class="s1">&#39;PORT&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="c1"># keep empry for local DBMS</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>As in our previous examples replace <code class="docutils literal"><span class="pre">&lt;db_username&gt;</span></code> and <code class="docutils literal"><span class="pre">&lt;bd_password&gt;</span></code> by
+the proper database user’s name and password.</p>
+<p>Finally it is time to initialize the database of your first instance by running
+the following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">-</span><span class="n">u</span> <span class="n">eoxserver</span> <span class="n">python</span> <span class="o">/</span><span class="n">srv</span><span class="o">/</span><span class="n">eoxserver</span><span class="o">/</span><span class="n">instance00</span><span class="o">/</span><span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">syncdb</span>
+</pre></div>
+</div>
+<p>The command interactively asks for the creation of the Django system
+administrator. It is safe to say no and create the administrator’s account
+later by:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">-</span><span class="n">u</span> <span class="n">eoxserver</span> <span class="n">python</span> <span class="o">/</span><span class="n">srv</span><span class="o">/</span><span class="n">eoxserver</span><span class="o">/</span><span class="n">instance00</span><span class="o">/</span><span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">createsuperuser</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">manage.py</span></code> is the command-line proxy for the management of EOxServer. To
+avoid repeated writing of this fairly long command make a shorter alias such
+as:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">alias</span> <span class="n">eoxsi00</span><span class="o">=</span><span class="s2">&quot;sudo -u eoxserver python /srv/eoxserver/instance00/manage.py&quot;</span>
+<span class="n">eoxsi00</span> <span class="n">createsuperuser</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="step-6-web-server-integration">
+<h3><a class="toc-backref" href="#table-of-contents">Step 6 - Web Server Integration</a><a class="headerlink" href="#step-6-web-server-integration" title="Permalink to this headline">¶</a></h3>
+<p>The remaining task to be performed is to integrate the created EOxServer
+instance with the Apache web server. As it was already mentioned, the web
+server access the EOxServer instance through the WSGI interface. We assume
+that the web server is already configured to load the <code class="docutils literal"><span class="pre">mod_wsgi</span></code> module
+and thus it remains to configure the WSGI access point. The proposed
+configuration is to create the new configuration file
+<code class="docutils literal"><span class="pre">/etc/httpd/conf.d/default_site.conf</span></code> with the following content:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">VirtualHost</span> <span class="o">*</span><span class="p">:</span><span class="mi">80</span><span class="o">&gt;</span>
+    <span class="c1"># EOxServer instance: instance00</span>
+    <span class="n">Alias</span> <span class="o">/</span><span class="n">instance00</span> <span class="s2">&quot;/srv/eoxserver/instance00/instance00/wsgi.py&quot;</span>
+    <span class="n">Alias</span> <span class="o">/</span><span class="n">instance00_static</span> <span class="s2">&quot;/srv/eoxserver/instance00/instance00/static&quot;</span>
+    <span class="n">WSGIDaemonProcess</span> <span class="n">ows</span> <span class="n">processes</span><span class="o">=</span><span class="mi">10</span> <span class="n">threads</span><span class="o">=</span><span class="mi">1</span>
+    <span class="o">&lt;</span><span class="n">Directory</span> <span class="s2">&quot;/srv/eoxserver/instance00/instance00&gt;</span>
+            <span class="n">Options</span> <span class="o">+</span><span class="n">ExecCGI</span> <span class="n">FollowSymLinks</span>
+            <span class="n">AddHandler</span> <span class="n">wsgi</span><span class="o">-</span><span class="n">script</span> <span class="o">.</span><span class="n">py</span>
+            <span class="n">WSGIProcessGroup</span> <span class="n">ows</span>
+            <span class="n">AllowOverride</span> <span class="kc">None</span>
+            <span class="n">Order</span> <span class="n">allow</span><span class="p">,</span><span class="n">deny</span>
+            <span class="n">allow</span> <span class="kn">from</span> <span class="nn">all</span>
+    <span class="o">&lt;/</span><span class="n">Directory</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">VirtualHost</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>In case there is already a <code class="docutils literal"><span class="pre">VirtualHost</span></code> section present in
+<code class="docutils literal"><span class="pre">/etc/httpd/conf/httpd.conf</span></code> or in any other <code class="docutils literal"><span class="pre">*.conf</span></code> file included from
+the <code class="docutils literal"><span class="pre">/etc/httpd/conf.d/</span></code> directory  we suggest to add the configuration
+lines given above to the appropriate virtual host section.</p>
+<p>The <code class="docutils literal"><span class="pre">WSGIDaemonProcess</span></code> option forces execution of the Apache WSGI in daemon
+mode using multiple single-thread processes. While the number of daemon
+processes can be adjusted the number of threads <em>must</em> be always set to 1.</p>
+<p>On systems such as CentOS, following option must be added to Apache
+configuration (preferably in <code class="docutils literal"><span class="pre">/etc/httpd/conf.d/wsgi.conf</span></code>) to allow
+communication between the Apache server and WSGI daemon (the reason is explained,
+e.g., <a class="reference external" href="http://code.google.com/p/modwsgi/wiki/ConfigurationIssues">here</a>):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">WSGISocketPrefix</span> <span class="n">run</span><span class="o">/</span><span class="n">wsgi</span>
+</pre></div>
+</div>
+<p>Don’t forget to adjust the URL configuration in
+<code class="docutils literal"><span class="pre">/srv/eoxserver/instance00/instance00/conf/eoxserver.conf</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">services</span><span class="o">.</span><span class="n">owscommon</span><span class="p">]</span>
+<span class="n">http_service_url</span><span class="o">=</span><span class="n">http</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">you</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">address</span><span class="o">&gt;/</span><span class="n">instance00</span><span class="o">/</span><span class="n">ows</span>
+</pre></div>
+</div>
+<p>The location and base URL of the static files are specified in the EOxServer
+instance’s <code class="docutils literal"><span class="pre">setting.py</span></code> file by the <code class="docutils literal"><span class="pre">STATIC_ROOT</span></code> and <code class="docutils literal"><span class="pre">STATIC_URL</span></code>
+options:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="n">STATIC_ROOT</span> <span class="o">=</span> <span class="s1">&#39;/srv/eoxserver/instance00/instance00/static/&#39;</span>
+<span class="o">...</span>
+<span class="n">STATIC_URL</span> <span class="o">=</span> <span class="s1">&#39;/instance00_static/&#39;</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>These options are set automatically by the instance creation script.</p>
+<p>The static files needed by the EOxServer’s web GUI need to be initialized
+(<em>collected</em>) using the following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">alias</span> <span class="n">eoxsi00</span><span class="o">=</span><span class="s2">&quot;sudo -u eoxserver python /srv/eoxserver/instance00/manage.py&quot;</span>
+<span class="n">eoxsi00</span> <span class="n">collectstatic</span> <span class="o">-</span><span class="n">l</span>
+</pre></div>
+</div>
+<p>To allow the <code class="docutils literal"><span class="pre">apache</span></code> user to write to the instance log-file make sure the
+user is permitted to do so:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">chmod</span> <span class="n">g</span><span class="o">+</span><span class="n">w</span> <span class="o">/</span><span class="n">srv</span><span class="o">/</span><span class="n">eoxserver</span><span class="o">/</span><span class="n">instance00</span><span class="o">/</span><span class="n">instance00</span><span class="o">/</span><span class="n">logs</span><span class="o">/</span><span class="n">eoxserver</span><span class="o">.</span><span class="n">log</span>
+</pre></div>
+</div>
+<p>And now the last thing to do remains to restart the Apache server by:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">service</span> <span class="n">httpd</span> <span class="n">restart</span>
+</pre></div>
+</div>
+<p>You can check that your EOxServer instance runs properly by inserting the
+following URL to your browser:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">you</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">address</span><span class="o">&gt;/</span><span class="n">instance00</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="step-7-start-operating-the-instance">
+<h3><a class="toc-backref" href="#table-of-contents">Step 7 - Start Operating the Instance</a><a class="headerlink" href="#step-7-start-operating-the-instance" title="Permalink to this headline">¶</a></h3>
+<p>Now we have a running instance of EOxServer. For different operations such as
+data registration see <a class="reference internal" href="operators.html#eoxserver-operators-guide"><span class="std std-ref">EOxServer Operators’ Guide</span></a>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="migration.html" class="btn btn-neutral float-right" title="Migration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="instance_creation.html" class="btn btn-neutral float-left" title="Service Instance Creation and Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,487 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SOAP Proxy &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="EOxServer Presentations" href="presentations.html" />
+    <link rel="prev" title="SOAP Components" href="idm/soap.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Users’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">EOxServer Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="global_use_case.html">Global Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos_installation.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instance_creation.html">Service Instance Creation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operational_install.html">Recommendations for Operational Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailing_lists.html">Mailing Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demonstration.html">Demonstration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EO-WCS_request_parameters.html">EO-WCS Request Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opensearch.html">OpenSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html">EOxServer Operators’ Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webclient.html">The Webclient Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="idm/index.html">Identity Management System</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">SOAP Proxy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#soap-access-to-wcs">SOAP Access to WCS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#quick-installation-guide-for-eoxserver-on-centos">Quick installation guide for EOxServer on CentOS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#old-installation-guide-without-rpms">Old installation guide without rpms</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html">EOxServer Presentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html">Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crss.html">Supported CRSs and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html">Supported Raster File Formats and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html">Asynchronous Task Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WCS-T_summary.html">Web Coverage Service - Transaction Extension</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Users’ Guide</a> &raquo;</li>
+        
+      <li>SOAP Proxy</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/users/soap_proxy.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="soap-proxy">
+<span id="id1"></span><h1><a class="toc-backref" href="#table-of-contents">SOAP Proxy</a><a class="headerlink" href="#soap-proxy" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#soap-proxy" id="id3">SOAP Proxy</a><ul>
+<li><a class="reference internal" href="#soap-access-to-wcs" id="id4">SOAP Access to WCS</a></li>
+<li><a class="reference internal" href="#installation" id="id5">Installation</a><ul>
+<li><a class="reference internal" href="#quick-installation-guide-for-eoxserver-on-centos" id="id6">Quick installation guide for EOxServer on CentOS</a></li>
+<li><a class="reference internal" href="#old-installation-guide-without-rpms" id="id7">Old installation guide without rpms</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="soap-access-to-wcs">
+<h2><a class="toc-backref" href="#table-of-contents">SOAP Access to WCS</a><a class="headerlink" href="#soap-access-to-wcs" title="Permalink to this headline">¶</a></h2>
+<p>SOAP access to services provided by EOxServer is possible if the functionality
+is installed by the service provider. The protocol is SOAP 1.2 over HTTP.</p>
+<p>EOxServer responds to the following WCS-EO requests via its SOAP service interface:</p>
+<ul class="simple">
+<li>DescribeCoverage</li>
+<li>DescribeEOCoverageSet</li>
+<li>GetCapabilities</li>
+<li>GetCoverage</li>
+</ul>
+<p>To access the EOxServer by means of SOAP requests, you need to obtain the
+access ULR from the service provider.
+For machine readable configuration the SOAP service exposes the WSDL
+configuration file: given a service address of ‘<a class="reference external" href="http://example.org/eo_wcs">http://example.org/eo_wcs</a>’ the
+corresponding WSDL file may be downloaded at the URL
+‘<a class="reference external" href="http://example.org/eo_wcs?wsdl">http://example.org/eo_wcs?wsdl</a>’.</p>
+</div>
+<div class="section" id="installation">
+<h2><a class="toc-backref" href="#table-of-contents">Installation</a><a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>A quick-intall quide is provided below.  For a full installation guide see the
+INSTALL file in the source tree.</p>
+<div class="section" id="quick-installation-guide-for-eoxserver-on-centos">
+<h3><a class="toc-backref" href="#table-of-contents">Quick installation guide for EOxServer on CentOS</a><a class="headerlink" href="#quick-installation-guide-for-eoxserver-on-centos" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="prerequisites">
+<h4>0. Prerequisites:<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><a class="reference internal" href="install.html#installation"><span class="std std-ref">EOxServer</span></a> installed and configured, including
+MapServer and Apache HTTP Server</li>
+<li>Add the yum repository as described in the <a class="reference internal" href="centos_installation.html#centosinstallation"><span class="std std-ref">Installation on CentOS</span></a>
+available at <a class="reference external" href="http://packages.eox.at">http://packages.eox.at</a> (recommended) or directoy obtain the
+RPM packages from <a class="reference external" href="http://yum.packages.eox.at/el/6/testing/x86_64/">http://yum.packages.eox.at/el/6/testing/x86_64/</a>.</li>
+</ul>
+</div>
+<div class="section" id="basic-install">
+<h4>1. Basic install:<a class="headerlink" href="#basic-install" title="Permalink to this headline">¶</a></h4>
+<p>The following standard installation sets up soap_proxy for an installed eoxserver
+service accessible at <a class="reference external" href="http://127.0.0.1/eoxserver/ows">http://127.0.0.1/eoxserver/ows</a></p>
+<p><strong>Caution:</strong> if upgrading an existing installation of soap_proxy, please be
+sure to make a backup of the directory
+<cite>/usr/share/axis2c_eo/services/soapProxy</cite>. The eo_soap_proxy-1.0.1-1 package
+does not correctly preserve this directory duing upgrading.</p>
+<p>Via the repository:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">axis2c_eo</span> <span class="n">eo_soap_proxy</span>
+<span class="n">sudo</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">httpd</span> <span class="n">restart</span>
+</pre></div>
+</div>
+<p>or the packages:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">rpm</span> <span class="o">-</span><span class="n">i</span> <span class="n">axis2c_eo</span><span class="o">-</span><span class="mf">1.6</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mf">3.</span><span class="n">x86_64</span><span class="o">.</span><span class="n">rpm</span>
+<span class="n">sudo</span> <span class="n">rpm</span> <span class="o">-</span><span class="n">i</span> <span class="n">eo_soap_proxy</span><span class="o">-</span><span class="mf">1.0</span><span class="o">.</span><span class="mi">1</span><span class="o">-</span><span class="mf">1.</span><span class="n">x86_64</span><span class="o">.</span><span class="n">rpm</span>
+<span class="n">sudo</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">httpd</span> <span class="n">restart</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test">
+<h4>2. Test:<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h4>
+<p>To test open a webbrowser to the page:</p>
+<blockquote>
+<div><a class="reference external" href="http:/">http:/</a>/&lt;your_server&gt;/sp_eowcs?wsdl</div></blockquote>
+<p>You should see the wsdl.</p>
+<p>Further testing may be done via soapui.  See the file
+<code class="docutils literal"><span class="pre">soap_proxy/test/README.txt</span></code> in the source tree.</p>
+</div>
+<div class="section" id="add-another-service">
+<h4>3. Add another service:<a class="headerlink" href="#add-another-service" title="Permalink to this headline">¶</a></h4>
+<p>To add another service to the basic installation, perform the following steps
+as root:</p>
+<p>By way of example let us say our new soap_proxy service shall be available at
+<a class="reference external" href="http://example.org/sp_foo">http://example.org/sp_foo</a>, and the corresponding backend eoxserver is
+accessible at  <a class="reference external" href="http://127.0.0.1/eoxs_foo">http://127.0.0.1/eoxs_foo</a></p>
+<p>First, in the directory <code class="docutils literal"><span class="pre">/usr/local/share/axis2c/services</span></code> recursively copy
+the subdirectory <code class="docutils literal"><span class="pre">soapProxy</span></code> to <code class="docutils literal"><span class="pre">soapFoo</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">-</span><span class="n">r</span> <span class="n">soapProxy</span> <span class="n">soapFoo</span>
+<span class="n">cd</span> <span class="n">soapFoo</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal"><span class="pre">soapFoo</span></code> rename <code class="docutils literal"><span class="pre">libsoapProxy.so</span></code> and <code class="docutils literal"><span class="pre">soapProxy.wsdl</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mv</span> <span class="n">libsoapProxy</span><span class="o">.</span><span class="n">so</span> <span class="n">libsoapFoo</span><span class="o">.</span><span class="n">so</span>
+<span class="n">mv</span> <span class="n">soapProxy</span><span class="o">.</span><span class="n">wsdl</span> <span class="n">soapFoo</span><span class="o">.</span><span class="n">wsdl</span>
+</pre></div>
+</div>
+<p>Note that if selinux is enabled you may need adjust the object type of
+<code class="docutils literal"><span class="pre">libsoapFoo.so</span></code>.</p>
+<p>edit <code class="docutils literal"><span class="pre">soapFoo.wsdl</span></code> - at the bottom of the file chage  <code class="docutils literal"><span class="pre">soap:address</span> <span class="pre">location</span></code>
+to the new endpoint:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">soap</span><span class="p">:</span><span class="n">address</span> <span class="n">location</span><span class="o">=</span><span class="s2">&quot;http://example.org/sp_foo&quot;</span><span class="o">/&gt;</span>
+</pre></div>
+</div>
+<p>edit <code class="docutils literal"><span class="pre">services.xml</span></code> - change ServiceClass, BackendURL, and SOAPOperationsURL:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">parameter</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ServiceClass&quot;</span> <span class="n">locked</span><span class="o">=</span><span class="s2">&quot;xsd:false&quot;</span><span class="o">&gt;</span><span class="n">soapFoo</span><span class="o">&lt;/</span><span class="n">parameter</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">parameter</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;BackendURL&quot;</span><span class="o">&gt;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="o">/</span><span class="n">eoxs_foo</span><span class="o">/</span><span class="n">ows</span><span class="o">&lt;/</span><span class="n">parameter</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">parameter</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;SOAPOperationsURL&quot;</span><span class="o">&gt;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">example</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">sp_foo</span><span class="o">&lt;/</span><span class="n">parameter</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Optionally, you may consider updating the <code class="docutils literal"><span class="pre">&lt;description&gt;</span></code>.</p>
+<p>Edit the file <code class="docutils literal"><span class="pre">/etc/httpd/conf.d/030_axis2c.conf</span></code>:  In the block <code class="docutils literal"><span class="pre">&lt;IfModule</span>
+<span class="pre">mod_proxy.c&gt;</span></code>, add ‘ProxyPass’ and ‘ProxyPassReverse’ lines corresponding to
+your new service:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ProxyPass</span>         <span class="o">/</span><span class="n">sp_foo</span>  <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="o">/</span><span class="n">sp_axis</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">soapFoo</span>
+<span class="n">ProxyPassReverse</span>  <span class="o">/</span><span class="n">sp_foo</span>  <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="o">/</span><span class="n">sp_axis</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">soapFoo</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="old-installation-guide-without-rpms">
+<h3><a class="toc-backref" href="#table-of-contents">Old installation guide without rpms</a><a class="headerlink" href="#old-installation-guide-without-rpms" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id2">
+<h4>0. Prerequisites:<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<p>The following is required before you can proceed with installing soap_proxy:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">mapserver</span></code> installed &amp; configured.</li>
+<li>Apache <code class="docutils literal"><span class="pre">httpd</span></code> server(<code class="docutils literal"><span class="pre">httpd2</span></code> on some systems) installed and running</li>
+<li><code class="docutils literal"><span class="pre">eoxserver</span></code> is optional</li>
+</ul>
+</div>
+<div class="section" id="old-non-rpm-installation">
+<h4>1. Old Non-rpm installation<a class="headerlink" href="#old-non-rpm-installation" title="Permalink to this headline">¶</a></h4>
+<p>This is suitable for general installation e.g. if you are not using
+eoxerver but wish to use mapserver direcly.</p>
+<p><strong>Warning</strong>: some of the configuration details are out of date, but
+the changes are not structural.</p>
+<p>Also see the INSTALL file in the source tree.</p>
+<p>Download from <a class="reference external" href="http://ws.apache.org/axis2/c/download.cgi">http://ws.apache.org/axis2/c/download.cgi</a></p>
+<p>Make a directory for the code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">someplace</span>
+<span class="n">mkdir</span> <span class="n">axis2c</span>
+<span class="n">setenv</span> <span class="n">AXIS2C_HOME</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">someplace</span><span class="o">/</span><span class="n">axis2c</span>
+</pre></div>
+</div>
+<p>Follow the instructions in ‘doc’ to compile, and use something like the
+following configure line to get <code class="docutils literal"><span class="pre">mod_axis2</span></code> configured for compiling at the same
+time:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>./configure --with-apache2=&quot;/usr/include/apache2&quot; \
+  --with-apr=&quot;/usr/include/apr-1&quot; --prefix=${AXIS2C_HOME}
+</pre></div>
+</div>
+<p>Execute the standard sequence:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">make</span>
+<span class="n">make</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>Copy <code class="docutils literal"><span class="pre">lib/libmod_axis2.so.0.6.0</span></code>  to <code class="docutils literal"><span class="pre">&lt;apache2</span> <span class="pre">modules</span> <span class="pre">directory&gt;</span></code>  as
+<code class="docutils literal"><span class="pre">mod_axis2.so</span></code>.</p>
+<p>Edit the file <code class="docutils literal"><span class="pre">${AXIS2C_HOME}/axis2.xml</span></code> and ensure that the parameter
+enableMTOM has the value <code class="docutils literal"><span class="pre">true</span></code>.</p>
+<dl class="docutils">
+<dt>Check that the following directory exits, if not create it:</dt>
+<dd><code class="docutils literal"><span class="pre">${AXIS2C_HOME}/services</span></code></dd>
+</dl>
+</div>
+<div class="section" id="deploy-axis2-via-your-webserver">
+<h4>2. Deploy axis2 via your webserver<a class="headerlink" href="#deploy-axis2-via-your-webserver" title="Permalink to this headline">¶</a></h4>
+<p>Configure <code class="docutils literal"><span class="pre">mod_axis2</span></code> in the apache server config file. On Suse Linux one might
+edit the file <code class="docutils literal"><span class="pre">/etc/apache2/default-server.conf</span></code>.</p>
+<p>Set up a proxy:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">IfModule</span> <span class="n">mod_proxy</span><span class="o">.</span><span class="n">c</span><span class="o">&gt;</span>
+  <span class="n">ProxyRequests</span> <span class="n">Off</span>
+  <span class="n">ProxyPass</span>         <span class="o">/</span><span class="n">sp_wcs</span>   <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="o">/</span><span class="n">o3s_axis</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">soapProxy</span>
+  <span class="n">ProxyPassReverse</span>  <span class="o">/</span><span class="n">sp_wcs</span>   <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="o">/</span><span class="n">o3s_axis</span><span class="o">/</span><span class="n">services</span><span class="o">/</span><span class="n">soapProxy</span>
+  <span class="o">...</span>
+  <span class="o">&lt;</span><span class="n">Proxy</span> <span class="o">*&gt;</span>
+    <span class="n">Order</span> <span class="n">deny</span><span class="p">,</span><span class="n">allow</span>
+    <span class="n">Deny</span> <span class="kn">from</span> <span class="nn">all</span>
+    <span class="o">...</span>
+  <span class="o">&lt;/</span><span class="n">Proxy</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">IfModule</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>and deploy axis2:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">LoadModule</span> <span class="n">axis2_module</span>  <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib64</span><span class="o">/</span><span class="n">apache2</span><span class="o">/</span><span class="n">mod_axis2</span><span class="o">.</span><span class="n">so</span>
+<span class="n">Axis2RepoPath</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">AXIS2C_HOME</span>
+<span class="n">Axis2LogFile</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ax2logs</span>
+<span class="n">Axis2MaxLogFileSize</span> <span class="mi">204800</span>
+<span class="n">Axis2LogLevel</span> <span class="n">info</span>
+<span class="o">&lt;</span><span class="n">Location</span> <span class="o">/</span><span class="n">o3s_axis</span><span class="o">&gt;</span>
+    <span class="n">SetHandler</span> <span class="n">axis2_module</span>
+<span class="o">&lt;/</span><span class="n">Location</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="verify-the-deployment-of-axis2">
+<h4>3. Verify the deployment of axis2<a class="headerlink" href="#verify-the-deployment-of-axis2" title="Permalink to this headline">¶</a></h4>
+<p>Resart the webserver (<code class="docutils literal"><span class="pre">httpd2</span></code>) and open the following page:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="o">/</span><span class="n">o3s_axis</span><span class="o">/</span><span class="n">services</span>
+</pre></div>
+</div>
+<p>You should get a page that displays the text “Deployed Services” and is otherwise blank.</p>
+</div>
+<div class="section" id="configure-and-compile-soap-proxy">
+<h4>4. Configure and Compile Soap Proxy.<a class="headerlink" href="#configure-and-compile-soap-proxy" title="Permalink to this headline">¶</a></h4>
+<p>Change your working directory to the service directory in the soap_proxy source
+code:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">&lt;...&gt;/</span><span class="n">soap_proxy</span><span class="o">/</span><span class="n">service</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal"><span class="pre">soapProxy.wsdl</span></code> set <code class="docutils literal"><span class="pre">&lt;soap:address</span> <span class="pre">location=.../&gt;</span></code>.  Copy
+TEMLATE_services.xml to <code class="docutils literal"><span class="pre">services.xml</span></code>.
+In <code class="docutils literal"><span class="pre">services.xml</span></code> set <code class="docutils literal"><span class="pre">BackendURL</span></code> to the address of eoxserver.</p>
+<p>Now change to the src directory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">src</span>
+</pre></div>
+</div>
+<p>In your environment or in the <code class="docutils literal"><span class="pre">Makefile</span></code> set <code class="docutils literal"><span class="pre">AXIS2C_HOME</span></code> appropriately, and
+execute:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">inst</span>
+</pre></div>
+</div>
+<p>Restart you httpd server and check that <a class="reference external" href="http://127.0.0.1/o3s_axis/services">http://127.0.0.1/o3s_axis/services</a>
+shows the soapProxy service offering the four EO-WCS operations.</p>
+<p>Further testing may be done via soapui.  See the file
+<code class="docutils literal"><span class="pre">soap_proxy/test/README.txt</span></code> in the source tree.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="presentations.html" class="btn btn-neutral float-right" title="EOxServer Presentations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="idm/soap.html" class="btn btn-neutral float-left" title="SOAP Components" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

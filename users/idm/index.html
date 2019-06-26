@@ -1,0 +1,930 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Identity Management System &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="copyright" title="Copyright" href="../../copyright.html" />
+    <link rel="next" title="HTTP Components" href="http.html" />
+    <link rel="prev" title="The Webclient Interface" href="../webclient.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Users’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../basics.html">EOxServer Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../global_use_case.html">Global Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../centos_installation.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../instance_creation.html">Service Instance Creation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../operational_install.html">Recommendations for Operational Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mailing_lists.html">Mailing Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../demonstration.html">Demonstration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../EO-WCS_request_parameters.html">EO-WCS Request Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../opensearch.html">OpenSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../operators.html">EOxServer Operators’ Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../webclient.html">The Webclient Interface</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Identity Management System</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation-and-configuration">Installation and Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ldap-directory">LDAP Directory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#authorisation-service">Authorisation Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#general-configuration-for-charon-services">General Configuration for CHARON services</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#http-and-soap-specific-components">HTTP and SOAP Specific Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="http.html">HTTP Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="soap.html">SOAP Components</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../presentations.html">EOxServer Presentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configuration_options.html">Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../crss.html">Supported CRSs and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../formats.html">Supported Raster File Formats and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../atp_sum.html">Asynchronous Task Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../WCS-T_summary.html">Web Coverage Service - Transaction Extension</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Users’ Guide</a> &raquo;</li>
+        
+      <li>Identity Management System</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/users/idm/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="identity-management-system">
+<span id="id1"></span><h1><a class="toc-backref" href="#table-of-contents">Identity Management System</a><a class="headerlink" href="#identity-management-system" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#identity-management-system" id="id8">Identity Management System</a><ul>
+<li><a class="reference internal" href="#installation-and-configuration" id="id9">Installation and Configuration</a><ul>
+<li><a class="reference internal" href="#prerequisites" id="id10">Prerequisites</a></li>
+<li><a class="reference internal" href="#ldap-directory" id="id11">LDAP Directory</a></li>
+<li><a class="reference internal" href="#authorisation-service" id="id12">Authorisation Service</a><ul>
+<li><a class="reference internal" href="#xacml-policies-for-the-authorisation-service" id="id13">XACML Policies for the Authorisation Service</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#general-configuration-for-charon-services" id="id14">General Configuration for CHARON services</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#http-and-soap-specific-components" id="id15">HTTP and SOAP Specific Components</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The Identity Management System (IDMS) provides access control capabilities for
+security relevant data. The current IDMS supports EOxServer with a native
+security component for HTTP KVP and POST/XML protocol binding as well as
+external components for SOAP binding. The system is based on other free and
+open software projects, namely the <a class="reference external" href="http://www.enviromatics.net/charon/">Charon Project</a>, the <a class="reference external" href="http://shibboleth.internet2.edu/">Shibboleth
+framwork</a> and  the <a class="reference external" href="http://wiki.services.eoportal.org/tiki-index.php?page=HMA+Authentication+Service">HMA Authentication
+Service</a>. In the context of EOxServer, the SOAP support in the
+IDMS can be used to provide authentication and authorisation capabilities for
+the <a class="reference internal" href="../soap_proxy.html#soap-proxy"><span class="std std-ref">SOAP Proxy</span></a>.</p>
+<p>The IDMS uses two different schemes for authentication: The native EOxServer
+component relies on Shibboleth for Authentication, the SOAP components use the
+Charon framework.</p>
+<p>The approach chosen for the SOAP part of the IDMS follows the OGC best practice
+document <a class="reference external" href="http://portal.opengeospatial.org/files/?artifact_id=40677">User Management Interfaces for Earth Observation Services</a> for the
+authentication concept. The authentication part is following the ideas of the
+<a class="reference external" href="http://docs.oasis-open.org/xacml/2.0/access_control-xacml-2.0-core-spec-os.pdf">XACML data flow pattern</a>: The IDMS authorisation part consists of a Policy
+Decision Point (PDP, here represented through the Charon Policy Management And
+Authentication Service) and the Policy Enforcement Point (PEP, represented
+through the Charon PEP Service). The following figure gives an overview of the
+IDMS SOAP part:</p>
+<div class="figure align-center" id="id6">
+<img alt="../../_images/IDM_SOAP_Components.png" src="../../_images/IDM_SOAP_Components.png" />
+<p class="caption"><span class="caption-text"><em>IDMS SOAP Access Control Overview</em></span></p>
+</div>
+<p>The HMA Authentication Service, or Security Token Service (STS), and the Charon
+PEP components were both modified in order to be compatible. This is a result
+of the ESA project <a class="reference external" href="http://wiki.services.eoportal.org/tiki-index.php?page=O3S">Open-standard Online Observation Service</a> (O3S). The STS
+now also supports SAML 2.0 security tokens, which the PEP components can
+interpret and validate. The IDMS supports trust relationships between identity
+providers and enforcement components on the basis of certificate stores.</p>
+<p>The HTTP or native EOxServer part of the IDMS uses exactly the same scheme for
+authorisation as the SOAP part, but uses the Shibboleth federated identity
+management system for authentication.</p>
+<div class="figure align-center" id="id7">
+<img alt="../../_images/IDM_HTTP_Components1.png" src="../../_images/IDM_HTTP_Components1.png" />
+<p class="caption"><span class="caption-text"><em>IDMS EOxServer Access Control Overview</em></span></p>
+</div>
+<p>Two requirements must be met to use the IDMS in this case:</p>
+<ul class="simple">
+<li>A Shibboleth Identity Provider (IdP) must be available for authentication</li>
+<li>A Shibboleth Service Provider (SP) must be installed and configured in an
+<a class="reference external" href="http://httpd.apache.org/">Apache HTTP Server</a> to protect the EOxServer
+resource.</li>
+</ul>
+<p>A user has to authenticate at an IdP in order to perform requests to an
+EOxServer with access control enabled. The IdP issues a SAML token which will
+be validated by the SP.</p>
+<p>Is the user valid, the SP adds the user attributes received from the IdP to the
+HTTP Header of the original service requests and conveys it to the protected
+EOxServer instance. The whole process ensures, that only authenticated users
+can access the data and services provided by EOxServer. The attributes from
+Shibboleth are used by the EOxServer security components to make a
+XACMLAuthzDecisionQuery to the Charon Authorisation Service.</p>
+<div class="section" id="installation-and-configuration">
+<h2><a class="toc-backref" href="#table-of-contents">Installation and Configuration</a><a class="headerlink" href="#installation-and-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The following services are needed both for the HTTP and the SOAP security part:</p>
+<ul class="simple">
+<li>Charon <a class="reference internal" href="#authorisation-service"><span class="std std-ref">Authorisation Service</span></a>.</li>
+<li><a class="reference internal" href="#ldap-directory"><span class="std std-ref">LDAP Directory</span></a>.</li>
+</ul>
+<div class="section" id="prerequisites">
+<h3><a class="toc-backref" href="#table-of-contents">Prerequisites</a><a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h3>
+<p>Download locations for the IDMS components:</p>
+<ul class="simple">
+<li>Shibboleth: <a class="reference external" href="http://shibboleth.internet2.edu/downloads.html">http://shibboleth.internet2.edu/downloads.html</a></li>
+<li>CHARON Authorisation Service: <a class="reference external" href="http://www.enviromatics.net/charon/">http://www.enviromatics.net/charon/</a> or <a class="reference external" href="http://packages.eox.at/idm/">http://packages.eox.at/idm/</a></li>
+<li>Security Token Service: <a class="reference external" href="http://packages.eox.at/idm/">http://packages.eox.at/idm/</a></li>
+<li>PEP Service: <a class="reference external" href="http://packages.eox.at/idm/">http://packages.eox.at/idm/</a></li>
+<li>EOxServer: <a class="reference external" href="http://eoxserver.org/wiki/Download">http://eoxserver.org/wiki/Download</a></li>
+</ul>
+<p>The following software is needed to run the IDMS:</p>
+<ul class="simple">
+<li>A <a class="reference internal" href="#ldap-directory"><span class="std std-ref">LDAP Directory</span></a>.</li>
+<li><a class="reference external" href="http://www.oracle.com/technetwork/java/index.html">Java</a> JDK 6 or higher</li>
+<li><a class="reference external" href="http://tomcat.apache.org/">Apache Tomcat</a> 6 or higher</li>
+<li><a class="reference external" href="http://axis.apache.org/axis2/java/core/">Apache Axis2</a> 1.4.1 or higher</li>
+<li><a class="reference external" href="http://dev.mysql.com/downloads/">MySQL</a> 5</li>
+<li><a class="reference external" href="http://httpd.apache.org/">Apache HTTP Server</a> 2.x</li>
+</ul>
+<p>The following software is needed to build the IDMS components:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.oracle.com/technetwork/java/index.html">Java</a>  SDK 6 or higher</li>
+<li><a class="reference external" href="http://ant.apache.org/">Apache Ant</a> 1.6.2 or higher</li>
+<li><a class="reference external" href="http://maven.apache.org/">Apache Maven</a> 2 or higher</li>
+</ul>
+</div>
+<div class="section" id="ldap-directory">
+<span id="id4"></span><h3><a class="toc-backref" href="#table-of-contents">LDAP Directory</a><a class="headerlink" href="#ldap-directory" title="Permalink to this headline">¶</a></h3>
+<p>The IDMS uses a LDAP directory to store user data (attributes, passwords, etc).
+You can use any directory implementation, supporting the Lightweight Directory
+Access Protocol (v3).</p>
+<p>Known working implementations are:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://directory.apache.org/">Apache Directory Service</a></li>
+<li><a class="reference external" href="http://openldap.org">OpenLDAP</a></li>
+</ul>
+<p>A good graphical client for LDAP directories is the <a class="reference external" href="http://directory.apache.org/studio/">Apache Directory Studio</a>.</p>
+</div>
+<div class="section" id="authorisation-service">
+<span id="id5"></span><h3><a class="toc-backref" href="#table-of-contents">Authorisation Service</a><a class="headerlink" href="#authorisation-service" title="Permalink to this headline">¶</a></h3>
+<p>Before installing the Authorsation Service, refer to the <a class="reference internal" href="#charon-configuration"><span class="std std-ref">General Configuration for CHARON services</span></a>.</p>
+<p>The Authorisation Service is responsible for the authorisation of service
+requests. It makes use of <a class="reference external" href="http://www.oasis-open.org/committees/xacml/#XACML20">XACML</a>, a XML based language for access policies. The Authorisation
+Service is part of the <a class="reference external" href="http://www.enviromatics.net/charon/index.html">CHAORN</a>
+project.</p>
+<p>The Authorisation Service relies on a MySQL database to store all XACML
+policies. So in order to install the Authorisation Service, you first need to
+prepare a MySQL database:</p>
+<ul>
+<li><p class="first">Install the MySQL database on your system.</p>
+</li>
+<li><p class="first">Change the <em>root</em> password. You can use the command line for this:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">mysqladmin</span> <span class="pre">-u</span> <span class="pre">root</span> <span class="pre">password</span> <span class="pre">'root'</span> <span class="pre">-p</span></code></p>
+</div></blockquote>
+</li>
+<li><p class="first">Run the SQL script bundle with the Authorisation Service in order to create
+the policy database:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">mysql</span> <span class="pre">-u</span> <span class="pre">root</span> <span class="pre">-h</span> <span class="pre">localhost</span> <span class="pre">-p</span> <span class="pre">&lt;</span> <span class="pre">PolicyAuthorService.sql</span></code></p>
+</div></blockquote>
+</li>
+</ul>
+<p>The Service needs the following additional dependencies in the
+<code class="docutils literal"><span class="pre">${AXIS2_HOME}\lib</span></code> folder:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">mysql-connector-java-5.1.6.jar</span></code></li>
+<li><code class="docutils literal"><span class="pre">spring-2.5.1.jar</span></code></li>
+</ul>
+<p>The next step is deploying the Authorisation Service, therefore extract the ZIP
+archive into the directory of your <code class="docutils literal"><span class="pre">${AXIS2_HOME}</span></code>.</p>
+<p>Now you have to configure the service. All configuration files are in the
+<code class="docutils literal"><span class="pre">${AXIS2_HOME}/WEB-INF/classes</span></code> folder and its sub-folders.</p>
+<ul class="simple">
+<li>Open the <code class="docutils literal"><span class="pre">PolicyAuthorService.properties</span></code> and change the <code class="docutils literal"><span class="pre">axisURL</span></code>
+parameter to the URL URL where you are actually deploying your service.</li>
+<li>You can change the database connection in the <code class="docutils literal"><span class="pre">config/GeoPDP.xml</span></code>
+configuration file if necessary.</li>
+</ul>
+<p>To add new XACML policies to the Authorisation Service, refer to the
+<a class="reference internal" href="#xacml-policies"><span class="std std-ref">XACML Policies for the Authorisation Service</span></a>.</p>
+<div class="section" id="xacml-policies-for-the-authorisation-service">
+<span id="xacml-policies"></span><h4><a class="toc-backref" href="#table-of-contents">XACML Policies for the Authorisation Service</a><a class="headerlink" href="#xacml-policies-for-the-authorisation-service" title="Permalink to this headline">¶</a></h4>
+<p>As mentioned before, the Charon Authorisation Service uses a MySQL database
+to store all XACML policies. The policies are stored in the database
+<code class="docutils literal"><span class="pre">policy_author</span></code> and the table <code class="docutils literal"><span class="pre">policy</span></code>. To add new policies, use an SQL client</p>
+<div class="highlight-sql"><div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">policy</span><span class="p">(</span><span class="n">policy</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39; your xacml policy&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>An XACML policy usually consists of a policy wide target and and several specific rules.
+The three main identifiers are subjects, targets and actions. Subjects (or users) can be
+identified through the “asserted user attributes” which are provided by the Shibboleth framework.
+The EOxServer security components also provide an attribute <code class="docutils literal"><span class="pre">REMOTE_ADDR</span></code> for subjects,
+which contains the IP address of the user. The resource is mainly identified through the attribute
+<code class="docutils literal"><span class="pre">urn:oasis:names:tc:xacml:1.0:resource:resource-id</span></code>, which is the service address of the secured
+service in case of an secured SOAP service and the host name or a ID set in the configuration in case of
+the EOxServer. The EOxServer also provides the atributes serverName (the host name) and serviceType
+(type of the service, i.e. wcs or wms). The action identifies the operation performed on the service, i.e.
+<code class="docutils literal"><span class="pre">getcapabilities</span></code> or <code class="docutils literal"><span class="pre">getcoverage</span></code>. In the following there are two example policies for the EOxServer
+WMS and WCS. Please note the comments inline.</p>
+<p>A XACML policy to permit a user “wms_user” full accesss to the EOxServer WMS:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;Policy</span>
+    <span class="na">xsi:schemalocation=</span><span class="s">&quot;urn:oasis:names:tc:xacml:2.0:policy:schema:os http://docs.oasis-open.org/xacml/access_control-xacml-2.0-policy-schema-os.xsd&quot;</span>
+    <span class="na">PolicyId=</span><span class="s">&quot;wms_user_policy&quot;</span>
+    <span class="na">RuleCombiningAlgId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:permit-overrides&quot;</span>
+    <span class="na">xmlns=</span><span class="s">&quot;urn:oasis:names:tc:xacml:2.0:policy:schema:os&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:ns=</span><span class="s">&quot;http://www.enviromatics.net/WS/PolicyManagementAndAuthorisationService/types /2.0&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;Target&gt;</span>
+    <span class="nt">&lt;Subjects&gt;</span>
+        <span class="nt">&lt;Subject&gt;</span>
+        <span class="c">&lt;!-- Here we specify the user who has access to the service. Default identifier is the uid attribute --&gt;</span>
+        <span class="nt">&lt;SubjectMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>wms_user<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;SubjectAttributeDesignator</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span> <span class="na">AttributeId=</span><span class="s">&quot;uid&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/SubjectMatch&gt;</span>
+        <span class="nt">&lt;/Subject&gt;</span>
+    <span class="nt">&lt;/Subjects&gt;</span>
+    <span class="nt">&lt;Resources&gt;</span>
+        <span class="nt">&lt;Resource&gt;</span>
+        <span class="c">&lt;!-- The attribute urn:oasis:names:tc:xacml:1.0:resource:resource-id specifies the protected server (default is the hostname) --&gt;</span>
+        <span class="nt">&lt;ResourceMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>eoxserver.example.com<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ResourceAttributeDesignator</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span> <span class="na">AttributeId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:resource:resource-id&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/ResourceMatch&gt;</span>
+
+        <span class="c">&lt;!-- The attribute serviceType specifies the protected service (wms or wcs) --&gt;</span>
+        <span class="nt">&lt;ResourceMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>wms<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ResourceAttributeDesignator</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span> <span class="na">AttributeId=</span><span class="s">&quot;serviceType&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/ResourceMatch&gt;</span>
+        <span class="nt">&lt;/Resource&gt;</span>
+    <span class="nt">&lt;/Resources&gt;</span>
+    <span class="nt">&lt;/Target&gt;</span>
+
+
+    <span class="c">&lt;!--</span>
+<span class="c">    In the following rules we allow the specified user to perform selected operations</span>
+<span class="c">    on the service.</span>
+<span class="c">    --&gt;</span>
+
+    <span class="c">&lt;!--</span>
+<span class="c">    GetCapabilities</span>
+<span class="c">    --&gt;</span>
+
+
+    <span class="nt">&lt;Rule</span> <span class="na">RuleId=</span><span class="s">&quot;PermitGetCapabilitiesCC&quot;</span> <span class="na">Effect=</span><span class="s">&quot;Permit&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Target&gt;</span>
+        <span class="nt">&lt;Actions&gt;</span>
+        <span class="nt">&lt;Action&gt;</span>
+            <span class="nt">&lt;ActionMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>GetCapabilities<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ActionAttributeDesignator</span> <span class="na">AttributeId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:action:action&quot;</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/ActionMatch&gt;</span>
+        <span class="nt">&lt;/Action&gt;</span>
+        <span class="nt">&lt;/Actions&gt;</span>
+    <span class="nt">&lt;/Target&gt;</span>
+    <span class="nt">&lt;/Rule&gt;</span>
+
+    <span class="nt">&lt;Rule</span> <span class="na">RuleId=</span><span class="s">&quot;PermitGetCapabilitiesSC&quot;</span> <span class="na">Effect=</span><span class="s">&quot;Permit&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Target&gt;</span>
+        <span class="nt">&lt;Actions&gt;</span>
+        <span class="nt">&lt;Action&gt;</span>
+            <span class="nt">&lt;ActionMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>getcapabilities<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ActionAttributeDesignator</span> <span class="na">AttributeId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:action:action&quot;</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/ActionMatch&gt;</span>
+        <span class="nt">&lt;/Action&gt;</span>
+        <span class="nt">&lt;/Actions&gt;</span>
+    <span class="nt">&lt;/Target&gt;</span>
+    <span class="nt">&lt;/Rule&gt;</span>
+
+    <span class="c">&lt;!--</span>
+<span class="c">    GetMap</span>
+<span class="c">    --&gt;</span>
+
+    <span class="nt">&lt;Rule</span> <span class="na">RuleId=</span><span class="s">&quot;GetMapCC&quot;</span> <span class="na">Effect=</span><span class="s">&quot;Permit&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Target&gt;</span>
+        <span class="nt">&lt;Actions&gt;</span>
+        <span class="nt">&lt;Action&gt;</span>
+            <span class="nt">&lt;ActionMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>GetMap<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ActionAttributeDesignator</span> <span class="na">AttributeId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:action:action&quot;</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/ActionMatch&gt;</span>
+        <span class="nt">&lt;/Action&gt;</span>
+        <span class="nt">&lt;/Actions&gt;</span>
+    <span class="nt">&lt;/Target&gt;</span>
+    <span class="nt">&lt;/Rule&gt;</span>
+
+    <span class="nt">&lt;Rule</span> <span class="na">RuleId=</span><span class="s">&quot;GetMapSC&quot;</span> <span class="na">Effect=</span><span class="s">&quot;Permit&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Target&gt;</span>
+        <span class="nt">&lt;Actions&gt;</span>
+        <span class="nt">&lt;Action&gt;</span>
+            <span class="nt">&lt;ActionMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>getmap<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ActionAttributeDesignator</span> <span class="na">AttributeId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:action:action&quot;</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/ActionMatch&gt;</span>
+        <span class="nt">&lt;/Action&gt;</span>
+        <span class="nt">&lt;/Actions&gt;</span>
+    <span class="nt">&lt;/Target&gt;</span>
+    <span class="nt">&lt;/Rule&gt;</span>
+
+    <span class="c">&lt;!--</span>
+<span class="c">    GetFeatureInfo</span>
+<span class="c">    --&gt;</span>
+
+    <span class="nt">&lt;Rule</span> <span class="na">RuleId=</span><span class="s">&quot;GetFeatureInfoCC&quot;</span> <span class="na">Effect=</span><span class="s">&quot;Permit&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Target&gt;</span>
+        <span class="nt">&lt;Actions&gt;</span>
+        <span class="nt">&lt;Action&gt;</span>
+            <span class="nt">&lt;ActionMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>GetFeatureInfo<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ActionAttributeDesignator</span> <span class="na">AttributeId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:action:action&quot;</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/ActionMatch&gt;</span>
+        <span class="nt">&lt;/Action&gt;</span>
+        <span class="nt">&lt;/Actions&gt;</span>
+    <span class="nt">&lt;/Target&gt;</span>
+    <span class="nt">&lt;/Rule&gt;</span>
+
+    <span class="nt">&lt;Rule</span> <span class="na">RuleId=</span><span class="s">&quot;GetFeatureInfoSC&quot;</span> <span class="na">Effect=</span><span class="s">&quot;Permit&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Target&gt;</span>
+        <span class="nt">&lt;Actions&gt;</span>
+        <span class="nt">&lt;Action&gt;</span>
+            <span class="nt">&lt;ActionMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>getfeatureinfo<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ActionAttributeDesignator</span> <span class="na">AttributeId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:action:action&quot;</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/ActionMatch&gt;</span>
+        <span class="nt">&lt;/Action&gt;</span>
+        <span class="nt">&lt;/Actions&gt;</span>
+    <span class="nt">&lt;/Target&gt;</span>
+    <span class="nt">&lt;/Rule&gt;</span>
+
+    <span class="c">&lt;!--</span>
+<span class="c">    DescribeLayer</span>
+<span class="c">    --&gt;</span>
+
+    <span class="nt">&lt;Rule</span> <span class="na">RuleId=</span><span class="s">&quot;DescribeLayerCC&quot;</span> <span class="na">Effect=</span><span class="s">&quot;Permit&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Target&gt;</span>
+        <span class="nt">&lt;Actions&gt;</span>
+        <span class="nt">&lt;Action&gt;</span>
+            <span class="nt">&lt;ActionMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>DescribeLayer<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ActionAttributeDesignator</span> <span class="na">AttributeId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:action:action&quot;</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/ActionMatch&gt;</span>
+        <span class="nt">&lt;/Action&gt;</span>
+        <span class="nt">&lt;/Actions&gt;</span>
+    <span class="nt">&lt;/Target&gt;</span>
+    <span class="nt">&lt;/Rule&gt;</span>
+
+    <span class="nt">&lt;Rule</span> <span class="na">RuleId=</span><span class="s">&quot;DescribeLayerSC&quot;</span> <span class="na">Effect=</span><span class="s">&quot;Permit&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Target&gt;</span>
+        <span class="nt">&lt;Actions&gt;</span>
+        <span class="nt">&lt;Action&gt;</span>
+            <span class="nt">&lt;ActionMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>describelayer<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ActionAttributeDesignator</span> <span class="na">AttributeId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:action:action&quot;</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/ActionMatch&gt;</span>
+        <span class="nt">&lt;/Action&gt;</span>
+        <span class="nt">&lt;/Actions&gt;</span>
+    <span class="nt">&lt;/Target&gt;</span>
+    <span class="nt">&lt;/Rule&gt;</span>
+
+    <span class="c">&lt;!--</span>
+<span class="c">    GetLegendGraphic</span>
+<span class="c">    --&gt;</span>
+
+    <span class="nt">&lt;Rule</span> <span class="na">RuleId=</span><span class="s">&quot;GetLegendGraphicCC&quot;</span> <span class="na">Effect=</span><span class="s">&quot;Permit&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Target&gt;</span>
+        <span class="nt">&lt;Actions&gt;</span>
+        <span class="nt">&lt;Action&gt;</span>
+            <span class="nt">&lt;ActionMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>GetLegendGraphic<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ActionAttributeDesignator</span> <span class="na">AttributeId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:action:action&quot;</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/ActionMatch&gt;</span>
+        <span class="nt">&lt;/Action&gt;</span>
+        <span class="nt">&lt;/Actions&gt;</span>
+    <span class="nt">&lt;/Target&gt;</span>
+    <span class="nt">&lt;/Rule&gt;</span>
+
+    <span class="nt">&lt;Rule</span> <span class="na">RuleId=</span><span class="s">&quot;GetLegendGraphicSC&quot;</span> <span class="na">Effect=</span><span class="s">&quot;Permit&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Target&gt;</span>
+        <span class="nt">&lt;Actions&gt;</span>
+        <span class="nt">&lt;Action&gt;</span>
+            <span class="nt">&lt;ActionMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>getlegendgraphic<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ActionAttributeDesignator</span> <span class="na">AttributeId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:action:action&quot;</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/ActionMatch&gt;</span>
+        <span class="nt">&lt;/Action&gt;</span>
+        <span class="nt">&lt;/Actions&gt;</span>
+    <span class="nt">&lt;/Target&gt;</span>
+    <span class="nt">&lt;/Rule&gt;</span>
+
+    <span class="c">&lt;!--</span>
+<span class="c">    GetStyles</span>
+<span class="c">    --&gt;</span>
+
+    <span class="nt">&lt;Rule</span> <span class="na">RuleId=</span><span class="s">&quot;GetStylesCC&quot;</span> <span class="na">Effect=</span><span class="s">&quot;Permit&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Target&gt;</span>
+        <span class="nt">&lt;Actions&gt;</span>
+        <span class="nt">&lt;Action&gt;</span>
+            <span class="nt">&lt;ActionMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>GetStyles<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ActionAttributeDesignator</span> <span class="na">AttributeId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:action:action&quot;</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/ActionMatch&gt;</span>
+        <span class="nt">&lt;/Action&gt;</span>
+        <span class="nt">&lt;/Actions&gt;</span>
+    <span class="nt">&lt;/Target&gt;</span>
+    <span class="nt">&lt;/Rule&gt;</span>
+
+    <span class="nt">&lt;Rule</span> <span class="na">RuleId=</span><span class="s">&quot;GetStylesSC&quot;</span> <span class="na">Effect=</span><span class="s">&quot;Permit&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Target&gt;</span>
+        <span class="nt">&lt;Actions&gt;</span>
+        <span class="nt">&lt;Action&gt;</span>
+            <span class="nt">&lt;ActionMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>getstyles<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ActionAttributeDesignator</span> <span class="na">AttributeId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:action:action&quot;</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/ActionMatch&gt;</span>
+        <span class="nt">&lt;/Action&gt;</span>
+        <span class="nt">&lt;/Actions&gt;</span>
+    <span class="nt">&lt;/Target&gt;</span>
+    <span class="nt">&lt;/Rule&gt;</span>
+
+<span class="nt">&lt;/Policy&gt;</span>
+</pre></div>
+</div>
+<p>A XACML policy to permit a user “wcs_user” full accesss to the EOxServer WCS:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;Policy</span>
+    <span class="na">xsi:schemalocation=</span><span class="s">&quot;urn:oasis:names:tc:xacml:2.0:policy:schema:os http://docs.oasis-open.org/xacml/access_control-xacml-2.0-policy-schema-os.xsd&quot;</span>
+    <span class="na">PolicyId=</span><span class="s">&quot;wcs_user_policy&quot;</span>
+    <span class="na">RuleCombiningAlgId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:permit-overrides&quot;</span>
+    <span class="na">xmlns=</span><span class="s">&quot;urn:oasis:names:tc:xacml:2.0:policy:schema:os&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:ns=</span><span class="s">&quot;http://www.enviromatics.net/WS/PolicyManagementAndAuthorisationService/types /2.0&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;Target&gt;</span>
+    <span class="nt">&lt;Subjects&gt;</span>
+        <span class="nt">&lt;Subject&gt;</span>
+        <span class="c">&lt;!-- Here we specify the user who has access to the service. Default identifier is the uid attribute --&gt;</span>
+        <span class="nt">&lt;SubjectMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>wcs_user<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;SubjectAttributeDesignator</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span> <span class="na">AttributeId=</span><span class="s">&quot;uid&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/SubjectMatch&gt;</span>
+        <span class="nt">&lt;/Subject&gt;</span>
+    <span class="nt">&lt;/Subjects&gt;</span>
+    <span class="nt">&lt;Resources&gt;</span>
+        <span class="nt">&lt;Resource&gt;</span>
+        <span class="c">&lt;!-- The attribute urn:oasis:names:tc:xacml:1.0:resource:resource-id specifies the protected server (default is the hostname) --&gt;</span>
+        <span class="nt">&lt;ResourceMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>eoxserver.example.com<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ResourceAttributeDesignator</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span> <span class="na">AttributeId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:resource:resource-id&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/ResourceMatch&gt;</span>
+
+        <span class="c">&lt;!-- The attribute serviceType specifies the protected service (wms or wcs) --&gt;</span>
+        <span class="nt">&lt;ResourceMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>wcs<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ResourceAttributeDesignator</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span> <span class="na">AttributeId=</span><span class="s">&quot;serviceType&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;/ResourceMatch&gt;</span>
+        <span class="nt">&lt;/Resource&gt;</span>
+    <span class="nt">&lt;/Resources&gt;</span>
+    <span class="nt">&lt;/Target&gt;</span>
+
+
+
+    <span class="c">&lt;!--</span>
+<span class="c">    GetCapabilities</span>
+<span class="c">    --&gt;</span>
+
+    <span class="nt">&lt;Rule</span> <span class="na">RuleId=</span><span class="s">&quot;PermitGetCapabilitiesCC&quot;</span> <span class="na">Effect=</span><span class="s">&quot;Permit&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Target&gt;</span>
+        <span class="nt">&lt;Actions&gt;</span>
+        <span class="nt">&lt;Action&gt;</span>
+            <span class="nt">&lt;ActionMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>GetCapabilities<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ActionAttributeDesignator</span> <span class="na">AttributeId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:action:action&quot;</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/ActionMatch&gt;</span>
+        <span class="nt">&lt;/Action&gt;</span>
+        <span class="nt">&lt;/Actions&gt;</span>
+    <span class="nt">&lt;/Target&gt;</span>
+    <span class="nt">&lt;/Rule&gt;</span>
+
+    <span class="nt">&lt;Rule</span> <span class="na">RuleId=</span><span class="s">&quot;PermitGetCapabilitiesSC&quot;</span> <span class="na">Effect=</span><span class="s">&quot;Permit&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Target&gt;</span>
+        <span class="nt">&lt;Actions&gt;</span>
+        <span class="nt">&lt;Action&gt;</span>
+            <span class="nt">&lt;ActionMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>getcapabilities<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ActionAttributeDesignator</span> <span class="na">AttributeId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:action:action&quot;</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/ActionMatch&gt;</span>
+        <span class="nt">&lt;/Action&gt;</span>
+        <span class="nt">&lt;/Actions&gt;</span>
+    <span class="nt">&lt;/Target&gt;</span>
+    <span class="nt">&lt;/Rule&gt;</span>
+
+    <span class="c">&lt;!--</span>
+<span class="c">    DescribeCoverage</span>
+<span class="c">    --&gt;</span>
+
+    <span class="nt">&lt;Rule</span> <span class="na">RuleId=</span><span class="s">&quot;DescribeCoverageCC&quot;</span> <span class="na">Effect=</span><span class="s">&quot;Permit&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Target&gt;</span>
+        <span class="nt">&lt;Actions&gt;</span>
+        <span class="nt">&lt;Action&gt;</span>
+            <span class="nt">&lt;ActionMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>DescribeCoverage<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ActionAttributeDesignator</span> <span class="na">AttributeId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:action:action&quot;</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/ActionMatch&gt;</span>
+        <span class="nt">&lt;/Action&gt;</span>
+        <span class="nt">&lt;/Actions&gt;</span>
+    <span class="nt">&lt;/Target&gt;</span>
+    <span class="nt">&lt;/Rule&gt;</span>
+
+    <span class="nt">&lt;Rule</span> <span class="na">RuleId=</span><span class="s">&quot;DescribeCoverageSC&quot;</span> <span class="na">Effect=</span><span class="s">&quot;Permit&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Target&gt;</span>
+        <span class="nt">&lt;Actions&gt;</span>
+        <span class="nt">&lt;Action&gt;</span>
+            <span class="nt">&lt;ActionMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>describecoverage<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ActionAttributeDesignator</span> <span class="na">AttributeId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:action:action&quot;</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/ActionMatch&gt;</span>
+        <span class="nt">&lt;/Action&gt;</span>
+        <span class="nt">&lt;/Actions&gt;</span>
+    <span class="nt">&lt;/Target&gt;</span>
+    <span class="nt">&lt;/Rule&gt;</span>
+
+    <span class="c">&lt;!--</span>
+<span class="c">    GetCoverage</span>
+<span class="c">    --&gt;</span>
+
+    <span class="nt">&lt;Rule</span> <span class="na">RuleId=</span><span class="s">&quot;DescribeCoverageCC&quot;</span> <span class="na">Effect=</span><span class="s">&quot;Permit&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Target&gt;</span>
+        <span class="nt">&lt;Actions&gt;</span>
+        <span class="nt">&lt;Action&gt;</span>
+            <span class="nt">&lt;ActionMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>GetCoverage<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ActionAttributeDesignator</span> <span class="na">AttributeId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:action:action&quot;</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/ActionMatch&gt;</span>
+        <span class="nt">&lt;/Action&gt;</span>
+        <span class="nt">&lt;/Actions&gt;</span>
+    <span class="nt">&lt;/Target&gt;</span>
+    <span class="nt">&lt;/Rule&gt;</span>
+
+    <span class="nt">&lt;Rule</span> <span class="na">RuleId=</span><span class="s">&quot;GetCoverageSC&quot;</span> <span class="na">Effect=</span><span class="s">&quot;Permit&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Target&gt;</span>
+        <span class="nt">&lt;Actions&gt;</span>
+        <span class="nt">&lt;Action&gt;</span>
+            <span class="nt">&lt;ActionMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>getcoverage<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ActionAttributeDesignator</span> <span class="na">AttributeId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:action:action&quot;</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/ActionMatch&gt;</span>
+        <span class="nt">&lt;/Action&gt;</span>
+        <span class="nt">&lt;/Actions&gt;</span>
+    <span class="nt">&lt;/Target&gt;</span>
+    <span class="nt">&lt;/Rule&gt;</span>
+
+    <span class="c">&lt;!--</span>
+<span class="c">    DescribeEOCoverageSet</span>
+<span class="c">    --&gt;</span>
+
+    <span class="nt">&lt;Rule</span> <span class="na">RuleId=</span><span class="s">&quot;DescribeEOCoverageSetCC&quot;</span> <span class="na">Effect=</span><span class="s">&quot;Permit&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Target&gt;</span>
+        <span class="nt">&lt;Actions&gt;</span>
+        <span class="nt">&lt;Action&gt;</span>
+            <span class="nt">&lt;ActionMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>DescribeEOCoverageSet<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ActionAttributeDesignator</span> <span class="na">AttributeId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:action:action&quot;</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/ActionMatch&gt;</span>
+        <span class="nt">&lt;/Action&gt;</span>
+        <span class="nt">&lt;/Actions&gt;</span>
+    <span class="nt">&lt;/Target&gt;</span>
+    <span class="nt">&lt;/Rule&gt;</span>
+
+    <span class="nt">&lt;Rule</span> <span class="na">RuleId=</span><span class="s">&quot;DescribeEOCoverageSetSC&quot;</span> <span class="na">Effect=</span><span class="s">&quot;Permit&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;Target&gt;</span>
+        <span class="nt">&lt;Actions&gt;</span>
+        <span class="nt">&lt;Action&gt;</span>
+            <span class="nt">&lt;ActionMatch</span> <span class="na">MatchId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:function:string-equal&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;AttributeValue</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">&gt;</span>describeeocoverageset<span class="nt">&lt;/AttributeValue&gt;</span>
+            <span class="nt">&lt;ActionAttributeDesignator</span> <span class="na">AttributeId=</span><span class="s">&quot;urn:oasis:names:tc:xacml:1.0:action:action&quot;</span> <span class="na">DataType=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema#string&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/ActionMatch&gt;</span>
+        <span class="nt">&lt;/Action&gt;</span>
+        <span class="nt">&lt;/Actions&gt;</span>
+    <span class="nt">&lt;/Target&gt;</span>
+    <span class="nt">&lt;/Rule&gt;</span>
+
+<span class="nt">&lt;/Policy&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="general-configuration-for-charon-services">
+<span id="charon-configuration"></span><h3><a class="toc-backref" href="#table-of-contents">General Configuration for CHARON services</a><a class="headerlink" href="#general-configuration-for-charon-services" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>The Charon services need the <code class="docutils literal"><span class="pre">acs-xbeans-1.0.jar</span></code> dependency in the
+<code class="docutils literal"><span class="pre">\lib</span></code> folder of your Axis2 installation (presumably the <code class="docutils literal"><span class="pre">webapps/axis2</span></code>
+of your Apache Tomcat installation).</li>
+<li>Furthermore, you have to activate the EIGSecurityHandler in the
+<strong>Global Modules</strong> section of your axis2 configuration
+(<code class="docutils literal"><span class="pre">${AXIS2_HOME}/WEB-INF/conf/axis2.xml</span></code>).</li>
+<li>You may configure the logging for the services in the Log4J configuration
+file (<code class="docutils literal"><span class="pre">${AXIS2_HOME}/WEB-INF/classes/log4j.properties</span></code>).</li>
+</ul>
+<p>Both, the Security Token Service and the PEP service make use of Java
+Keystores: The IDMS uses  Keystores to store a) the certificate used by the
+Security Token Service for signing SAML tokens and b) the public keys of those
+authenticating authorities trusted by the Policy Enforcement Point. The
+<code class="docutils literal"><span class="pre">keytool</span></code> of the Java distribution can be used to create and manipulate
+Java Keystores:</p>
+<ul>
+<li><p class="first">The following command creates a new Keystore with the password :secret: and
+a suitable key pair with the alias :authenticate: for the Security Token
+Service:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">keytool</span> <span class="pre">-genkey</span> <span class="pre">-alias</span> <span class="pre">authenticate</span> <span class="pre">-keyalg</span> <span class="pre">RSA</span> <span class="pre">-keystore</span> <span class="pre">keystore.jks</span>
+<span class="pre">-storepass</span> <span class="pre">secret</span> <span class="pre">-validity</span> <span class="pre">360</span></code></p>
+</div></blockquote>
+</li>
+<li><p class="first">The following command exports the public certificate from a key pair
+:authenticate: to the file <code class="docutils literal"><span class="pre">authn.crt</span></code>:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">keytool</span> <span class="pre">-export</span> <span class="pre">-alias</span> <span class="pre">authenticate</span> <span class="pre">-file</span> <span class="pre">authn.crt</span> <span class="pre">-keystore</span>
+<span class="pre">keystore.jks</span></code></p>
+</div></blockquote>
+</li>
+<li><p class="first">The following command imports a certificate to a Keystore:</p>
+<blockquote>
+<div><p><code class="docutils literal"><span class="pre">keytool</span> <span class="pre">-import</span> <span class="pre">-alias</span> <span class="pre">trusted_sts</span> <span class="pre">-file</span> <span class="pre">authn.crt</span> <span class="pre">-keystore</span>
+<span class="pre">keystore.jks</span></code></p>
+</div></blockquote>
+</li>
+</ul>
+<p>You can use the Apache HTTP Server as a proxy, it will enable your services
+running in Tomcat to be accessible over the Apache server. This can be useful
+when your services have to be accessible over the HTTP standard port <em>80</em>:</p>
+<ul>
+<li><p class="first">First you have to enable <code class="docutils literal"><span class="pre">mod_proxy_ajp</span></code> and <code class="docutils literal"><span class="pre">mod_proxy</span></code>.</p>
+</li>
+<li><p class="first">Create a virtual host in your <code class="docutils literal"><span class="pre">httpd.conf</span></code>:</p>
+<blockquote>
+<div><div class="highlight-apache"><div class="highlight"><pre><span></span><span class="nt">&lt;VirtualHost</span> <span class="s">*:80</span><span class="nt">&gt;</span>
+   <span class="nb">ServerName</span> server.example.com
+
+   <span class="nt">&lt;Proxy</span> <span class="s">*</span><span class="nt">&gt;</span>
+     <span class="nb">AddDefaultCharset</span> <span class="k">Off</span>
+     <span class="nb">Order</span> deny,allow
+     <span class="nb">Allow</span> from <span class="k">all</span>
+   <span class="nt">&lt;/Proxy&gt;</span>
+
+   <span class="nb">ProxyPass</span> <span class="sx">/services/AuthenticationService</span> ajp://localhost:8009/axis2/services/AuthenticationService
+   <span class="nb">ProxyPassReverse</span> <span class="sx">/services/AuthenticationService</span> ajp://localhost:8009/axis2/services/AuthenticationService
+
+<span class="nt">&lt;/VirtualHost&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first">The <code class="docutils literal"><span class="pre">ProxyPass</span></code> and <code class="docutils literal"><span class="pre">ProxyPassReverse</span></code> directives have to point to your
+services. Please note that the Tomcat server hosting your services must have
+the AJP interface enabled.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="http-and-soap-specific-components">
+<h2><a class="toc-backref" href="#table-of-contents">HTTP and SOAP Specific Components</a><a class="headerlink" href="#http-and-soap-specific-components" title="Permalink to this headline">¶</a></h2>
+<p>For the installation and configuration please refer to the HTTP or SOAP specific
+documentation:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http.html">HTTP Components</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="http.html#shibboleth-identity-provider">Shibboleth Identity Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http.html#shibboleth-service-provider">Shibboleth Service Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http.html#configure-shibboleth-sp-and-idp">Configure Shibboleth SP and IdP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http.html#configure-the-eoxserver-security-components">Configure the EOxServer Security Components</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="soap.html">SOAP Components</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="soap.html#security-token-service">Security Token Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap.html#policy-enforcement-point-service">Policy Enforcement Point Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap.html#soap-security-proxy">SOAP Security Proxy</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="http.html" class="btn btn-neutral float-right" title="HTTP Components" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../webclient.html" class="btn btn-neutral float-left" title="The Webclient Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

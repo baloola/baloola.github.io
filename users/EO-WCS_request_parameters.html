@@ -1,0 +1,757 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>EO-WCS Request Parameters &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="OpenSearch" href="opensearch.html" />
+    <link rel="prev" title="Demonstration" href="demonstration.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Users’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">EOxServer Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="global_use_case.html">Global Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos_installation.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instance_creation.html">Service Instance Creation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operational_install.html">Recommendations for Operational Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailing_lists.html">Mailing Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demonstration.html">Demonstration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">EO-WCS Request Parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#getcapabilities">GetCapabilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#describecoverage">DescribeCoverage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#describeeocoverageset">DescribeEOCoverageSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getcoverage">GetCoverage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opensearch.html">OpenSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html">EOxServer Operators’ Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webclient.html">The Webclient Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="idm/index.html">Identity Management System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html">EOxServer Presentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html">Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crss.html">Supported CRSs and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html">Supported Raster File Formats and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html">Asynchronous Task Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WCS-T_summary.html">Web Coverage Service - Transaction Extension</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Users’ Guide</a> &raquo;</li>
+        
+      <li>EO-WCS Request Parameters</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/users/EO-WCS_request_parameters.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="eo-wcs-request-parameters">
+<span id="index-0"></span><span id="id1"></span><h1><a class="toc-backref" href="#table-of-contents">EO-WCS Request Parameters</a><a class="headerlink" href="#eo-wcs-request-parameters" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#eo-wcs-request-parameters" id="id22">EO-WCS Request Parameters</a><ul>
+<li><a class="reference internal" href="#getcapabilities" id="id23">GetCapabilities</a></li>
+<li><a class="reference internal" href="#describecoverage" id="id24">DescribeCoverage</a></li>
+<li><a class="reference internal" href="#describeeocoverageset" id="id25">DescribeEOCoverageSet</a></li>
+<li><a class="reference internal" href="#getcoverage" id="id26">GetCoverage</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The following tables provide an overview over the available EO-WCS request
+parameters for each operation supported by EOxServer.</p>
+<p>Please see EOxServer’s <a class="reference internal" href="demonstration.html#demonstration"><span class="std std-ref">Demonstration</span></a> for complete sample requests.</p>
+<div class="section" id="getcapabilities">
+<span id="index-1"></span><h2><a class="toc-backref" href="#table-of-contents">GetCapabilities</a><a class="headerlink" href="#getcapabilities" title="Permalink to this headline">¶</a></h2>
+<p>Table: “<a class="reference internal" href="#table-eo-wcs-request-parameters-getcapabilities"><span class="std std-ref">EO-WCS GetCapabilities Request Parameters</span></a>” below lists all
+parameters that are available with Capabilities requests.</p>
+<span id="table-eo-wcs-request-parameters-getcapabilities"></span><table border="1" class="docutils" id="id18">
+<caption><span class="caption-text">EO-WCS GetCapabilities Request Parameters</span><a class="headerlink" href="#id18" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="18%" />
+<col width="39%" />
+<col width="22%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Description / Subparameter</th>
+<th class="head">Allowed value(s) / Example</th>
+<th class="head">Mandatory (M) / Optional (O)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>→ service</td>
+<td>Requested service</td>
+<td>WCS</td>
+<td>M</td>
+</tr>
+<tr class="row-odd"><td>→ request</td>
+<td>Type of request</td>
+<td>GetCapabilities</td>
+<td>M</td>
+</tr>
+<tr class="row-even"><td>→ version <a class="footnote-reference" href="#id15" id="id2">[1]</a></td>
+<td>Version number</td>
+<td>2.0.1</td>
+<td>O</td>
+</tr>
+<tr class="row-odd"><td>→ acceptVersions <a class="footnote-reference" href="#id15" id="id3">[1]</a></td>
+<td>Prioritized sequence of one or more specification
+versions accepted by the client, with preferred versions
+listed first (first supported version will be used)
+version1[,version2[,…]]</td>
+<td>2.0.1, 1.1.2, 1.0.0</td>
+<td>O</td>
+</tr>
+<tr class="row-even"><td>→ sections</td>
+<td>Comma-separated unordered list of zero or more names of
+zero or more names of sections of service metadata
+document to be returned in service metadata document.
+Request only certain sections of Capabilities
+Document section1[,section2[,…]]</td>
+<td><ul class="first last simple">
+<li>DatasetSeriesSummary</li>
+<li>CoverageSummary</li>
+<li>Contents</li>
+<li>All</li>
+<li>ServiceIdentification</li>
+<li>ServiceProvider</li>
+<li>OperationsMetadata</li>
+<li>Languages</li>
+</ul>
+</td>
+<td>O</td>
+</tr>
+<tr class="row-odd"><td>→ updateSequence</td>
+<td>Date of last issued GetCapabilities request; to receive
+new document only if it has changed since</td>
+<td>“2013-05-08”</td>
+<td>O</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="describecoverage">
+<span id="index-2"></span><h2><a class="toc-backref" href="#table-of-contents">DescribeCoverage</a><a class="headerlink" href="#describecoverage" title="Permalink to this headline">¶</a></h2>
+<p>Table: “<a class="reference internal" href="#table-eo-wcs-request-parameters-describecoverage"><span class="std std-ref">EO-WCS DescribeCoverage Request Parameters</span></a>” below lists all
+parameters that are available with DescribeCoverage requests.</p>
+<span id="table-eo-wcs-request-parameters-describecoverage"></span><table border="1" class="docutils" id="id19">
+<caption><span class="caption-text">EO-WCS DescribeCoverage Request Parameters</span><a class="headerlink" href="#id19" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="18%" />
+<col width="39%" />
+<col width="22%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Description / Subparameter</th>
+<th class="head">Allowed value(s) / Example</th>
+<th class="head">Mandatory (M) / Optional (O)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>→ service</td>
+<td>Requested service</td>
+<td>WCS</td>
+<td>M</td>
+</tr>
+<tr class="row-odd"><td>→ request</td>
+<td>Type of request</td>
+<td>DescribeCoverage</td>
+<td>M</td>
+</tr>
+<tr class="row-even"><td>→ version <a class="footnote-reference" href="#id15" id="id4">[1]</a></td>
+<td>Version number</td>
+<td>2.0.1</td>
+<td>M</td>
+</tr>
+<tr class="row-odd"><td>→ coverageId</td>
+<td><p class="first">NCName(s):</p>
+<ul class="last simple">
+<li>valid coverageID of a Dataset</li>
+<li>valid coverageID of a StichedMosaic</li>
+</ul>
+</td>
+<td>&#160;</td>
+<td>M</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="describeeocoverageset">
+<span id="index-3"></span><h2><a class="toc-backref" href="#table-of-contents">DescribeEOCoverageSet</a><a class="headerlink" href="#describeeocoverageset" title="Permalink to this headline">¶</a></h2>
+<p>Table: “<a class="reference internal" href="#table-eo-wcs-request-parameters-describeeocoverageset"><span class="std std-ref">EO-WCS DescribeEOCoverageSet Request Parameters</span></a>” below
+lists all parameters that are available with DescribeEOCoverageSet requests.</p>
+<span id="table-eo-wcs-request-parameters-describeeocoverageset"></span><table border="1" class="docutils" id="id20">
+<caption><span class="caption-text">EO-WCS DescribeEOCoverageSet Request Parameters</span><a class="headerlink" href="#id20" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="18%" />
+<col width="39%" />
+<col width="22%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Description / Subparameter</th>
+<th class="head">Allowed value(s) / Example</th>
+<th class="head">Mandatory (M) / Optional (O)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>→ service</td>
+<td>Requested service</td>
+<td>WCS</td>
+<td>M</td>
+</tr>
+<tr class="row-odd"><td>→ request</td>
+<td>Type of request</td>
+<td>DescribeEOCoverageSet</td>
+<td>M</td>
+</tr>
+<tr class="row-even"><td>→ version <a class="footnote-reference" href="#id15" id="id5">[1]</a></td>
+<td>Version number</td>
+<td>2.0.1</td>
+<td>M</td>
+</tr>
+<tr class="row-odd"><td>→ eoId</td>
+<td><p class="first">Valid eoId:</p>
+<ul class="last simple">
+<li>using the coverageId of a Datatset</li>
+<li>using the eoId of a DatatsetSeries</li>
+<li>using the coverageId of a StitchedMosaic</li>
+</ul>
+</td>
+<td>&#160;</td>
+<td>M</td>
+</tr>
+<tr class="row-even"><td>→ subset</td>
+<td><p class="first">Allows to constrain the request in each dimensions and
+define how these  parameters are applied.</p>
+<p>The spatial constraint is expressed in WGS84, the
+temporal constraint in ISO&nbsp;8601.</p>
+<p>Spatial trimming:  Name of an coverage axis (Long or Lat)
+Temporal trimming: phenomenonTime
+Plus optional either:</p>
+<ul class="simple">
+<li>containment = overlaps (default)</li>
+<li>containment = contains</li>
+</ul>
+<p class="last">Any combination thereof (but each value only once per
+request)</p>
+</td>
+<td><ul class="first last simple">
+<li>Lat(32,47)</li>
+<li>Long(11,33)</li>
+<li>phenomenonTime(“2006-08-01”,
+“2006-08-22T09:22:00Z”)</li>
+<li>Lat(32,47)&amp;Long(11,33)&amp;
+phenomenonTime(“2006-08-01”&amp;
+“2006-08-22T09:22:00Z”)&amp;
+containment=contains</li>
+</ul>
+</td>
+<td>O</td>
+</tr>
+<tr class="row-odd"><td>→ containment</td>
+<td>see <cite>subset</cite> parameter</td>
+<td><ul class="first last simple">
+<li>overlaps (default)</li>
+<li>contains</li>
+</ul>
+</td>
+<td>O</td>
+</tr>
+<tr class="row-even"><td>→ section</td>
+<td>see GetCapabilities</td>
+<td><ul class="first last simple">
+<li>DatasetSeriesSummary</li>
+<li>CoverageSummary</li>
+<li>All</li>
+</ul>
+</td>
+<td>O</td>
+</tr>
+<tr class="row-odd"><td>→ count</td>
+<td>Limits the maximum number of DatasetDescriptions returned
+in the EOCoverageSetDescription.</td>
+<td>10</td>
+<td>O</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="getcoverage">
+<span id="index-4"></span><h2><a class="toc-backref" href="#table-of-contents">GetCoverage</a><a class="headerlink" href="#getcoverage" title="Permalink to this headline">¶</a></h2>
+<p>Table: “<a class="reference internal" href="#table-eo-wcs-request-parameters-getcoverage"><span class="std std-ref">EO-WCS GetCoverage Request Parameters</span></a>” below lists all
+parameters that are available with GetCoverage requests.</p>
+<span id="table-eo-wcs-request-parameters-getcoverage"></span><table border="1" class="docutils" id="id21">
+<caption><span class="caption-text">EO-WCS GetCoverage Request Parameters</span><a class="headerlink" href="#id21" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="18%" />
+<col width="39%" />
+<col width="22%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Description / Subparameter</th>
+<th class="head">Allowed value(s) / Example</th>
+<th class="head">Mandatory (M) / Optional (O)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>→ service</td>
+<td>Requested service</td>
+<td>WCS</td>
+<td>M</td>
+</tr>
+<tr class="row-odd"><td>→ request</td>
+<td>Type of request</td>
+<td>GetCoverage</td>
+<td>M</td>
+</tr>
+<tr class="row-even"><td>→ version <a class="footnote-reference" href="#id15" id="id6">[1]</a></td>
+<td>Version number</td>
+<td>2.0.1</td>
+<td>M</td>
+</tr>
+<tr class="row-odd"><td>→ coverageId</td>
+<td><p class="first">NCName(s):</p>
+<ul class="last simple">
+<li>valid coverageID of a Dataset</li>
+<li>valid coverageID of a StichedMosaic</li>
+</ul>
+</td>
+<td>&#160;</td>
+<td>M</td>
+</tr>
+<tr class="row-even"><td>→ format</td>
+<td><p class="first">Requested format of coverage to be returned, currently:</p>
+<ul class="last simple">
+<li>image/tiff</li>
+<li>image/jpeg</li>
+<li>image/png</li>
+<li>image/gif</li>
+</ul>
+</td>
+<td>image/tiff</td>
+<td>M</td>
+</tr>
+<tr class="row-odd"><td>→ mediatype</td>
+<td><p class="first">Coverage delivered directly as image file or enclosed in
+GML structure</p>
+<ul class="last simple">
+<li>not present or</li>
+<li>multipart/mixed</li>
+</ul>
+</td>
+<td>multipart/mixed</td>
+<td>O</td>
+</tr>
+<tr class="row-even"><td>→ subset</td>
+<td><p class="first">Trimming of coverage dimension (no slicing allowed!)</p>
+<ul class="last simple">
+<li>the label of a coverage axis<ul>
+<li>The meaning of the subset can be altered by the
+subsettingCrs parameter.</li>
+</ul>
+</li>
+</ul>
+</td>
+<td><ul class="first last simple">
+<li>x(400,200)</li>
+<li>Lat(12,14)</li>
+<li>Long(17,17.4)</li>
+</ul>
+</td>
+<td>O</td>
+</tr>
+<tr class="row-odd"><td>→ subsettingCrs</td>
+<td>The CRS the subsets are expressed in. This also defines
+the output CRS, if no further outputCrs is specified.
+If no subsettingCrs is given, pixel coordinates are
+assumed.</td>
+<td>http://www.opengis.net/def/crs/
+EPSG/0/4326</td>
+<td>O</td>
+</tr>
+<tr class="row-even"><td>→ outputCrs</td>
+<td><p class="first">CRS for the requested output coverage</p>
+<ul class="last simple">
+<li>not present or</li>
+<li>CRS</li>
+</ul>
+</td>
+<td>http://www.opengis.net/def/crs/
+EPSG/0/3035</td>
+<td>O</td>
+</tr>
+<tr class="row-odd"><td>→ rangesubset</td>
+<td>Subsetting in the range domain (e.g. Band-Subsetting).</td>
+<td><ul class="first last simple">
+<li>Blue,Green,Red</li>
+<li>Band1:Band3,Band5,Band7:Band9</li>
+</ul>
+</td>
+<td>O</td>
+</tr>
+<tr class="row-even"><td>→ scaleFactor</td>
+<td>Scale the output by this factor.
+The ‘scaleFactor’ parameter requires MapServer v7.0.</td>
+<td><ul class="first last simple">
+<li>0.5</li>
+<li>1.25</li>
+</ul>
+</td>
+<td>O</td>
+</tr>
+<tr class="row-odd"><td><ul class="first last simple">
+<li>→ scaleAxes</li>
+<li>→ scaleSize</li>
+<li>→ scaleExtent</li>
+</ul>
+</td>
+<td><p class="first">Mutually exclusive per axis, either:</p>
+<ul class="simple">
+<li>a scale factor (per axis)</li>
+<li>absolute pixel size as integer (per axis)</li>
+<li>the size given as extent (per axis). This is internally
+translated to a ‘scaleSize’</li>
+</ul>
+<p class="last">The ‘scaleAxes’ parameter requires MapServer v7.0.</p>
+</td>
+<td><ul class="first last simple">
+<li>scaleAxes=x(1.5),y(0.5)</li>
+<li>scaleSize=x(50),y(100)</li>
+<li>scaleExtent=long(50:100)</li>
+</ul>
+</td>
+<td>O</td>
+</tr>
+<tr class="row-even"><td>→ interpolation <a class="footnote-reference" href="#id16" id="id7">[2]</a></td>
+<td><p class="first">Interpolation method to be used</p>
+<ul class="last simple">
+<li>http://www.opengis.net/def/interpolation/OGC/1/
+nearest-neighbour (default)</li>
+<li>http://www.opengis.net/def/interpolation/OGC/1/
+average</li>
+<li>http://www.opengis.net/def/interpolation/OGC/1/
+bilinear</li>
+</ul>
+</td>
+<td>bilinear</td>
+<td>O</td>
+</tr>
+<tr class="row-odd"><td>→ geotiff:compression <a class="footnote-reference" href="#id17" id="id8">[3]</a></td>
+<td><p class="first">The internal compression method used. One of:</p>
+<ul class="last simple">
+<li>None</li>
+<li>PackBits</li>
+<li>Huffman</li>
+<li>LZW</li>
+<li>JPEG</li>
+<li>Deflate</li>
+</ul>
+</td>
+<td>LZW</td>
+<td>O</td>
+</tr>
+<tr class="row-even"><td><dl class="first last docutils">
+<dt>→ geotiff:jpeg_quality</dt>
+<dd><a class="footnote-reference" href="#id17" id="id9">[3]</a></dd>
+</dl>
+</td>
+<td>The quality of the JPEG compression when this compression
+method is used. Must be an integer between 1 and 100.</td>
+<td>75</td>
+<td>O</td>
+</tr>
+<tr class="row-odd"><td>→ geotiff:predictor <a class="footnote-reference" href="#id17" id="id10">[3]</a></td>
+<td><p class="first">The predictor method used for the Deflate or LZW
+compression. One of:</p>
+<ul class="last simple">
+<li>None</li>
+<li>Horizontal</li>
+<li>FloatingPoint</li>
+</ul>
+</td>
+<td>Horizontal</td>
+<td>O</td>
+</tr>
+<tr class="row-even"><td>→ geotiff:interleave <a class="footnote-reference" href="#id17" id="id11">[3]</a></td>
+<td><p class="first">Defines how the output image shall be interleaved.
+One of:</p>
+<ul class="last simple">
+<li>Pixel</li>
+<li>Band</li>
+</ul>
+</td>
+<td>Horizontal</td>
+<td>O</td>
+</tr>
+<tr class="row-odd"><td>→ geotiff:tiling <a class="footnote-reference" href="#id17" id="id12">[3]</a></td>
+<td>Defines whether or not the image shall be internally
+tiled. Must be a boolean value (true/false). If this is
+set to ‘true’, also a tilewidth and tileheight must be
+specified.</td>
+<td>true</td>
+<td>O</td>
+</tr>
+<tr class="row-even"><td>→ geotiff:tilewidth <a class="footnote-reference" href="#id17" id="id13">[3]</a></td>
+<td>Defines the width of the internal tiles. Must be an
+integer and a multiple of 16.</td>
+<td>256</td>
+<td>O</td>
+</tr>
+<tr class="row-odd"><td>→ geotiff:tileheight <a class="footnote-reference" href="#id17" id="id14">[3]</a></td>
+<td>Defines the height of the internal tiles. Must be an
+integer and a multiple of 16.</td>
+<td>128</td>
+<td>O</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id15" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>, <a class="fn-backref" href="#id4">3</a>, <a class="fn-backref" href="#id5">4</a>, <a class="fn-backref" href="#id6">5</a>)</em> Version, acceptVersions: Support for EO-WCS is available only together
+with WCS version 2.0.1.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id16" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[2]</a></td><td>Interpolation: (Note: Resampling options other than NEAREST can
+dramatically slow down raster processing). The default (and fastest) is
+NEAREST. Replaces the target pixel with its NEAREST Neighbor.
+AVERAGE will compute the average pixel value of all pixels in the region
+of the disk file being mapped to the output pixel (or possibly just a
+sampling of them). Generally AVERAGE can be desirable for reducing noise
+in dramatically downsampled data, and can give something approximating
+anti-aliasing for black and white linework. BILINEAR will compute a
+linear interpolation of the four pixels around the target location.
+BILINEAR can be helpful when oversampling data to give a smooth
+appearance.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id17" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td><em>(<a class="fn-backref" href="#id8">1</a>, <a class="fn-backref" href="#id9">2</a>, <a class="fn-backref" href="#id10">3</a>, <a class="fn-backref" href="#id11">4</a>, <a class="fn-backref" href="#id12">5</a>, <a class="fn-backref" href="#id13">6</a>, <a class="fn-backref" href="#id14">7</a>)</em> These parameters are only used in conjunction with GeoTIFF output. Thus
+the format parameter must be either ‘image/tiff’ or the “native” format
+of the coverage maps to GeoTIFF. The specificaiton of this encoding
+extension can be found <a class="reference external" href="https://portal.opengeospatial.org/files/?artifact_id=54813">here</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="opensearch.html" class="btn btn-neutral float-right" title="OpenSearch" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="demonstration.html" class="btn btn-neutral float-left" title="Demonstration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,706 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Demonstration &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="EO-WCS Request Parameters" href="EO-WCS_request_parameters.html" />
+    <link rel="prev" title="Mailing Lists" href="mailing_lists.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Users’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">EOxServer Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="global_use_case.html">Global Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos_installation.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instance_creation.html">Service Instance Creation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operational_install.html">Recommendations for Operational Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailing_lists.html">Mailing Lists</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Demonstration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#getcapabilities">GetCapabilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#describecoverage">DescribeCoverage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#describeeocoverageset">DescribeEOCoverageSet</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dataset">Dataset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#stitchedmosaic">StitchedMosaic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#datasetseries">DatasetSeries</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#getcoverage">GetCoverage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getcoverage-post-xml">GetCoverage POST/XML</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="EO-WCS_request_parameters.html">EO-WCS Request Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opensearch.html">OpenSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html">EOxServer Operators’ Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webclient.html">The Webclient Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="idm/index.html">Identity Management System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html">EOxServer Presentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html">Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crss.html">Supported CRSs and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html">Supported Raster File Formats and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html">Asynchronous Task Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WCS-T_summary.html">Web Coverage Service - Transaction Extension</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Users’ Guide</a> &raquo;</li>
+        
+      <li>Demonstration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/users/demonstration.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="demonstration">
+<span id="index-0"></span><span id="id1"></span><h1><a class="toc-backref" href="#table-of-contents">Demonstration</a><a class="headerlink" href="#demonstration" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#demonstration" id="id3">Demonstration</a><ul>
+<li><a class="reference internal" href="#getcapabilities" id="id4">GetCapabilities</a></li>
+<li><a class="reference internal" href="#describecoverage" id="id5">DescribeCoverage</a></li>
+<li><a class="reference internal" href="#describeeocoverageset" id="id6">DescribeEOCoverageSet</a><ul>
+<li><a class="reference internal" href="#dataset" id="id7">Dataset</a></li>
+<li><a class="reference internal" href="#stitchedmosaic" id="id8">StitchedMosaic</a></li>
+<li><a class="reference internal" href="#datasetseries" id="id9">DatasetSeries</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#getcoverage" id="id10">GetCoverage</a></li>
+<li><a class="reference internal" href="#getcoverage-post-xml" id="id11">GetCoverage POST/XML</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The EOxServer demonstration is an instantiation of the <a class="reference internal" href="../developers/autotest.html#autotest"><span class="std std-ref">autotest instance</span></a> and is based on the Envisat MERIS sample data available <a class="reference external" href="http://earth.esa.int/object/index.cfm?fobjectid=4320">here</a>.</p>
+<p>The configuration includes one DatasetSeries and one StitchedMosaic both
+combining the three available datasets:</p>
+<ul class="simple">
+<li>DatasetSeries (EOId: MER_FRS_1P_reduced) containing the 3 MERIS sample
+datasets with all 15 radiance bands encoded as uint16 values</li>
+<li>StitchedMosaic (CoverageId: mosaic_MER_FRS_1P_reduced_RGB) containing
+the 3 MERIS sample datasets reduced to RGB 8-bit</li>
+</ul>
+<p>Note, the data has been reduced from 300m resolution to 3000m.</p>
+<p>The demonstration tries to show the usage of all available
+<a class="reference internal" href="EO-WCS_request_parameters.html#eo-wcs-request-parameters"><span class="std std-ref">EO-WCS request parameters</span></a>.</p>
+<div class="section" id="getcapabilities">
+<span id="index-1"></span><h2><a class="toc-backref" href="#table-of-contents">GetCapabilities</a><a class="headerlink" href="#getcapabilities" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://eoxserver.org/demo_stable/ows?service=wcs&amp;version=2.0.1&amp;request=GetCapabilities">GetCapabilities</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://eoxserver.org/demo_stable/ows?
+    service=wcs&amp;
+    version=2.0.1&amp;
+    request=GetCapabilities
+</pre></div>
+</div>
+<p>Interesting parts of the repsonse:</p>
+<ul>
+<li><p class="first">Advertising EO-WCS:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;ows:Profile&gt;</span>http://www.opengis.net/spec/WCS_application-profile_earth-observation/1.0/conf/eowcs<span class="nt">&lt;/ows:Profile&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">The additional EO-WCS operation:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;ows:Operation</span> <span class="na">name=</span><span class="s">&quot;DescribeEOCoverageSet&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;ows:DCP&gt;</span>
+        <span class="nt">&lt;ows:HTTP&gt;</span>
+            <span class="nt">&lt;ows:Get</span> <span class="na">xlink:href=</span><span class="s">&quot;http://eoxserver.org/demo_stable/ows?&quot;</span> <span class="na">xlink:type=</span><span class="s">&quot;simple&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;ows:Post</span> <span class="na">xlink:href=</span><span class="s">&quot;http://eoxserver.org/demo_stable/ows?&quot;</span> <span class="na">xlink:type=</span><span class="s">&quot;simple&quot;</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;ows:Constraint</span> <span class="na">name=</span><span class="s">&quot;PostEncoding&quot;</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;ows:AllowedValues&gt;</span>
+                        <span class="nt">&lt;ows:Value&gt;</span>XML<span class="nt">&lt;/ows:Value&gt;</span>
+                    <span class="nt">&lt;/ows:AllowedValues&gt;</span>
+                <span class="nt">&lt;/ows:Constraint&gt;</span>
+            <span class="nt">&lt;/ows:Post&gt;</span>
+        <span class="nt">&lt;/ows:HTTP&gt;</span>
+    <span class="nt">&lt;/ows:DCP&gt;</span>
+<span class="nt">&lt;/ows:Operation&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">The server will limit the number of CoverageDescription elements in DescribeEOCoverageSet responses:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;ows:Constraint</span> <span class="na">name=</span><span class="s">&quot;CountDefault&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;ows:NoValues/&gt;</span>
+    <span class="nt">&lt;ows:DefaultValue&gt;</span>100<span class="nt">&lt;/ows:DefaultValue&gt;</span>
+<span class="nt">&lt;/ows:Constraint&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">There is a StitchedMosaic available:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;wcs:CoverageSummary&gt;</span>
+    <span class="nt">&lt;wcs:CoverageId&gt;</span>mosaic_MER_FRS_1P_reduced_RGB<span class="nt">&lt;/wcs:CoverageId&gt;</span>
+    <span class="nt">&lt;wcs:CoverageSubtype&gt;</span>RectifiedStitchedMosaic<span class="nt">&lt;/wcs:CoverageSubtype&gt;</span>
+<span class="nt">&lt;/wcs:CoverageSummary&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">There is a DatasetSeries available:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;wcseo:DatasetSeriesSummary&gt;</span>
+    <span class="nt">&lt;ows:WGS84BoundingBox&gt;</span>
+        <span class="nt">&lt;ows:LowerCorner&gt;</span>-3.43798100 32.26454100<span class="nt">&lt;/ows:LowerCorner&gt;</span>
+        <span class="nt">&lt;ows:UpperCorner&gt;</span>27.96859100 46.21844500<span class="nt">&lt;/ows:UpperCorner&gt;</span>
+    <span class="nt">&lt;/ows:WGS84BoundingBox&gt;</span>
+    <span class="nt">&lt;wcseo:DatasetSeriesId&gt;</span>MER_FRS_1P_reduced<span class="nt">&lt;/wcseo:DatasetSeriesId&gt;</span>
+    <span class="nt">&lt;gml:TimePeriod</span> <span class="na">gml:id=</span><span class="s">&quot;MER_FRS_1P_reduced_timeperiod&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;gml:beginPosition&gt;</span>2006-08-16T09:09:29<span class="nt">&lt;/gml:beginPosition&gt;</span>
+        <span class="nt">&lt;gml:endPosition&gt;</span>2006-08-30T10:13:06<span class="nt">&lt;/gml:endPosition&gt;</span>
+    <span class="nt">&lt;/gml:TimePeriod&gt;</span>
+<span class="nt">&lt;/wcseo:DatasetSeriesSummary&gt;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="describecoverage">
+<span id="index-2"></span><h2><a class="toc-backref" href="#table-of-contents">DescribeCoverage</a><a class="headerlink" href="#describecoverage" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://eoxserver.org/demo_stable/ows?service=wcs&amp;version=2.0.1&amp;request=DescribeCoverage&amp;coverageid=mosaic_MER_FRS_1P_reduced_RGB">DescribeCoverage StitchedMosaic</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://eoxserver.org/demo_stable/ows?
+    service=wcs&amp;
+    version=2.0.1&amp;
+    request=DescribeCoverage&amp;
+    coverageid=mosaic_MER_FRS_1P_reduced_RGB
+</pre></div>
+</div>
+<p><a class="reference external" href="http://eoxserver.org/demo_stable/ows?service=wcs&amp;version=2.0.1&amp;request=DescribeCoverage&amp;coverageid=MER_FRS_1PNPDE20060822_092058_000001972050_00308_23408_0077_uint16_reduced_compressed">DescribeCoverage Dataset</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://eoxserver.org/demo_stable/ows?
+    service=wcs&amp;
+    version=2.0.1&amp;
+    request=DescribeCoverage&amp;
+    coverageid=MER_FRS_1PNPDE20060822_092058_000001972050_00308_23408_0077_uint16_reduced_compressed
+</pre></div>
+</div>
+</div>
+<div class="section" id="describeeocoverageset">
+<span id="index-3"></span><h2><a class="toc-backref" href="#table-of-contents">DescribeEOCoverageSet</a><a class="headerlink" href="#describeeocoverageset" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="dataset">
+<h3><a class="toc-backref" href="#table-of-contents">Dataset</a><a class="headerlink" href="#dataset" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://eoxserver.org/demo_stable/ows?service=wcs&amp;version=2.0.1&amp;request=DescribeEOCoverageSet&amp;EOId=MER_FRS_1PNPDE20060822_092058_000001972050_00308_23408_0077_uint16_reduced_compressed">DescribeEOCoverageSet Dataset</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://eoxserver.org/demo_stable/ows?
+        service=wcs&amp;
+        version=2.0.1&amp;
+        request=DescribeEOCoverageSet&amp;
+        EOId=MER_FRS_1PNPDE20060822_092058_000001972050_00308_23408_0077_uint16_reduced_compressed
+</pre></div>
+</div>
+</div>
+<div class="section" id="stitchedmosaic">
+<h3><a class="toc-backref" href="#table-of-contents">StitchedMosaic</a><a class="headerlink" href="#stitchedmosaic" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://eoxserver.org/demo_stable/ows?service=wcs&amp;version=2.0.1&amp;request=DescribeEOCoverageSet&amp;EOId=mosaic_MER_FRS_1P_reduced_RGB">DescribeEOCoverageSet StitchedMosaic (4 Datasets returned)</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://eoxserver.org/demo_stable/ows?
+    service=wcs&amp;
+    version=2.0.1&amp;
+    request=DescribeEOCoverageSet&amp;
+    EOId=mosaic_MER_FRS_1P_reduced_RGB
+</pre></div>
+</div>
+<p><a class="reference external" href="http://eoxserver.org/demo_stable/ows?service=wcs&amp;version=2.0.1&amp;request=DescribeEOCoverageSet&amp;EOId=mosaic_MER_FRS_1P_reduced_RGB&amp;subset=phenomenonTime(%222006-08-01%22,%222006-08-22T09:22:00Z%22)">DescribeEOCoverageSet StitchedMosaic, subset in time (3 Datasets returned)</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://eoxserver.org/demo_stable/ows?
+    service=wcs&amp;
+    version=2.0.1&amp;
+    request=DescribeEOCoverageSet&amp;
+    EOId=mosaic_MER_FRS_1P_reduced_RGB&amp;
+    subset=phenomenonTime(&quot;2006-08-01&quot;,&quot;2006-08-22T09:22:00Z&quot;)
+</pre></div>
+</div>
+<p><a class="reference external" href="http://eoxserver.org/demo_stable/ows?service=wcs&amp;version=2.0.1&amp;request=DescribeEOCoverageSet&amp;EOId=mosaic_MER_FRS_1P_reduced_RGB&amp;subset=Lat(32,47)&amp;subset=Long(11,33)&amp;containment=contains">DescribeEOCoverageSet StitchedMosaic, subset in Lat and Long, containment contains (1 Dataset returned)</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://eoxserver.org/demo_stable/ows?
+    service=wcs&amp;
+    version=2.0.1&amp;
+    request=DescribeEOCoverageSet&amp;
+    EOId=mosaic_MER_FRS_1P_reduced_RGB&amp;
+    subset=Lat(32,47)&amp;
+    subset=Long(11,33)&amp;
+    containment=contains
+</pre></div>
+</div>
+<p><a class="reference external" href="http://eoxserver.org/demo_stable/ows?service=wcs&amp;version=2.0.1&amp;request=DescribeEOCoverageSet&amp;EOId=mosaic_MER_FRS_1P_reduced_RGB&amp;count=2">DescribeEOCoverageSet StitchedMosaic, returned CoverageDescriptions limited to 2</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://eoxserver.org/demo_stable/ows?
+    service=wcs&amp;
+    version=2.0.1&amp;
+    request=DescribeEOCoverageSet&amp;
+    EOId=mosaic_MER_FRS_1P_reduced_RGB&amp;
+    count=2
+</pre></div>
+</div>
+</div>
+<div class="section" id="datasetseries">
+<h3><a class="toc-backref" href="#table-of-contents">DatasetSeries</a><a class="headerlink" href="#datasetseries" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://eoxserver.org/demo_stable/ows?service=wcs&amp;version=2.0.1&amp;request=describeeocoverageset&amp;eoid=MER_FRS_1P_reduced">DescribeEOCoverageSet DatasetSeries (5 Datasets returned)</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://eoxserver.org/demo_stable/ows?
+    service=wcs&amp;
+    version=2.0.1&amp;
+    request=describeeocoverageset&amp;
+    eoid=MER_FRS_1P_reduced
+</pre></div>
+</div>
+<p><a class="reference external" href="http://eoxserver.org/demo_stable/ows?service=wcs&amp;version=2.0.1&amp;request=describeeocoverageset&amp;eoid=MER_FRS_1P_reduced&amp;subset=phenomenonTime(%222006-08-01%22,%222006-08-22T09:22:00Z%22)">DescribeEOCoverageSet DatasetSeries, trim subset in time (4 Datasets returned)</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://eoxserver.org/demo_stable/ows?
+    service=wcs&amp;
+    version=2.0.1&amp;
+    request=describeeocoverageset&amp;
+    eoid=MER_FRS_1P_reduced&amp;
+    subset=phenomenonTime(&quot;2006-08-01&quot;,&quot;2006-08-22T09:22:00Z&quot;)
+</pre></div>
+</div>
+<p><a class="reference external" href="http://eoxserver.org/demo_stable/ows?service=wcs&amp;version=2.0.1&amp;request=describeeocoverageset&amp;eoid=MER_FRS_1P_reduced&amp;subset=phenomenonTime(%222006-08-22T09:20:58Z%22)">DescribeEOCoverageSet DatasetSeries, slice subset in time (2 Dataset returned)</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://eoxserver.org/demo_stable/ows?
+    service=wcs&amp;
+    version=2.0.1&amp;
+    request=describeeocoverageset&amp;
+    eoid=MER_FRS_1P_reduced&amp;
+    subset=phenomenonTime(&quot;2006-08-22T09:20:58Z&quot;)
+</pre></div>
+</div>
+<p><a class="reference external" href="http://eoxserver.org/demo_stable/ows?service=wcs&amp;version=2.0.1&amp;request=describeeocoverageset&amp;eoid=MER_FRS_1P_reduced&amp;subset=phenomenonTime(%222006-08-01%22,%222006-08-22T09:22:00Z%22)&amp;containment=contains">DescribeEOCoverageSet DatasetSeries, trim subset in time trim, containment contains (2 Dataset returned)</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://eoxserver.org/demo_stable/ows?
+    service=wcs&amp;
+    version=2.0.1&amp;
+    request=describeeocoverageset&amp;
+    eoid=MER_FRS_1P_reduced&amp;
+    subset=phenomenonTime(&quot;2006-08-01&quot;,&quot;2006-08-22T09:22:00Z&quot;)&amp;
+    containment=contains
+</pre></div>
+</div>
+<p><a class="reference external" href="http://eoxserver.org/demo_stable/ows?service=wcs&amp;version=2.0.1&amp;request=describeeocoverageset&amp;eoid=MER_FRS_1P_reduced&amp;subset=Lat(32,47)&amp;subset=Long(11,33)">DescribeEOCoverageSet DatasetSeries, subset in Lat and Long (5 Datasets returned)</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://eoxserver.org/demo_stable/ows?
+    service=wcs&amp;
+    version=2.0.1&amp;
+    request=describeeocoverageset&amp;
+    eoid=MER_FRS_1P_reduced&amp;
+    subset=Lat(32,47)&amp;
+    subset=Long(11,33)
+</pre></div>
+</div>
+<p><a class="reference external" href="http://eoxserver.org/demo_stable/ows?service=wcs&amp;version=2.0.1&amp;request=describeeocoverageset&amp;eoid=MER_FRS_1P_reduced&amp;subset=Lat(32,47)&amp;subset=Long(11,33)&amp;containment=contains">DescribeEOCoverageSet DatasetSeries, subset in Lat and Long, containment contains (2 Dataset returned)</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://eoxserver.org/demo_stable/ows?
+    service=wcs&amp;
+    version=2.0.1&amp;
+    request=describeeocoverageset&amp;
+    eoid=MER_FRS_1P_reduced&amp;
+    subset=Lat(32,47)&amp;
+    subset=Long(11,33)&amp;
+    containment=contains
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="getcoverage">
+<span id="index-4"></span><h2><a class="toc-backref" href="#table-of-contents">GetCoverage</a><a class="headerlink" href="#getcoverage" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://eoxserver.org/demo_stable/ows?service=wcs&amp;version=2.0.1&amp;request=GetCoverage&amp;coverageid=mosaic_MER_FRS_1P_reduced_RGB&amp;format=image/tiff&amp;mediatype=multipart/mixed">GetCoverage StitchedMosaic, full (GML incl. contributingFootprint &amp; GeoTIFF)</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://eoxserver.org/demo_stable/ows?
+    service=wcs&amp;
+    version=2.0.1&amp;
+    request=GetCoverage&amp;
+    coverageid=mosaic_MER_FRS_1P_reduced_RGB&amp;
+    format=image/tiff&amp;
+    mediatype=multipart/mixed
+</pre></div>
+</div>
+<p><a class="reference external" href="http://eoxserver.org/demo_stable/ows?service=wcs&amp;version=2.0.1&amp;request=GetCoverage&amp;coverageid=MER_FRS_1PNPDE20060822_092058_000001972050_00308_23408_0077_uint16_reduced_compressed&amp;format=image/tiff&amp;mediatype=multipart/mixed&amp;scalesize=x(200),y(200)">GetCoverage Dataset, full (GML &amp; GeoTIFF)</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://eoxserver.org/demo_stable/ows?
+    service=wcs&amp;
+    version=2.0.1&amp;
+    request=GetCoverage&amp;
+    coverageid=MER_FRS_1PNPDE20060822_092058_000001972050_00308_23408_0077_uint16_reduced_compressed&amp;
+    format=image/tiff&amp;
+    mediatype=multipart/mixed
+</pre></div>
+</div>
+<p><a class="reference external" href="http://eoxserver.org/demo_stable/ows?service=wcs&amp;version=2.0.1&amp;request=GetCoverage&amp;coverageid=MER_FRS_1PNPDE20060822_092058_000001972050_00308_23408_0077_uint16_reduced_compressed&amp;format=image/tiff&amp;mediatype=multipart/mixed&amp;subset=x(100,200)&amp;subset=y(300,400)">GetCoverage Dataset, subset in pixels</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://eoxserver.org/demo_stable/ows?
+    service=wcs&amp;
+    version=2.0.1&amp;
+    request=GetCoverage&amp;
+    coverageid=MER_FRS_1PNPDE20060822_092058_000001972050_00308_23408_0077_uint16_reduced_compressed&amp;
+    format=image/tiff&amp;
+    mediatype=multipart/mixed&amp;
+    subset=x(100,200)&amp;
+    subset=y(300,400)
+</pre></div>
+</div>
+<p><a class="reference external" href="http://eoxserver.org/demo_stable/ows?service=wcs&amp;version=2.0.1&amp;request=GetCoverage&amp;coverageid=MER_FRS_1PNPDE20060822_092058_000001972050_00308_23408_0077_uint16_reduced_compressed&amp;format=image/tiff&amp;mediatype=multipart/mixed&amp;subset=Lat(40,41)&amp;subset=Long(17,18)&amp;subsettingCrs=http://www.opengis.net/def/crs/EPSG/0/4326">GetCoverage Dataset, subset in epsg 4326</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://eoxserver.org/demo_stable/ows?
+    service=wcs&amp;
+    version=2.0.1&amp;
+    request=GetCoverage&amp;
+    coverageid=MER_FRS_1PNPDE20060822_092058_000001972050_00308_23408_0077_uint16_reduced_compressed&amp;
+    format=image/tiff&amp;
+    mediatype=multipart/mixed&amp;
+    subset=Lat(40,41)&amp;
+    subset=Long(17,18)&amp;
+    subsettingCrs=http://www.opengis.net/def/crs/EPSG/0/4326
+</pre></div>
+</div>
+<p><a class="reference external" href="http://eoxserver.org/demo_stable/ows?service=wcs&amp;version=2.0.1&amp;request=GetCoverage&amp;coverageid=MER_FRS_1PNPDE20060822_092058_000001972050_00308_23408_0077_uint16_reduced_compressed&amp;format=image/tiff&amp;mediatype=multipart/mixed&amp;OutputCRS=http://www.opengis.net/def/crs/EPSG/0/3035&amp;scalesize=x(200),y(200)">GetCoverage Dataset, full, OutputCRS epsg 3035</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://eoxserver.org/demo_stable/ows?
+    service=wcs&amp;
+    version=2.0.1&amp;
+    request=GetCoverage&amp;
+    coverageid=MER_FRS_1PNPDE20060822_092058_000001972050_00308_23408_0077_uint16_reduced_compressed&amp;
+    format=image/tiff&amp;
+    mediatype=multipart/mixed&amp;
+    outputCrs=http://www.opengis.net/def/crs/EPSG/0/3035
+</pre></div>
+</div>
+<p><a class="reference external" href="http://eoxserver.org/demo_stable/ows?service=wcs&amp;version=2.0.1&amp;request=GetCoverage&amp;coverageid=MER_FRS_1PNPDE20060822_092058_000001972050_00308_23408_0077_uint16_reduced_compressed&amp;format=image/tiff&amp;mediatype=multipart/mixed&amp;scalesize=x(200),y(200)">GetCoverage Dataset, full, size 200x200</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://eoxserver.org/demo_stable/ows?
+    service=wcs&amp;
+    version=2.0.1&amp;
+    request=GetCoverage&amp;
+    coverageid=MER_FRS_1PNPDE20060822_092058_000001972050_00308_23408_0077_uint16_reduced_compressed&amp;
+    format=image/tiff&amp;
+    mediatype=multipart/mixed&amp;
+    scalesize=x(200),y(200)
+</pre></div>
+</div>
+<p><a class="reference external" href="http://eoxserver.org/demo_stable/ows?service=wcs&amp;version=2.0.1&amp;request=GetCoverage&amp;coverageid=MER_FRS_1PNPDE20060822_092058_000001972050_00308_23408_0077_uint16_reduced_compressed&amp;format=image/tiff&amp;mediatype=multipart/mixed&amp;scalesize=x(200),y(400)">GetCoverage Dataset, full, size 200x400</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://eoxserver.org/demo_stable/ows?
+    service=wcs&amp;
+    version=2.0.1&amp;
+    request=GetCoverage&amp;
+    coverageid=MER_FRS_1PNPDE20060822_092058_000001972050_00308_23408_0077_uint16_reduced_compressed&amp;
+    format=image/tiff&amp;
+    mediatype=multipart/mixed&amp;
+    scalesize=x(200),y(400)
+</pre></div>
+</div>
+<p><a class="reference external" href="http://eoxserver.org/demo_stable/ows?service=wcs&amp;version=2.0.1&amp;request=GetCoverage&amp;coverageid=MER_FRS_1PNPDE20060822_092058_000001972050_00308_23408_0077_uint16_reduced_compressed&amp;format=image/tiff&amp;mediatype=multipart/mixed&amp;rangesubset=MERIS_radiance_01_uint16:MERIS_radiance_03_uint16">GetCoverage Dataset, subset in bands</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>http://eoxserver.org/demo_stable/ows?
+    service=wcs&amp;
+    version=2.0.1&amp;
+    request=GetCoverage&amp;
+    coverageid=MER_FRS_1PNPDE20060822_092058_000001972050_00308_23408_0077_uint16_reduced_compressed&amp;
+    format=image/tiff&amp;
+    mediatype=multipart/mixed&amp;
+    rangesubset=MERIS_radiance_01_uint16:MERIS_radiance_03_uint16
+</pre></div>
+</div>
+</div>
+<div class="section" id="getcoverage-post-xml">
+<h2><a class="toc-backref" href="#table-of-contents">GetCoverage POST/XML</a><a class="headerlink" href="#getcoverage-post-xml" title="Permalink to this headline">¶</a></h2>
+<p>GetCoverage requests with POST/XML encoding might look like this:</p>
+<p>A simple request:</p>
+<blockquote>
+<div><div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;wcs:GetCoverage</span> <span class="na">service=</span><span class="s">&quot;WCS&quot;</span> <span class="na">version=</span><span class="s">&quot;2.0.1&quot;</span>
+   <span class="na">xmlns:wcs=</span><span class="s">&quot;http://www.opengis.net/wcs/2.0&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;wcs:CoverageId&gt;</span>mosaic_MER_FRS_1PNPDE20060816_090929_000001972050_00222_23322_0058_RGB_reduced<span class="nt">&lt;/wcs:CoverageId&gt;</span>
+  <span class="nt">&lt;wcs:format&gt;</span>image/tiff<span class="nt">&lt;/wcs:format&gt;</span>
+  <span class="nt">&lt;wcs:mediaType&gt;</span>multipart/related<span class="nt">&lt;/wcs:mediaType&gt;</span>
+<span class="nt">&lt;/wcs:GetCoverage&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>With a subset in pixel coordinates:</p>
+<blockquote>
+<div><div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;wcs:GetCoverage</span> <span class="na">service=</span><span class="s">&quot;WCS&quot;</span> <span class="na">version=</span><span class="s">&quot;2.0.1&quot;</span>
+   <span class="na">xmlns:wcs=</span><span class="s">&quot;http://www.opengis.net/wcs/2.0&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;wcs:CoverageId&gt;</span>mosaic_MER_FRS_1PNPDE20060816_090929_000001972050_00222_23322_0058_RGB_reduced<span class="nt">&lt;/wcs:CoverageId&gt;</span>
+  <span class="nt">&lt;wcs:DimensionTrim&gt;</span>
+    <span class="nt">&lt;wcs:Dimension&gt;</span>x<span class="nt">&lt;/wcs:Dimension&gt;</span>
+    <span class="nt">&lt;wcs:TrimLow&gt;</span>0<span class="nt">&lt;/wcs:TrimLow&gt;</span>
+    <span class="nt">&lt;wcs:TrimHigh&gt;</span>99<span class="nt">&lt;/wcs:TrimHigh&gt;</span>
+  <span class="nt">&lt;/wcs:DimensionTrim&gt;</span>
+  <span class="nt">&lt;wcs:DimensionTrim&gt;</span>
+    <span class="nt">&lt;wcs:Dimension&gt;</span>y<span class="nt">&lt;/wcs:Dimension&gt;</span>
+    <span class="nt">&lt;wcs:TrimLow&gt;</span>0<span class="nt">&lt;/wcs:TrimLow&gt;</span>
+    <span class="nt">&lt;wcs:TrimHigh&gt;</span>99<span class="nt">&lt;/wcs:TrimHigh&gt;</span>
+  <span class="nt">&lt;/wcs:DimensionTrim&gt;</span>
+  <span class="nt">&lt;wcs:format&gt;</span>image/tiff<span class="nt">&lt;/wcs:format&gt;</span>
+  <span class="nt">&lt;wcs:mediaType&gt;</span>multipart/related<span class="nt">&lt;/wcs:mediaType&gt;</span>
+<span class="nt">&lt;/wcs:GetCoverage&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>With a subset in geographic coordinates with bilinear interpolation:</p>
+<blockquote>
+<div><div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;wcs:GetCoverage</span> <span class="na">service=</span><span class="s">&quot;WCS&quot;</span> <span class="na">version=</span><span class="s">&quot;2.0.1&quot;</span>
+   <span class="na">xmlns:wcs=</span><span class="s">&quot;http://www.opengis.net/wcs/2.0&quot;</span>
+   <span class="na">xmlns:int=</span><span class="s">&quot;http://www.opengis.net/wcs/interpolation/1.0&quot;</span>
+   <span class="na">xmlns:crs=</span><span class="s">&quot;http://www.opengis.net/wcs/crs/1.0&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;wcs:Extension&gt;</span>
+    <span class="nt">&lt;crs:subsettingCrs&gt;</span>http://www.opengis.net/def/crs/EPSG/0/4326<span class="nt">&lt;/crs:subsettingCrs&gt;</span>
+    <span class="nt">&lt;int:Interpolation&gt;</span>
+      <span class="nt">&lt;int:globalInterpolation&gt;</span>http://www.opengis.net/def/interpolation/OGC/1/bilinear<span class="nt">&lt;/int:globalInterpolation&gt;</span>
+    <span class="nt">&lt;/int:Interpolation&gt;</span>
+  <span class="nt">&lt;/wcs:Extension&gt;</span>
+  <span class="nt">&lt;wcs:CoverageId&gt;</span>mosaic_MER_FRS_1PNPDE20060816_090929_000001972050_00222_23322_0058_RGB_reduced<span class="nt">&lt;/wcs:CoverageId&gt;</span>
+  <span class="nt">&lt;wcs:DimensionTrim&gt;</span>
+    <span class="nt">&lt;wcs:Dimension&gt;</span>Long<span class="nt">&lt;/wcs:Dimension&gt;</span>
+    <span class="nt">&lt;wcs:TrimLow&gt;</span>20<span class="nt">&lt;/wcs:TrimLow&gt;</span>
+    <span class="nt">&lt;wcs:TrimHigh&gt;</span>22<span class="nt">&lt;/wcs:TrimHigh&gt;</span>
+  <span class="nt">&lt;/wcs:DimensionTrim&gt;</span>
+  <span class="nt">&lt;wcs:DimensionTrim&gt;</span>
+    <span class="nt">&lt;wcs:Dimension&gt;</span>Lat<span class="nt">&lt;/wcs:Dimension&gt;</span>
+    <span class="nt">&lt;wcs:TrimLow&gt;</span>36<span class="nt">&lt;/wcs:TrimLow&gt;</span>
+    <span class="nt">&lt;wcs:TrimHigh&gt;</span>38<span class="nt">&lt;/wcs:TrimHigh&gt;</span>
+  <span class="nt">&lt;/wcs:DimensionTrim&gt;</span>
+  <span class="nt">&lt;wcs:format&gt;</span>image/tiff<span class="nt">&lt;/wcs:format&gt;</span>
+  <span class="nt">&lt;wcs:mediaType&gt;</span>multipart/related<span class="nt">&lt;/wcs:mediaType&gt;</span>
+<span class="nt">&lt;/wcs:GetCoverage&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>With a range-subset and pixel-subset:</p>
+<blockquote>
+<div><div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;wcs:GetCoverage</span> <span class="na">service=</span><span class="s">&quot;WCS&quot;</span> <span class="na">version=</span><span class="s">&quot;2.0.1&quot;</span>
+   <span class="na">xmlns:wcs=</span><span class="s">&quot;http://www.opengis.net/wcs/2.0&quot;</span>
+   <span class="na">xmlns:rsub=</span><span class="s">&quot;http://www.opengis.net/wcs/range-subsetting/1.0&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;wcs:Extension&gt;</span>
+    <span class="nt">&lt;rsub:RangeSubset&gt;</span>
+      <span class="nt">&lt;rsub:RangeItem&gt;</span>
+        <span class="nt">&lt;rsub:RangeComponent&gt;</span>MERIS_radiance_04_uint16<span class="nt">&lt;/rsub:RangeComponent&gt;</span>
+      <span class="nt">&lt;/rsub:RangeItem&gt;</span>
+      <span class="nt">&lt;rsub:RangeItem&gt;</span>
+        <span class="nt">&lt;rsub:RangeInterval&gt;</span>
+          <span class="nt">&lt;rsub:startComponent&gt;</span>MERIS_radiance_05_uint16<span class="nt">&lt;/rsub:startComponent&gt;</span>
+          <span class="nt">&lt;rsub:endComponent&gt;</span>MERIS_radiance_07_uint16<span class="nt">&lt;/rsub:endComponent&gt;</span>
+        <span class="nt">&lt;/rsub:RangeInterval&gt;</span>
+      <span class="nt">&lt;/rsub:RangeItem&gt;</span>
+    <span class="nt">&lt;/rsub:RangeSubset&gt;</span>
+  <span class="nt">&lt;/wcs:Extension&gt;</span>
+  <span class="nt">&lt;wcs:CoverageId&gt;</span>MER_FRS_1PNPDE20060822_092058_000001972050_00308_23408_0077_uint16_reduced_compressed<span class="nt">&lt;/wcs:CoverageId&gt;</span>
+  <span class="nt">&lt;wcs:DimensionTrim&gt;</span>
+    <span class="nt">&lt;wcs:Dimension&gt;</span>x<span class="nt">&lt;/wcs:Dimension&gt;</span>
+    <span class="nt">&lt;wcs:TrimLow&gt;</span>0<span class="nt">&lt;/wcs:TrimLow&gt;</span>
+    <span class="nt">&lt;wcs:TrimHigh&gt;</span>99<span class="nt">&lt;/wcs:TrimHigh&gt;</span>
+  <span class="nt">&lt;/wcs:DimensionTrim&gt;</span>
+  <span class="nt">&lt;wcs:DimensionTrim&gt;</span>
+    <span class="nt">&lt;wcs:Dimension&gt;</span>y<span class="nt">&lt;/wcs:Dimension&gt;</span>
+    <span class="nt">&lt;wcs:TrimLow&gt;</span>0<span class="nt">&lt;/wcs:TrimLow&gt;</span>
+    <span class="nt">&lt;wcs:TrimHigh&gt;</span>99<span class="nt">&lt;/wcs:TrimHigh&gt;</span>
+  <span class="nt">&lt;/wcs:DimensionTrim&gt;</span>
+  <span class="nt">&lt;wcs:format&gt;</span>image/tiff<span class="nt">&lt;/wcs:format&gt;</span>
+  <span class="nt">&lt;wcs:mediaType&gt;</span>multipart/related<span class="nt">&lt;/wcs:mediaType&gt;</span>
+<span class="nt">&lt;/wcs:GetCoverage&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>With a set of GeoTIFF encoding parameters:</p>
+<blockquote>
+<div><div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;wcs:GetCoverage</span> <span class="na">service=</span><span class="s">&quot;WCS&quot;</span> <span class="na">version=</span><span class="s">&quot;2.0.1&quot;</span>
+   <span class="na">xmlns:wcs=</span><span class="s">&quot;http://www.opengis.net/wcs/2.0&quot;</span>
+   <span class="na">xmlns:geotiff=</span><span class="s">&quot;http://www.opengis.net/gmlcov/geotiff/1.0&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;wcs:CoverageId&gt;</span>mosaic_MER_FRS_1PNPDE20060816_090929_000001972050_00222_23322_0058_RGB_reduced<span class="nt">&lt;/wcs:CoverageId&gt;</span>
+  <span class="nt">&lt;wcs:format&gt;</span>image/tiff<span class="nt">&lt;/wcs:format&gt;</span>
+  <span class="nt">&lt;wcs:Extension&gt;</span>
+    <span class="nt">&lt;geotiff:parameters&gt;</span>
+      <span class="nt">&lt;geotiff:compression&gt;</span>Deflate<span class="nt">&lt;/geotiff:compression&gt;</span>
+      <span class="nt">&lt;geotiff:predictor&gt;</span>FloatingPoint<span class="nt">&lt;/geotiff:predictor&gt;</span>
+      <span class="nt">&lt;geotiff:interleave&gt;</span>Band<span class="nt">&lt;/geotiff:interleave&gt;</span>
+      <span class="nt">&lt;geotiff:tiling&gt;</span>true<span class="nt">&lt;/geotiff:tiling&gt;</span>
+      <span class="nt">&lt;geotiff:tilewidth&gt;</span>32<span class="nt">&lt;/geotiff:tilewidth&gt;</span>
+      <span class="nt">&lt;geotiff:tileheight&gt;</span>64<span class="nt">&lt;/geotiff:tileheight&gt;</span>
+    <span class="nt">&lt;/geotiff:parameters&gt;</span>
+  <span class="nt">&lt;/wcs:Extension&gt;</span>
+<span class="nt">&lt;/wcs:GetCoverage&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="EO-WCS_request_parameters.html" class="btn btn-neutral float-right" title="EO-WCS Request Parameters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mailing_lists.html" class="btn btn-neutral float-left" title="Mailing Lists" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

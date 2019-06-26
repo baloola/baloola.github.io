@@ -1,0 +1,1152 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>EOxServer Operators’ Guide &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="The Webclient Interface" href="webclient.html" />
+    <link rel="prev" title="OpenSearch" href="opensearch.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Users’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">EOxServer Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="global_use_case.html">Global Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos_installation.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instance_creation.html">Service Instance Creation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operational_install.html">Recommendations for Operational Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailing_lists.html">Mailing Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demonstration.html">Demonstration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EO-WCS_request_parameters.html">EO-WCS Request Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opensearch.html">OpenSearch</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">EOxServer Operators’ Guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#basic-concepts">Basic Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#storage-backends">Storage Backends</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#local">Local</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ftp-repositories">FTP Repositories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rasdaman-databases">Rasdaman Databases</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#data-items">Data Items</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#coverages">Coverages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#range-types">Range Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rectified-datasets">Rectified Datasets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#referenceable-datasets">Referenceable Datasets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rectified-stitched-mosaics">Rectified Stitched Mosaics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dataset-series">Dataset Series</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#data-preparation-and-supported-data-formats">Data Preparation and Supported Data Formats</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#raster-data-formats">Raster Data Formats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#raster-data-preparation">Raster Data Preparation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metadata-formats">Metadata Formats</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metadata-preparation">Metadata Preparation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#admin-client">Admin Client</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#creating-a-custom-range-type">Creating a custom Range Type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creating-a-dataset">Creating a Dataset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creating-a-dataset-series-or-a-stitched-mosaic">Creating a Dataset Series or a Stitched Mosaic</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#command-line-tools">Command Line Tools</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#eoxserver-instance-py">eoxserver-instance.py</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#coverage">coverage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#updating-datasets">Updating Datasets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eoxs-collection-create">eoxs_collection_create</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eoxs-collection-delete">eoxs_collection_delete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eoxs-collection-link-and-eoxs-collection-unlink">eoxs_collection_link and eoxs_collection_unlink</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eoxs-collection-purge">eoxs_collection_purge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eoxs-collection-datasource">eoxs_collection_datasource</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eoxs-collection-synchronize">eoxs_collection_synchronize</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eoxs-id-check">eoxs_id_check</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#range-type-handling">Range Type Handling</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#performance">Performance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="webclient.html">The Webclient Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="idm/index.html">Identity Management System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html">EOxServer Presentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html">Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crss.html">Supported CRSs and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html">Supported Raster File Formats and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html">Asynchronous Task Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WCS-T_summary.html">Web Coverage Service - Transaction Extension</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Users’ Guide</a> &raquo;</li>
+        
+      <li>EOxServer Operators’ Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/users/operators.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="eoxserver-operators-guide">
+<span id="id1"></span><h1><a class="toc-backref" href="#table-of-contents">EOxServer Operators’ Guide</a><a class="headerlink" href="#eoxserver-operators-guide" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#eoxserver-operators-guide" id="id3">EOxServer Operators’ Guide</a><ul>
+<li><a class="reference internal" href="#basic-concepts" id="id4">Basic Concepts</a></li>
+<li><a class="reference internal" href="#storage-backends" id="id5">Storage Backends</a><ul>
+<li><a class="reference internal" href="#local" id="id6">Local</a></li>
+<li><a class="reference internal" href="#ftp-repositories" id="id7">FTP Repositories</a></li>
+<li><a class="reference internal" href="#rasdaman-databases" id="id8">Rasdaman Databases</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-items" id="id9">Data Items</a></li>
+<li><a class="reference internal" href="#coverages" id="id10">Coverages</a><ul>
+<li><a class="reference internal" href="#range-types" id="id11">Range Types</a></li>
+<li><a class="reference internal" href="#rectified-datasets" id="id12">Rectified Datasets</a></li>
+<li><a class="reference internal" href="#referenceable-datasets" id="id13">Referenceable Datasets</a></li>
+<li><a class="reference internal" href="#rectified-stitched-mosaics" id="id14">Rectified Stitched Mosaics</a></li>
+<li><a class="reference internal" href="#dataset-series" id="id15">Dataset Series</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-preparation-and-supported-data-formats" id="id16">Data Preparation and Supported Data Formats</a><ul>
+<li><a class="reference internal" href="#raster-data-formats" id="id17">Raster Data Formats</a></li>
+<li><a class="reference internal" href="#raster-data-preparation" id="id18">Raster Data Preparation</a></li>
+<li><a class="reference internal" href="#metadata-formats" id="id19">Metadata Formats</a></li>
+<li><a class="reference internal" href="#metadata-preparation" id="id20">Metadata Preparation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#admin-client" id="id21">Admin Client</a><ul>
+<li><a class="reference internal" href="#creating-a-custom-range-type" id="id22">Creating a custom Range Type</a></li>
+<li><a class="reference internal" href="#creating-a-dataset" id="id23">Creating a Dataset</a></li>
+<li><a class="reference internal" href="#creating-a-dataset-series-or-a-stitched-mosaic" id="id24">Creating a Dataset Series or a Stitched Mosaic</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#command-line-tools" id="id25">Command Line Tools</a><ul>
+<li><a class="reference internal" href="#eoxserver-instance-py" id="id26">eoxserver-instance.py</a></li>
+<li><a class="reference internal" href="#coverage" id="id27">coverage</a></li>
+<li><a class="reference internal" href="#updating-datasets" id="id28">Updating Datasets</a></li>
+<li><a class="reference internal" href="#eoxs-collection-create" id="id29">eoxs_collection_create</a></li>
+<li><a class="reference internal" href="#eoxs-collection-delete" id="id30">eoxs_collection_delete</a></li>
+<li><a class="reference internal" href="#eoxs-collection-link-and-eoxs-collection-unlink" id="id31">eoxs_collection_link and eoxs_collection_unlink</a></li>
+<li><a class="reference internal" href="#eoxs-collection-purge" id="id32">eoxs_collection_purge</a></li>
+<li><a class="reference internal" href="#eoxs-collection-datasource" id="id33">eoxs_collection_datasource</a></li>
+<li><a class="reference internal" href="#eoxs-collection-synchronize" id="id34">eoxs_collection_synchronize</a></li>
+<li><a class="reference internal" href="#eoxs-id-check" id="id35">eoxs_id_check</a></li>
+<li><a class="reference internal" href="#range-type-handling" id="id36">Range Type Handling</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#performance" id="id37">Performance</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="basic-concepts">
+<h2><a class="toc-backref" href="#table-of-contents">Basic Concepts</a><a class="headerlink" href="#basic-concepts" title="Permalink to this headline">¶</a></h2>
+<p>EOxServer is all about coverages - see the <a class="reference internal" href="basics.html"><span class="doc">EOxServer Basics</span></a> for a short
+description.</p>
+<p>In the language of the OGC Abstract Specification, coverages are mappings from
+a domain set that is related to some area of the Earth to a range set. So, the
+data model for coverages contains information about the structure of the
+domain set and of the range set (the so-called Range Type).</p>
+<p>In the <a class="reference internal" href="#ops-coverages"><span class="std std-ref">Coverages</span></a> section below you find more detailed information
+about what data and metadata is stored by EOxServer.</p>
+<p>The actual data EOxServer deals with can be stored in different ways. These
+storage facilities are discussed below in the section on
+<a class="reference internal" href="#ops-storage-backends"><span class="std std-ref">Storage Backends</span></a>.</p>
+<p>Operators have different possibilities to ingest data into the system. Using
+the <a class="reference internal" href="#ops-admin"><span class="std std-ref">Admin Client</span></a>, you can edit the contents of the EOxServer database.
+Especially for batch processing using the <a class="reference internal" href="#ops-cli"><span class="std std-ref">Command Line Tools</span></a> may be preferable.</p>
+</div>
+<div class="section" id="storage-backends">
+<span id="ops-storage-backends"></span><h2><a class="toc-backref" href="#table-of-contents">Storage Backends</a><a class="headerlink" href="#storage-backends" title="Permalink to this headline">¶</a></h2>
+<p>EOxServer supports different kinds of data stores for coverage data (additional
+backends can be added as plugin):</p>
+<ul class="simple">
+<li>as an image file stored on the local file system</li>
+<li>as an image file stored on a remote FTP or HTTP server</li>
+<li>as a raster array in a <a class="reference external" href="http://www.rasdaman.org">rasdaman</a> database</li>
+</ul>
+<div class="section" id="local">
+<h3><a class="toc-backref" href="#table-of-contents">Local</a><a class="headerlink" href="#local" title="Permalink to this headline">¶</a></h3>
+<p>A path on the local filesystem is the most straightforward way to define the
+location of a resource. You can use relative paths as well as absolute paths.
+Please keep in mind that relative paths are interpreted as being relative to
+the working directory of the process EOxServer runs in. For Apache processes,
+for instance, this is usually the root directory <code class="docutils literal"><span class="pre">/</span></code>.</p>
+</div>
+<div class="section" id="ftp-repositories">
+<h3><a class="toc-backref" href="#table-of-contents">FTP Repositories</a><a class="headerlink" href="#ftp-repositories" title="Permalink to this headline">¶</a></h3>
+<p>EOxServer allows to define locations on a remote FTP server. This is useful
+if you do not want to transfer a whole large archive to the machine EOxServer
+runs on. In that case you can define a remote path that consists of information
+about the FTP server and the path relative to the root directory of the
+FTP repository.</p>
+<p>An FTP Storage record - as it is called in EOxServer - contains the URL of the
+server and optional port, username and password entries.</p>
+<p>Resources stored on an FTP server are transferred only when they are needed.
+There is however a cache for transferred files on the machine EOxServer runs on.</p>
+</div>
+<div class="section" id="rasdaman-databases">
+<h3><a class="toc-backref" href="#table-of-contents">Rasdaman Databases</a><a class="headerlink" href="#rasdaman-databases" title="Permalink to this headline">¶</a></h3>
+<p>The third backend supported at the moment are
+<a class="reference external" href="http://www.rasdaman.org">rasdaman</a> databases. A rasdaman location consists
+of rasdaman database connection information and the collection of the
+corresponding resource.</p>
+<p>The rasdaman storage records contain hostname, port, database name, user and
+password entries.</p>
+<p>The data is retrieved from the database using the rasdaman GDAL driver (see
+<a class="reference internal" href="install.html"><span class="doc">Installation</span></a> for further information).</p>
+</div>
+</div>
+<div class="section" id="data-items">
+<h2><a class="toc-backref" href="#table-of-contents">Data Items</a><a class="headerlink" href="#data-items" title="Permalink to this headline">¶</a></h2>
+<p>A data item describes a single resource located on a storage, where the “local”
+storage (the local filesystem) is assumed if no other storage is defined. The
+path of a data item is always relative to its storage and might in some special
+cases have a specific meaning. This is defined in the Storage plugin that
+handles the specific backend.</p>
+<p>Each data item has a semantic, which defines the actual usage of this data
+item. This might be “metadata” for metadata files or “bands[1:3]” for raster
+data. The usage of this field is really generic and depends on the context.</p>
+<p>The format of a data item has informative character of how it might be
+interpreted. Use default MIME types here.</p>
+</div>
+<div class="section" id="coverages">
+<span id="ops-coverages"></span><h2><a class="toc-backref" href="#table-of-contents">Coverages</a><a class="headerlink" href="#coverages" title="Permalink to this headline">¶</a></h2>
+<p>EOxServer coverages fall into three main categories:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#ops-rect-ds"><span class="std std-ref">Rectified Datasets</span></a></li>
+<li><a class="reference internal" href="#ops-ref-ds"><span class="std std-ref">Referenceable Datasets</span></a></li>
+<li><a class="reference internal" href="#ops-rect-mosaics"><span class="std std-ref">Rectified Stitched Mosaics</span></a></li>
+</ul>
+<p>In addition there is the <a class="reference internal" href="#ops-ds-series"><span class="std std-ref">Dataset Series</span></a> type which corresponds to an
+inhomogeneous collection of coverages.</p>
+<p>Every coverage is a set of associated Data Items which define where the actual
+data of the coverage can be found.</p>
+<p>Additionally every coverage has associated EO Metadata, that defines the
+acquisition time and the area of interest whithin the coverage.</p>
+<div class="section" id="range-types">
+<span id="ops-range-types"></span><h3><a class="toc-backref" href="#table-of-contents">Range Types</a><a class="headerlink" href="#range-types" title="Permalink to this headline">¶</a></h3>
+<p>Every coverage has a range type describing the structure of the data.
+Each range type has a given data type whereas the following data types are
+supported:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="48%" />
+<col width="52%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Data Type Name</th>
+<th class="head">Data Type Value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Unknown</td>
+<td>0</td>
+</tr>
+<tr class="row-odd"><td>Byte</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>UInt16</td>
+<td>2</td>
+</tr>
+<tr class="row-odd"><td>Int16</td>
+<td>3</td>
+</tr>
+<tr class="row-even"><td>UInt32</td>
+<td>4</td>
+</tr>
+<tr class="row-odd"><td>Int32</td>
+<td>5</td>
+</tr>
+<tr class="row-even"><td>Float32</td>
+<td>6</td>
+</tr>
+<tr class="row-odd"><td>Float64</td>
+<td>7</td>
+</tr>
+<tr class="row-even"><td>CInt16</td>
+<td>8</td>
+</tr>
+<tr class="row-odd"><td>CInt32</td>
+<td>9</td>
+</tr>
+<tr class="row-even"><td>CFloat32</td>
+<td>10</td>
+</tr>
+<tr class="row-odd"><td>CFloat64</td>
+<td>11</td>
+</tr>
+</tbody>
+</table>
+<p>A range type contains of one or more bands. For each band you may specify a
+name, an identifier and a definition that describes the property measured
+(e.g. radiation). Furthermore, you can define nil values for each band (i.e.
+values that indicate that there is no measurement at the given position).</p>
+<p>This range type metadata is used in the coverage description metadata that is
+returned by WCS operations and for configuring WMS layers.</p>
+<p>Note that WMS supports only one data type (Byte) and only Grayscale and RGB
+output. Any other range types will be mapped to these: for single-band coverages,
+Grayscale output is generated and RGB output using the first three bands for all
+others. Automatic scaling is applied when mapping from another data type to
+Byte. That means the minimum-maximum interval for the given subset of the
+coverage is computed and mapped to the 0-255 interval supported by the Byte
+data type.</p>
+<p>If you want to view other band combinations than the default ones, you can use
+the EO-WMS features implemented by EOxServer. For each coverage, an additional
+layers called <code class="docutils literal"><span class="pre">&lt;coverage</span> <span class="pre">id&gt;_bands</span></code> is provided for WMS 1.3. Using this
+layer and the <code class="docutils literal"><span class="pre">DIM_BANDS</span></code> KVP parameter you can select another combination
+of bands (either 1 or 3 bands).</p>
+</div>
+<div class="section" id="rectified-datasets">
+<span id="ops-rect-ds"></span><h3><a class="toc-backref" href="#table-of-contents">Rectified Datasets</a><a class="headerlink" href="#rectified-datasets" title="Permalink to this headline">¶</a></h3>
+<p>Rectified Datasets are EO coverages whose domain set is a rectified grid i.e.
+which are having a regular spacing in projected or geographic CRS. In practice,
+this applies to ortho-rectified satellite data. The rectified grid is described
+by the EPSG SRID of the coordinate reference system, the extent and pixel size
+of the coverage.</p>
+<p>Rectified Datasets can be added to Dataset Series and Rectified Stitched
+Mosaics.</p>
+</div>
+<div class="section" id="referenceable-datasets">
+<span id="ops-ref-ds"></span><h3><a class="toc-backref" href="#table-of-contents">Referenceable Datasets</a><a class="headerlink" href="#referenceable-datasets" title="Permalink to this headline">¶</a></h3>
+<p>Referenceale Datasets are EO coverages whose domain set is a referenceable grid
+i.e. which are not rectified, but are associated with (one or more) coordinate
+transformation which relate the image to a projected or geographic CRS.
+That means that there is some general transformation between the grid cell
+coordinates and coordinates in an Earth-bound spatial reference system. This
+applies for satellite data in its original geometry.</p>
+<p>At the moment, EOxServer supports only referenceable datasets that contain
+ground control points (GCPs) in the data files. Simple approximative
+transformations based on these GCPs are used to generate rectified views on the
+data for WMS and to calculate subset bounds for WCS GetCoverage requests. Note
+that these transformations can be very inaccurate in comparison to an actual
+ortho-rectification of the coverage.</p>
+</div>
+<div class="section" id="rectified-stitched-mosaics">
+<span id="ops-rect-mosaics"></span><h3><a class="toc-backref" href="#table-of-contents">Rectified Stitched Mosaics</a><a class="headerlink" href="#rectified-stitched-mosaics" title="Permalink to this headline">¶</a></h3>
+<p>Rectified Stitched Mosaics are EO coverages that are composed of a set of
+homogeneous Rectified Datasets. That means, the datasets must have the same
+range type and their domain sets must be subsets of the same rectified grid.</p>
+<p>When creating a Rectified Stitched Mosaic a homogeneous coverage is generated
+from the contained Rectified Datasets. Where datasets overlap the most recent
+one as indicated by the acquisition timestamps in the EO metadata is shown on
+top hiding the others.</p>
+</div>
+<div class="section" id="dataset-series">
+<span id="ops-ds-series"></span><h3><a class="toc-backref" href="#table-of-contents">Dataset Series</a><a class="headerlink" href="#dataset-series" title="Permalink to this headline">¶</a></h3>
+<p>Any Rectified and Referenceable Datasets can be organized in Dataset Series.
+Multiple datasets which are spatially and/or temporally overlapping can be
+organized in a Dataset Series. Furthermore Stitched Mosaics can also be
+organized in Dataset Series.</p>
+</div>
+</div>
+<div class="section" id="data-preparation-and-supported-data-formats">
+<span id="ops-data"></span><h2><a class="toc-backref" href="#table-of-contents">Data Preparation and Supported Data Formats</a><a class="headerlink" href="#data-preparation-and-supported-data-formats" title="Permalink to this headline">¶</a></h2>
+<p>EO Coverages consist of raster data and metadata. The way this data is
+stored can vary considerably. EOxServer supports a wide range of different
+data and metadata formats which are described below.</p>
+<div class="section" id="raster-data-formats">
+<h3><a class="toc-backref" href="#table-of-contents">Raster Data Formats</a><a class="headerlink" href="#raster-data-formats" title="Permalink to this headline">¶</a></h3>
+<p>EOxServer uses the <a class="reference external" href="http://www.gdal.org">GDAL</a> library for raster data
+handling. So does <a class="reference external" href="http://www.mapserver.org">MapServer</a> whose scripting API
+(MapScript) is used by EOxServer as well. In principle, any <a class="reference external" href="http://www.gdal.org/formats_list.html">format supported
+by GDAL</a> can be read by EOxServer and
+registered in the database.</p>
+<p>There is, however, one caveat. Most data formats are composed of bands which
+contain the data (e.g. ENVISAT N1, GeoTIFF, JPEG 2000). But some data formats
+(notably netCDF and HDF) have a different substructure: subdatasets. At the
+moment these data formats are only supported for data output, but not for data
+input.</p>
+<p>For more information on configuration of supported raster file formats read
+“<a class="reference internal" href="formats.html#formatsconfiguration"><span class="std std-ref">Supported Raster File Formats and Their Configuration</span></a>”.</p>
+</div>
+<div class="section" id="raster-data-preparation">
+<h3><a class="toc-backref" href="#table-of-contents">Raster Data Preparation</a><a class="headerlink" href="#raster-data-preparation" title="Permalink to this headline">¶</a></h3>
+<p>Usually, raster data does not need to be prepared in a special way to be
+ingested into EOxServer.</p>
+<p>If the raster data file is structured in subdatasets, though, as is the case
+with netCDF and HDF, you will have to convert it to another format. You can use
+the <code class="docutils literal"><span class="pre">gdal_translate</span></code> command for that task:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ gdal_translate -of &lt;Output Format&gt; &lt;Input File Name&gt; &lt;Output File Name&gt;
+</pre></div>
+</div>
+<p>You can display the list of possible output formats with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ gdalinfo --formats
+</pre></div>
+</div>
+<p>For automatic registration of datasets, EOxServer relies on the geospatial
+metadata stored with the dataset, notably the EPSG ID of the coordinate
+reference system and the geospatial extent. In some cases the CRS information
+in the dataset does not contain the EPSG code. If you are using the command
+line interfaces of EOxServer you can specify an SRID with the <code class="docutils literal"><span class="pre">--default-srid</span></code>
+option. As an alternative you can try to add the corresponding information to
+the dataset, e.g. with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ gdal_translate -a_srs &quot;+init=EPSG:&lt;SRID&gt;&quot; &lt;Input File Name&gt; &lt;Output File Name&gt;
+</pre></div>
+</div>
+<p>For performance reasons, especially if you are using WMS, you might also
+consider to add overviews to the raster data files using the <code class="docutils literal"><span class="pre">gdaladdo</span></code>
+command (<a class="reference external" href="http://www.gdal.org/gdaladdo.html">documentation</a>). Note however
+that this is supported only by a few formats like GeoTIFF and JPEG2000.</p>
+</div>
+<div class="section" id="metadata-formats">
+<h3><a class="toc-backref" href="#table-of-contents">Metadata Formats</a><a class="headerlink" href="#metadata-formats" title="Permalink to this headline">¶</a></h3>
+<p>There are two possible ways to store metadata: the first one is to store it
+in the data file itself, the second one is to store it in an accompanying
+metadata file.</p>
+<p>Only a subset of the supported raster data formats are capable of storing
+metadata in the data file. Furthermore there are no standards defining
+the semantics of the metadata for generic formats like GeoTIFF. For mission
+specific formats, however, there are thorough specifications in place.</p>
+<p>EOxServer supports reading basic metadata from ENVISAT N1 files and files that
+have a similar metadata structure (e.g. a GeoTIFF file with the same metadata
+tags).</p>
+<p>For other formats metadata files have to be provided. EOxServer supports two
+XML-based formats:</p>
+<ul class="simple">
+<li>OGC Earth Observation Profile for Observations and Measurements (OGC 10-157r2)</li>
+<li>an EOxServer native format</li>
+</ul>
+<p>Here is an example for EO O&amp;M:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;
+&lt;eop:EarthObservation gml:id=&quot;eop_ASA_WSM_1PNDPA20050331_075939_000000552036_00035_16121_0775&quot; xmlns:eop=&quot;http://www.opengis.net/eop/2.0&quot; xmlns:gml=&quot;http://www.opengis.net/gml/3.2&quot; xmlns:om=&quot;http://www.opengis.net/om/2.0&quot;&gt;
+  &lt;om:phenomenonTime&gt;
+    &lt;gml:TimePeriod gml:id=&quot;phen_time_ASA_WSM_1PNDPA20050331_075939_000000552036_00035_16121_0775&quot;&gt;
+      &lt;gml:beginPosition&gt;2005-03-31T07:59:36Z&lt;/gml:beginPosition&gt;
+      &lt;gml:endPosition&gt;2005-03-31T08:00:36Z&lt;/gml:endPosition&gt;
+    &lt;/gml:TimePeriod&gt;
+  &lt;/om:phenomenonTime&gt;
+  &lt;om:resultTime&gt;
+    &lt;gml:TimeInstant gml:id=&quot;res_time_ASA_WSM_1PNDPA20050331_075939_000000552036_00035_16121_0775&quot;&gt;
+      &lt;gml:timePosition&gt;2005-03-31T08:00:36Z&lt;/gml:timePosition&gt;
+    &lt;/gml:TimeInstant&gt;
+  &lt;/om:resultTime&gt;
+  &lt;om:procedure /&gt;
+  &lt;om:observedProperty /&gt;
+  &lt;om:featureOfInterest&gt;
+    &lt;eop:Footprint gml:id=&quot;footprint_ASA_WSM_1PNDPA20050331_075939_000000552036_00035_16121_0775&quot;&gt;
+      &lt;eop:multiExtentOf&gt;
+        &lt;gml:MultiSurface gml:id=&quot;multisurface_ASA_WSM_1PNDPA20050331_075939_000000552036_00035_16121_0775&quot; srsName=&quot;http://www.opengis.net/def/crs/EPSG/0/4326&quot;&gt;
+          &lt;gml:surfaceMember&gt;
+            &lt;gml:Polygon gml:id=&quot;polygon_ASA_WSM_1PNDPA20050331_075939_000000552036_00035_16121_0775&quot;&gt;
+              &lt;gml:exterior&gt;
+                &lt;gml:LinearRing&gt;
+                  &lt;gml:posList&gt;-33.03902600 22.30175400 -32.53056000 20.09945700 -31.98492200 17.92562200 -35.16690300 16.72760500 -35.73368300 18.97694800 -36.25910700 21.26212300 -33.03902600 22.30175400&lt;/gml:posList&gt;
+                &lt;/gml:LinearRing&gt;
+              &lt;/gml:exterior&gt;
+            &lt;/gml:Polygon&gt;
+          &lt;/gml:surfaceMember&gt;
+        &lt;/gml:MultiSurface&gt;
+      &lt;/eop:multiExtentOf&gt;
+    &lt;/eop:Footprint&gt;
+  &lt;/om:featureOfInterest&gt;
+  &lt;om:result /&gt;
+  &lt;eop:metaDataProperty&gt;
+    &lt;eop:EarthObservationMetaData&gt;
+      &lt;eop:identifier&gt;ASA_WSM_1PNDPA20050331_075939_000000552036_00035_16121_0775&lt;/eop:identifier&gt;
+      &lt;eop:acquisitionType&gt;NOMINAL&lt;/eop:acquisitionType&gt;
+      &lt;eop:status&gt;ARCHIVED&lt;/eop:status&gt;
+    &lt;/eop:EarthObservationMetaData&gt;
+  &lt;/eop:metaDataProperty&gt;
+&lt;/eop:EarthObservation&gt;
+</pre></div>
+</div>
+<p>The native format has the following structure:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Metadata</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">EOID</span><span class="o">&gt;</span><span class="n">some_unique_eoid</span><span class="o">&lt;/</span><span class="n">EOID</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">BeginTime</span><span class="o">&gt;</span><span class="n">YYYY</span><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">DDTHH</span><span class="p">:</span><span class="n">MM</span><span class="p">:</span><span class="n">SSZ</span><span class="o">&lt;/</span><span class="n">BeginTime</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">EndTime</span><span class="o">&gt;</span><span class="n">YYYY</span><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">DDTHH</span><span class="p">:</span><span class="n">MM</span><span class="p">:</span><span class="n">SSZ</span><span class="o">&lt;/</span><span class="n">EndTime</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">Footprint</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">Polygon</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">Exterior</span><span class="o">&gt;</span><span class="n">Mandatory</span> <span class="o">-</span> <span class="n">some_pos_list</span> <span class="k">as</span> <span class="nb">all</span><span class="o">-</span><span class="n">space</span><span class="o">-</span><span class="n">delimited</span> <span class="n">Lat</span> <span class="n">Lon</span> <span class="n">pairs</span> <span class="p">(</span><span class="n">closed</span> <span class="n">polygon</span> <span class="n">i</span><span class="o">.</span><span class="n">e</span><span class="o">.</span> <span class="mi">5</span> <span class="n">coordinate</span> <span class="n">pairs</span> <span class="k">for</span> <span class="n">a</span> <span class="n">rectangle</span><span class="p">)</span> <span class="ow">in</span> <span class="n">EPSG</span><span class="p">:</span><span class="mi">4326</span><span class="o">&lt;/</span><span class="n">Exterior</span><span class="o">&gt;</span>
+            <span class="p">[</span>
+             <span class="o">&lt;</span><span class="n">Interior</span><span class="o">&gt;</span><span class="n">Optional</span> <span class="o">-</span> <span class="n">some_pos_list</span> <span class="k">as</span> <span class="nb">all</span><span class="o">-</span><span class="n">space</span><span class="o">-</span><span class="n">delimited</span> <span class="n">Lat</span> <span class="n">Lon</span> <span class="n">pairs</span> <span class="p">(</span><span class="n">closed</span> <span class="n">polygon</span><span class="p">)</span> <span class="ow">in</span> <span class="n">EPSG</span><span class="p">:</span><span class="mi">4326</span><span class="o">&lt;/</span><span class="n">Interior</span><span class="o">&gt;</span>
+             <span class="o">...</span>
+            <span class="p">]</span>
+        <span class="o">&lt;/</span><span class="n">Polygon</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">Footprint</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">Metadata</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The automatic registration tools for EOxServer (see below under <a class="reference internal" href="#ops-cli"><span class="std std-ref">Command Line Tools</span></a>)
+expect that the metadata file accompanying the data file has the same name with
+<code class="docutils literal"><span class="pre">.xml</span></code> as extension.</p>
+</div>
+<div class="section" id="metadata-preparation">
+<h3><a class="toc-backref" href="#table-of-contents">Metadata Preparation</a><a class="headerlink" href="#metadata-preparation" title="Permalink to this headline">¶</a></h3>
+<p>EOxServer provides a tool to extract metadata from ENVISAT N1 files and
+convert it to EO O&amp;M format. It can be found under <code class="docutils literal"><span class="pre">tools/gen_envisat_md.py</span></code>.
+It accepts an input path to an N1 file and stores the resulting XML file under
+the same path with the appropriate file name (i.e. replacing the <code class="docutils literal"><span class="pre">.N1</span></code>
+extension with <code class="docutils literal"><span class="pre">.xml</span></code>). Note that EOxServer must be in the Python path and
+the environment variable <code class="docutils literal"><span class="pre">DJANGO_SETTINGS_MODULE</span></code> must be set and point to
+a properly configured EOxServer instance.</p>
+</div>
+</div>
+<div class="section" id="admin-client">
+<span id="ops-admin"></span><h2><a class="toc-backref" href="#table-of-contents">Admin Client</a><a class="headerlink" href="#admin-client" title="Permalink to this headline">¶</a></h2>
+<p>The Admin Client is accessible via any standard web browser at the path
+/<em>admin</em> under the URL your instance is deployed or simply by following the
+<em>admin</em> link on the start page. <a class="reference internal" href="instance_creation.html#eoxserver-deployment"><span class="std std-ref">Deployment</span></a> provides more
+details.</p>
+<p>Use the username and password you provided during the <cite>syncdb</cite> step as
+described in the <a class="reference internal" href="instance_creation.html#creating-an-instance"><span class="std std-ref">Service Instance Creation and Configuration</span></a> section.</p>
+<div class="section" id="creating-a-custom-range-type">
+<h3><a class="toc-backref" href="#table-of-contents">Creating a custom Range Type</a><a class="headerlink" href="#creating-a-custom-range-type" title="Permalink to this headline">¶</a></h3>
+<p>Before registering any data in EOxServer some vital information on the datasets
+has to be provided. Detailed information regarding the kind of data stored can
+be defined in the Range Type. A Range Type is a collection of bands which
+themselves are assigned to a specific Data Type (see <a class="reference internal" href="#ops-range-types"><span class="std std-ref">Range Types</span></a>).</p>
+<p>A simple standard PNG for example holds 4 bands (RGB + Alpha) each of them able
+to store 8 bit data. Therefore the Range Type would have to be defined with four
+bands (red, green, blue, alpha) each of them having ‘Byte’ as Data Type.</p>
+<p>In our example we use the reduced MERIS RGB data provided in the autotest
+instance. <code class="docutils literal"><span class="pre">gdalinfo</span></code> provides us with the most important information:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<span class="n">Band</span> <span class="mi">1</span> <span class="n">Block</span><span class="o">=</span><span class="mi">541</span><span class="n">x5</span> <span class="n">Type</span><span class="o">=</span><span class="n">Byte</span><span class="p">,</span> <span class="n">ColorInterp</span><span class="o">=</span><span class="n">Red</span>
+<span class="n">Band</span> <span class="mi">2</span> <span class="n">Block</span><span class="o">=</span><span class="mi">541</span><span class="n">x5</span> <span class="n">Type</span><span class="o">=</span><span class="n">Byte</span><span class="p">,</span> <span class="n">ColorInterp</span><span class="o">=</span><span class="n">Green</span>
+<span class="n">Band</span> <span class="mi">3</span> <span class="n">Block</span><span class="o">=</span><span class="mi">541</span><span class="n">x5</span> <span class="n">Type</span><span class="o">=</span><span class="n">Byte</span><span class="p">,</span> <span class="n">ColorInterp</span><span class="o">=</span><span class="n">Blue</span>
+</pre></div>
+</div>
+<p>In order to define a new Range Type we click on the “Add” button next to the
+“Range Types” in the home menu of the admin client. Here we define the name of
+the Range Type and add bands to it by clicking on “Add another band”.</p>
+<p>For each band in “Name”, “Identifier” and “Description” you can enter the
+same content for now. The default “Definition” value for now can be
+“<a class="reference external" href="http://www.opengis.net/def/property/OGC/0/Radiance">http://www.opengis.net/def/property/OGC/0/Radiance</a>”. “UOM” stands for “unit of
+measurement” which in our case is radiance defined by the value “W.m-2.Sr-1”.
+For displaying the data correctly it is recommended to assign the respective
+value in “Color Interpretation”. If your data is distributed in only a portion
+of the possible values of its data type it is best to define “Raw value min” and
+“Raw value max” to have a better visual representation in e.g WMS. You can add
+a Nilvalue set to each of the bands, which is explained in the next section.</p>
+<p>With the “index” you can finetune the index of the band within the range type.</p>
+<div class="figure align-center" id="fig-admin-app-01-add-range-type">
+<img alt="../_images/admin_app_01_add_range_type.png" src="../_images/admin_app_01_add_range_type.png" />
+</div>
+<p>To define invalid values of the image, for each band a set of nil values can be
+defined. To create one navigate to “/admin/coverages/nilvalueset” and click on
+the button “Add Nil Value Set”. Here you can define a name of the set (which you
+can later use to set it in the band) and set the nil value(s) definition and
+reason. You can also add additional nil values to the set by clicking “Add
+another Nil Value”. To add the NilValue set to the band(s), you have to navigate
+back to your range type admin page and set the nilvalue set to your band.</p>
+<div class="figure align-center" id="fig-admin-app-02-add-nil-value-set">
+<img alt="../_images/admin_app_02_add_nilvalue_set.png" src="../_images/admin_app_02_add_nilvalue_set.png" />
+</div>
+<p>To list, export, and load range types using the command-line tools see
+<a class="reference internal" href="#eoxs-range-type"><span class="std std-ref">Range Type Handling</span></a>.</p>
+</div>
+<div class="section" id="creating-a-dataset">
+<h3><a class="toc-backref" href="#table-of-contents">Creating a Dataset</a><a class="headerlink" href="#creating-a-dataset" title="Permalink to this headline">¶</a></h3>
+<p>To create a Rectified or Referenceable Dataset from the admin click on either
+of the “Add” buttons next to the corresponding dataset type in the home screen.
+For both Dataset types the following fields must be set:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Identifier: a unique identifier for the Dataset</li>
+<li>Range Type</li>
+<li>Size for both X and Y axis</li>
+<li>The bounding box (min x, min y, max x, max y). The bounding box is expressed
+in the CRS defined by either “SRID” or “Projection” of which one <em>must</em> be
+specified</li>
+</ul>
+</div></blockquote>
+<p>The following items <em>should</em> be set:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Begin and end time: if available this should be set to let the various
+services allow a temporal search</li>
+<li>Footprint: this should be set as-well to let the various services perform
+spatial searches.</li>
+</ul>
+</div></blockquote>
+<p>To link actual files containing data and metadata to the Dataset, we have to add
+Data Items. Each data item has a “location”, a “format” (mime-type) and a
+“semantic” (band data, metadata or anything else related).</p>
+<p>The “location” is relative to either the “storage” or “package” if available,
+otherwise the location is treated a local (relative or absolute) path. A
+“Storage” defines a remote service like FTP, HTTP or similar. A package
+abstracts archives like TAR or ZIP files. Packages have a location themselves
+and can also reside on a storage or be located within another package
+themselves.</p>
+<p>To add a local 15-bands GeoTIFF and a local metadata XML-file to the Dataset use
+the following values:</p>
+<blockquote>
+<div><table border="1" class="docutils">
+<colgroup>
+<col width="47%" />
+<col width="26%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Location</th>
+<th class="head">Format</th>
+<th class="head">Semantic</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>path/to/data.tiff</td>
+<td>image/tiff</td>
+<td>bands[1:15]</td>
+</tr>
+<tr class="row-odd"><td>path/to/metadata.xml</td>
+<td>eogml</td>
+<td>metadata</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>If the raster-data is distributed among several files you can use several data
+items with semantic <code class="docutils literal"><span class="pre">bands[low:high]</span></code> where low and high are the 1-based
+indices.</p>
+<p>You can directly add the dataset to one or multiple collections in the
+“EO Object to Collection Relations” section.</p>
+<div class="figure align-center" id="fig-admin-app-03-add-dataset">
+<img alt="../_images/admin_app_03_add_dataset.png" src="../_images/admin_app_03_add_dataset.png" />
+</div>
+</div>
+<div class="section" id="creating-a-dataset-series-or-a-stitched-mosaic">
+<h3><a class="toc-backref" href="#table-of-contents">Creating a Dataset Series or a Stitched Mosaic</a><a class="headerlink" href="#creating-a-dataset-series-or-a-stitched-mosaic" title="Permalink to this headline">¶</a></h3>
+<p>A Dataset Series is a very basic type of collection that can contain Datasets,
+Stitched Mosaics and even other Dataset Series. The creation of a dataset series
+is fairly simple: In the admin click on “Add Dataset Series”, enter a valid
+identifier, add elements (in the “EO Object to Collection Relations” section)
+and click on “save”. The metadata (footprint, begin time and end time) are
+automatically collected upon the save.</p>
+<p>The creation of a Stitched Mosaic is similar to the creation of a Dataset Series
+with some restrictions:</p>
+<blockquote>
+<div><ul class="simple">
+<li>the Range Type, overall size and exact bounding box must be specified
+(exactly as with Datasets)</li>
+<li>only Rectified Datasets that lie on the exact same grid can be added</li>
+</ul>
+</div></blockquote>
+<div class="figure align-center" id="fig-admin-app-04-add-dataset-series">
+<img alt="../_images/admin_app_04_add_dataset_series.png" src="../_images/admin_app_04_add_dataset_series.png" />
+</div>
+</div>
+</div>
+<div class="section" id="command-line-tools">
+<span id="ops-cli"></span><h2><a class="toc-backref" href="#table-of-contents">Command Line Tools</a><a class="headerlink" href="#command-line-tools" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="eoxserver-instance-py">
+<h3><a class="toc-backref" href="#table-of-contents">eoxserver-instance.py</a><a class="headerlink" href="#eoxserver-instance-py" title="Permalink to this headline">¶</a></h3>
+<p>The first important command line tool is used for <a class="reference internal" href="instance_creation.html#creating-an-instance"><span class="std std-ref">Service Instance Creation and Configuration</span></a>
+of EOxServer and is explained in the <a class="reference internal" href="install.html#installation"><span class="std std-ref">Installation</span></a> section of this user’
+guide.</p>
+</div>
+<div class="section" id="coverage">
+<span id="coverage-ds"></span><h3><a class="toc-backref" href="#table-of-contents">coverage</a><a class="headerlink" href="#coverage" title="Permalink to this headline">¶</a></h3>
+<p>Besides this tool EOxServer adds some custom commands to Django’s manage.py
+script. This command has two subcommands: <code class="docutils literal"><span class="pre">coverage</span> <span class="pre">register</span></code> and <code class="docutils literal"><span class="pre">coverage</span> <span class="pre">deregister</span></code>. The <code class="docutils literal"><span class="pre">coverage</span> <span class="pre">register</span></code> command is detailed in the
+<a class="reference internal" href="instance_creation.html#data-registration"><span class="std std-ref">Data Registration</span></a> section.</p>
+<p>The <code class="docutils literal"><span class="pre">coverage</span> <span class="pre">deregister</span></code> command allows the de-registration of existing
+datasets (simple coverage types as Rectified and Referenceables datasets only)
+from an EOxServer instance including proper unlinking from relevant
+container types. The functionality of this command is complementary to the
+<span class="xref std std-ref">coverage register</span> command.</p>
+<p>It is worth to mention that the de-registration does not remove physical
+data stored in the file system or different storage backende. Therefore an
+extra effort has to be spent to purge the physical data/meta-data files from
+their storage.</p>
+<p>To de-register a dataset (coverage) identified by its (Coverage/EO) identifier
+the following command shall be invoked:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">coverage</span> <span class="n">deregister</span> <span class="o">&lt;</span><span class="n">identifier</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The de-registration command allows convenient de-registration of an arbitrary
+number of datasets at the same time:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">coverage</span> <span class="n">deregister</span> <span class="o">&lt;</span><span class="n">identifier</span><span class="o">&gt;</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">identifier</span><span class="o">&gt;</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">coverage</span> <span class="pre">deregister</span></code> does not allow the removing of container objects
+such as Rectified Stitched Mosaics or Dataset Series.</p>
+<p>The <code class="docutils literal"><span class="pre">coverage</span> <span class="pre">deregister</span></code> command, by default, does not allow the
+de-registration of automatic datasets (i.e, datasets registered by the
+synchronisation process, see <a class="reference internal" href="#what-is-sync"><span class="std std-ref">What is synchronization?</span></a>). Although this restriction
+can be overridden by the <code class="docutils literal"><span class="pre">--force</span></code> option, it is not recommended to do so.</p>
+</div>
+<div class="section" id="updating-datasets">
+<h3><a class="toc-backref" href="#table-of-contents">Updating Datasets</a><a class="headerlink" href="#updating-datasets" title="Permalink to this headline">¶</a></h3>
+<p>There is currently no way how to update registered EOxServer datasets from the
+command line. In case such an action would be needed it is recommended to
+de-register the existing dataset first (see <a class="reference internal" href="#coverage-ds"><span class="std std-ref">coverage</span></a>
+command) and register it again with the updated parameters (see
+<a class="reference internal" href="#coverage-ds"><span class="std std-ref">coverage</span></a> command). Special attention should be paid to
+linking of the <em>updated</em> dataset to all the container objects during the
+registration as this information is removed  by the de-registration.</p>
+</div>
+<div class="section" id="eoxs-collection-create">
+<h3><a class="toc-backref" href="#table-of-contents">eoxs_collection_create</a><a class="headerlink" href="#eoxs-collection-create" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">eoxs_collection_create</span></code> command allows the creation of a dataset series
+with initial data sources or coverages included. In it’s simplest use case,
+only the <code class="docutils literal"><span class="pre">--identifier</span></code> parameter is required, which has to be a valid and not
+yet taken identifier for the collection. By default a Dataset Series is created.</p>
+<p>Range types for datasets can be read from configuration files that are
+accompanying them. There can be a configuration file for each dataset or one
+that applies to all datasets contained within a directory corresponding to a
+data source. Configuration files have the file extension <code class="docutils literal"><span class="pre">.conf</span></code>. The file
+name is the same as the one of the dataset (so the dataset <code class="docutils literal"><span class="pre">foo.tiff</span></code>
+needs to be accompanied by <code class="docutils literal"><span class="pre">foo.conf</span></code>) or <code class="docutils literal"><span class="pre">__default__.conf</span></code> if you want
+to use the config file for the whole directory. The syntax for the file is
+as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">range_type</span><span class="p">]</span>
+<span class="n">range_type_name</span><span class="o">=&lt;</span><span class="nb">range</span> <span class="nb">type</span> <span class="n">name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Both approaches may be combine and configuration files produced only for
+some of the datasets in a directory and a default range type defined in
+<code class="docutils literal"><span class="pre">__default__.conf</span></code>. EOxServer will first look up the dataset configuration
+file and fall back to the default only if there is no individual <code class="docutils literal"><span class="pre">.conf</span></code>
+file.</p>
+<p>Already registered datasets can be automatically added to the Dataset Series by
+using the <code class="docutils literal"><span class="pre">--add</span></code> option which takes an identifier of the Dataset or
+collection to be added. This option can be used multiple times.</p>
+<p>If the collection is intended to be a sub-collection of another collection it
+can be inserted via the <code class="docutils literal"><span class="pre">--collection</span></code> parameter that also requires the
+identifier of the collection. Again, this parameter can be used multiple times.</p>
+</div>
+<div class="section" id="eoxs-collection-delete">
+<h3><a class="toc-backref" href="#table-of-contents">eoxs_collection_delete</a><a class="headerlink" href="#eoxs-collection-delete" title="Permalink to this headline">¶</a></h3>
+<p>With this command an existing collection can be removed. When the <code class="docutils literal"><span class="pre">--force</span></code>
+switch is not set, only empty collections can be deleted. With the
+<code class="docutils literal"><span class="pre">--recursive</span></code> option all sub-collections will be deleted aswell.</p>
+<p>This command does <em>never</em> remove any Datasets.</p>
+</div>
+<div class="section" id="eoxs-collection-link-and-eoxs-collection-unlink">
+<span id="eoxs-dss-insert-ds"></span><span id="eoxs-dss-remove-ds"></span><h3><a class="toc-backref" href="#table-of-contents">eoxs_collection_link and eoxs_collection_unlink</a><a class="headerlink" href="#eoxs-collection-link-and-eoxs-collection-unlink" title="Permalink to this headline">¶</a></h3>
+<p>These two commands insert and remove links between objects and collections. To
+insert an object into a collection use the following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">eoxs_collection_link</span> <span class="o">--</span><span class="n">add</span> <span class="o">&lt;</span><span class="nb">object</span><span class="o">-</span><span class="n">identifier</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">collection</span> <span class="o">&lt;</span><span class="n">collection</span><span class="o">-</span><span class="n">identifier</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>To do the opposite do the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">eoxs_collection_unlink</span> <span class="o">--</span><span class="n">remove</span> <span class="o">&lt;</span><span class="nb">object</span><span class="o">-</span><span class="n">identifier</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">collection</span> <span class="o">&lt;</span><span class="n">collection</span><span class="o">-</span><span class="n">identifier</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="eoxs-collection-purge">
+<h3><a class="toc-backref" href="#table-of-contents">eoxs_collection_purge</a><a class="headerlink" href="#eoxs-collection-purge" title="Permalink to this headline">¶</a></h3>
+<p>To quickly remove the contents of a single collection from the database, the
+<code class="docutils literal"><span class="pre">eoxs_collection_purge</span></code> command can be used. This command deregisters all
+contained datasets of a collection. When the <code class="docutils literal"><span class="pre">--recursive</span></code> option is set, all
+contained sub-collections are purged aswell.
+Using the <code class="docutils literal"><span class="pre">--delete</span></code> option, the purged collections themselves are deleted too.</p>
+</div>
+<div class="section" id="eoxs-collection-datasource">
+<h3><a class="toc-backref" href="#table-of-contents">eoxs_collection_datasource</a><a class="headerlink" href="#eoxs-collection-datasource" title="Permalink to this headline">¶</a></h3>
+<p>This command allows to add a datasource to a collection. A datasource consists
+of a primary <code class="docutils literal"><span class="pre">source</span></code> and zero or more secondary <code class="docutils literal"><span class="pre">templates</span></code>. The <code class="docutils literal"><span class="pre">source</span></code>
+should be a path using unix shell regular expressions to match files in the
+given directory structure. The <code class="docutils literal"><span class="pre">templates</span></code> are similar, but should make use of
+template tags that are then replaced the values of the <code class="docutils literal"><span class="pre">source</span></code>. Possible tags
+are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">{basename}</span></code>: the sources file basename (name without directory)</li>
+<li><code class="docutils literal"><span class="pre">{root}</span></code>: like <code class="docutils literal"><span class="pre">{basename}</span></code>, but without file extension</li>
+<li><code class="docutils literal"><span class="pre">{extension}</span></code>: the source files extension</li>
+<li><code class="docutils literal"><span class="pre">{dirname}</span></code>: the directory path of the source file</li>
+<li><code class="docutils literal"><span class="pre">{source}</span></code>: the full path of the source file</li>
+</ul>
+</div></blockquote>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">eoxs_collection_datasource</span> <span class="o">-</span><span class="n">i</span> <span class="n">MER_FRS_1P</span> \
+    <span class="o">-</span><span class="n">s</span> <span class="n">data</span><span class="o">/</span><span class="n">MER_FRS_1P_reduced</span><span class="o">/*</span><span class="n">tif</span> \
+    <span class="o">-</span><span class="n">t</span> <span class="n">data</span><span class="o">/</span><span class="n">MER_FRS_1P_reduced</span><span class="o">/</span><span class="p">{</span><span class="n">root</span><span class="p">}</span><span class="o">.</span><span class="n">xml</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="eoxs-collection-synchronize">
+<h3><a class="toc-backref" href="#table-of-contents">eoxs_collection_synchronize</a><a class="headerlink" href="#eoxs-collection-synchronize" title="Permalink to this headline">¶</a></h3>
+<p>This command allows to synchronize a collection with the file system using its
+datasources.</p>
+<div class="section" id="what-is-synchronization">
+<span id="what-is-sync"></span><h4>What is synchronization?<a class="headerlink" href="#what-is-synchronization" title="Permalink to this headline">¶</a></h4>
+<p>In the context of EOxServer, synchronization is the process of updating the
+database models for container objects (such as RectifiedStitchedMosaics or
+DatasetSeries) according to changes in the file system.</p>
+<p>Automatic datasets are deleted from the database, when their data files cannot
+be found in the file system. Similar, new datasets will be created when new
+files matching the search pattern in the subscripted directories are found.</p>
+<p>When datasets are added to or deleted from a container object, the metadata
+(e.g the footprint of the features of interest or the time extent of the image)
+of the container is also likely to be adjusted.</p>
+</div>
+<div class="section" id="reasons-for-synchronization">
+<h4>Reasons for Synchronization<a class="headerlink" href="#reasons-for-synchronization" title="Permalink to this headline">¶</a></h4>
+<p>There are several occasions, where synchronization is necessary:</p>
+<blockquote>
+<div><ul class="simple">
+<li>A file has been added to a folder associated with a container</li>
+<li>A file from a folder associated with a container has been removed</li>
+<li>EO Metadata has been changed</li>
+<li>A regular check for database consistency</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="howto">
+<h4>HowTo<a class="headerlink" href="#howto" title="Permalink to this headline">¶</a></h4>
+<p>Synchronization can be triggered by a custom <a class="reference external" href="https://docs.djangoproject.com/en/1.11/ref/django-admin/">Django admin command</a>, called
+<code class="docutils literal"><span class="pre">eoxs_collection_synchronize</span></code>.</p>
+<p>To start the synchronization process, navigate to your instances directory and
+type:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">eoxs_synchronize</span> <span class="o">-</span><span class="n">i</span> <span class="o">&lt;</span><span class="n">ID</span><span class="o">&gt;</span> <span class="p">[</span> <span class="o">-</span><span class="n">i</span> <span class="o">&lt;</span><span class="n">ID</span><span class="o">&gt;</span> <span class="o">...</span> <span class="p">]</span>
+</pre></div>
+</div>
+<p>whereas <code class="docutils literal"><span class="pre">&lt;IDs&gt;</span></code> are the coverage/EO IDs of the containers that shall be
+synchronized.</p>
+<p>Alternatively, with the <code class="docutils literal"><span class="pre">-a</span></code> or <code class="docutils literal"><span class="pre">--all</span></code> option, all container objects in
+the database will be synchronized. This option is useful for a daily cron-job,
+ensuring the databases consistency with the file system.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">eoxs_collection_synchronize</span> <span class="o">--</span><span class="nb">all</span>
+</pre></div>
+</div>
+<p>The synchronization process may take some time, especially when FTP/Rasdaman
+storages are used and also depends on the number of synchronized objects.</p>
+</div>
+</div>
+<div class="section" id="eoxs-id-check">
+<span id="eoxs-check-id"></span><h3><a class="toc-backref" href="#table-of-contents">eoxs_id_check</a><a class="headerlink" href="#eoxs-id-check" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">eoxs_check_id</span></code> commands allows checking about status of the queried
+coverage/EO identifier. The command returns the status via its return code (0 -
+<code class="docutils literal"><span class="pre">True</span></code> or 1 - <code class="docutils literal"><span class="pre">False</span></code>).</p>
+<p>By default the command checks whether an identifier can be used (is available)
+as a new Coverage/Collection ID:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">eoxs_id_check</span> <span class="o">&lt;</span><span class="n">ID</span><span class="o">&gt;</span> <span class="o">&amp;&amp;</span> <span class="n">echo</span> <span class="kc">True</span> <span class="o">||</span> <span class="n">echo</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>It is possible to check if the identifier is used for a specific type of object.
+For example, the following would check if the identifier is used for a
+Dataset Series:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">eoxs_id_check</span> <span class="o">&lt;</span><span class="n">ID</span><span class="o">&gt;</span> <span class="o">--</span><span class="nb">type</span> <span class="n">DatasetSeries</span> <span class="o">&amp;&amp;</span> <span class="n">echo</span> <span class="kc">True</span> <span class="o">||</span> <span class="n">echo</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="range-type-handling">
+<span id="eoxs-range-type"></span><h3><a class="toc-backref" href="#table-of-contents">Range Type Handling</a><a class="headerlink" href="#range-type-handling" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal"><span class="pre">eoxs_rangetypes_list</span></code> command, by default, lists the names of all
+registered range types:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">eoxs_rangetypes_list</span>
+</pre></div>
+</div>
+<p>In case of more range types details required verbose listing may be requested by
+<code class="docutils literal"><span class="pre">--details</span></code> option. When one or more range type names are specified the output
+will be limited to the specified range-types only:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">eoxs_rangetypes_list</span> <span class="o">--</span><span class="n">details</span> <span class="p">[</span><span class="o">&lt;</span><span class="nb">range</span><span class="o">-</span><span class="nb">type</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span> <span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The same command can be also used to export rangetype in JSON format
+(<code class="docutils literal"><span class="pre">--json</span></code> option). Following example prints the selected RGB range type in
+JSON format:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">eoxs_rangetypes_list</span> <span class="o">--</span><span class="n">json</span> <span class="n">RGB</span>
+</pre></div>
+</div>
+<p>The output may be directly savaved to file by using the <code class="docutils literal"><span class="pre">-o</span></code> option. Following
+example saves all the registered range-types to a file named
+<code class="docutils literal"><span class="pre">rangetypes.json</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">eoxs_rangetypes_list</span> <span class="o">--</span><span class="n">json</span> <span class="o">-</span><span class="n">o</span> <span class="n">rangetypes</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+<p>The rangetypes saved in JSON format can be loaded (e.g., by another <em>EOxServer</em>
+instance) by using of the <code class="docutils literal"><span class="pre">eoxs_rangetypes_load</span></code> command. By default, this
+command reads the JSON data from the standard input. To force the command to
+read the input from a file use <code class="docutils literal"><span class="pre">-i</span></code></p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">eoxs_rangetypes_load</span> <span class="o">-</span><span class="n">i</span> <span class="n">rangetypes</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="performance">
+<h2><a class="toc-backref" href="#table-of-contents">Performance</a><a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h2>
+<p>The performance of different EOxServer tasks and services depends heavily on
+the hardware infrastructure and the data to be handled. Tests were made for
+two typical operator use cases:</p>
+<ul class="simple">
+<li>registering a dataset</li>
+<li>generating a mosaic</li>
+</ul>
+<p>The tests for <strong>registering datasets</strong> were performed on a quad-core machine
+with 4 GB of RAM and with a SQLite/SpatiaLite database. The test datasets
+were 58 IKONOS multispectral (4-band 16-bit), 58 IKONOS panchromatic (1-band
+16-bit) and 58 IKONOS pansharpened (3-band 8-bit) scenes in GeoTIFF format with
+file sizes ranging between 60 MB and 1.7 GB. The file size did not have any
+discernible impact on the time it took to register. The average registration
+took about 61 ms, meaning that registering nearly 1000 datasets per minute is
+possible.</p>
+<p>The tests for the <strong>generation of mosaics</strong> were performed on a virtual machine
+with one CPU core allocated and 4 GB of RAM. Yet again, the input data were
+IKONOS scenes in GeoTIFF format.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="14%" />
+<col width="5%" />
+<col width="16%" />
+<col width="16%" />
+<col width="9%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Datasets</th>
+<th class="head">Data Type</th>
+<th class="head">Files</th>
+<th class="head">Input File Size</th>
+<th class="head">Tiles Generated</th>
+<th class="head">Time</th>
+<th class="head">GB per minute</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>IKONOS multispectral</td>
+<td>4-band 16-bit</td>
+<td>68</td>
+<td>8.9 GB</td>
+<td>8.819</td>
+<td>10 m</td>
+<td>0.89 GB</td>
+</tr>
+<tr class="row-odd"><td>IKONOS panchromatic</td>
+<td>1-band 16-bit</td>
+<td>68</td>
+<td>35.1 GB</td>
+<td>126.750</td>
+<td>1:05 h</td>
+<td>0.54 GB</td>
+</tr>
+<tr class="row-even"><td>IKONOS pansharpened</td>
+<td>3-band  8-bit</td>
+<td>68</td>
+<td>52.7 GB</td>
+<td>126.750</td>
+<td>1:46 h</td>
+<td>0.49 GB</td>
+</tr>
+</tbody>
+</table>
+<p>As the results show the file size of the input files has a certain impact on
+performance, but the effect seems to level off.</p>
+<p>Regarding the performance of the services there are many influence factors:</p>
+<ul class="simple">
+<li>the hardware configuration of the machine</li>
+<li>the network connection bandwith</li>
+<li>the database configuration (SQLite or PostGIS)</li>
+<li>the format and size of the raster data files</li>
+<li>the processing steps necessary to fulfill the request (e.g. resampling,
+reprojection)</li>
+<li>the coverage type (processing referenceable grid coverages is considerably
+more expensive than processing rectified grid coverages)</li>
+<li>the setup of IDM components (if any)</li>
+</ul>
+<p>For hints on improving performance of the services see
+<a class="reference internal" href="install.html#hardware-guidelines"><span class="std std-ref">Hardware Guidelines</span></a> and <a class="reference internal" href="#ops-data"><span class="std std-ref">Data Preparation and Supported Data Formats</span></a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="webclient.html" class="btn btn-neutral float-right" title="The Webclient Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="opensearch.html" class="btn btn-neutral float-left" title="OpenSearch" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

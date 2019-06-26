@@ -1,0 +1,404 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Supported Raster File Formats and Their Configuration &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Asynchronous Task Processing" href="atp_sum.html" />
+    <link rel="prev" title="Supported CRSs and Their Configuration" href="crss.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Users’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">EOxServer Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="global_use_case.html">Global Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos_installation.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instance_creation.html">Service Instance Creation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operational_install.html">Recommendations for Operational Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailing_lists.html">Mailing Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demonstration.html">Demonstration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EO-WCS_request_parameters.html">EO-WCS Request Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opensearch.html">OpenSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html">EOxServer Operators’ Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webclient.html">The Webclient Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="idm/index.html">Identity Management System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html">EOxServer Presentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html">Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crss.html">Supported CRSs and Their Configuration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Supported Raster File Formats and Their Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#format-registry">Format Registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#format-configuration">Format Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#web-coverage-service-format-configuration">Web Coverage Service - Format Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#web-coverage-service-native-format-configuration">Web Coverage Service - Native Format Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#web-map-service-format-configuration">Web Map Service - Format Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html">Asynchronous Task Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WCS-T_summary.html">Web Coverage Service - Transaction Extension</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Users’ Guide</a> &raquo;</li>
+        
+      <li>Supported Raster File Formats and Their Configuration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/users/formats.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="supported-raster-file-formats-and-their-configuration">
+<span id="formatsconfiguration"></span><span id="index-0"></span><h1><a class="toc-backref" href="#table-of-contents">Supported Raster File Formats and Their Configuration</a><a class="headerlink" href="#supported-raster-file-formats-and-their-configuration" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#supported-raster-file-formats-and-their-configuration" id="id1">Supported Raster File Formats and Their Configuration</a><ul>
+<li><a class="reference internal" href="#format-registry" id="id2">Format Registry</a></li>
+<li><a class="reference internal" href="#format-configuration" id="id3">Format Configuration</a></li>
+<li><a class="reference internal" href="#web-coverage-service-format-configuration" id="id4">Web Coverage Service - Format Configuration</a></li>
+<li><a class="reference internal" href="#web-coverage-service-native-format-configuration" id="id5">Web Coverage Service - Native Format Configuration</a></li>
+<li><a class="reference internal" href="#web-map-service-format-configuration" id="id6">Web Map Service - Format Configuration</a></li>
+<li><a class="reference internal" href="#references" id="id7">References</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>In this section, the EOxServer’s handling of raster file
+formats and OWS service specific format configuration is described.</p>
+<div class="section" id="format-registry">
+<h2><a class="toc-backref" href="#table-of-contents">Format Registry</a><a class="headerlink" href="#format-registry" title="Permalink to this headline">¶</a></h2>
+<p>The format registry is the list of raster file formats recognised by EOxServer.
+It holds definitions of both input and output formats. Each format record
+defines the MIME-type (unique, primary key), library, driver, and the default
+file extension.</p>
+<p>Currently, EOxServer handles the raster data exclusively by means of the
+<a class="reference external" href="http://www.gdal.org">GDAL</a> library. Thus, in principle, any raster file
+<a class="reference external" href="http://www.gdal.org/formats_list.html">format supported by the GDAL</a> library
+is supported by EOxServer. In particular, any raster file format readable by
+the GDAL library (provided that the file structure can be decomposed to one
+single-type, single- or multi-band image) can be used as the input and, vice
+versa, any raster file format writeable by the GDAL library can used as the
+output produced by WCS and WMS services.</p>
+<p>Any raster file format intended to be used by EOxServer must be defined in
+the format registry. The format registry then provides unique mappings from
+MIME-type to the (GDAL) format driver.</p>
+</div>
+<div class="section" id="format-configuration">
+<h2><a class="toc-backref" href="#table-of-contents">Format Configuration</a><a class="headerlink" href="#format-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The format registry configuration is split in two parts (files):</p>
+<blockquote>
+<div><ul class="simple">
+<li>per-installation (mandatory) format configuration (set
+up automatically during the EOxServer installation) defining the default
+baseline set of formats
+(<code class="docutils literal"><span class="pre">&lt;instal.path&gt;/eoxserver/conf/default_formats.conf</span></code>).</li>
+<li>per-instance (optional) format configuration allowing customization of the
+format registry (<code class="docutils literal"><span class="pre">&lt;instance</span> <span class="pre">path&gt;/conf/formats.conf</span></code>).</li>
+</ul>
+</div></blockquote>
+<p>In case of conflicting format definitions, the per-instance configuration takes
+precedence. Both formats’ configuration files share the same text file format.</p>
+<p>The formats’ configuration is a simple text file containing a simple list of
+format definitions. One format definition (record) per line. Each record is
+then a comma separated list of the following text fields:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">MIME</span><span class="o">-</span><span class="nb">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">driver</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">file</span> <span class="n">extension</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The mime type is used as the primary key and thus any repeated MIME-type will
+rewrite the previous format definition(s) using this MIME-type.
+The driver field should be in format <code class="docutils literal"><span class="pre">GDAL/&lt;GDAL</span> <span class="pre">driver</span> <span class="pre">name&gt;</span></code>. To list
+available drivers provided by your GDAL installation use the following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">gdalinfo</span> <span class="o">--</span><span class="n">formats</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">GDAL</span></code> prefix is used as place-holder to allow future use of additional
+library back-ends. The file extension shall be written including the separating
+dot <code class="docutils literal"><span class="pre">.</span></code>.  Any leading or trailing white-characters as well as empty lines
+are ignored.  The <code class="docutils literal"><span class="pre">#</span></code> character is used as line-comment and any content
+between this character and the end of the line is ignored.</p>
+<p>An example format definition:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">image</span><span class="o">/</span><span class="n">tiff</span><span class="p">,</span><span class="n">GDAL</span><span class="o">/</span><span class="n">GTiff</span><span class="p">,</span><span class="o">.</span><span class="n">tif</span> <span class="c1"># GeoTIFF raster file format</span>
+</pre></div>
+</div>
+<p>Since the list of supported drivers may vary for different installations of
+the back-end (GDAL) library, the library drivers are checked by EOxServer
+ignoring any format definitions requiring non-supported library drivers. Any
+invalid format record is reported to the EOxServer log.
+Further, EOxServer checks automatically which of the library drivers are
+‘read-only’, i.e., which cannot be used to produce output images, and
+restricts these to be used for data input only.</p>
+</div>
+<div class="section" id="web-coverage-service-format-configuration">
+<h2><a class="toc-backref" href="#table-of-contents">Web Coverage Service - Format Configuration</a><a class="headerlink" href="#web-coverage-service-format-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The list of the file formats supported by the <em>Web Coverage Service</em> (WCS) is
+specified in the EOxServer configuration (<code class="docutils literal"><span class="pre">&lt;instance</span>
+<span class="pre">path&gt;/conf/eoxserver.conf</span></code>) in the section <code class="docutils literal"><span class="pre">serices.ows.wcs</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">services</span><span class="o">.</span><span class="n">ows</span><span class="o">.</span><span class="n">wcs</span><span class="p">]</span>
+<span class="n">supported_formats</span><span class="o">=&lt;</span><span class="n">MIME</span> <span class="nb">type</span><span class="o">&gt;</span><span class="p">[,</span><span class="o">&lt;</span><span class="n">MIME</span> <span class="nb">type</span><span class="o">&gt;</span><span class="p">[,</span><span class="o">&lt;</span><span class="n">MIME</span> <span class="nb">type</span><span class="o">&gt;</span> <span class="o">...</span> <span class="p">]]</span>
+</pre></div>
+</div>
+<p>The supported WCS formats are specified as a comma-separated list of MIME-types.
+The listed MIME-types must be defined in the format registry otherwise they will
+be ignored. Read-only file formats will also be ignored.</p>
+<p>The supported formats are announced through the WCS <code class="docutils literal"><span class="pre">Capabilities</span></code> and
+<code class="docutils literal"><span class="pre">CoverageDescription</span></code> (the output may vary based on the WCS version used).
+The use of in invalid MIME-types (not listed among the supported formats) in
+<code class="docutils literal"><span class="pre">getCoverge()</span></code> requests will lead to errors (OWS Exceptions).</p>
+</div>
+<div class="section" id="web-coverage-service-native-format-configuration">
+<h2><a class="toc-backref" href="#table-of-contents">Web Coverage Service - Native Format Configuration</a><a class="headerlink" href="#web-coverage-service-native-format-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The <em>native format</em> (as defined by <a class="reference external" href="http://www.opengeospatial.org/standards/wcs">WCS 2.0.1 [OGC 09-110r4]</a>) is the default
+raster file format returned by the <code class="docutils literal"><span class="pre">getCoverage()</span></code> operation in case of a
+missing explicit format specification. By default, EOxServer sets the <em>native
+format</em> to the format of the stored source data (source format), however, in
+cases when the source format cannot be used (‘read-only’ source format) and/or
+another default format is desired, EOxServer allows the configuration of
+WCS <em>native formats</em> (<code class="docutils literal"><span class="pre">&lt;instance</span> <span class="pre">path&gt;/conf/eoxserver.conf</span></code>, section
+<code class="docutils literal"><span class="pre">services.ows.wcs20</span></code>):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">services</span><span class="o">.</span><span class="n">ows</span><span class="o">.</span><span class="n">wcs20</span><span class="p">]</span>
+<span class="n">default_native_format</span><span class="o">=&lt;</span><span class="n">MIME</span><span class="o">-</span><span class="nb">type</span><span class="o">&gt;</span>
+<span class="n">source_to_native_format_map</span><span class="o">=</span><span class="p">[</span><span class="o">&lt;</span><span class="n">src</span><span class="o">.</span><span class="n">MIME</span><span class="o">-</span><span class="nb">type</span><span class="p">,</span><span class="n">native</span><span class="o">-</span><span class="n">MIME</span><span class="o">-</span><span class="nb">type</span><span class="o">&gt;</span><span class="p">[,</span><span class="o">&lt;</span><span class="n">src</span><span class="o">.</span><span class="n">MIME</span><span class="o">-</span><span class="nb">type</span><span class="p">,</span><span class="n">native</span><span class="o">-</span><span class="n">MIME</span><span class="o">-</span><span class="nb">type</span><span class="o">&gt;</span> <span class="o">...</span> <span class="p">]]</span>
+</pre></div>
+</div>
+<p>The default <em>native format</em> option is used in cases when the source format
+cannot be used (read-only) and no source to native format mapping is present.
+This option must always be set to a valid format (GeoTIFF by default). The
+source to native format mapping, as the name suggests, maps the (zero, one, or
+more) source format(s) to non-default native formats. The source formats are
+not restricted to the read-only ones. This option accepts a comma-separated
+list of MIME-type pairs.</p>
+</div>
+<div class="section" id="web-map-service-format-configuration">
+<h2><a class="toc-backref" href="#table-of-contents">Web Map Service - Format Configuration</a><a class="headerlink" href="#web-map-service-format-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The list of the file formats supported by the <em>Web Map Service’s</em> (WMS)
+<code class="docutils literal"><span class="pre">getMap()</span></code> operation is specified in the EOxServer configuration
+(<code class="docutils literal"><span class="pre">&lt;instance</span> <span class="pre">path&gt;/conf/eoxserver.conf</span></code>) in section <code class="docutils literal"><span class="pre">serices.ows.wms</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">services</span><span class="o">.</span><span class="n">ows</span><span class="o">.</span><span class="n">wms</span><span class="p">]</span>
+<span class="n">supported_formats</span><span class="o">=&lt;</span><span class="n">MIME</span> <span class="nb">type</span><span class="o">&gt;</span><span class="p">[,</span><span class="o">&lt;</span><span class="n">MIME</span> <span class="nb">type</span><span class="o">&gt;</span><span class="p">[,</span><span class="o">&lt;</span><span class="n">MIME</span> <span class="nb">type</span><span class="o">&gt;</span> <span class="o">...</span> <span class="p">]]</span>
+</pre></div>
+</div>
+<p>The supported WMS formats are specified as a comma-separated list of MIME-types.
+The listed MIME-types must be defined in the format registry otherwise they will
+be ignored. The read-only file formats will be ignored.</p>
+<p>The supported formats are announced through the WMS <code class="docutils literal"><span class="pre">Capabilities</span></code> (the output
+may vary based on the WMS version used).</p>
+</div>
+<div class="section" id="references">
+<h2><a class="toc-backref" href="#table-of-contents">References</a><a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">[OGC 09-110r4]:</th><td class="field-body"><a class="reference external" href="http://www.opengeospatial.org/standards/wcs">http://www.opengeospatial.org/standards/wcs</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="atp_sum.html" class="btn btn-neutral float-right" title="Asynchronous Task Processing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="crss.html" class="btn btn-neutral float-left" title="Supported CRSs and Their Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

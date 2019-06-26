@@ -1,0 +1,472 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>EOxServer Basics &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Data Models Concepts" href="concept.html" />
+    <link rel="prev" title="Users’ Guide" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Users’ Guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">EOxServer Basics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#what-is-eoxserver">What is EOxServer?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-are-the-main-features-of-eoxserver">What are the main features of EOxServer?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#where-can-i-get-it">Where can I get it?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#where-can-i-get-support">Where can I get support?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#eoxserver-documentation">EOxServer Documentation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#demonstration-services">Demonstration Services</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#data-model">Data Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#service-model">Service Model</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#web-coverage-service">Web Coverage Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#web-map-service">Web Map Service</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#web-processing-service">Web Processing Service</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="concept.html">Data Models Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="global_use_case.html">Global Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos_installation.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instance_creation.html">Service Instance Creation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operational_install.html">Recommendations for Operational Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailing_lists.html">Mailing Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demonstration.html">Demonstration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EO-WCS_request_parameters.html">EO-WCS Request Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opensearch.html">OpenSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html">EOxServer Operators’ Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webclient.html">The Webclient Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="idm/index.html">Identity Management System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html">EOxServer Presentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html">Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crss.html">Supported CRSs and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html">Supported Raster File Formats and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html">Asynchronous Task Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WCS-T_summary.html">Web Coverage Service - Transaction Extension</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Users’ Guide</a> &raquo;</li>
+        
+      <li>EOxServer Basics</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/users/basics.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="eoxserver-basics">
+<span id="id1"></span><h1><a class="toc-backref" href="#table-of-contents">EOxServer Basics</a><a class="headerlink" href="#eoxserver-basics" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#eoxserver-basics" id="id5">EOxServer Basics</a><ul>
+<li><a class="reference internal" href="#introduction" id="id6">Introduction</a><ul>
+<li><a class="reference internal" href="#what-is-eoxserver" id="id7">What is EOxServer?</a></li>
+<li><a class="reference internal" href="#what-are-the-main-features-of-eoxserver" id="id8">What are the main features of EOxServer?</a></li>
+<li><a class="reference internal" href="#where-can-i-get-it" id="id9">Where can I get it?</a></li>
+<li><a class="reference internal" href="#where-can-i-get-support" id="id10">Where can I get support?</a></li>
+<li><a class="reference internal" href="#eoxserver-documentation" id="id11">EOxServer Documentation</a></li>
+<li><a class="reference internal" href="#demonstration-services" id="id12">Demonstration Services</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-model" id="id13">Data Model</a></li>
+<li><a class="reference internal" href="#service-model" id="id14">Service Model</a><ul>
+<li><a class="reference internal" href="#web-coverage-service" id="id15">Web Coverage Service</a></li>
+<li><a class="reference internal" href="#web-map-service" id="id16">Web Map Service</a></li>
+<li><a class="reference internal" href="#web-processing-service" id="id17">Web Processing Service</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#table-of-contents">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="what-is-eoxserver">
+<h3><a class="toc-backref" href="#table-of-contents">What is EOxServer?</a><a class="headerlink" href="#what-is-eoxserver" title="Permalink to this headline">¶</a></h3>
+<p>EOxServer is an open source software for registering, processing, and publishing
+Earth Observation (EO) data via different Web Services. EOxServer is written in
+Python and relies on widely-used libraries for geospatial data manipulation.</p>
+<p>The core concept of the EOxServer data model is the one of a coverage. In this
+context, a coverage is a mapping from a domain set (a geographic region of the
+Earth described by its coordinates) to a range set. For original EO data,
+the range set usually consists of measurements of some physical quantity
+(e.g. radiation for optical instruments).</p>
+<p>The EOxServer service model is designed to deliver (representations of) EO data
+using open standard web service interfaces as specified by the <a class="reference external" href="http://www.opengeospatial.org">Open Geospatial
+Consortium</a> (OGC).</p>
+</div>
+<div class="section" id="what-are-the-main-features-of-eoxserver">
+<h3><a class="toc-backref" href="#table-of-contents">What are the main features of EOxServer?</a><a class="headerlink" href="#what-are-the-main-features-of-eoxserver" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Repository for Earth Observation data</li>
+<li>OGC Web Services</li>
+<li>Administration Tools</li>
+<li>Web Client</li>
+<li>Identity Management System</li>
+</ul>
+</div>
+<div class="section" id="where-can-i-get-it">
+<h3><a class="toc-backref" href="#table-of-contents">Where can I get it?</a><a class="headerlink" href="#where-can-i-get-it" title="Permalink to this headline">¶</a></h3>
+<p>You can get the EOxServer source from</p>
+<ul class="simple">
+<li>the <a class="reference external" href="http://eoxserver.org/wiki/Download">EOxServer Download page</a></li>
+<li>the <a class="reference external" href="http://pypi.python.org/pypi/EOxServer/">Python Package Index (PyPi)</a></li>
+<li>the <a class="reference external" href="https://github.com/EOxServer/eoxserver">EOxServer Git repository</a></li>
+</ul>
+<p>Additionally the following binary packages are provided:</p>
+<ul class="simple">
+<li>Enterprise Linux RPMs from <a class="reference external" href="http://packages.eox.at">EOX’ YUM repository</a></li>
+</ul>
+<p>The recommended way to install EOxServer on your system is to use the
+Python installer utility
+<a class="reference external" href="http://www.pip-installer.org/en/latest/index.html">pip</a>.</p>
+<p>Please refer to the <a class="reference internal" href="install.html"><span class="doc">Installation</span></a> document for further information on
+installing the software.</p>
+</div>
+<div class="section" id="where-can-i-get-support">
+<h3><a class="toc-backref" href="#table-of-contents">Where can I get support?</a><a class="headerlink" href="#where-can-i-get-support" title="Permalink to this headline">¶</a></h3>
+<p>If you have questions or problems, you can get support at the official
+EOxServer Users’ mailing list <a class="reference external" href="mailto:users&#37;&#52;&#48;eoxserver&#46;org">users<span>&#64;</span>eoxserver<span>&#46;</span>org</a>. See <a class="reference internal" href="mailing_lists.html"><span class="doc">Mailing Lists</span></a> for
+instructions how to subscribe.</p>
+<p>Documentation is available on this site and as a part of the EOxServer source.</p>
+</div>
+<div class="section" id="eoxserver-documentation">
+<h3><a class="toc-backref" href="#table-of-contents">EOxServer Documentation</a><a class="headerlink" href="#eoxserver-documentation" title="Permalink to this headline">¶</a></h3>
+<p>The EOxServer documentation consists of the</p>
+<ul class="simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Users’ Guide</span></a> (which this document is part of)</li>
+<li><a class="reference internal" href="../developers/index.html"><span class="doc">Developers’ Guide</span></a> (where you can find implementation details)</li>
+<li><a class="reference internal" href="../rfc/index.html"><span class="doc">Requests for Comments</span></a> (where you can find high-level design documentation)</li>
+</ul>
+<p>Furthermore, you can consult the inline documentation in the source code
+e.g. in the <a class="reference external" href="https://github.com/EOxServer/eoxserver">Source Browser</a>.</p>
+</div>
+<div class="section" id="demonstration-services">
+<h3><a class="toc-backref" href="#table-of-contents">Demonstration Services</a><a class="headerlink" href="#demonstration-services" title="Permalink to this headline">¶</a></h3>
+<p>There is a demonstration service available on the EOxServer site. You can reach
+it under <a class="reference external" href="http://eoxserver.org/demo_stable/ows">http://eoxserver.org/demo_stable/ows</a>. For some sample calls to
+different OGC Web Services, see <a class="reference internal" href="demonstration.html"><span class="doc">Demonstration</span></a>.</p>
+</div>
+</div>
+<div class="section" id="data-model">
+<h2><a class="toc-backref" href="#table-of-contents">Data Model</a><a class="headerlink" href="#data-model" title="Permalink to this headline">¶</a></h2>
+<p>The EOxServer data model describes which data can be handled by the software
+and how this is done. This section gives you a short overview about the
+basic components of the data model.</p>
+<p>The term coverage is introduced by the OGC Abstract Specification. There,
+coverages are defined as a mapping between a domain set that can be referenced
+to some region of the Earth to a range set which describes the possible values
+of the coverage. This is, of course, a very abstract definition. It comprises
+everything that has historically been called “raster data” (and then some, but
+that is out of scope of EOxServer at the moment).</p>
+<p>The data EOxServer originally was designed for is satellite imagery. So the
+domain set is the extent of the area that was scanned by the respective sensor,
+and the range set contains its measurements, e.g. the radiation of a spectrum of
+wavelengths (optical data).</p>
+<p>In the language of the OGC Abstract Specification ortho-rectified data
+corresponds to “rectified grid coverages”, whereas data in
+the original geometry corresponds to “referenceable grid coverages”.</p>
+<p>The EOxServer coverage model relies heavily on the data model of the
+Web Coverage Service 2.0 Earth Observation Application Profile which is about
+to be approved by OGC. This profile introduces different categories of
+Earth Observation data:</p>
+<ul class="simple">
+<li>Rectified or Referenceable Datasets roughly correspond to satellite scenes,
+either ortho-rectified or in the original geometry</li>
+<li>Rectified Stitched Mosaics are collections of Rectified Datasets that can be
+combined to form a single coverage</li>
+<li>Dataset Series are more general collections of Datasets; they are just
+containers for coverages, but not coverages themselves</li>
+</ul>
+<p>Datasets, Stitched Mosaics and Dataset Series are accompanyed by Earth
+Observation metadata. At the moment, EOxServer supports a limited subset of
+metadata items, such as the identifier of the Earth Observation product, the
+acquisition time and the acquisistion footprint.</p>
+</div>
+<div class="section" id="service-model">
+<h2><a class="toc-backref" href="#table-of-contents">Service Model</a><a class="headerlink" href="#service-model" title="Permalink to this headline">¶</a></h2>
+<p>Earth Observation data are published by EOxServer using different OGC Web
+Services. The OGC specifies open standard interfaces for the exchange of
+geospatial data that shall ensure interoperability and universal access to
+geodata.</p>
+<div class="section" id="web-coverage-service">
+<h3><a class="toc-backref" href="#table-of-contents">Web Coverage Service</a><a class="headerlink" href="#web-coverage-service" title="Permalink to this headline">¶</a></h3>
+<p>The OGC <a class="reference external" href="http://www.opengeospatial.org/standards/wcs">Web Coverage Service</a>
+(WCS) is designed to deliver original coverage data. EOxServer implements
+three versions of the WCS specification:</p>
+<ul class="simple">
+<li>version 1.0.0</li>
+<li>version 1.1.0</li>
+<li>version 2.0.1 including the Earth Observation Application Profile (EO-WCS)</li>
+</ul>
+<p>Each of these versions supports three operations:</p>
+<ul class="simple">
+<li>GetCapabilities - returns an XML document describing the available coverages
+(and Dataset Series)</li>
+<li>DescribeCoverage - returns an XML document describing a specific coverage
+and its metadata</li>
+<li>GetCoverage - returns (a subset of) the coverage data</li>
+</ul>
+<p>The WCS 2.0 EO-AP (EO-WCS) adds an additional operation:</p>
+<ul class="simple">
+<li>DescribeEOCoverageSet - returns an XML document describing (a subset of) the
+datasets contained in a Rectified Stitched Mosaic or Dataset Series</li>
+</ul>
+<p>For detailed lists of supported parameters for each of the operations see
+<a class="reference internal" href="EO-WCS_request_parameters.html#eo-wcs-request-parameters"><span class="std std-ref">EO-WCS Request Parameters</span></a> .</p>
+<p>In addition, EOxServer supports the WCS 1.1 Transaction operation which provides
+an interface to ingest coverages and metadata into an existing server.</p>
+</div>
+<div class="section" id="web-map-service">
+<h3><a class="toc-backref" href="#table-of-contents">Web Map Service</a><a class="headerlink" href="#web-map-service" title="Permalink to this headline">¶</a></h3>
+<p>The OGC <a class="reference external" href="http://www.opengeospatial.org/standards/wms">Web Map Service</a> (WMS)
+is intended to provide portrayals of geospatial data (maps). In EOxServer,
+WMS is used for viewing purposes. The service provides RGB or grayscale
+representations of Earth Observation data. In some cases, the Earth Observation
+data will be RGB imagery itself, but in most cases the bands of the images
+correspond to other parts of the wavelength spectrum or other measurements
+altogether.</p>
+<p>EOxServer implements WMS versions 1.0, 1.1 and 1.3 as well as parts of the
+Earth Observation Application Profile for WMS 1.3. The basic operations are:</p>
+<ul class="simple">
+<li>GetCapabilities - returns an XML document describing the available layers</li>
+<li>GetMap - returns a map</li>
+</ul>
+<p>For certain WMS 1.3 layers, there is also a third operation available</p>
+<ul class="simple">
+<li>GetFeatureInfo - returns information about geospatial features (in our case:
+datasets) at a certain position on the map</li>
+</ul>
+<p>Every coverage (Rectified Dataset, Referenceable Dataset or Rectified Stitched
+Mosaic) is mapped to a WMS layer. Furthermore, Dataset Series are mapped to
+WMS layers as well. In WMS 1.3 a “bands” layer is appended for each coverage
+that allows to select and view a subset of the coverage bands only. Furthermore,
+queryable “outlines” layers are added for Rectified Stitched Mosaics and Dataset
+Series which show the footprints of the Datasets they contain.</p>
+</div>
+<div class="section" id="web-processing-service">
+<h3><a class="toc-backref" href="#table-of-contents">Web Processing Service</a><a class="headerlink" href="#web-processing-service" title="Permalink to this headline">¶</a></h3>
+<p>The OGC <a class="reference external" href="http://www.opengeospatial.org/standards/wps">Web Processing Service</a>
+(WPS) is intended to make processing resources for geospatial data available
+online. EOxServer features an implementation of this standard as well.</p>
+<p>The WPS server provides three operations:</p>
+<ul class="simple">
+<li>GetCapabilities - returns an XML document describing the available processes</li>
+<li>DescribeProcess - returns an XML document describing a specific process</li>
+<li>Execute - allows to invoke a process</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="concept.html" class="btn btn-neutral float-right" title="Data Models Concepts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Users’ Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-22T22:04:33Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

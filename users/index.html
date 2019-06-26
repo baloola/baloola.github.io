@@ -1,0 +1,560 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Users’ Guide &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="EOxServer Basics" href="basics.html" />
+    <link rel="prev" title="EOxServer’s Documentation" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Users’ Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basics.html">EOxServer Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concept.html">Data Models Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="global_use_case.html">Global Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos_installation.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instance_creation.html">Service Instance Creation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operational_install.html">Recommendations for Operational Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailing_lists.html">Mailing Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demonstration.html">Demonstration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EO-WCS_request_parameters.html">EO-WCS Request Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opensearch.html">OpenSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html">EOxServer Operators’ Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webclient.html">The Webclient Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="idm/index.html">Identity Management System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html">EOxServer Presentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html">Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crss.html">Supported CRSs and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html">Supported Raster File Formats and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html">Asynchronous Task Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WCS-T_summary.html">Web Coverage Service - Transaction Extension</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Users’ Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/users/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="users-guide">
+<span id="eoxserver-users-guide"></span><h1>Users’ Guide<a class="headerlink" href="#users-guide" title="Permalink to this headline">¶</a></h1>
+<p>This section is intended for users of the EOxServer software stack. Users range
+from administrators installing and configuring the software stack and operators
+registering the available <em>EO Data</em> on the <em>Provider</em> side to end users
+consuming the registered <em>EO Data</em> on the <em>User</em> side.</p>
+<div class="figure align-center">
+<img alt="../_images/Global_Use_Case1.png" src="../_images/Global_Use_Case1.png" />
+</div>
+<p>Developers needing to know all the nitty-gritty about EOxServer implementation
+and APIs please refer to the <a class="reference internal" href="../developers/index.html#eoxserver-developers-guide"><span class="std std-ref">Developers’ Guide</span></a>.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="basics.html">EOxServer Basics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#introduction">Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="basics.html#what-is-eoxserver">What is EOxServer?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basics.html#what-are-the-main-features-of-eoxserver">What are the main features of EOxServer?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basics.html#where-can-i-get-it">Where can I get it?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basics.html#where-can-i-get-support">Where can I get support?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basics.html#eoxserver-documentation">EOxServer Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basics.html#demonstration-services">Demonstration Services</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#data-model">Data Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html#service-model">Service Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="basics.html#web-coverage-service">Web Coverage Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basics.html#web-map-service">Web Map Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basics.html#web-processing-service">Web Processing Service</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concept.html">Data Models Concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concept.html#coverage">Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concept.html#product">Product</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="concept.html#browse">Browse</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="concept.html#collection">Collection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="concept.html#mosaic">Mosaic</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="concept.html#type-objects">Type objects</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="global_use_case.html">Global Use Case</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="global_use_case.html#the-general-provider-view">The General <em>Provider</em> View</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="global_use_case.html#environment-software-configuration">Environment &amp; Software Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="global_use_case.html#data-registration">Data Registration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="global_use_case.html#the-general-user-view">The General <em>User</em> View</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="global_use_case.html#web-browser">Web Browser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="global_use_case.html#gis-tool">GIS Tool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#installing-eoxserver">Installing EOxServer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#upgrading-eoxserver">Upgrading EOxServer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#hardware-guidelines">Hardware Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="centos_installation.html">Installation on CentOS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="centos_installation.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos_installation.html#installation-from-rpm-packages">Installation from RPM Packages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="centos_installation.html#preparation-of-rpm-repositories">Preparation of RPM Repositories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="centos_installation.html#installing-eoxserver">Installing EOxServer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="centos_installation.html#alternate-installation-method-using-pip">Alternate installation method using <em>pip</em></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="centos_installation.html#required-software-packages">Required Software Packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="centos_installation.html#id1">Installing EOxServer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="centos_installation.html#special-pysqlite-considerations">Special <em>pysqlite</em> considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="instance_creation.html">Service Instance Creation and Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="instance_creation.html#instance-creation">Instance Creation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instance_creation.html#instance-configuration">Instance Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instance_creation.html#instancecreation-dbsetup">Database Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instance_creation.html#deployment">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instance_creation.html#data-registration">Data Registration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="operational_install.html">Recommendations for Operational Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="operational_install.html#introduction-eoxserver">Introduction EOxServer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operational_install.html#directory-structure">Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operational_install.html#user-management">User Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="operational_install.html#operating-system-users">Operating System Users</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operational_install.html#database-user">Database User</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operational_install.html#django-sysadmin">Django Sysadmin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operational_install.html#application-user-management">Application User Management</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="operational_install.html#eoxserver-configuration-step-by-step">EOxServer Configuration Step-by-step</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="operational_install.html#step-1-web-server-installation">Step 1 - Web Server Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operational_install.html#step-2-database-backend">Step 2 - Database Backend</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operational_install.html#step-3-creating-users-and-directories-for-instance-and-data">Step 3 - Creating Users and Directories for Instance and Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operational_install.html#step-4-instance-creation">Step 4 - Instance Creation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operational_install.html#step-5-database-setup">Step 5 - Database Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operational_install.html#step-6-web-server-integration">Step 6 - Web Server Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operational_install.html#step-7-start-operating-the-instance">Step 7 - Start Operating the Instance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="migration.html">Migration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="migration.html#migration-from-0-3-to-0-4">Migration from 0.3 to 0.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html#migration-from-0-2-to-0-3">Migration from 0.2 to 0.3</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="migration.html#disclaimer">Disclaimer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="migration.html#preparatory-steps">Preparatory steps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="migration.html#software-upgrade">Software upgrade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="migration.html#instance-migration">Instance migration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="migration.html#new-configuration-options">New configuration options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mailing_lists.html">Mailing Lists</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mailing_lists.html#users-mailing-list">Users Mailing List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailing_lists.html#dev-mailing-list">Dev Mailing List</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="demonstration.html">Demonstration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demonstration.html#getcapabilities">GetCapabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demonstration.html#describecoverage">DescribeCoverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demonstration.html#describeeocoverageset">DescribeEOCoverageSet</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="demonstration.html#dataset">Dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="demonstration.html#stitchedmosaic">StitchedMosaic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="demonstration.html#datasetseries">DatasetSeries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="demonstration.html#getcoverage">GetCoverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demonstration.html#getcoverage-post-xml">GetCoverage POST/XML</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="EO-WCS_request_parameters.html">EO-WCS Request Parameters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="EO-WCS_request_parameters.html#getcapabilities">GetCapabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EO-WCS_request_parameters.html#describecoverage">DescribeCoverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EO-WCS_request_parameters.html#describeeocoverageset">DescribeEOCoverageSet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EO-WCS_request_parameters.html#getcoverage">GetCoverage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="opensearch.html">OpenSearch</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="opensearch.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opensearch.html#setup">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opensearch.html#usage">Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opensearch.html#collection-search">Collection Search</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opensearch.html#record-search">Record Search</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opensearch.html#parameters">Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opensearch.html#output-formats">Output Formats</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opensearch.html#atom-and-rss">ATOM and RSS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opensearch.html#geojson-and-kml">GeoJSON and KML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opensearch.html#enabling-disabling-formats">Enabling/Disabling Formats</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="opensearch.html#future-work">Future Work</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="operators.html">EOxServer Operators’ Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="operators.html#basic-concepts">Basic Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html#storage-backends">Storage Backends</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#local">Local</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#ftp-repositories">FTP Repositories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#rasdaman-databases">Rasdaman Databases</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html#data-items">Data Items</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html#coverages">Coverages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#range-types">Range Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#rectified-datasets">Rectified Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#referenceable-datasets">Referenceable Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#rectified-stitched-mosaics">Rectified Stitched Mosaics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#dataset-series">Dataset Series</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html#data-preparation-and-supported-data-formats">Data Preparation and Supported Data Formats</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#raster-data-formats">Raster Data Formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#raster-data-preparation">Raster Data Preparation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#metadata-formats">Metadata Formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#metadata-preparation">Metadata Preparation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html#admin-client">Admin Client</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#creating-a-custom-range-type">Creating a custom Range Type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#creating-a-dataset">Creating a Dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#creating-a-dataset-series-or-a-stitched-mosaic">Creating a Dataset Series or a Stitched Mosaic</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html#command-line-tools">Command Line Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#eoxserver-instance-py">eoxserver-instance.py</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#coverage">coverage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#updating-datasets">Updating Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#eoxs-collection-create">eoxs_collection_create</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#eoxs-collection-delete">eoxs_collection_delete</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#eoxs-collection-link-and-eoxs-collection-unlink">eoxs_collection_link and eoxs_collection_unlink</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#eoxs-collection-purge">eoxs_collection_purge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#eoxs-collection-datasource">eoxs_collection_datasource</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#eoxs-collection-synchronize">eoxs_collection_synchronize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#eoxs-id-check">eoxs_id_check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="operators.html#range-type-handling">Range Type Handling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html#performance">Performance</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="webclient.html">The Webclient Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="webclient.html#enable-the-webclient-interface">Enable the Webclient Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webclient.html#using-the-webclient-interface">Using the webclient interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="idm/index.html">Identity Management System</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="idm/index.html#installation-and-configuration">Installation and Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="idm/index.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="idm/index.html#ldap-directory">LDAP Directory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="idm/index.html#authorisation-service">Authorisation Service</a></li>
+<li class="toctree-l3"><a class="reference internal" href="idm/index.html#general-configuration-for-charon-services">General Configuration for CHARON services</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="idm/index.html#http-and-soap-specific-components">HTTP and SOAP Specific Components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="idm/http.html">HTTP Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="idm/soap.html">SOAP Components</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html#soap-access-to-wcs">SOAP Access to WCS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="soap_proxy.html#quick-installation-guide-for-eoxserver-on-centos">Quick installation guide for EOxServer on CentOS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="soap_proxy.html#old-installation-guide-without-rpms">Old installation guide without rpms</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="presentations.html">EOxServer Presentations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html#foss4g-2011-denver">FOSS4G 2011, Denver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html#agit-2011-salzburg">AGIT 2011, Salzburg</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html#hma-awg-february-2012-esa-esrin">HMA-AWG February 2012, ESA ESRIN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html#fossgis-2012-dessau">FOSSGIS 2012, Dessau</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html#linuxwochen-wien-2012">Linuxwochen Wien 2012</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html#foss4g-cee-2012-prague">FOSS4G-CEE 2012, Prague</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html#hma-awg-june-2012-esa-esrin">HMA-AWG June 2012, ESA ESRIN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html#sentinel-3-olci-slstr-and-meris-a-atsr-workshop-2012-esa-esrin">Sentinel-3 OLCI/SLSTR and MERIS/(A)ATSR workshop 2012, ESA ESRIN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html#somap-2012-vienna">SOMAP 2012, Vienna</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration_options.html">Configuration Options</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html#core-system">[core.system]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html#processing-gdal-reftools">[processing.gdal.reftools]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html#backends-cache">[backends.cache]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html#resources-coverages-coverage-id">[resources.coverages.coverage_id]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html#services-owscommon">[services.owscommon]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html#services-ows">[services.ows]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html#services-ows-wms">[services.ows.wms]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html#services-ows-wcs">[services.ows.wcs]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html#services-ows-wcs20">[services.ows.wcs20]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html#services-ows-wcst11">[services.ows.wcst11]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html#services-auth-base">[services.auth.base]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html#webclient">[webclient]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html#testing">[testing]</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="crss.html">Supported CRSs and Their Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="crss.html#coordinate-reference-systems">Coordinate Reference Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crss.html#web-map-service">Web Map Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crss.html#web-coverage-service">Web Coverage Service</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="formats.html">Supported Raster File Formats and Their Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#format-registry">Format Registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#format-configuration">Format Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#web-coverage-service-format-configuration">Web Coverage Service - Format Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#web-coverage-service-native-format-configuration">Web Coverage Service - Native Format Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#web-map-service-format-configuration">Web Map Service - Format Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="atp_sum.html">Asynchronous Task Processing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html#tasks">Tasks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="atp_sum.html#id1">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="atp_sum.html#life-cycle">Life-cycle</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html#atp-installation-and-configuration">ATP Installation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html#atp-operation">ATP Operation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html#atp-demo-application">ATP Demo Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html#performance-considerations">Performance considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="WCS-T_summary.html">Web Coverage Service - Transaction Extension</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="WCS-T_summary.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WCS-T_summary.html#implementation-details">Implementation Details</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="WCS-T_summary.html#configuration">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="WCS-T_summary.html#adding-new-coverages">Adding New Coverages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="WCS-T_summary.html#deleting-existing-coverages">Deleting Existing Coverages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="WCS-T_summary.html#asynchronous-operation">Asynchronous Operation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="WCS-T_summary.html#references">References</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="basics.html" class="btn btn-neutral float-right" title="EOxServer Basics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="EOxServer’s Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-25T19:09:25Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

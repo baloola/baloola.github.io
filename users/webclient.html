@@ -1,0 +1,350 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The Webclient Interface &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Identity Management System" href="idm/index.html" />
+    <link rel="prev" title="EOxServer Operators’ Guide" href="operators.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Users’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">EOxServer Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="global_use_case.html">Global Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos_installation.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instance_creation.html">Service Instance Creation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operational_install.html">Recommendations for Operational Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailing_lists.html">Mailing Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demonstration.html">Demonstration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EO-WCS_request_parameters.html">EO-WCS Request Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opensearch.html">OpenSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html">EOxServer Operators’ Guide</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The Webclient Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#enable-the-webclient-interface">Enable the Webclient Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-webclient-interface">Using the webclient interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="idm/index.html">Identity Management System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html">EOxServer Presentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html">Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crss.html">Supported CRSs and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html">Supported Raster File Formats and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html">Asynchronous Task Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WCS-T_summary.html">Web Coverage Service - Transaction Extension</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Users’ Guide</a> &raquo;</li>
+        
+      <li>The Webclient Interface</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/users/webclient.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-webclient-interface">
+<span id="webclient"></span><h1><a class="toc-backref" href="#table-of-contents">The Webclient Interface</a><a class="headerlink" href="#the-webclient-interface" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#the-webclient-interface" id="id3">The Webclient Interface</a><ul>
+<li><a class="reference internal" href="#enable-the-webclient-interface" id="id4">Enable the Webclient Interface</a></li>
+<li><a class="reference internal" href="#using-the-webclient-interface" id="id5">Using the webclient interface</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The webclient interface is an application running in the browser and provides a
+preview of all Datasets in a specified Dataset Series. It uses an
+<a class="reference external" href="http://openlayers.org/">OpenLayers</a> display to show a WMS view of the
+datasets within a map context. The background map tiles are provided by
+<a class="reference external" href="https://maps.eox.at//">EOX</a>.</p>
+<p>It can further be used to provide a download mechanism for registered datasets.</p>
+<div class="section" id="enable-the-webclient-interface">
+<h2><a class="toc-backref" href="#table-of-contents">Enable the Webclient Interface</a><a class="headerlink" href="#enable-the-webclient-interface" title="Permalink to this headline">¶</a></h2>
+<p>To enable the webclient interface, several adjustments have to be made to the
+instances <code class="docutils literal"><span class="pre">settings.py</span></code> and <code class="docutils literal"><span class="pre">urls.py</span></code>.</p>
+<p>First off, the <code class="docutils literal"><span class="pre">eoxserver.webclient</span></code> has to be inserted in the <code class="docutils literal"><span class="pre">INSTALLED_APPS</span></code>
+option of your <code class="docutils literal"><span class="pre">settings.py</span></code>. As the interface also requires several static
+files like style-sheets and script files, the option <code class="docutils literal"><span class="pre">STATIC_URL</span></code> has to be set
+to a path the webserver is able to serve, for example <code class="docutils literal"><span class="pre">/static/</span></code>. The static
+media files are located under <code class="docutils literal"><span class="pre">path/to/eoxserver/webclient/static</span></code> and can be
+collected via the <a class="reference external" href="https://docs.djangoproject.com/en/1.8/ref/contrib/staticfiles/#collectstatic">collectstatic command</a>.</p>
+<p>To finally enable the webclient, a proper URL scheme has to be set up in
+<code class="docutils literal"><span class="pre">urls.py</span></code>. The following lines would enable the index and the webclient view
+on the URL <code class="docutils literal"><span class="pre">www.yourdomain.com/client</span></code>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">urlpatterns</span> <span class="o">=</span> <span class="n">patterns</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="o">...</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^client/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s2">&quot;eoxserver.webclient.urls&quot;</span><span class="p">)),</span>
+    <span class="o">...</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-the-webclient-interface">
+<h2><a class="toc-backref" href="#table-of-contents">Using the webclient interface</a><a class="headerlink" href="#using-the-webclient-interface" title="Permalink to this headline">¶</a></h2>
+<p>The webclient interface can be accessed via the given URL in <cite>urls.py</cite> as
+described in the instructions above, whereas the URL <cite>www.yourdomain.com/client</cite> would
+open an index view, displaying links to the webclient for every dataset series
+registered in the system. To view the webclient for a specific dataset series,
+use this URL: <cite>www.yourdomain.com/client/&lt;EOID&gt;</cite> where <cite>&lt;EOID&gt;</cite> is the EO-ID of
+the dataset series you want to inspect.</p>
+<div class="figure align-center" id="id1">
+<span id="fig-webclient-autotest"></span><img alt="../_images/webclient_autotest.png" src="../_images/webclient_autotest.png" />
+<p class="caption"><span class="caption-text"><em>The webclient showing the contents of the autotest instance.</em></span></p>
+</div>
+<p>The map can be panned with via mouse dragging or the map-moving buttons in the
+upper left of the screen. Alternatively, the arrow keys can be used. The
+zoomlevel can be adjusted with the mouse scrolling wheel or the zoom-level
+buttons located directly below the pan control buttons.</p>
+<p>A click on the small “+” sign on the upper right of the screen reveals the
+layer switcher control, where the preview and outline layers of the dataset
+series can be switched on or off.</p>
+<p>The upper menu allows to switch the visibility of the “Layers”, “Tools” and
+“About” panels. The “Layers” panel allows to set the visibility of all the
+enabled layers of the instance. This includes all non-empty collections and all
+coverages that are <code class="docutils literal"><span class="pre">visible</span></code> but not in a collection. Also the background and
+the overlay can be altered.</p>
+<p>The “Tools” panel allows to draw bounding boxes, manage selections and trigger
+the download. In order to download, first at least one bounding box must be
+drawn. Afterwards the download icon is clickable.</p>
+<div class="figure align-center" id="id2">
+<span id="fig-webclient-autotest-download-view"></span><img alt="../_images/webclient_autotest_download_view.png" src="../_images/webclient_autotest_download_view.png" />
+<p class="caption"><span class="caption-text"><em>The download selection view.</em></span></p>
+</div>
+<p>Upon clicking on the download icon, the download view is shown. It displays all
+the coverages available for download that are in the active layers and are
+intersecting with the spatio-temporal subsets. There, additional download
+options can be made:</p>
+<blockquote>
+<div><ul class="simple">
+<li>actually selecting coverages for download</li>
+<li>selecting an output format</li>
+<li>selecting an output projection</li>
+</ul>
+</div></blockquote>
+<p>When all coverages to be downloaded are selected and all configuration is done
+a click on “Start Download” triggers the download of each coverage, subcetted by
+the given spatial subsets.</p>
+<p>The “About” panel shows general info of <a class="reference external" href="https://github.com/EOX-A/EOxClient">EOxClient</a>, the software used to build the
+webclient.</p>
+<p>In the bottom there is the timeslider widget. It is only shown if at least one
+layer is active. Like the map, it is “zoomable” (use the mousewheel when the
+mouse is over the timeslider) and “pannable” (the bar that contains the actual
+dates and times is the handle). It also allows to draw time intervals by
+dragging over the upper half of the widget. The upper half is also where
+coverages are displayed as colored dots or lines. The color of the dots/lines is
+the same as the color of its associated collection, whereas only active
+collections are visible on the timeslider. Hollow dots/lines mean that
+the coverage is currently not in the maps viewport. By clicking on a dot/line
+the map zooms to the coverages extent.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="idm/index.html" class="btn btn-neutral float-right" title="Identity Management System" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="operators.html" class="btn btn-neutral float-left" title="EOxServer Operators’ Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,365 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>EOxServer Presentations &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Configuration Options" href="configuration_options.html" />
+    <link rel="prev" title="SOAP Proxy" href="soap_proxy.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Users’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">EOxServer Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="global_use_case.html">Global Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos_installation.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instance_creation.html">Service Instance Creation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operational_install.html">Recommendations for Operational Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailing_lists.html">Mailing Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demonstration.html">Demonstration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EO-WCS_request_parameters.html">EO-WCS Request Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opensearch.html">OpenSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html">EOxServer Operators’ Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webclient.html">The Webclient Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="idm/index.html">Identity Management System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">EOxServer Presentations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#foss4g-2011-denver">FOSS4G 2011, Denver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#agit-2011-salzburg">AGIT 2011, Salzburg</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hma-awg-february-2012-esa-esrin">HMA-AWG February 2012, ESA ESRIN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fossgis-2012-dessau">FOSSGIS 2012, Dessau</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linuxwochen-wien-2012">Linuxwochen Wien 2012</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#foss4g-cee-2012-prague">FOSS4G-CEE 2012, Prague</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hma-awg-june-2012-esa-esrin">HMA-AWG June 2012, ESA ESRIN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sentinel-3-olci-slstr-and-meris-a-atsr-workshop-2012-esa-esrin">Sentinel-3 OLCI/SLSTR and MERIS/(A)ATSR workshop 2012, ESA ESRIN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#somap-2012-vienna">SOMAP 2012, Vienna</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html">Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crss.html">Supported CRSs and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html">Supported Raster File Formats and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html">Asynchronous Task Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WCS-T_summary.html">Web Coverage Service - Transaction Extension</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Users’ Guide</a> &raquo;</li>
+        
+      <li>EOxServer Presentations</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/users/presentations.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="eoxserver-presentations">
+<span id="id1"></span><h1><a class="toc-backref" href="#table-of-contents">EOxServer Presentations</a><a class="headerlink" href="#eoxserver-presentations" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#eoxserver-presentations" id="id3">EOxServer Presentations</a><ul>
+<li><a class="reference internal" href="#foss4g-2011-denver" id="id4">FOSS4G 2011, Denver</a></li>
+<li><a class="reference internal" href="#agit-2011-salzburg" id="id5">AGIT 2011, Salzburg</a></li>
+<li><a class="reference internal" href="#hma-awg-february-2012-esa-esrin" id="id6">HMA-AWG February 2012, ESA ESRIN</a></li>
+<li><a class="reference internal" href="#fossgis-2012-dessau" id="id7">FOSSGIS 2012, Dessau</a></li>
+<li><a class="reference internal" href="#linuxwochen-wien-2012" id="id8">Linuxwochen Wien 2012</a></li>
+<li><a class="reference internal" href="#foss4g-cee-2012-prague" id="id9">FOSS4G-CEE 2012, Prague</a></li>
+<li><a class="reference internal" href="#hma-awg-june-2012-esa-esrin" id="id10">HMA-AWG June 2012, ESA ESRIN</a></li>
+<li><a class="reference internal" href="#sentinel-3-olci-slstr-and-meris-a-atsr-workshop-2012-esa-esrin" id="id11">Sentinel-3 OLCI/SLSTR and MERIS/(A)ATSR workshop 2012, ESA ESRIN</a></li>
+<li><a class="reference internal" href="#somap-2012-vienna" id="id12">SOMAP 2012, Vienna</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>This sections holds some links to presentations related to EOxServer.</p>
+<div class="section" id="foss4g-2011-denver">
+<h2><a class="toc-backref" href="#table-of-contents">FOSS4G 2011, Denver</a><a class="headerlink" href="#foss4g-2011-denver" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://2011.foss4g.org/sessions/enhanced-support-ogcs-web-coverage-service-wcs-mapserver-60">WCS in MapServer 6.0</a></p>
+<p><a class="reference download internal" href="../_downloads/20110915_WCS_in_MapServer_6.0.pdf" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">the</span> <span class="pre">presentation</span></code></a></p>
+<p>The <a class="reference external" href="http://2011.foss4g.org/">FOSS4G</a> is a global conference focused on Free
+and Open Source Software for Geospatial, organized by <a class="reference external" href="http://osgeo.org">OSGeo</a>.</p>
+</div>
+<div class="section" id="agit-2011-salzburg">
+<h2><a class="toc-backref" href="#table-of-contents">AGIT 2011, Salzburg</a><a class="headerlink" href="#agit-2011-salzburg" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.agit.at/index.php?option=com_content&amp;task=view&amp;id=132&amp;Itemid=72">Introducing WCS 2.0, EO-WCS, and Open Source implementations (MapServer,
+rasdaman, and EOxServer) enabling the Online Data Access to Heterogeneous
+Multidimensional Satellite Data</a></p>
+<p><a class="reference download internal" href="../_downloads/20110708_AGIT2011_EOX.pdf" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">the</span> <span class="pre">presentation</span></code></a></p>
+<p>The <a class="reference external" href="http://agit.at">Angewandte Geoinformatik (AGIT)</a> is a conference for
+applied geo-informatics held annually in Salzburg, Austria. Since 5 years it
+includes the OSGeo Day where the presentation was given.</p>
+</div>
+<div class="section" id="hma-awg-february-2012-esa-esrin">
+<span id="id2"></span><h2><a class="toc-backref" href="#table-of-contents">HMA-AWG February 2012, ESA ESRIN</a><a class="headerlink" href="#hma-awg-february-2012-esa-esrin" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://wiki.services.eoportal.org/tiki-index.php?page=HMA%20AWG%20Meeting%231%202012%2015%20February%202012">WCS Standardization &amp; Reference Implementation</a></p>
+<p><a class="reference download internal" href="../_downloads/20120215_EOX_WCS_O3S_HMA-AWG.pdf" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">the</span> <span class="pre">presentation</span></code></a></p>
+<p>The <a class="reference external" href="https://wiki.services.eoportal.org/tiki-index.php?page=HMA+AWG">Heterogeneous Missions Access Architecture Working Group</a> has been defined by the
+European Space Agency together with other relevant EO data owners (national
+agencies, European institutions and industry) for the management of the
+evolution of the interoperability interface standards defined within the HMA
+project and in follow on activities.</p>
+</div>
+<div class="section" id="fossgis-2012-dessau">
+<h2><a class="toc-backref" href="#table-of-contents">FOSSGIS 2012, Dessau</a><a class="headerlink" href="#fossgis-2012-dessau" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.fossgis.de/konferenz/2012/programm/events/379.de.html">EOxServer, GDAL, MapServer - Zugang zu großen Archiven von Erdbeobachtungsdaten</a></p>
+<p><a class="reference download internal" href="../_downloads/20120322_fossgis_eoxserver_earthserver.pdf" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">the</span> <span class="pre">presentation</span></code></a></p>
+<p><a class="reference external" href="http://www.fossgis.de/konferenz.html">Freie und Open Source Software für Geoinformationssysteme (FOSSGIS)</a> is the German speaking annual OSGeo
+conference</p>
+</div>
+<div class="section" id="linuxwochen-wien-2012">
+<h2><a class="toc-backref" href="#table-of-contents">Linuxwochen Wien 2012</a><a class="headerlink" href="#linuxwochen-wien-2012" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://linuxwochen.at/index.php?option=com_content&amp;view=article&amp;id=331&amp;Itemid=83">EOxServer &amp; Mapserver - Open Source Lösungen für Erdbeobachtungsdaten</a></p>
+<p><a class="reference download internal" href="../_downloads/20120504_Linuxwochen_Wien.pdf" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">the</span> <span class="pre">presentation</span></code></a></p>
+<p><a class="reference external" href="http://linuxwochen.at/">Linuxwochen</a> is Austria’s biggest event series
+dedicated to Open Source and Free Software.</p>
+</div>
+<div class="section" id="foss4g-cee-2012-prague">
+<h2><a class="toc-backref" href="#table-of-contents">FOSS4G-CEE 2012, Prague</a><a class="headerlink" href="#foss4g-cee-2012-prague" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://foss4g-cee.org/program/presentations/eoxserver-a-solution-for-online-access-to-large-collections-of-earth-observation-data/">EOxServer: A Solution for Online Access to Large Collections of Earth
+Observation Data</a></p>
+<p><a class="reference download internal" href="../_downloads/20120522_foss4g-cee_eoxserver.pdf" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">the</span> <span class="pre">presentation</span></code></a></p>
+<p><a class="reference external" href="http://foss4g-cee.org/">FOSS4G-CEE</a> &amp; Geoinformatics 2012 is the first
+local conference focused on Free and Open Source Software for Geospatial in
+Central and Eastern Europe. This year, it is organized together with the
+traditional Geoinformatics FCE CTU conference in Prague.</p>
+</div>
+<div class="section" id="hma-awg-june-2012-esa-esrin">
+<h2><a class="toc-backref" href="#table-of-contents">HMA-AWG June 2012, ESA ESRIN</a><a class="headerlink" href="#hma-awg-june-2012-esa-esrin" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://wiki.services.eoportal.org/tiki-index.php?page=HMA%20AWG%20Meeting%20no2%202012%208%20June%202012">Web Coverage Service 2.0 MapServer Implementation</a></p>
+<p><a class="reference download internal" href="../_downloads/20120608_EOX_WCS_O3S_HMA-AWG.pdf" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">the</span> <span class="pre">presentation</span></code></a></p>
+<p>Description: See <a class="reference internal" href="#hma-awg-february-2012-esa-esrin"><span class="std std-ref">HMA-AWG February 2012, ESA ESRIN</span></a> above</p>
+</div>
+<div class="section" id="sentinel-3-olci-slstr-and-meris-a-atsr-workshop-2012-esa-esrin">
+<h2><a class="toc-backref" href="#table-of-contents">Sentinel-3 OLCI/SLSTR and MERIS/(A)ATSR workshop 2012, ESA ESRIN</a><a class="headerlink" href="#sentinel-3-olci-slstr-and-meris-a-atsr-workshop-2012-esa-esrin" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://congrexprojects.com/sen3symposium/poster-sessions">EOxServer - An Open Source Solution for Standardized Online Access to Earth
+Observation Data</a></p>
+<p><a class="reference download internal" href="../_downloads/20121015_EOxServer_Poster.pdf" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">the</span> <span class="pre">poster</span></code></a></p>
+<p>The <a class="reference external" href="http://www.sen3symposium.org/">Sentinel-3 OLCI/SLSTR and MERIS/(A)ATSR workshop</a> is organized by the European Space Agency,
+together with Eumetsat, and hosted in ESA-ESRIN, Frascati, Italy. The
+workshop is open to ESA Principle Investigators and co-investigators,
+scientists and students using MERIS/(A)ATSR data, future follow-on
+Sentinel-3 OLCI/SLSTR data users, representatives from GMES services,
+national, European and international space agencies and value adding
+industries.</p>
+</div>
+<div class="section" id="somap-2012-vienna">
+<h2><a class="toc-backref" href="#table-of-contents">SOMAP 2012, Vienna</a><a class="headerlink" href="#somap-2012-vienna" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://somap.cartography.at/?SOMAP_2012:Program:November_23rd_2012">EOxServer - Accessing Large Archives of Earth Observation Data Online</a>
+(<a class="reference external" href="http://somap.cartography.at/plugins/gallery/includes/image.php?pic=L2hvbWUvLnNpdGVzLzEyL3NpdGUyNDMvd2ViL3NvbWFwMjAxMi9nYWxsZXJ5L3NvbWFwMDIvU09NQVAyMDEyXzIwMTIxMTIzLTE2NDIzOV9KTS5KUEc=&amp;h=1060&amp;w=1600">photo</a>)</p>
+<p><a class="reference download internal" href="../_downloads/20121123_SOMAP2012.pdf" download=""><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">the</span> <span class="pre">presentation</span></code></a></p>
+<p>The <a class="reference external" href="http://somap.cartography.at/?SOMAP_2012">Symposium on Service-Oriented Mapping</a> aims to be a multidisciplinary
+event, spanning from computer science to geobusiness. The aim is to bring
+together various stakeholders in the area of Service-Oriented mapping (data
+producers, mapping agencies and companies, infrastructure providers,
+software developers, cartographers, artists, …) in order to discuss the
+influence of this new production environment (the networked spatial
+infrastructure and its service-oriented distribution) on the map production
+and the perspectives of the new paradigm for research and development in
+cartography.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="configuration_options.html" class="btn btn-neutral float-right" title="Configuration Options" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="soap_proxy.html" class="btn btn-neutral float-left" title="SOAP Proxy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

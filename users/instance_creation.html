@@ -1,0 +1,538 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Service Instance Creation and Configuration &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Recommendations for Operational Installation" href="operational_install.html" />
+    <link rel="prev" title="Installation on CentOS" href="centos_installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Users’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">EOxServer Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="global_use_case.html">Global Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos_installation.html">Installation on CentOS</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Service Instance Creation and Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#instance-creation">Instance Creation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#instance-configuration">Instance Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#instancecreation-dbsetup">Database Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#deployment">Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-registration">Data Registration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="operational_install.html">Recommendations for Operational Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailing_lists.html">Mailing Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demonstration.html">Demonstration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EO-WCS_request_parameters.html">EO-WCS Request Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opensearch.html">OpenSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html">EOxServer Operators’ Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webclient.html">The Webclient Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="idm/index.html">Identity Management System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html">EOxServer Presentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html">Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crss.html">Supported CRSs and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html">Supported Raster File Formats and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html">Asynchronous Task Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WCS-T_summary.html">Web Coverage Service - Transaction Extension</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Users’ Guide</a> &raquo;</li>
+        
+      <li>Service Instance Creation and Configuration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/users/instance_creation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="service-instance-creation-and-configuration">
+<span id="instancecreation"></span><span id="creating-an-instance"></span><span id="index-0"></span><h1><a class="toc-backref" href="#table-of-contents">Service Instance Creation and Configuration</a><a class="headerlink" href="#service-instance-creation-and-configuration" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#service-instance-creation-and-configuration" id="id3">Service Instance Creation and Configuration</a><ul>
+<li><a class="reference internal" href="#instance-creation" id="id4">Instance Creation</a></li>
+<li><a class="reference internal" href="#instance-configuration" id="id5">Instance Configuration</a></li>
+<li><a class="reference internal" href="#instancecreation-dbsetup" id="id6">Database Setup</a></li>
+<li><a class="reference internal" href="#deployment" id="id7">Deployment</a></li>
+<li><a class="reference internal" href="#data-registration" id="id8">Data Registration</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Speaking of EOxServer we distinguish the common EOxServer installation (the
+installed code implementing the software functionality) and EOxServer
+instances. An instance is a collection of data and configuration files that
+enables the deployment of a specific service. A single server will typically
+contain a single software installation and one or more specific instances.</p>
+<p>This section deals with the creation and configuration of EOxServer instances.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<ul class="last simple">
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="install.html#installation"><span class="std std-ref">Installation</span></a></dt>
+<dd>generic installation procedure for GNU/Linux operating systems.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="centos_installation.html#centosinstallation"><span class="std std-ref">Installation on CentOS</span></a></dt>
+<dd>for specific installation on CentOS.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="operational_install.html#operationalinstallation"><span class="std std-ref">Recommendations for Operational Installation</span></a></dt>
+<dd>to configure an operational EOxServer installation.</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="instance-creation">
+<h2><a class="toc-backref" href="#table-of-contents">Instance Creation</a><a class="headerlink" href="#instance-creation" title="Permalink to this headline">¶</a></h2>
+<p>To create an instance, we recommend to use the <code class="file docutils literal"><span class="pre">eoxserver-instance.py</span></code>
+script that comes with EOxServer:</p>
+<blockquote>
+<div><p>Usage: <code class="docutils literal"><span class="pre">eoxserver-instance.py</span> <span class="pre">[options]</span> <span class="pre">INSTANCE_ID</span> <span class="pre">[Optional</span> <span class="pre">destination</span> <span class="pre">directory]</span></code></p>
+<p>Creates a new EOxServer instance with name <code class="docutils literal"><span class="pre">INSTANCE_ID</span></code> in the current
+or optionally given directory with all necessary files and folder
+structure. If the <code class="docutils literal"><span class="pre">--init-spatialite</span></code> flag is set, then an initial
+sqlite database will be created and initialized.</p>
+<p>Options:</p>
+<table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></td>
+<td>show this help message and exit</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--init-spatialite</span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>Flag to initialize the sqlite database.</td></tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="instance-configuration">
+<span id="index-1"></span><h2><a class="toc-backref" href="#table-of-contents">Instance Configuration</a><a class="headerlink" href="#instance-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Every EOxServer instance has various configuration files:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">settings.py</span></code> - <a class="reference external" href="https://github.com/EOxServer/eoxserver/blob/0.4/eoxserver/instance_template/project_name/settings.py">template</a></li>
+<li><cite>urls.py`</cite> - <a class="reference external" href="https://github.com/EOxServer/eoxserver/blob/0.4/eoxserver/instance_template/project_name/urls.py">template</a></li>
+<li><code class="docutils literal"><span class="pre">conf/eoxserver.conf</span></code> - <a class="reference external" href="https://github.com/EOxServer/eoxserver/blob/0.4/eoxserver/instance_template/project_name/conf/eoxserver.conf">template</a></li>
+</ul>
+<p>For each of them there is a template in the <code class="docutils literal"><span class="pre">eoxserver/instance_template</span></code>
+directory of the EOxServer distribution (referenced above) which is copied and
+adjusted by the <code class="file docutils literal"><span class="pre">eoxserver-instance.py</span></code> script to the instance directory.
+If you create an EOxServer instance without the script you can copy those files
+and edit them yourself.</p>
+<p>The file <code class="docutils literal"><span class="pre">settings.py</span></code> contains the Django configuration. Settings that need
+to be customized:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">PROJECT_DIR</span></code>: Absolute path to the instance directory.</li>
+<li><code class="docutils literal"><span class="pre">DATABASES</span></code>: The database connection details. For detailed information see
+<a class="reference internal" href="#database-setup">Database Setup</a></li>
+<li><code class="docutils literal"><span class="pre">COMPONENTS</span></code>: The EOxServer components enabled for this instance. This is
+the main way how the active functionality of EOxServer is controlled, and also
+a way to extend the existing capabilities with extensions. Please refer to the
+<a class="reference internal" href="../developers/plugins.html#plugins"><span class="std std-ref">Plugins</span></a> section to see how this is done. By default all available components
+are enabled.</li>
+<li><code class="docutils literal"><span class="pre">LOGGING</span></code>: what and how logs are prcessed and stored. EOxServer provides a
+very basic configuration that stores logfiles in the instace directory, but
+they will probably not be suitable for every instance.</li>
+</ul>
+<p>You can also customize further settings, for a complete reference please refer
+to the <a class="reference external" href="https://docs.djangoproject.com/en/1.11/topics/settings/">Django settings overview</a>.</p>
+<p>Please especially consider the setting of the <a class="reference external" href="https://docs.djangoproject.com/en/1.11/ref/settings/#std:setting-TIME_ZONE">TIME_ZONE</a>
+parameter and read the Notes provided in the <code class="docutils literal"><span class="pre">settings.py</span></code> file.</p>
+<p>The file <code class="docutils literal"><span class="pre">conf/eoxserver.conf</span></code> contains EOxServer specific settings. Please
+refer to the <a class="reference external" href="ConfigurationOptions">configuration options section</a> for details.</p>
+<p>Once you have created an instance, you have to configure and synchronize the
+database. If you are using the <code class="file docutils literal"><span class="pre">eoxserver-instance.py</span></code> script with the
+<code class="docutils literal"><span class="pre">--init-spatialite</span></code> flag, all you have to do is:</p>
+<ul>
+<li><p class="first">Make sure EOxServer is on your <code class="docutils literal"><span class="pre">PYTHONPATH</span></code> environment variable</p>
+</li>
+<li><p class="first">run in your instance directory:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">syncdb</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>This script will also create an administration user if you want to. Note the
+username and password you provide. You’ll need it to log in to the admin client.</p>
+<p>You can always create a user at a later time by running
+<code class="docutils literal"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">createsuperuser</span></code>.</p>
+</div>
+<div class="section" id="instancecreation-dbsetup">
+<span id="database-setup"></span><span id="id1"></span><h2><a class="toc-backref" href="#table-of-contents">Database Setup</a><a class="headerlink" href="#instancecreation-dbsetup" title="Permalink to this headline">¶</a></h2>
+<p>This section is only needed if the <code class="docutils literal"><span class="pre">--init_spatialite</span></code> flag was not used
+during instance creation or a PostgreSQL/PostGIS database back-end shall be
+used. Before proceeding, please make sure that you have installed all required
+software for the database system of your choice.</p>
+<p>Using a SQLite database, all you have to do is to copy the
+<code class="docutils literal"><span class="pre">TEMPLATE_config.sqlite</span></code> and place it somewhere in your instance directory.
+Now you have to edit the <code class="docutils literal"><span class="pre">DATABASES</span></code> of your <code class="docutils literal"><span class="pre">settings.py</span></code> file with the
+following lines:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.contrib.gis.db.backends.spatialite&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;/path/to/config.sqlite&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Using a PostgreSQL/PostGIS database back-end configuration for EOxServer is a
+little bit more complex. Setting up a PostgreSQL database requires also
+installing the PostGIS extensions (the following example is an installation
+based on a Debian system):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>sudo su - postgres
+POSTGIS_DB_NAME=eoxserver_db
+POSTGIS_SQL_PATH=`pg_config --sharedir`/contrib/postgis-1.5
+createdb $POSTGIS_DB_NAME
+createlang plpgsql $POSTGIS_DB_NAME
+psql -d $POSTGIS_DB_NAME -f $POSTGIS_SQL_PATH/postgis.sql
+psql -d $POSTGIS_DB_NAME -f $POSTGIS_SQL_PATH/spatial_ref_sys.sql
+psql -d $POSTGIS_DB_NAME -c &quot;GRANT ALL ON geometry_columns TO PUBLIC;&quot;
+psql -d $POSTGIS_DB_NAME -c &quot;GRANT ALL ON geography_columns TO PUBLIC;&quot;
+psql -d $POSTGIS_DB_NAME -c &quot;GRANT ALL ON spatial_ref_sys TO PUBLIC;&quot;
+</pre></div>
+</div>
+<p>This creates the database and installs the PostGIS extensions within the
+database. Now a user with password can be set with the following line:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">createuser</span> <span class="o">-</span><span class="n">d</span> <span class="o">-</span><span class="n">R</span> <span class="o">-</span><span class="n">P</span> <span class="o">-</span><span class="n">S</span> <span class="n">eoxserver</span><span class="o">-</span><span class="n">admin</span>
+</pre></div>
+</div>
+<p>Depending on the configuration of the system used there may be the need to
+enable access for the user in the <code class="docutils literal"><span class="pre">pg_hba.conf</span></code>.</p>
+<p>In the <code class="docutils literal"><span class="pre">settings.py</span></code> the following entry has to be added:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;ENGINE&#39;</span><span class="p">:</span> <span class="s1">&#39;django.contrib.gis.db.backends.postgis&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="s1">&#39;eoxserver_db&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;USER&#39;</span><span class="p">:</span> <span class="s1">&#39;eoxserver-admin&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;PASSWORD&#39;</span><span class="p">:</span> <span class="s1">&#39;eoxserver&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;HOST&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>    <span class="c1"># or the URL of your server hosting the DB</span>
+        <span class="s1">&#39;PORT&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Please refer to <a class="reference external" href="https://docs.djangoproject.com/en/1.11/ref/contrib/gis/db-api/">GeoDjango Database API</a> for more
+instructions.</p>
+</div>
+<div class="section" id="deployment">
+<span id="eoxserver-deployment"></span><span id="index-2"></span><h2><a class="toc-backref" href="#table-of-contents">Deployment</a><a class="headerlink" href="#deployment" title="Permalink to this headline">¶</a></h2>
+<p>EOxServer is deployed using the Python WSGI interface standard as any other
+<a class="reference external" href="https://docs.djangoproject.com/en/1.11/howto/deployment/">Django application</a>.
+The WSGI endpoint accepts HTTP requests passed from the web server and
+processes them synchronously. Each request is executed independently.</p>
+<p>In the <a class="reference external" href="https://github.com/EOxServer/deployment">deployment git repository</a>
+we collect snippets for various deployment scenarios.</p>
+<p>In the following we present the way to deploy it using the <a class="reference external" href="http://httpd.apache.org">Apache2 Web Server</a> and its <a class="reference external" href="http://code.google.com/p/modwsgi/">mod_wsgi</a> extension module.</p>
+<p>The deployment procedure consists of the following:</p>
+<ul>
+<li><p class="first">Customize the Apache2 configuration file, e.g.
+<code class="docutils literal"><span class="pre">/etc/apache2/sites-enabled/000-default</span></code>, by adding:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Alias</span> <span class="o">/&lt;</span><span class="n">url</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">absolute</span> <span class="n">path</span> <span class="n">to</span> <span class="n">instance</span> <span class="nb">dir</span><span class="o">&gt;/</span><span class="n">wsgi</span><span class="o">.</span><span class="n">py</span>
+<span class="o">&lt;</span><span class="n">Directory</span> <span class="s2">&quot;&lt;absolute path to instance dir&gt;&quot;</span><span class="o">&gt;</span>
+        <span class="n">AllowOverride</span> <span class="kc">None</span>
+        <span class="n">Options</span> <span class="o">+</span><span class="n">ExecCGI</span> <span class="o">-</span><span class="n">MultiViews</span> <span class="o">+</span><span class="n">SymLinksIfOwnerMatch</span>
+        <span class="n">AddHandler</span> <span class="n">wsgi</span><span class="o">-</span><span class="n">script</span> <span class="o">.</span><span class="n">py</span>
+        <span class="n">Order</span> <span class="n">Allow</span><span class="p">,</span><span class="n">Deny</span>
+        <span class="n">Allow</span> <span class="kn">from</span> <span class="nn">all</span>
+<span class="o">&lt;/</span><span class="n">Directory</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">If using EOxServer &lt; 0.3 customize <code class="docutils literal"><span class="pre">wsgi.py</span></code> in your EOxServer instance
+and add:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;&lt;absolute path to instance dir&gt;&quot;</span>
+<span class="k">if</span> <span class="n">path</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Restart the Web Server</p>
+</li>
+</ul>
+<p>As a general good idea the number of threads can be limited using the
+following additional Apache2 configuration. In case an old version of
+MapServer, i.e. &lt; 6.2 or &lt; 6.0.4, is used the number of threads <strong>needs</strong> to be
+limited to 1 to avoid some <a class="reference external" href="https://github.com/mapserver/mapserver/issues/4369">thread safety issues</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">WSGIDaemonProcess</span> <span class="n">ows</span> <span class="n">processes</span><span class="o">=</span><span class="mi">10</span> <span class="n">threads</span><span class="o">=</span><span class="mi">1</span>
+<span class="o">&lt;</span><span class="n">Directory</span> <span class="s2">&quot;&lt;absolute path to instance dir&gt;&quot;</span><span class="o">&gt;</span>
+    <span class="o">...</span>
+    <span class="n">WSGIProcessGroup</span> <span class="n">ows</span>
+<span class="o">&lt;/</span><span class="n">Directory</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>This setup will deploy your instance under the URL <code class="docutils literal"><span class="pre">&lt;url&gt;</span></code> and make it
+publicly accessible.</p>
+<p>Finally all the static files need to be collected at the location configured
+by <code class="docutils literal"><span class="pre">STATIC_ROOT</span></code> in <code class="docutils literal"><span class="pre">settings.py</span></code> by using the following command from
+within your instance:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">collectstatic</span>
+</pre></div>
+</div>
+<p>Don’t forget to update the static files by re-running above command if needed.</p>
+</div>
+<div class="section" id="data-registration">
+<span id="id2"></span><h2><a class="toc-backref" href="#table-of-contents">Data Registration</a><a class="headerlink" href="#data-registration" title="Permalink to this headline">¶</a></h2>
+<p>To insert data into an EOxServer instance there are several ways. One is the
+admin interface, which is explained in detail in the <a class="reference internal" href="operators.html#ops-admin"><span class="std std-ref">Admin Client</span></a> section.</p>
+<p>Another convenient way to register datasets is the command line interface to
+EOxServer. As a Django application, the instance can be configured using the
+<a class="reference external" href="https://docs.djangoproject.com/en/1.11/ref/django-admin/">manage.py</a> script.</p>
+<p>EOxServer provides a specific command and a subcommand to insert datasets into the instance,
+called <code class="docutils literal"><span class="pre">coverage</span> <span class="pre">register</span></code>. It is invoked from command line from your
+instance base folder:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">coverage</span> <span class="n">register</span> <span class="o">--</span><span class="n">data</span> <span class="n">DATAFILES</span> <span class="o">--</span><span class="n">coverage</span><span class="o">-</span><span class="nb">type</span> <span class="n">COVERAGETYPE</span>
+</pre></div>
+</div>
+<p>The mandatory parameter <code class="docutils literal"><span class="pre">--data</span></code> is a path to a file containing the raster
+data for the dataset to be inserted. If the file resides in a package (a ZIP or
+TAR archive) then the location must be preceeded with the following:
+<code class="docutils literal"><span class="pre">&lt;package-type&gt;:&lt;package-location&gt;</span></code>. It also possible to chain multiple
+packages, e.g a ZIP file in a ZIP file containing the actual raster data.
+In conjunction to packages, it is also possible to state the storage of the
+data files. By default it is assumed that the data is available locally, but
+other storages (such as FTP or HTTP backends) are also possible. If used, it
+must be declared as first item in the aforementioned in the chain.</p>
+<p>For each <code class="docutils literal"><span class="pre">--data</span></code> item a <code class="docutils literal"><span class="pre">--semantic</span></code> can be stated. The semantic defines]
+how this data item is being used. For example a semantic of <code class="docutils literal"><span class="pre">&quot;bands[1:3]&quot;</span></code>
+defines that the first three bands of the dataset is in the first data item.</p>
+<p>The same rules also apply for files declared via the <code class="docutils literal"><span class="pre">--meta-data</span></code> directive.
+This basically creates a <code class="docutils literal"><span class="pre">--data</span></code> item with <code class="docutils literal"><span class="pre">&quot;metadata&quot;</span></code> semantic. Also,
+these files are preferred when trying to determine the mandatory metadata of a
+dataset.</p>
+<p>To specify the Coverage Type of the dataset, the <code class="docutils literal"><span class="pre">--coverage-type</span></code> parameter is
+mandatory to specify the name of a previously registered Coverage Type.</p>
+<p>The following options are used to supply metadata values that are either not
+possible to retrieve automatically or are to overwrite values automatically
+collected:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">--identifier</span></code>: the main identifier of the dataset</li>
+<li><code class="docutils literal"><span class="pre">--grid</span> <span class="pre">GRID</span></code>: the name of the grid to associate the coverage with.</li>
+<li><code class="docutils literal"><span class="pre">--size</span></code>: the pixel size of the dataset (size_x,size_y)</li>
+<li><code class="docutils literal"><span class="pre">--footprint-from-extent</span></code>: the footprint from the coverages extent, reprojected to WGS 84</li>
+<li><code class="docutils literal"><span class="pre">--footprint</span></code>: the footprint (multi-) polygon in WKT format</li>
+<li><code class="docutils literal"><span class="pre">--begin-time</span></code> and <code class="docutils literal"><span class="pre">--end-time</span></code>: the datasets time span</li>
+<li><code class="docutils literal"><span class="pre">--coverage-type</span></code>: the type of the dataset</li>
+</ul>
+</div></blockquote>
+<p>When this dataset shall be inserted into a collection, use the <code class="docutils literal"><span class="pre">--collection</span></code>
+option with the collections identifier. This option can be set multiple times
+for different collections.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="operational_install.html" class="btn btn-neutral float-right" title="Recommendations for Operational Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="centos_installation.html" class="btn btn-neutral float-left" title="Installation on CentOS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

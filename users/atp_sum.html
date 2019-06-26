@@ -1,0 +1,490 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Asynchronous Task Processing &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Web Coverage Service - Transaction Extension" href="WCS-T_summary.html" />
+    <link rel="prev" title="Supported Raster File Formats and Their Configuration" href="formats.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Users’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">EOxServer Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="global_use_case.html">Global Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos_installation.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instance_creation.html">Service Instance Creation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operational_install.html">Recommendations for Operational Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailing_lists.html">Mailing Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demonstration.html">Demonstration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EO-WCS_request_parameters.html">EO-WCS Request Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opensearch.html">OpenSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html">EOxServer Operators’ Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webclient.html">The Webclient Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="idm/index.html">Identity Management System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html">EOxServer Presentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html">Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crss.html">Supported CRSs and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html">Supported Raster File Formats and Their Configuration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Asynchronous Task Processing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tasks">Tasks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#life-cycle">Life-cycle</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#atp-installation-and-configuration">ATP Installation and Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#atp-operation">ATP Operation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#atp-demo-application">ATP Demo Application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#performance-considerations">Performance considerations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="WCS-T_summary.html">Web Coverage Service - Transaction Extension</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Users’ Guide</a> &raquo;</li>
+        
+      <li>Asynchronous Task Processing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/users/atp_sum.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="asynchronous-task-processing">
+<span id="atp-sum"></span><h1><a class="toc-backref" href="#table-of-contents">Asynchronous Task Processing</a><a class="headerlink" href="#asynchronous-task-processing" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#asynchronous-task-processing" id="id3">Asynchronous Task Processing</a><ul>
+<li><a class="reference internal" href="#introduction" id="id4">Introduction</a></li>
+<li><a class="reference internal" href="#tasks" id="id5">Tasks</a><ul>
+<li><a class="reference internal" href="#id1" id="id6">Introduction</a></li>
+<li><a class="reference internal" href="#life-cycle" id="id7">Life-cycle</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#atp-installation-and-configuration" id="id8">ATP Installation and Configuration</a></li>
+<li><a class="reference internal" href="#atp-operation" id="id9">ATP Operation</a></li>
+<li><a class="reference internal" href="#atp-demo-application" id="id10">ATP Demo Application</a></li>
+<li><a class="reference internal" href="#performance-considerations" id="id11">Performance considerations</a></li>
+<li><a class="reference internal" href="#further-reading" id="id12">Further reading</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#table-of-contents">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The <em>Asynchronous Task Processing</em> (ATP) subsystem, as the name suggests,
+extends the <em>EOxServer</em> functionality by the ability to process tasks
+asynchronously, i.e., in background independently of the default <em>EOxServer’s</em>
+synchronous client request processing.</p>
+<p>Although the ATP subsystem is primarily designed to support asynchronous
+request processing of OGC Web Services such as the Web Coverage Service
+transaction extension (WCS-T) and/or the Web Processing Service (WPS), it is
+not limited to these and other parts of <em>EOxServer</em> may use it as well.</p>
+<p>The ATP subsystem employs the model of a single shared task queue and one or
+more <em>Asynchronous Task Processing Daemons</em> (APTD) executing the pending
+tasks pulled from the task queue. A single ATPD is not restricted to a
+single processed task at time and it can internally process multiple tasks
+concurrently, e.g., by employing a pool of parallel worker threads assigned
+to multiple CPU cores.</p>
+<p>The ATP subsystem is implemented as Django application using a DB model as the
+task queue. Although the underlying DB storage may be seen as suboptimal in
+terms of performance and latency it assures tolerance of the subsystem to
+possible failures or maintenance shut-downs of both <em>EOxServer</em> and/or APTDs.</p>
+</div>
+<div class="section" id="tasks">
+<h2><a class="toc-backref" href="#table-of-contents">Tasks</a><a class="headerlink" href="#tasks" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3><a class="toc-backref" href="#table-of-contents">Introduction</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>For the correct operation of the ATP subsystem it is essential to understand the
+concept of a <em>task</em> and its life-cycle.</p>
+<p>A <em>task</em> is an atomic and isolated action (amount of work) to be performed
+by <em>EOxServer</em>. When created, each task has a handler subroutine (python
+code to be executed) and a set of task specific input parameters to be
+processed by the handler subroutine. When finished, the tasks produce
+outputs.</p>
+<p>The tasks may be created by different applications (<em>EOxServer’s</em> apps and
+services). The tasks sharing the same handler subroutine and generic parameters
+belong to the same task <em>type</em>.</p>
+<p>The ATP is expected to be shared by multiple applications. APTDs pull the tasks
+from the shared queue in First-In-First-Out fashion (regardless of the task
+type) and execute the given handler subroutines. Significant benefit of this
+shared nature of the APT subsystem is the control over the processing resources
+(pool of workers) and isolation of the execution details from the application
+(isolated from details such as the number of ATPD and working threads).</p>
+</div>
+<div class="section" id="life-cycle">
+<h3><a class="toc-backref" href="#table-of-contents">Life-cycle</a><a class="headerlink" href="#life-cycle" title="Permalink to this headline">¶</a></h3>
+<p>The life-cycle of an asynchronous task, i.e., its possible states and state
+transitions are displayed in Fig.3.</p>
+<div class="figure align-center" id="id2">
+<img alt="../_images/processes_task_state1.png" src="../_images/processes_task_state1.png" />
+<p class="caption"><span class="caption-text"><em>Fig.1: ATP Task State Diagram</em></span></p>
+</div>
+<p>Any existing task can be in one of the following states:</p>
+<blockquote>
+<div><ul class="simple">
+<li>ACCEPTED  - a new enqueued task waiting to be pulled by an ATPD (initial
+state)</li>
+<li>SCHEDULED - a task pulled (dequeued) by an ATPD but not yet started</li>
+<li>RUNNING   - a task being processed by an ATPD</li>
+<li>PAUSED    - a task which has been put on hold and which is waiting to be
+resumed</li>
+<li>FINISHED  - a task which has been finished successfully (terminal state)</li>
+<li>FAILED    - a task which has been finished by a failure (terminal state)</li>
+</ul>
+</div></blockquote>
+<p>When a task is created and enqueued for processing (ACCEPTED) it is stored in
+the DB task queue waiting for an ATPD to pull the task out. In this state, it is
+safely stored and protected against failures and shut-downs of both of the
+producer (ATPD can access the DB) and of the ATPD (producer can access the DB).</p>
+<p>When a task is in one of the intermediate states (SCHEDULED, RUNNING, or
+PAUSED) it is being processed by an ATPD and it is vulnerable to possible
+failures. In these states, any unexpected crash of the ATPD could leave a
+task in an intermediate state forever. Therefore each task type has assigned
+a security time-out after which the task is considered to be abandoned and
+shall be re-enqueued for new processing (ACCEPTED). A task, however, can be
+re-enqueued for limited times (3 times by default). After the number of
+restarts has been exceeded the task will be rejected (FAILED). This
+mechanism ensures that no task would be abandoned unfinished after an
+occasional ATPD crash but also that a defective task would get stacked in
+the time-out loop.</p>
+<p>When a task is in one of the terminal states (FINISHED or FAILED) it is safely
+stored in the DB. By default a terminated task will be stored forever, however,
+it is possible to specify an task type specific time-out after which the
+terminated tasks will be removed automatically.</p>
+</div>
+</div>
+<div class="section" id="atp-installation-and-configuration">
+<h2><a class="toc-backref" href="#table-of-contents">ATP Installation and Configuration</a><a class="headerlink" href="#atp-installation-and-configuration" title="Permalink to this headline">¶</a></h2>
+<p>There are no specific steps to install and configure the ATP subsystem except
+the basic <em>EOxServer</em> installation and configuration. The ATP is tightly coupled
+with <em>EOxServer</em> and works right out of box.</p>
+<p>To track the status of the executed tasks and view the stored outputs auxiliary
+ATP HTML views can be enabled by adding following lines to the URL patterns
+(‘url.py’ configuration file) of the actual <em>EOxServer</em> instance:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">urlpatterns</span> <span class="o">=</span> <span class="n">patterns</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+
+    <span class="o">...</span>
+
+    <span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^process/status$&#39;</span><span class="p">,</span> <span class="n">procViews</span><span class="o">.</span><span class="n">status</span> <span class="p">),</span>
+    <span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^process/status/(?P&lt;requestType&gt;[^/]{,64})/(?P&lt;requestID&gt;[^/]{,64})$&#39;</span><span class="p">,</span> <span class="n">procViews</span><span class="o">.</span><span class="n">status</span> <span class="p">),</span>
+    <span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^process/task$&#39;</span><span class="p">,</span> <span class="n">procViews</span><span class="o">.</span><span class="n">task</span> <span class="p">),</span>
+    <span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^process/response/(?P&lt;requestType&gt;[^/]{,64})/(?P&lt;requestID&gt;[^/]{,64})&#39;</span><span class="p">,</span> <span class="n">procViews</span><span class="o">.</span><span class="n">response</span> <span class="p">),</span>
+
+    <span class="o">...</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="atp-operation">
+<h2><a class="toc-backref" href="#table-of-contents">ATP Operation</a><a class="headerlink" href="#atp-operation" title="Permalink to this headline">¶</a></h2>
+<p>The ATP operation requires at least one ATPD to be running. Currently, there
+is only one ATPD implemented in EOxServer. This ATPD uses multiple
+sub-processes to process the tasks concurrently. By default, the numbers of
+sub-processes equals the number of available CPU cores. This ATPD can be
+executed as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ export PYTHONPATH=&lt;EOxServer install.path&gt;:&lt;EOxServer instance path&gt;
+$ export DJANGO_SETTINGS_MODULE=autotest.settings
+$ &lt;EOxServer install.path&gt;/tools/asyncProcServer.py
+
+[0x504DD5AE614D562C] INFO: Default number of working threads: 4
+[0x504DD5AE614D562C] INFO: &#39;autotest.settings&#39; ... is set as the Django settings module
+SpatiaLite version ..: 2.4.0    Supported Extensions:
+    - &#39;VirtualShape&#39;    [direct Shapefile access]
+    - &#39;VirtualDbf&#39;      [direct Dbf access]
+    - &#39;VirtualText&#39;     [direct CSV/TXT access]
+    - &#39;VirtualNetwork&#39;  [Dijkstra shortest path]
+    - &#39;RTree&#39;       [Spatial Index - R*Tree]
+    - &#39;MbrCache&#39;        [Spatial Index - MBR cache]
+    - &#39;VirtualFDO&#39;      [FDO-OGR interoperability]
+    - &#39;SpatiaLite&#39;      [Spatial SQL - OGC]
+PROJ.4 Rel. 4.7.1, 23 September 2009
+GEOS version 3.2.2-CAPI-1.6.2
+[0x504DD5AE614D562C] INFO: ATPD Asynchronous Task Processing Daemon has just been started!
+[0x504DD5AE614D562C] INFO: ATPD: id=0x504DD5AE614D562C (5786516041174439468)
+[0x504DD5AE614D562C] INFO: ATPD: hostname=localhost
+[0x504DD5AE614D562C] INFO: ATPD: pid=3295
+</pre></div>
+</div>
+<p>The <code class="docutils literal"><span class="pre">PYTHONPATH</span></code> and <code class="docutils literal"><span class="pre">DJANGO_SETTINGS_MODULE</span></code> values can be passed as
+command line arguments by the ‘-p’ and ‘-s’ options, respectively. The default
+number of worker sub-processes can be overridden by the ‘-n’ option:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ &lt;EOxServer install.path&gt;/tools/asyncProcServer.py -n 6 -s &quot;autotest.settings&quot; -p &quot;&lt;EOxServer install.path&gt;&quot; -p &quot;&lt;EOxServer instance path&gt;&quot;
+
+[0xADDB15DB482ED425] INFO: Default number of working threads: 4
+[0xADDB15DB482ED425] INFO: Setting number of working threads to: 6
+[0xADDB15DB482ED425] INFO: &#39;autotest.settings&#39; ... is set as the Django settings module
+SpatiaLite version ..: 2.4.0    Supported Extensions:
+    - &#39;VirtualShape&#39;    [direct Shapefile access]
+    - &#39;VirtualDbf&#39;      [direct Dbf access]
+    - &#39;VirtualText&#39;     [direct CSV/TXT access]
+    - &#39;VirtualNetwork&#39;  [Dijkstra shortest path]
+    - &#39;RTree&#39;       [Spatial Index - R*Tree]
+    - &#39;MbrCache&#39;        [Spatial Index - MBR cache]
+    - &#39;VirtualFDO&#39;      [FDO-OGR interoperability]
+    - &#39;SpatiaLite&#39;      [Spatial SQL - OGC]
+PROJ.4 Rel. 4.7.1, 23 September 2009
+GEOS version 3.2.2-CAPI-1.6.2
+[0xADDB15DB482ED425] INFO: ATPD Asynchronous Task Processing Daemon has just been started!
+[0xADDB15DB482ED425] INFO: ATPD: id=0xADDB15DB482ED425 (-5919113253695335387)
+[0xADDB15DB482ED425] INFO: ATPD: hostname=holly3
+[0xADDB15DB482ED425] INFO: ATPD: pid=3345
+</pre></div>
+</div>
+<p>The server can be gracefully terminated by using ‘Ctrl-C’ or the TERM signal.</p>
+</div>
+<div class="section" id="atp-demo-application">
+<h2><a class="toc-backref" href="#table-of-contents">ATP Demo Application</a><a class="headerlink" href="#atp-demo-application" title="Permalink to this headline">¶</a></h2>
+<p>There is a demo application showing the running of the ATPD and the ATP as
+such available in the default EOxServer installation. This demo application
+can be executed as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ export PYTHONPATH=&lt;EOxServer install.path&gt;:&lt;EOxServer instance path&gt;
+$ export DJANGO_SETTINGS_MODULE=autotest.settings
+$ &lt;EOxServer install.path&gt;/atp_test.py
+SpatiaLite version ..: 2.4.0    Supported Extensions:
+    - &#39;VirtualShape&#39;    [direct Shapefile access]
+    - &#39;VirtualDbf&#39;      [direct Dbf access]
+    - &#39;VirtualText&#39;     [direct CSV/TXT access]
+    - &#39;VirtualNetwork&#39;  [Dijkstra shortest path]
+    - &#39;RTree&#39;       [Spatial Index - R*Tree]
+    - &#39;MbrCache&#39;        [Spatial Index - MBR cache]
+    - &#39;VirtualFDO&#39;      [FDO-OGR interoperability]
+    - &#39;SpatiaLite&#39;      [Spatial SQL - OGC]
+PROJ.4 Rel. 4.7.1, 23 September 2009
+GEOS version 3.2.2-CAPI-1.6.2
+ENQUEUE: test_5710ffb4189c4345aebde828d2bbc640 000000
+ENQUEUE: test_47e161ec633b4105a1d174759f4a933d 000001
+ENQUEUE: test_e53cf3ae654a447191e1308d805d8777 000002
+ENQUEUE: test_fb71659cb9274383a8820e0110c86e15 000003
+ENQUEUE: test_0e6e5edcdf8244d9b25a932cbd8c6112 000004
+ENQUEUE: test_be5fa7af84444c47aba731c8e816f99b 000005
+ENQUEUE: test_aae3faa14b5e4f48b8cabae7a0b01a3b 000006
+ENQUEUE: test_6be7ea23f0984efbb09181503aa1a974 000007
+</pre></div>
+</div>
+</div>
+<div class="section" id="performance-considerations">
+<h2><a class="toc-backref" href="#table-of-contents">Performance considerations</a><a class="headerlink" href="#performance-considerations" title="Permalink to this headline">¶</a></h2>
+<p>The ATP is designed for resource demanding longer running tasks (10 seconds and
+more) which in case of a synchronous operation could clog the system or lead to
+connection time-outs. On contrary, <em>light</em> tasks (less than 1 sec.) should
+preferably be executed synchronously.</p>
+</div>
+<div class="section" id="further-reading">
+<h2><a class="toc-backref" href="#table-of-contents">Further reading</a><a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
+<p>The database model used in the ATP subsystem is described in the <a class="reference internal" href="../developers/data_model.html#atp-data-model"><span class="std std-ref">Task Tracker Data Model</span></a> section. The developers’ guide, helping with the creation of ATP
+based applications, can be found in the <a class="reference internal" href="../developers/atp_dev_guide.html#atp-dev-guide"><span class="std std-ref">Asynchronous Task Processing - Developers Guide</span></a> section.  The
+complete API reference can be found in
+<code class="xref py py-mod docutils literal"><span class="pre">eoxserver.resources.processes.tracker</span></code>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="WCS-T_summary.html" class="btn btn-neutral float-right" title="Web Coverage Service - Transaction Extension" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="formats.html" class="btn btn-neutral float-left" title="Supported Raster File Formats and Their Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

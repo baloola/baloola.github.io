@@ -1,0 +1,437 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation on CentOS &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Service Instance Creation and Configuration" href="instance_creation.html" />
+    <link rel="prev" title="Installation" href="install.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Users’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">EOxServer Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="global_use_case.html">Global Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Installation on CentOS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installation-from-rpm-packages">Installation from RPM Packages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#preparation-of-rpm-repositories">Preparation of RPM Repositories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-eoxserver">Installing EOxServer</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#alternate-installation-method-using-pip">Alternate installation method using <em>pip</em></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#required-software-packages">Required Software Packages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Installing EOxServer</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#special-pysqlite-considerations">Special <em>pysqlite</em> considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="instance_creation.html">Service Instance Creation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operational_install.html">Recommendations for Operational Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailing_lists.html">Mailing Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demonstration.html">Demonstration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EO-WCS_request_parameters.html">EO-WCS Request Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opensearch.html">OpenSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html">EOxServer Operators’ Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webclient.html">The Webclient Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="idm/index.html">Identity Management System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html">EOxServer Presentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html">Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crss.html">Supported CRSs and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html">Supported Raster File Formats and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html">Asynchronous Task Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WCS-T_summary.html">Web Coverage Service - Transaction Extension</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Users’ Guide</a> &raquo;</li>
+        
+      <li>Installation on CentOS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/users/centos_installation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installation-on-centos">
+<span id="centosinstallation"></span><span id="index-0"></span><h1><a class="toc-backref" href="#table-of-contents">Installation on CentOS</a><a class="headerlink" href="#installation-on-centos" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#installation-on-centos" id="id3">Installation on CentOS</a><ul>
+<li><a class="reference internal" href="#prerequisites" id="id4">Prerequisites</a></li>
+<li><a class="reference internal" href="#installation-from-rpm-packages" id="id5">Installation from RPM Packages</a><ul>
+<li><a class="reference internal" href="#preparation-of-rpm-repositories" id="id6">Preparation of RPM Repositories</a></li>
+<li><a class="reference internal" href="#installing-eoxserver" id="id7">Installing EOxServer</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#alternate-installation-method-using-pip" id="id8">Alternate installation method using <em>pip</em></a><ul>
+<li><a class="reference internal" href="#required-software-packages" id="id9">Required Software Packages</a></li>
+<li><a class="reference internal" href="#id1" id="id10">Installing EOxServer</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#special-pysqlite-considerations" id="id11">Special <em>pysqlite</em> considerations</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>This section describes specific installation procedure for EOxServer
+on <a class="reference external" href="http://www.centos.org/">CentOS</a> GNU/Linux based operating systems.
+In this example, a raw CentOS 6.4 minimal image is used.</p>
+<p>This guide is assumed (but not tested) to be applicable also for equivalent
+versions of the prominent North American Enterprise Linux and its clones.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<ul class="last simple">
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="install.html#installation"><span class="std std-ref">Installation</span></a></dt>
+<dd>generic installation procedure for GNU/Linux operating systems.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="instance_creation.html#instancecreation"><span class="std std-ref">Service Instance Creation and Configuration</span></a></dt>
+<dd>to configure an instance of EOxServer after successful installation.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="operational_install.html#operationalinstallation"><span class="std std-ref">Recommendations for Operational Installation</span></a></dt>
+<dd>to configure an operational EOxServer installation.</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="prerequisites">
+<h2><a class="toc-backref" href="#table-of-contents">Prerequisites</a><a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>This example requires a running CentOS installation with superuser privileges
+available.</p>
+</div>
+<div class="section" id="installation-from-rpm-packages">
+<span id="centosinstallation-repos"></span><h2><a class="toc-backref" href="#table-of-contents">Installation from RPM Packages</a><a class="headerlink" href="#installation-from-rpm-packages" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="preparation-of-rpm-repositories">
+<h3><a class="toc-backref" href="#table-of-contents">Preparation of RPM Repositories</a><a class="headerlink" href="#preparation-of-rpm-repositories" title="Permalink to this headline">¶</a></h3>
+<p>The default repositories of CentOS do not provide all software packages
+required for EOxServer, and some packages are only provided in out-dated
+versions. Thus several further repositories have to be added to the system’s
+list.</p>
+<p>The first one is the <a class="reference external" href="http://wiki.osgeo.org/wiki/Enterprise_Linux_GIS">ELGIS (Enterprise Linux GIS)</a> repository which can be
+added with the following <cite>yum</cite> command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">rpm</span> <span class="o">-</span><span class="n">Uvh</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">elgis</span><span class="o">.</span><span class="n">argeo</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">repos</span><span class="o">/</span><span class="mi">6</span><span class="o">/</span><span class="n">elgis</span><span class="o">-</span><span class="n">release</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="mi">6</span><span class="n">_0</span><span class="o">.</span><span class="n">noarch</span><span class="o">.</span><span class="n">rpm</span>
+</pre></div>
+</div>
+<p>The second repository to be added is <a class="reference external" href="http://fedoraproject.org/wiki/EPEL">EPEL (Extra Packages for Enterprise
+Linux)</a> again via a simple <cite>yum</cite> command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">epel</span><span class="o">-</span><span class="n">release</span>
+</pre></div>
+</div>
+<p>Finally EOxServer is available from the yum repository at <a class="reference external" href="http://packages.eox.at">packages.eox.at</a>. This repository offers current versions of
+packages like <a class="reference external" href="http://mapserver.org/">MapServer</a> as well as custom built
+ones with extra drivers enabled like <a class="reference external" href="http://gdal.org/">GDAL</a> and/or with
+patches applied like <a class="reference external" href="http://xmlsoft.org/">libxml2</a>. It is not mandatory
+to use this repository as detailed below but it is highly recommended in
+order for all features of EOxServer to work correctly. The repository is
+again easily added via a single <cite>yum</cite> command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">rpm</span> <span class="o">-</span><span class="n">Uvh</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">yum</span><span class="o">.</span><span class="n">packages</span><span class="o">.</span><span class="n">eox</span><span class="o">.</span><span class="n">at</span><span class="o">/</span><span class="n">el</span><span class="o">/</span><span class="n">eox</span><span class="o">-</span><span class="n">release</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="mf">2.</span><span class="n">noarch</span><span class="o">.</span><span class="n">rpm</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="installing-eoxserver">
+<span id="centosinstallation-rpm"></span><span id="centos-installing-eoxserver-yum"></span><h3><a class="toc-backref" href="#table-of-contents">Installing EOxServer</a><a class="headerlink" href="#installing-eoxserver" title="Permalink to this headline">¶</a></h3>
+<p>Once the RPM repositories are configured EOxServer and all its dependencies
+are installed via a single command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">EOxServer</span>
+</pre></div>
+</div>
+<p>To update EOxServer simply run the above command again or update the whole
+system with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">update</span>
+</pre></div>
+</div>
+<p>Please carefully follow the <a class="reference internal" href="migration.html#migration"><span class="std std-ref">migration/update procedure</span></a>
+corresponding to your version numbers for any configured EOxServer instances
+in case of a major version upgrade.</p>
+<p>Further packages may be required if additional features (e.g: a full DBMS)
+are desired. The following command for example installs all packages needed
+when using SQLite:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">sqlite</span> <span class="n">libspatialite</span> <span class="n">python</span><span class="o">-</span><span class="n">pysqlite</span> <span class="n">python</span><span class="o">-</span><span class="n">pyspatialite</span>
+</pre></div>
+</div>
+<p>Alternatively the PosgreSQL DBMS can be installed as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">postgresql</span> <span class="n">postgresql</span><span class="o">-</span><span class="n">server</span> <span class="n">postgis</span> <span class="n">python</span><span class="o">-</span><span class="n">psycopg2</span>
+</pre></div>
+</div>
+<p>To run EOxServer behind the Apache web server requires the installation of this
+web server:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">httpd</span> <span class="n">mod_wsgi</span>
+</pre></div>
+</div>
+<p>Now that EOxServer is properly installed the next step is to <a class="reference internal" href="instance_creation.html#instancecreation"><span class="std std-ref">create and
+configure a service instance</span></a>.</p>
+</div>
+</div>
+<div class="section" id="alternate-installation-method-using-pip">
+<span id="centosinstallation-pip"></span><h2><a class="toc-backref" href="#table-of-contents">Alternate installation method using <em>pip</em></a><a class="headerlink" href="#alternate-installation-method-using-pip" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="required-software-packages">
+<h3><a class="toc-backref" href="#table-of-contents">Required Software Packages</a><a class="headerlink" href="#required-software-packages" title="Permalink to this headline">¶</a></h3>
+<p>The installation via pip builds EOxServer from its source. Thus there are
+some additional packages required which can be installed using:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">gdal</span> <span class="n">gdal</span><span class="o">-</span><span class="n">python</span> <span class="n">gdal</span><span class="o">-</span><span class="n">devel</span> <span class="n">mapserver</span> <span class="n">mapserver</span><span class="o">-</span><span class="n">python</span> \
+                 <span class="n">libxml2</span> <span class="n">libxml2</span><span class="o">-</span><span class="n">python</span> <span class="n">python</span><span class="o">-</span><span class="n">lxml</span> <span class="n">python</span><span class="o">-</span><span class="n">pip</span> \
+                 <span class="n">python</span><span class="o">-</span><span class="n">devel</span> <span class="n">gcc</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3><a class="toc-backref" href="#table-of-contents">Installing EOxServer</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>For the installation of Python packages <a class="reference external" href="http://www.pip-installer.org/">pip</a>
+is used, which itself was installed in the previous step. It automatically
+resolves and installs all dependencies. So a simple:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span><span class="o">-</span><span class="n">python</span> <span class="n">install</span> <span class="n">eoxserver</span>
+</pre></div>
+</div>
+<p>suffices to install EOxServer itself.</p>
+<p>To upgrade an existing installation of EOxServer simply add the <code class="docutils literal"><span class="pre">--upgrade</span></code>
+switch to your pip command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span><span class="o">-</span><span class="n">python</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">eoxserver</span>
+</pre></div>
+</div>
+<p>Please don’t forget to follow the update procedure for any configured
+EOxServer instances in case of a major version upgrade.</p>
+<p>Now that EOxServer is properly installed the next step is to <a class="reference internal" href="instance_creation.html#instancecreation"><span class="std std-ref">create and
+configure a service instance</span></a>.</p>
+</div>
+</div>
+<div class="section" id="special-pysqlite-considerations">
+<h2><a class="toc-backref" href="#table-of-contents">Special <em>pysqlite</em> considerations</a><a class="headerlink" href="#special-pysqlite-considerations" title="Permalink to this headline">¶</a></h2>
+<p>When used with <a class="reference external" href="http://www.gaia-gis.it/spatialite/">spatialite</a> EOxServer
+also requires <a class="reference external" href="http://code.google.com/p/pysqlite/">pysqlite</a> and
+<cite>pyspatialite</cite> which can be either installed as RPMs from <a class="reference external" href="http://packages.eox.at">packages.eox.at</a> (see <a class="reference internal" href="#centos-installing-eoxserver-yum"><span class="std std-ref">Installing EOxServer</span></a>
+above) or from source.</p>
+<p>If installing from source please make sure to adjust the
+<cite>SQLITE_OMIT_LOAD_EXTENSION</cite> parameter in <code class="docutils literal"><span class="pre">setup.cfg</span></code> which is set by
+default but not allowed for EOxServer. The following provides a complete
+installation procedure:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">libspatialite</span><span class="o">-</span><span class="n">devel</span> <span class="n">geos</span><span class="o">-</span><span class="n">devel</span> <span class="n">proj</span><span class="o">-</span><span class="n">devel</span>
+<span class="n">sudo</span> <span class="n">pip</span><span class="o">-</span><span class="n">python</span> <span class="n">install</span> <span class="n">pyspatialite</span>
+<span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">pysqlite</span><span class="o">.</span><span class="n">googlecode</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">files</span><span class="o">/</span><span class="n">pysqlite</span><span class="o">-</span><span class="mf">2.6</span><span class="o">.</span><span class="mf">3.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+<span class="n">tar</span> <span class="n">xzf</span> <span class="n">pysqlite</span><span class="o">-</span><span class="mf">2.6</span><span class="o">.</span><span class="mf">3.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+<span class="n">cd</span> <span class="n">pysqlite</span><span class="o">-</span><span class="mf">2.6</span><span class="o">.</span><span class="mi">3</span>
+<span class="n">sed</span> <span class="o">-</span><span class="n">e</span> <span class="s1">&#39;/^define=SQLITE_OMIT_LOAD_EXTENSION$/d&#39;</span> <span class="o">-</span><span class="n">i</span> <span class="n">setup</span><span class="o">.</span><span class="n">cfg</span>
+<span class="n">sudo</span> <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>If the installation is rerun the <code class="docutils literal"><span class="pre">--upgrade</span></code> respectively the <code class="docutils literal"><span class="pre">--force</span></code>
+flag have to be added to the <code class="docutils literal"><span class="pre">pip-python</span></code> and <code class="docutils literal"><span class="pre">python</span></code> commands in order
+to actually redo the installation:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span><span class="o">-</span><span class="n">python</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">pyspatialite</span>
+<span class="n">sudo</span> <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span> <span class="o">--</span><span class="n">force</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="instance_creation.html" class="btn btn-neutral float-right" title="Service Instance Creation and Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="install.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

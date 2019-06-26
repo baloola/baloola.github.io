@@ -1,0 +1,444 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Migration &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Mailing Lists" href="mailing_lists.html" />
+    <link rel="prev" title="Recommendations for Operational Installation" href="operational_install.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Users’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">EOxServer Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="global_use_case.html">Global Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos_installation.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instance_creation.html">Service Instance Creation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operational_install.html">Recommendations for Operational Installation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Migration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#migration-from-0-3-to-0-4">Migration from 0.3 to 0.4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#migration-from-0-2-to-0-3">Migration from 0.2 to 0.3</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#disclaimer">Disclaimer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#preparatory-steps">Preparatory steps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#software-upgrade">Software upgrade</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#instance-migration">Instance migration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#new-configuration-options">New configuration options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mailing_lists.html">Mailing Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demonstration.html">Demonstration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EO-WCS_request_parameters.html">EO-WCS Request Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opensearch.html">OpenSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html">EOxServer Operators’ Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webclient.html">The Webclient Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="idm/index.html">Identity Management System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html">EOxServer Presentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html">Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crss.html">Supported CRSs and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html">Supported Raster File Formats and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html">Asynchronous Task Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WCS-T_summary.html">Web Coverage Service - Transaction Extension</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Users’ Guide</a> &raquo;</li>
+        
+      <li>Migration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/users/migration.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="migration">
+<span id="index-0"></span><span id="id1"></span><h1><a class="toc-backref" href="#table-of-contents">Migration</a><a class="headerlink" href="#migration" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#migration" id="id4">Migration</a><ul>
+<li><a class="reference internal" href="#migration-from-0-3-to-0-4" id="id5">Migration from 0.3 to 0.4</a></li>
+<li><a class="reference internal" href="#migration-from-0-2-to-0-3" id="id6">Migration from 0.2 to 0.3</a><ul>
+<li><a class="reference internal" href="#disclaimer" id="id7">Disclaimer</a></li>
+<li><a class="reference internal" href="#preparatory-steps" id="id8">Preparatory steps</a></li>
+<li><a class="reference internal" href="#software-upgrade" id="id9">Software upgrade</a><ul>
+<li><a class="reference internal" href="#django-gdal" id="id10">Django &amp; GDAL</a></li>
+<li><a class="reference internal" href="#eoxserver" id="id11">EOxServer</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#instance-migration" id="id12">Instance migration</a></li>
+<li><a class="reference internal" href="#new-configuration-options" id="id13">New configuration options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Migrating or upgrading an existing EOxServer instance may require to perform
+several tasks depending on the version numbers. In general upgrading
+versions with changes in the third digit of the version number only e.g.
+from 0.2.3 to 0.2.4 doesn’t need any special considerations. For all other
+upgrades please carefully read the relevant sections below.</p>
+<div class="section" id="migration-from-0-3-to-0-4">
+<h2><a class="toc-backref" href="#table-of-contents">Migration from 0.3 to 0.4</a><a class="headerlink" href="#migration-from-0-3-to-0-4" title="Permalink to this headline">¶</a></h2>
+<p>Unfortunately there are no migrations from version 0.3 to version 0.4 due to a
+major overhaul of the database schema and configuration. We recommend that you
+upgrade the EOxServer software, create a new instance and register all the data
+again.</p>
+</div>
+<div class="section" id="migration-from-0-2-to-0-3">
+<h2><a class="toc-backref" href="#table-of-contents">Migration from 0.2 to 0.3</a><a class="headerlink" href="#migration-from-0-2-to-0-3" title="Permalink to this headline">¶</a></h2>
+<p>From version 0.2 to version 0.3 a lot of development effort has been put into
+EOxServer. Many new features have been implemented and a couple of bugs are now
+eradicated.</p>
+<p>However, if you already have an instance running EOxServer 0.2, this requires a
+couple of changes to that instance and enables you to configure some new
+optional configurations aswell.</p>
+<div class="section" id="disclaimer">
+<h3><a class="toc-backref" href="#table-of-contents">Disclaimer</a><a class="headerlink" href="#disclaimer" title="Permalink to this headline">¶</a></h3>
+<p>Before trying to upgrade EOxServer please make sure to backup your database.
+This step depends on the actual DBMS you are using for your instance.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you do not have a lot of datasets registered, or can easily reproduce
+the current status of your instance, a complete newly created instance
+may be more failsafe than trying to migrate your instance.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Because of changes in the database schema, the migration of referenceable
+datasets does <strong>not</strong> work. Please re-register them once the instance is
+migrated/re-created.</p>
+</div>
+</div>
+<div class="section" id="preparatory-steps">
+<h3><a class="toc-backref" href="#table-of-contents">Preparatory steps</a><a class="headerlink" href="#preparatory-steps" title="Permalink to this headline">¶</a></h3>
+<p>Before you upgrade your software, you will need to perform a database dump. The
+dump is required to migrate your registered objects to the new database. It is
+performed with the following call:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">dumpdata</span> <span class="n">core</span> <span class="n">backends</span> <span class="n">coverages</span> <span class="o">--</span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span> <span class="o">&gt;</span> <span class="n">dump</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+<p>Unfortunately in some versions <code class="docutils literal"><span class="pre">spatialite</span></code> produces some output aswell, which
+has to be removed from the top of the created <code class="docutils literal"><span class="pre">dump.json</span></code> file.</p>
+</div>
+<div class="section" id="software-upgrade">
+<h3><a class="toc-backref" href="#table-of-contents">Software upgrade</a><a class="headerlink" href="#software-upgrade" title="Permalink to this headline">¶</a></h3>
+<p>Now you are ready to actually perform the software upgrade.</p>
+<div class="section" id="django-gdal">
+<h4><a class="toc-backref" href="#table-of-contents">Django &amp; GDAL</a><a class="headerlink" href="#django-gdal" title="Permalink to this headline">¶</a></h4>
+<p>The most notable changes concern our technology base: Django &amp; GDAL. EOxServer
+now relies on features of Django 1.4, so if you still have Django 1.3 or lower
+installed, please upgrade to (at least) that version. This step, however,
+depends on how you installed Django in the first place. With <code class="docutils literal"><span class="pre">pip</span></code> it should
+be easy as pie/py:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">Django</span> <span class="o">--</span><span class="n">upgrade</span>
+</pre></div>
+</div>
+<p>If EOxServer is installed via pip, the upgrade of Django should be done
+automagically.</p>
+<p>Similar to Django, EOxServer now requires at least version 1.7 of the GDAL
+library respectively its python bindings. GDAL is not explicitly stated in the
+EOxServer dependencies to allow custom builds and OS specific installations. So
+you are required to install the minimum required version on your own, via pip,
+yum, apt, msi or whatever mechanism you prefer.</p>
+<p>Please refer to the <a class="reference internal" href="install.html#table-eoxserver-dependencies"><span class="std std-ref">EOxServer Dependencies</span></a> table for details on
+dependencies.</p>
+</div>
+<div class="section" id="eoxserver">
+<h4><a class="toc-backref" href="#table-of-contents">EOxServer</a><a class="headerlink" href="#eoxserver" title="Permalink to this headline">¶</a></h4>
+<p>The upgrade of EOxServer is quite similar to <a class="reference internal" href="install.html#installing-eoxserver"><span class="std std-ref">Installing EOxServer</span></a>. For
+<code class="docutils literal"><span class="pre">pip</span></code> you will need the <code class="docutils literal"><span class="pre">-U</span></code> (<code class="docutils literal"><span class="pre">--upgrade</span></code>) option:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">EOxServer</span><span class="o">==</span><span class="mf">0.3</span>
+</pre></div>
+</div>
+<p>or</p>
+<blockquote>
+<div>pip install -U “svn+http://eoxserver.org/svn/branches/0.3”</div></blockquote>
+</div>
+</div>
+<div class="section" id="instance-migration">
+<h3><a class="toc-backref" href="#table-of-contents">Instance migration</a><a class="headerlink" href="#instance-migration" title="Permalink to this headline">¶</a></h3>
+<p>Now that you have installed your software, there is a small step to perform
+which requires manual handling to upgrade your instance to the new version of
+EOxServer.</p>
+<p>Please open the <code class="docutils literal"><span class="pre">conf/eoxserver.conf</span></code> file within your instance directory and
+locate the <code class="docutils literal"><span class="pre">modules</span></code> setting of the <code class="docutils literal"><span class="pre">[core.registry]</span></code> setting. The list
+entry <code class="docutils literal"><span class="pre">eoxserver.resources.coverages.covmgrs</span></code> must be corrected to
+<code class="docutils literal"><span class="pre">eoxserver.resources.coverages.managers</span></code>.</p>
+<p>Now it is time to re-create your database which is done in three steps: deletion
+of the old database, creation of a new one, and a synchronization. The deletion
+and creation of the database depend on the database backend used. For SQLite,
+for example, only the database file needs to be deleted.</p>
+<p>The initialization of the database is done via:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">syncdb</span>
+</pre></div>
+</div>
+<p>The old contents of the database can be restored via:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">loaddata</span> <span class="n">dump</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="new-configuration-options">
+<h3><a class="toc-backref" href="#table-of-contents">New configuration options</a><a class="headerlink" href="#new-configuration-options" title="Permalink to this headline">¶</a></h3>
+<p>Since version 0.2 a couple of new configuration options are available, most
+notably for defining output <a class="reference internal" href="formats.html#formatsconfiguration"><span class="std std-ref">formats</span></a> and
+<a class="reference internal" href="crss.html#crsconfiguration"><span class="std std-ref">CRSs</span></a>. Please have a look at the relevant sections to
+see how both are set up.</p>
+<p>With Django 1.4, EOxServer allows a much more fine-grained logging mechanism
+defined in <code class="docutils literal"><span class="pre">settings.py</span></code>. Details can be obtained from the <a class="reference external" href="https://docs.djangoproject.com/en/dev/topics/logging/#configuring-logging">Django
+documentation</a>.
+The following is an example of how the logging is set up by default in new
+EOxServer instances using version 0.3:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">LOGGING</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;disable_existing_loggers&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">&#39;filters&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;require_debug_false&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;()&#39;</span><span class="p">:</span> <span class="s1">&#39;django.utils.log.RequireDebugFalse&#39;</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;formatters&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;simple&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">%(levelname)s</span><span class="s1">: </span><span class="si">%(message)s</span><span class="s1">&#39;</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="s1">&#39;[</span><span class="si">%(asctime)s</span><span class="s1">][</span><span class="si">%(module)s</span><span class="s1">] </span><span class="si">%(levelname)s</span><span class="s1">: </span><span class="si">%(message)s</span><span class="s1">&#39;</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;eoxserver_file&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;DEBUG&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;logging.FileHandler&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="n">join</span><span class="p">(</span><span class="n">PROJECT_DIR</span><span class="p">,</span> <span class="s1">&#39;logs&#39;</span><span class="p">,</span> <span class="s1">&#39;eoxserver.log&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;formatter&#39;</span><span class="p">:</span> <span class="s1">&#39;verbose&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;filters&#39;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;loggers&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;eoxserver&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;eoxserver_file&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;DEBUG&#39;</span> <span class="k">if</span> <span class="n">DEBUG</span> <span class="k">else</span> <span class="s1">&#39;INFO&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;propagate&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Another important feature that was introduced in Django 1.4 is the implicit
+support of time-zones. This can be activated in <code class="docutils literal"><span class="pre">settings.py</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">USE_TZ</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>For a complete list of changes in Django see the official documentation
+(<a class="reference external" href="https://docs.djangoproject.com/en/dev/releases/1.4/">1.4</a> and
+<a class="reference external" href="https://docs.djangoproject.com/en/dev/releases/1.5/">1.5</a>).</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mailing_lists.html" class="btn btn-neutral float-right" title="Mailing Lists" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="operational_install.html" class="btn btn-neutral float-left" title="Recommendations for Operational Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

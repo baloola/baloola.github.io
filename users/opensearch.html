@@ -1,0 +1,610 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>OpenSearch &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="EOxServer Operators’ Guide" href="operators.html" />
+    <link rel="prev" title="EO-WCS Request Parameters" href="EO-WCS_request_parameters.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Users’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">EOxServer Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="global_use_case.html">Global Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos_installation.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instance_creation.html">Service Instance Creation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operational_install.html">Recommendations for Operational Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailing_lists.html">Mailing Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demonstration.html">Demonstration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EO-WCS_request_parameters.html">EO-WCS Request Parameters</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">OpenSearch</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#collection-search">Collection Search</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#record-search">Record Search</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#output-formats">Output Formats</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#atom-and-rss">ATOM and RSS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#geojson-and-kml">GeoJSON and KML</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enabling-disabling-formats">Enabling/Disabling Formats</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#future-work">Future Work</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html">EOxServer Operators’ Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webclient.html">The Webclient Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="idm/index.html">Identity Management System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html">EOxServer Presentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html">Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crss.html">Supported CRSs and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html">Supported Raster File Formats and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html">Asynchronous Task Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WCS-T_summary.html">Web Coverage Service - Transaction Extension</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Users’ Guide</a> &raquo;</li>
+        
+      <li>OpenSearch</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/users/opensearch.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="opensearch">
+<span id="id1"></span><h1><a class="toc-backref" href="#table-of-contents">OpenSearch</a><a class="headerlink" href="#opensearch" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#opensearch" id="id3">OpenSearch</a><ul>
+<li><a class="reference internal" href="#introduction" id="id4">Introduction</a></li>
+<li><a class="reference internal" href="#setup" id="id5">Setup</a></li>
+<li><a class="reference internal" href="#usage" id="id6">Usage</a><ul>
+<li><a class="reference internal" href="#collection-search" id="id7">Collection Search</a></li>
+<li><a class="reference internal" href="#record-search" id="id8">Record Search</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#parameters" id="id9">Parameters</a></li>
+<li><a class="reference internal" href="#output-formats" id="id10">Output Formats</a><ul>
+<li><a class="reference internal" href="#atom-and-rss" id="id11">ATOM and RSS</a></li>
+<li><a class="reference internal" href="#geojson-and-kml" id="id12">GeoJSON and KML</a></li>
+<li><a class="reference internal" href="#enabling-disabling-formats" id="id13">Enabling/Disabling Formats</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#future-work" id="id14">Future Work</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#table-of-contents">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Since version 0.4, EOxServer features an OpenSearch 1.1 interface to allow the
+exploration of its contents in a different manner than by using the EO-WCS or
+WMS functionality.</p>
+<p>In contrast to EO-WCS and WMS, the OpenSearch interface operates on metadata
+only and allows a performant view of the data, by using slimmer output formats
+such as GeoJSON or Atom/RSS XML structures.</p>
+<p>In EOxServer, both the <a class="reference external" href="http://www.opensearch.org/Specifications/OpenSearch/Extensions/Time/1.0/Draft_1">Time</a>
+and the
+<a class="reference external" href="http://www.opensearch.org/Specifications/OpenSearch/Extensions/Geo/1.0/Draft_2">Geo</a>
+extensions are implemented to limit the spatio-temporal scope of the search.</p>
+</div>
+<div class="section" id="setup">
+<h2><a class="toc-backref" href="#table-of-contents">Setup</a><a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h2>
+<p>To enable the OpenSearch interface in the EOxServer instance, the <code class="docutils literal"><span class="pre">urls.py</span></code>
+has to be adjusted and the following line added:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="k">import</span> <span class="n">patterns</span><span class="p">,</span> <span class="n">include</span><span class="p">,</span> <span class="n">url</span>
+<span class="o">...</span>
+<span class="kn">from</span> <span class="nn">eoxserver.services.opensearch.urls</span> <span class="k">import</span> <span class="n">urlpatterns</span> <span class="k">as</span> <span class="n">opensearch</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="n">patterns</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="o">...</span>
+    <span class="n">url</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^opensearch/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="n">opensearch</span><span class="p">)),</span>
+    <span class="o">...</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>This adds the necessary URLs and views to the instances setup to expose the
+interface to the users.</p>
+<p>Additionally, the the string <code class="docutils literal"><span class="pre">&quot;eoxserver.services.opensearch.**&quot;</span></code> has to be
+added to the <code class="docutils literal"><span class="pre">COMPONENTS</span></code> of the <code class="docutils literal"><span class="pre">settings.py</span></code> file.</p>
+</div>
+<div class="section" id="usage">
+<h2><a class="toc-backref" href="#table-of-contents">Usage</a><a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>The OpenSearch implementation of EOxServer follows a two-step search approach:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>the instance can be searched for collections</li>
+<li>single collections can be searched for records</li>
+</ol>
+</div></blockquote>
+<p>For each of those steps, the OpenSearch interface allows two interactions, the
+<code class="docutils literal"><span class="pre">description</span></code> and the``search``.
+The description operation returns an XML document with service metadata and
+parametrized endpoints for further searches. The <code class="docutils literal"><span class="pre">search</span></code> operation hosts the
+main searching functionality: the search parameters are sent the service, and
+the results are encoded end returned.</p>
+<div class="section" id="collection-search">
+<h3><a class="toc-backref" href="#table-of-contents">Collection Search</a><a class="headerlink" href="#collection-search" title="Permalink to this headline">¶</a></h3>
+<p>To get the description of the OpenSearch service running in your instance, you
+have to access the URL previously specified in the <code class="docutils literal"><span class="pre">urlpatterns</span></code>. In the
+<a class="reference internal" href="../developers/autotest.html"><span class="doc">autotest instance</span></a>, this looks like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl http://localhost/opensearch/
+&lt;?xml version=&#39;1.0&#39; encoding=&#39;iso-8859-1&#39;?&gt;
+&lt;OpenSearchDescription xmlns=&quot;http://a9.com/-/spec/opensearch/1.1/&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;&quot;&gt;
+  &lt;ShortName/&gt;
+  &lt;Description/&gt;
+  &lt;Url type=&quot;application/atom+xml&quot; rel=&quot;collection&quot; template=&quot;http://localhost/opensearch/atom/?q={searchTerms?}&amp;amp;count={count?}&amp;amp;startIndex={startIndex?}&amp;amp;bbox={geo:box?}&amp;amp;geom={geo:geometry?}&amp;amp;lon={geo:lon?}&amp;amp;lat={geo:lat?}&amp;amp;r={geo:radius?}&amp;amp;georel={geo:relation?}&amp;amp;uid={geo:uid?}&amp;amp;start={time:start?}&amp;amp;end={time:end?}&amp;amp;timerel={time:relation?}&quot;/&gt;
+  &lt;Url type=&quot;application/vnd.geo+json&quot; rel=&quot;collection&quot; template=&quot;http://localhost/opensearch/json/?q={searchTerms?}&amp;amp;count={count?}&amp;amp;startIndex={startIndex?}&amp;amp;bbox={geo:box?}&amp;amp;geom={geo:geometry?}&amp;amp;lon={geo:lon?}&amp;amp;lat={geo:lat?}&amp;amp;r={geo:radius?}&amp;amp;georel={geo:relation?}&amp;amp;uid={geo:uid?}&amp;amp;start={time:start?}&amp;amp;end={time:end?}&amp;amp;timerel={time:relation?}&quot;/&gt;
+  &lt;Url type=&quot;application/vnd.google-earth.kml+xml&quot; rel=&quot;collection&quot; template=&quot;http://localhost/opensearch/kml/?q={searchTerms?}&amp;amp;count={count?}&amp;amp;startIndex={startIndex?}&amp;amp;bbox={geo:box?}&amp;amp;geom={geo:geometry?}&amp;amp;lon={geo:lon?}&amp;amp;lat={geo:lat?}&amp;amp;r={geo:radius?}&amp;amp;georel={geo:relation?}&amp;amp;uid={geo:uid?}&amp;amp;start={time:start?}&amp;amp;end={time:end?}&amp;amp;timerel={time:relation?}&quot;/&gt;
+  &lt;Url type=&quot;application/rss+xml&quot; rel=&quot;collection&quot; template=&quot;http://localhost/opensearch/rss/?q={searchTerms?}&amp;amp;count={count?}&amp;amp;startIndex={startIndex?}&amp;amp;bbox={geo:box?}&amp;amp;geom={geo:geometry?}&amp;amp;lon={geo:lon?}&amp;amp;lat={geo:lat?}&amp;amp;r={geo:radius?}&amp;amp;georel={geo:relation?}&amp;amp;uid={geo:uid?}&amp;amp;start={time:start?}&amp;amp;end={time:end?}&amp;amp;timerel={time:relation?}&quot;/&gt;
+  &lt;Contact/&gt;
+  &lt;LongName/&gt;
+  &lt;Developer/&gt;
+  &lt;Attribution/&gt;
+  &lt;SyndicationRight&gt;open&lt;/SyndicationRight&gt;
+  &lt;AdultContent/&gt;
+  &lt;Language/&gt;
+  &lt;InputEncoding/&gt;
+  &lt;OutputEncoding/&gt;
+&lt;/OpenSearchDescription&gt;
+</pre></div>
+</div>
+<p>As you can see, the description XML document contains a <code class="docutils literal"><span class="pre">Url</span></code> element for each
+registered output format. Each URL also has a set of parameter placeholders from which the
+actual query can be constructed. Most of the parameters are optional, as
+indicated by the suffixed <code class="docutils literal"><span class="pre">?</span></code> within the curly braces.</p>
+<p>To perform a search for collections, a request template has to be used and
+filled with <a class="reference internal" href="#parameters">parameters</a>. See this example, where a simple bounding box is used to
+limit the search:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl http://localhost/opensearch/atom/?bbox=10,33,12,35
+&lt;feed xmlns:georss=&quot;http://www.georss.org/georss&quot; xmlns:geo=&quot;http://a9.com/-/opensearch/extensions/geo/1.0/&quot; xmlns:opensearch=&quot;http://a9.com/-/spec/opensearch/1.1/&quot; xmlns:time=&quot;http://a9.com/-/opensearch/extensions/time/1.0/&quot; xmlns=&quot;http://www.w3.org/2005/Atom&quot;&gt;
+  &lt;id&gt;http://localhost/opensearch/atom/?bbox=10,33,12,35&lt;/id&gt;
+  &lt;title&gt;None Search&lt;/title&gt;
+  &lt;link href=&quot;http://localhost/opensearch/atom/?bbox=10,33,12,35&quot; rel=&quot;self&quot;/&gt;
+  &lt;description/&gt;
+  &lt;opensearch:totalResults&gt;1&lt;/opensearch:totalResults&gt;
+  &lt;opensearch:startIndex&gt;0&lt;/opensearch:startIndex&gt;
+  &lt;opensearch:itemsPerPage&gt;1&lt;/opensearch:itemsPerPage&gt;
+  &lt;opensearch:Query role=&quot;request&quot; geo:box=&quot;10,33,12,35&quot;/&gt;
+  &lt;link href=&quot;http://localhost/opensearch/&quot; type=&quot;application/opensearchdescription+xml&quot; rel=&quot;search&quot;/&gt;
+  &lt;link href=&quot;http://localhost/opensearch/atom/?bbox=10,33,12,35&quot; type=&quot;application/atom+xml&quot; rel=&quot;self&quot;/&gt;
+  &lt;link href=&quot;http://localhost/opensearch/atom/?bbox=10%2C33%2C12%2C35&quot; type=&quot;application/atom+xml&quot; rel=&quot;first&quot;/&gt;
+  &lt;link href=&quot;http://localhost/opensearch/atom/?startIndex=1&amp;amp;bbox=10%2C33%2C12%2C35&quot; type=&quot;application/atom+xml&quot; rel=&quot;last&quot;/&gt;
+  &lt;entry&gt;
+    &lt;title&gt;MER_FRS_1P_reduced_RGB&lt;/title&gt;
+    &lt;id&gt;MER_FRS_1P_reduced_RGB&lt;/id&gt;
+    &lt;link href=&quot;http://localhost/opensearch/collections/MER_FRS_1P_reduced_RGB/&quot; rel=&quot;search&quot;/&gt;
+    &lt;georss:box&gt;32.264541 -3.437981 46.218445 27.968591&lt;/georss:box&gt;
+  &lt;/entry&gt;
+&lt;/feed&gt;
+</pre></div>
+</div>
+<p>The resulting atom feed contains information used for paging and the matched
+collections. Each <code class="docutils literal"><span class="pre">entry</span></code> (or <code class="docutils literal"><span class="pre">item</span></code> in RSS) contains a rough metadata
+overview of the collection and a link to the collections OpenSearch description
+document, which can be used to make searches for records within the collection.</p>
+</div>
+<div class="section" id="record-search">
+<h3><a class="toc-backref" href="#table-of-contents">Record Search</a><a class="headerlink" href="#record-search" title="Permalink to this headline">¶</a></h3>
+<p>Searching for records within a collection is very similar to searching for
+collections on the service itself. The first step is to obtain the OpenSearch
+description document for the collections:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl http://localhost/opensearch/collections/MER_FRS_1P_reduced_RGB/
+&lt;?xml version=&#39;1.0&#39; encoding=&#39;iso-8859-1&#39;?&gt;
+&lt;OpenSearchDescription xmlns=&quot;http://a9.com/-/spec/opensearch/1.1/&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;&quot;&gt;
+  &lt;ShortName/&gt;
+  &lt;Description/&gt;
+  &lt;Url type=&quot;application/atom+xml&quot; rel=&quot;results&quot; template=&quot;http://localhost/opensearch/collections/MER_FRS_1P_reduced_RGB/atom/?q={searchTerms?}&amp;amp;count={count?}&amp;amp;startIndex={startIndex?}&amp;amp;bbox={geo:box?}&amp;amp;geom={geo:geometry?}&amp;amp;lon={geo:lon?}&amp;amp;lat={geo:lat?}&amp;amp;r={geo:radius?}&amp;amp;georel={geo:relation?}&amp;amp;uid={geo:uid?}&amp;amp;start={time:start?}&amp;amp;end={time:end?}&amp;amp;timerel={time:relation?}&quot;/&gt;
+  &lt;Url type=&quot;application/vnd.geo+json&quot; rel=&quot;results&quot; template=&quot;http://localhost/opensearch/collections/MER_FRS_1P_reduced_RGB/json/?q={searchTerms?}&amp;amp;count={count?}&amp;amp;startIndex={startIndex?}&amp;amp;bbox={geo:box?}&amp;amp;geom={geo:geometry?}&amp;amp;lon={geo:lon?}&amp;amp;lat={geo:lat?}&amp;amp;r={geo:radius?}&amp;amp;georel={geo:relation?}&amp;amp;uid={geo:uid?}&amp;amp;start={time:start?}&amp;amp;end={time:end?}&amp;amp;timerel={time:relation?}&quot;/&gt;
+  &lt;Url type=&quot;application/vnd.google-earth.kml+xml&quot; rel=&quot;results&quot; template=&quot;http://localhost/opensearch/collections/MER_FRS_1P_reduced_RGB/kml/?q={searchTerms?}&amp;amp;count={count?}&amp;amp;startIndex={startIndex?}&amp;amp;bbox={geo:box?}&amp;amp;geom={geo:geometry?}&amp;amp;lon={geo:lon?}&amp;amp;lat={geo:lat?}&amp;amp;r={geo:radius?}&amp;amp;georel={geo:relation?}&amp;amp;uid={geo:uid?}&amp;amp;start={time:start?}&amp;amp;end={time:end?}&amp;amp;timerel={time:relation?}&quot;/&gt;
+  &lt;Url type=&quot;application/rss+xml&quot; rel=&quot;results&quot; template=&quot;http://localhost/opensearch/collections/MER_FRS_1P_reduced_RGB/rss/?q={searchTerms?}&amp;amp;count={count?}&amp;amp;startIndex={startIndex?}&amp;amp;bbox={geo:box?}&amp;amp;geom={geo:geometry?}&amp;amp;lon={geo:lon?}&amp;amp;lat={geo:lat?}&amp;amp;r={geo:radius?}&amp;amp;georel={geo:relation?}&amp;amp;uid={geo:uid?}&amp;amp;start={time:start?}&amp;amp;end={time:end?}&amp;amp;timerel={time:relation?}&quot;/&gt;
+  &lt;Contact/&gt;
+  &lt;LongName/&gt;
+  &lt;Developer/&gt;
+  &lt;Attribution/&gt;
+  &lt;SyndicationRight&gt;open&lt;/SyndicationRight&gt;
+  &lt;AdultContent/&gt;
+  &lt;Language/&gt;
+  &lt;InputEncoding/&gt;
+  &lt;OutputEncoding/&gt;
+&lt;/OpenSearchDescription&gt;
+</pre></div>
+</div>
+<p>Again, the result contains a list of URL templates, one for each enabled result
+format. These templates can be used to perform the searches for records. The
+following example uses a time span to limit the records:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl &quot;http://localhost/opensearch/collections/MER_FRS_1P_reduced_RGB/json/?start=2006-08-16T09:09:29Z&amp;end=2006-08-22T09:09:29Z&quot;
+{
+&quot;type&quot;: &quot;FeatureCollection&quot;,
+&quot;bbox&quot;: [ 11.648344, 32.269746, 27.968591, 46.216558 ],
+&quot;features&quot;: [
+{ &quot;type&quot;: &quot;Feature&quot;, &quot;properties&quot;: { &quot;id&quot;: &quot;mosaic_MER_FRS_1PNPDE20060816_090929_000001972050_00222_23322_0058_RGB_reduced&quot;, &quot;begin_time&quot;: &quot;2006-08-16T09:09:29Z&quot;, &quot;end_time&quot;: &quot;2006-08-16T09:12:46Z&quot; }, &quot;bbox&quot;: [ 11.648344, 32.269746, 27.968591, 46.216558 ], &quot;geometry&quot;: { &quot;type&quot;: &quot;MultiPolygon&quot;, &quot;coordinates&quot;: [ [ [ [ 14.322576, 46.216558 ], [ 14.889221, 46.152076 ], [ 15.714163, 46.044475 ], [ 16.939196, 45.874384 ], [ 18.041168, 45.707637 ], [ 19.696621, 45.437661 ], [ 21.061979, 45.188708 ], [ 22.14653, 44.985502 ], [ 22.972839, 44.817601 ], [ 24.216794, 44.548719 ], [ 25.078471, 44.353026 ], [ 25.619454, 44.222401 ], [ 27.096691, 43.869453 ], [ 27.968591, 43.648678 ], [ 27.608909, 42.914276 ], [ 26.904154, 41.406745 ], [ 26.231198, 39.890887 ], [ 25.79281, 38.857425 ], [ 25.159378, 37.327455 ], [ 24.607823, 35.91698 ], [ 24.126822, 34.659956 ], [ 23.695477, 33.485864 ], [ 23.264471, 32.269746 ], [ 21.93772, 32.597366 ], [ 20.490342, 32.937415 ], [ 18.720985, 33.329502 ], [ 17.307239, 33.615994 ], [ 16.119969, 33.851259 ], [ 14.83709, 34.086159 ], [ 13.692708, 34.286728 ], [ 12.702329, 34.450209 ], [ 11.648344, 34.612576 ], [ 11.818952, 35.404302 ], [ 12.060892, 36.496444 ], [ 12.273682, 37.456615 ], [ 12.465752, 38.338768 ], [ 12.658489, 39.179619 ], [ 12.861886, 40.085426 ], [ 13.125704, 41.224754 ], [ 13.249298, 41.773101 ], [ 13.442094, 42.58703 ], [ 13.647311, 43.450338 ], [ 13.749196, 43.879742 ], [ 13.904244, 44.51596 ], [ 14.076176, 45.247154 ], [ 14.21562, 45.812577 ], [ 14.322576, 46.216558 ] ] ] ] } }
+
+]
+}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="parameters">
+<h2><a class="toc-backref" href="#table-of-contents">Parameters</a><a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p>As mentioned before, EOxServers implementation of OpenSearch adheres to the core,
+and the time and geo extensions. Thus the interface allows the following
+parameters when searching for datasets:</p>
+<span id="table-opensearch-search-request-parameters"></span><table border="1" class="docutils" id="id2">
+<caption><span class="caption-text">OpenSearch Search Request Parameters</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="24%" />
+<col width="48%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter (Replacement Tag)</th>
+<th class="head">Description</th>
+<th class="head">Example</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>→ q (searchTerms)</td>
+<td>This parameter is currently not used.</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>→ count</td>
+<td>Number of returned elements as an integer</td>
+<td>count=25</td>
+</tr>
+<tr class="row-even"><td>→ startIndex</td>
+<td>The initial offset to get elements as an integer</td>
+<td>startIndex=125</td>
+</tr>
+<tr class="row-odd"><td>→ format</td>
+<td>The output format of the search. Currently supported are
+“json”, “kml”, “atom”, and “rss”.</td>
+<td>format=json</td>
+</tr>
+<tr class="row-even"><td>→ bbox (geo:box)</td>
+<td>The geographical area expressed as a bounding box defined
+as “west,south,east,north” in EPSG:4326 decimal degrees.</td>
+<td>bbox=-120.0,40.5,-110.5,43.8</td>
+</tr>
+<tr class="row-odd"><td>→ lat and lon
+(geo:lat/geo:lon)</td>
+<td>latitude and longitude geographical coordinate pair as
+decimal degrees in EPSG:4326.</td>
+<td>lat=32.25&amp;lon=125.654</td>
+</tr>
+<tr class="row-even"><td>→ r (geo:radius)</td>
+<td>The radius parameter used with lat and lon parameters.
+Units are meters on along the earths surface.</td>
+<td>lat=32.25&amp;lon=125.654</td>
+</tr>
+<tr class="row-odd"><td>→ geom (geo:geometry)</td>
+<td>A custom geometry encoded as WKT. Supported are
+POINT, LINESTRING, POLYGON, MULTIPOINT, MULTILINESTRING,
+and MULTIPOLYGON. The geometry must be expressed in
+EPSG:4326.</td>
+<td>geom=POINT(6 10)
+geom=LINESTRING(3 4,1 5,20 25)</td>
+</tr>
+<tr class="row-even"><td>→ georel (geo:relation)</td>
+<td><p class="first">The geospatial relation of the supplied geometry (or
+bounding box/circle) and the
+searched datasets geometry. This parameter allows the
+following values:
+- “intersects” (default): the passed geometry has to</p>
+<blockquote>
+<div>intersect with the datasets geometry</div></blockquote>
+<ul class="last simple">
+<li>“contains”: the passed geometry has to fully enclose
+datasets geometry. Currently only PostgreSQL/PostGIS
+supports this relation for distance lookups.</li>
+<li>“disjoint”: the passed geometry has no spatial overlap
+with the datasets geometry.</li>
+</ul>
+</td>
+<td>georel=contains</td>
+</tr>
+<tr class="row-odd"><td>→ uid (geo:uid)</td>
+<td>This parameter allows to match a single record by its
+exact identifier. This is also used to allow links to
+searches with only a specific item, as used in the atom
+and RSS formats.</td>
+<td>uid=MER_FRS_1P_reduced_RGB</td>
+</tr>
+<tr class="row-even"><td>→ start and end
+(time:start/time:end)</td>
+<td>The start and end data/time of the given time interval
+encoded in
+<a class="reference external" href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>.</td>
+<td>start=2006-08-16T09:09:29Z&amp;
+end=2006-08-17</td>
+</tr>
+<tr class="row-odd"><td>→ timerel (time:relation)</td>
+<td><p class="first">The temporal relation between the passed interval and the
+datasets time intervals. This parameter allows the
+following values:
+- “intersects”: the given interval has to somehow</p>
+<blockquote>
+<div>intersect with the datasets time span.</div></blockquote>
+<ul class="last simple">
+<li>“during”: the given interval has to enclose the
+datasets time span.</li>
+<li>“disjoint”: the given interval must have no temporal
+overlap with the datasets time span.</li>
+<li>“equals”: the given interval has to exactly match the
+datasets time span.</li>
+</ul>
+</td>
+<td>timerel=equals</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Unfortunately there are some known issues for certain parameters, especially
+concerning the <code class="docutils literal"><span class="pre">geo:radius</span></code> with the <code class="docutils literal"><span class="pre">geo:lat</span></code> and <code class="docutils literal"><span class="pre">geo:lon</span></code>: On
+certain platforms any distance based search results in an abort <a class="reference external" href="https://trac.osgeo.org/geos/ticket/377">caused by
+GEOS</a>, the underlying geometric
+algorithm library.</p>
+</div>
+<p>All parameters are available for both collection and record searches.</p>
+</div>
+<div class="section" id="output-formats">
+<h2><a class="toc-backref" href="#table-of-contents">Output Formats</a><a class="headerlink" href="#output-formats" title="Permalink to this headline">¶</a></h2>
+<p>EOxServer supports various output formats to encode the results of the searches.
+All formats are available for both collection and record searches.</p>
+<div class="section" id="atom-and-rss">
+<h3><a class="toc-backref" href="#table-of-contents">ATOM and RSS</a><a class="headerlink" href="#atom-and-rss" title="Permalink to this headline">¶</a></h3>
+<p>The EOxServer OpenSearch implementation tries to adhere the specification and
+recommendations for using OpenSearch with either of the two formats.
+Apart from the usual metadata links are added to the various enabled services
+like WMS and WCS wherever applicable. When searching for collections a link to
+the collections OpenSearch description document is also added.</p>
+</div>
+<div class="section" id="geojson-and-kml">
+<h3><a class="toc-backref" href="#table-of-contents">GeoJSON and KML</a><a class="headerlink" href="#geojson-and-kml" title="Permalink to this headline">¶</a></h3>
+<p>These formats aim to provide only a compact metadata overview of the matched
+collections and records. Only the identifier, begin/end timestamps and the
+footprint geometry are included.</p>
+</div>
+<div class="section" id="enabling-disabling-formats">
+<h3><a class="toc-backref" href="#table-of-contents">Enabling/Disabling Formats</a><a class="headerlink" href="#enabling-disabling-formats" title="Permalink to this headline">¶</a></h3>
+<p>With the steps described in <a class="reference internal" href="#setup">Setup</a>, all formats are enabled by default. To limit
+the available formats, the line added to the line
+<code class="docutils literal"><span class="pre">&quot;eoxserver.services.opensearch.**&quot;</span></code> of the <code class="docutils literal"><span class="pre">COMPONENTS</span></code> setting in the
+<code class="docutils literal"><span class="pre">settings.py</span></code> must be replaced by the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">COMPONENTS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="o">...</span>
+    <span class="s2">&quot;eoxserver.services.opensearch.v11.*&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;eoxserver.services.opensearch.extensions.*&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;eoxserver.services.opensearch.formats.&lt;format&gt;&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">&lt;format&gt;</span></code> is one of <code class="docutils literal"><span class="pre">atom</span></code>, <code class="docutils literal"><span class="pre">geojson</span></code>, <code class="docutils literal"><span class="pre">kml</span></code> or <code class="docutils literal"><span class="pre">rss</span></code>. To
+enable more than one format, the last line can be repeated for each format.</p>
+</div>
+</div>
+<div class="section" id="future-work">
+<h2><a class="toc-backref" href="#table-of-contents">Future Work</a><a class="headerlink" href="#future-work" title="Permalink to this headline">¶</a></h2>
+<p>As of EOxServer version 0.4, it is planned to also implement support for the
+<a class="reference external" href="https://portal.opengeospatial.org/files/?artifact_id=61006">OpenSearch EO</a>
+extension. This extension was held back on purpose, as the current data models
+do not include the necessary metadata fields.</p>
+<p>Additionally, the aim is to support most of the required and recommended
+best practices of the <a class="reference external" href="https://earthdata.nasa.gov/files/CEOS_OpenSearch_Best_Practice_Doc-v.1.0.1_Jun2015.pdf">CEOS OpenSearch Best Practice Document</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="operators.html" class="btn btn-neutral float-right" title="EOxServer Operators’ Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="EO-WCS_request_parameters.html" class="btn btn-neutral float-left" title="EO-WCS Request Parameters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

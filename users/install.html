@@ -1,0 +1,494 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Installation on CentOS" href="centos_installation.html" />
+    <link rel="prev" title="Global Use Case" href="global_use_case.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Users’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">EOxServer Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="global_use_case.html">Global Use Case</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-eoxserver">Installing EOxServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#upgrading-eoxserver">Upgrading EOxServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-guidelines">Hardware Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="centos_installation.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instance_creation.html">Service Instance Creation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operational_install.html">Recommendations for Operational Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailing_lists.html">Mailing Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demonstration.html">Demonstration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EO-WCS_request_parameters.html">EO-WCS Request Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opensearch.html">OpenSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html">EOxServer Operators’ Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webclient.html">The Webclient Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="idm/index.html">Identity Management System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html">EOxServer Presentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html">Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crss.html">Supported CRSs and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html">Supported Raster File Formats and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html">Asynchronous Task Processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WCS-T_summary.html">Web Coverage Service - Transaction Extension</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Users’ Guide</a> &raquo;</li>
+        
+      <li>Installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/users/install.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installation">
+<span id="index-0"></span><span id="id1"></span><h1><a class="toc-backref" href="#table-of-contents">Installation</a><a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#installation" id="id6">Installation</a><ul>
+<li><a class="reference internal" href="#dependencies" id="id7">Dependencies</a></li>
+<li><a class="reference internal" href="#installing-eoxserver" id="id8">Installing EOxServer</a></li>
+<li><a class="reference internal" href="#upgrading-eoxserver" id="id9">Upgrading EOxServer</a></li>
+<li><a class="reference internal" href="#hardware-guidelines" id="id10">Hardware Guidelines</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>To use EOxServer it must be installed first. Following this guide will
+give you a working software installation.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<ul class="last simple">
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="centos_installation.html#centosinstallation"><span class="std std-ref">Installation on CentOS</span></a></dt>
+<dd>for specific installation on CentOS.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="instance_creation.html#instancecreation"><span class="std std-ref">Service Instance Creation and Configuration</span></a></dt>
+<dd>to configure an instance of EOxServer after successful installation.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="operational_install.html#operationalinstallation"><span class="std std-ref">Recommendations for Operational Installation</span></a></dt>
+<dd>to configure an operational EOxServer installation.</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="dependencies">
+<span id="index-1"></span><h2><a class="toc-backref" href="#table-of-contents">Dependencies</a><a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>EOxServer depends on some external software. Table:
+“<a class="reference internal" href="#table-eoxserver-dependencies"><span class="std std-ref">EOxServer Dependencies</span></a>” below shows the minimal required software
+to run EOxServer.</p>
+<span id="table-eoxserver-dependencies"></span><table border="1" class="docutils" id="id4">
+<caption><span class="caption-text">EOxServer Dependencies</span><a class="headerlink" href="#id4" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="15%" />
+<col width="24%" />
+<col width="61%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Software</th>
+<th class="head">Required Version</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Python</td>
+<td>&gt;= 2.5, &lt; 3.0
+(&gt;=2.6.5 for
+Django 1.5)</td>
+<td>Scripting language</td>
+</tr>
+<tr class="row-odd"><td>Django</td>
+<td>&gt;= 1.4 (1.5 for
+PostGIS 2.0
+support)</td>
+<td>Web development framework written in
+Python including the GeoDjango extension
+for geospatial database back-ends.</td>
+</tr>
+<tr class="row-even"><td>GDAL</td>
+<td>&gt;= 1.7.0 (1.8.0
+for rasdaman
+support)</td>
+<td>Geospatial Data Abstraction Library
+providing common interfaces for accessing
+various kinds of raster and vector data
+formats and including a Python binding
+which is used by EOxServer</td>
+</tr>
+<tr class="row-odd"><td>GEOS</td>
+<td>&gt;= 3.0</td>
+<td>GEOS (Geometry Engine - Open Source) is a
+C++ port of the  Java Topology Suite (JTS).</td>
+</tr>
+<tr class="row-even"><td>libxml2</td>
+<td>&gt;= 2.7</td>
+<td>Libxml2 is the XML C parser and toolkit
+developed for the Gnome project.</td>
+</tr>
+<tr class="row-odd"><td>lxml</td>
+<td>&gt;= 2.2</td>
+<td>The lxml XML toolkit is a Pythonic binding
+for the C libraries libxml2 and libxslt.</td>
+</tr>
+<tr class="row-even"><td>MapServer</td>
+<td>&gt;= 6.2
+(works partly
+with 6.0)</td>
+<td>Server software implementing various OGC
+Web Service interfaces including WCS and
+WMS. Includes a Python binding which is
+used by EOxServer.</td>
+</tr>
+</tbody>
+</table>
+<p>The Python bindings of the GDAL, MapServer (MapScript) and libxml2 libraries are
+required as well.</p>
+<p>EOxServer is written in <a class="reference external" href="http://www.python.org/">Python</a> and uses the
+<a class="reference external" href="https://www.djangoproject.com">Django</a> framework which requires a
+Python version from 2.5 to 2.7. Due to backwards incompatibilities in Python
+3.0, Django and thus EOxServer does not currently work with Python 3.0.</p>
+<p>EOxServer makes heavy usage of the <a class="reference external" href="http://osgeo.org">OSGeo</a> projects
+<a class="reference external" href="http://www.gdal.org">GDAL</a> and <a class="reference external" href="http://mapserver.org">MapServer</a>.</p>
+<p>EOxServer also requires a database to store its internal data objects. Since it
+is built on Django, EOxServer is mostly database agnostic, which means you can
+choose from various database systems. Since EOxServer requires the database to
+have geospatial enablement, the according extensions to that database have to
+be installed. We suggest you use one of the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li>For testing environments or small amounts of data, the <a class="reference external" href="http://sqlite.org/">SQLite</a> database provides a lightweight and easy-to-use
+system.</li>
+<li>However, if you’d like to work with a “large” database engine in an
+operational environment we recommend installing <a class="reference external" href="http://www.postgresql.org/">PostgreSQL</a>.</li>
+</ul>
+</div></blockquote>
+<p>For more and detailed information about database backends please refer to
+<a class="reference external" href="https://docs.djangoproject.com/en/1.11/ref/databases/">Django database notes</a>
+and <a class="reference external" href="https://docs.djangoproject.com/en/1.11/ref/contrib/gis/install/">GeoDjango installation</a>.</p>
+<span id="table-eoxserver-db-dependencies"></span><table border="1" class="docutils" id="id5">
+<caption><span class="caption-text">Database Dependencies</span><a class="headerlink" href="#id5" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="17%" />
+<col width="25%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Backend</th>
+<th class="head">Required Version</th>
+<th class="head">Required extensions/software</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>SQLite</td>
+<td>&gt;= 3.6</td>
+<td>spatialite (&gt;= 2.3), pysqlite2 (&gt;= 2.5),
+GEOS (&gt;= 3.0), PROJ.4 (&gt;= 4.4)</td>
+</tr>
+<tr class="row-odd"><td>PostgreSQL</td>
+<td>&gt;= 8.1</td>
+<td>PostGIS (&gt;= 1.3), GEOS (&gt;= 3.0),
+PROJ.4 (&gt;= 4.4), psycopg2 (== 2.4.1)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="installing-eoxserver">
+<span id="install-sw"></span><span id="id2"></span><h2><a class="toc-backref" href="#table-of-contents">Installing EOxServer</a><a class="headerlink" href="#installing-eoxserver" title="Permalink to this headline">¶</a></h2>
+<p>There are several easy options to install EOxServer:</p>
+<ul>
+<li><p class="first">Install an official release of EOxServer, the best approach for users who
+want a stable version and aren’t concerned about running a slightly older
+version of EOxServer. You can install EOxServer either from</p>
+<ul>
+<li><p class="first"><a class="reference external" href="http://pypi.python.org/pypi">PyPI - the Python Package Index</a> using
+<a class="reference external" href="http://www.pip-installer.org/en/latest/index.html">pip</a>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">eoxserver</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">or from the <a class="reference external" href="https://github.com/EOxServer/eoxserver/releases">EOxServer release page</a>
+using pip:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">EOxServer</span><span class="o">/</span><span class="n">eoxserver</span><span class="o">/</span><span class="n">releases</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="n">release</span><span class="o">-&lt;</span><span class="n">version</span><span class="o">&gt;/</span><span class="n">EOxServer</span><span class="o">-&lt;</span><span class="n">version</span><span class="o">&gt;.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+</pre></div>
+</div>
+<p>or manually:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">EOxServer</span><span class="o">/</span><span class="n">eoxserver</span><span class="o">/</span><span class="n">releases</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="n">release</span><span class="o">-&lt;</span><span class="n">version</span><span class="o">&gt;/</span><span class="n">EOxServer</span><span class="o">-&lt;</span><span class="n">version</span><span class="o">&gt;.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span> <span class="o">.</span>
+<span class="n">tar</span> <span class="n">xvfz</span> <span class="n">EOxServer</span><span class="o">-&lt;</span><span class="n">version</span><span class="o">&gt;.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+<span class="n">cd</span> <span class="n">EOxServer</span><span class="o">-&lt;</span><span class="n">version</span><span class="o">&gt;</span>
+<span class="n">sudo</span> <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">or binaries provided by your operating system distribution e.g.
+<a class="reference internal" href="centos_installation.html#centosinstallation"><span class="std std-ref">CentOS</span></a>.</p>
+</li>
+</ul>
+</li>
+<li><p class="first">Install the latest development version, the best option for users who
+want the latest-and-greatest features and aren’t afraid of running
+brand-new code. Make sure you have <a class="reference external" href="http://git-scm.com/">git</a> installed and install EOxServer’s
+main development branch using pip:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">EOxServer</span><span class="o">/</span><span class="n">eoxserver</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>or manually:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">eoxserver_git</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="n">EOxServer</span><span class="o">/</span><span class="n">eoxserver</span><span class="o">.</span><span class="n">git</span> <span class="n">eoxserver_git</span>
+<span class="n">cd</span> <span class="n">eoxserver_git</span>
+<span class="n">sudo</span> <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>If the directory EOxServer is installed to is not on the Python path, you will
+have to configure the deployed instances accordingly, see
+<a class="reference internal" href="instance_creation.html#eoxserver-deployment"><span class="std std-ref">Deployment</span></a> below.</p>
+<p>The successful installation of EOxServer can be tested using the
+<a class="reference internal" href="../developers/autotest.html#autotest"><span class="std std-ref">autotest instance</span></a> which is described in more detail in the
+<a class="reference internal" href="../developers/index.html#eoxserver-developers-guide"><span class="std std-ref">Developers’ Guide</span></a>.</p>
+<p id="index-2">Now that EOxServer is properly installed the next step is to <a class="reference internal" href="instance_creation.html#instancecreation"><span class="std std-ref">create and
+configure a service instance</span></a>.</p>
+</div>
+<div class="section" id="upgrading-eoxserver">
+<h2><a class="toc-backref" href="#table-of-contents">Upgrading EOxServer</a><a class="headerlink" href="#upgrading-eoxserver" title="Permalink to this headline">¶</a></h2>
+<p>To upgrade an existing installation of EOxServer simply add the <cite>–upgrade</cite>
+switch to your pip command e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">eoxserver</span>
+</pre></div>
+</div>
+<p>or rerun the manual installation as explained above.</p>
+<p>Please carefully follow the <a class="reference internal" href="migration.html#migration"><span class="std std-ref">migration/update procedure</span></a>
+corresponding to your version numbers for any configured EOxServer instances
+in case of a major version upgrade.</p>
+</div>
+<div class="section" id="hardware-guidelines">
+<span id="id3"></span><h2><a class="toc-backref" href="#table-of-contents">Hardware Guidelines</a><a class="headerlink" href="#hardware-guidelines" title="Permalink to this headline">¶</a></h2>
+<p>EOxServer has been deployed on a variety of different computers and virtual
+machines with commonplace hardware configurations. The typical setup is:</p>
+<ul class="simple">
+<li>a dual-core or quad-core CPU</li>
+<li>1 to 4 GB of RAM</li>
+</ul>
+<p>The image processing operations required for certain OGC Web Service requests
+(subsetting, reprojection, resampling) may be quite expensive in terms of
+CPU load and memory consumption, so adding more RAM or an additional core (for
+VMs) may increase the performance of the service. Bear in mind however, that
+disk I/O speed is often a bottleneck.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="centos_installation.html" class="btn btn-neutral float-right" title="Installation on CentOS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="global_use_case.html" class="btn btn-neutral float-left" title="Global Use Case" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

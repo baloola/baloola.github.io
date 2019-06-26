@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Web Coverage Service - Transaction Extension &mdash; EOxServer 0.04 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'en',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="copyright" title="Copyright" href="../copyright.html" />
+    <link rel="next" title="Developers’ Guide" href="../developers/index.html" />
+    <link rel="prev" title="Asynchronous Task Processing" href="atp_sum.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> EOxServer
+          
+
+          
+            
+            <img src="../_static/EOxServer_logo_transparent.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Users’ Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">EOxServer Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="global_use_case.html">Global Use Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="centos_installation.html">Installation on CentOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instance_creation.html">Service Instance Creation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operational_install.html">Recommendations for Operational Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mailing_lists.html">Mailing Lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demonstration.html">Demonstration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EO-WCS_request_parameters.html">EO-WCS Request Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opensearch.html">OpenSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="operators.html">EOxServer Operators’ Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="webclient.html">The Webclient Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="idm/index.html">Identity Management System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="soap_proxy.html">SOAP Proxy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="presentations.html">EOxServer Presentations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration_options.html">Configuration Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crss.html">Supported CRSs and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formats.html">Supported Raster File Formats and Their Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="atp_sum.html">Asynchronous Task Processing</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Web Coverage Service - Transaction Extension</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#implementation-details">Implementation Details</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adding-new-coverages">Adding New Coverages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#deleting-existing-coverages">Deleting Existing Coverages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#asynchronous-operation">Asynchronous Operation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../developers/index.html">Developers’ Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rfc/index.html">Requests for Comments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/index.html">Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apidoc/modules.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../copyright.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../credits.html">Credits</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">EOxServer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Users’ Guide</a> &raquo;</li>
+        
+      <li>Web Coverage Service - Transaction Extension</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/users/WCS-T_summary.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="web-coverage-service-transaction-extension">
+<span id="wcst-sum"></span><h1><a class="toc-backref" href="#table-of-contents">Web Coverage Service - Transaction Extension</a><a class="headerlink" href="#web-coverage-service-transaction-extension" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#web-coverage-service-transaction-extension" id="id1">Web Coverage Service - Transaction Extension</a><ul>
+<li><a class="reference internal" href="#introduction" id="id2">Introduction</a></li>
+<li><a class="reference internal" href="#implementation-details" id="id3">Implementation Details</a><ul>
+<li><a class="reference internal" href="#configuration" id="id4">Configuration</a></li>
+<li><a class="reference internal" href="#adding-new-coverages" id="id5">Adding New Coverages</a></li>
+<li><a class="reference internal" href="#deleting-existing-coverages" id="id6">Deleting Existing Coverages</a></li>
+<li><a class="reference internal" href="#asynchronous-operation" id="id7">Asynchronous Operation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#references" id="id8">References</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#table-of-contents">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This section describes the <em>Web Coverage Service - Transaction</em> (WCS-T)
+extension as implemented in <em>EOxServer</em>. The WCS-T interface is specified by
+the <em>Open Geospatial Consortium</em> (OGC) Web Coverage Service - Transaction
+operation extension (WCS-T) <a class="reference external" href="http://portal.opengeospatial.org/files/?artifact_id=28506">[OGC 07-068r4]</a> standard which describes the
+invocation of the service in detail. The WCS-T functionality is closely
+related to the data model of the WCS 2.0 <em>Earth Observation Application
+Profile</em> (EO-WCS) employed by <em>EOxServer</em> and allows the specification of
+EO-WCS metadata for newly inserted EO datasets.</p>
+</div>
+<div class="section" id="implementation-details">
+<h2><a class="toc-backref" href="#table-of-contents">Implementation Details</a><a class="headerlink" href="#implementation-details" title="Permalink to this headline">¶</a></h2>
+<p><em>EOxServer</em> provides to option to insert (<em>Add</em> action) and delete
+(<em>Delete</em>) coverages (datasets in EO-WCS jargon) via the WCS-T service.</p>
+<div class="section" id="configuration">
+<h3><a class="toc-backref" href="#table-of-contents">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
+<p>For details on the WCS-T configuration see <a class="reference internal" href="configuration_options.html#configurationoptionswcst11"><span class="std std-ref">[services.ows.wcst11]</span></a>.</p>
+</div>
+<div class="section" id="adding-new-coverages">
+<h3><a class="toc-backref" href="#table-of-contents">Adding New Coverages</a><a class="headerlink" href="#adding-new-coverages" title="Permalink to this headline">¶</a></h3>
+<p>Currently, it is possible to insert only <em>Rectified</em> and <em>Referenceable</em>
+datasets. It is beyond the capabilities of the WCS-T service to assign
+datasets to container coverage types such as the <em>Rectified Stitched Mosaic</em> or
+<em>Dataset Series</em>. Neither is it possible to create plain (non-EO-WCS) coverages.</p>
+<p>The input image data must be in valid GeoTIFF file format. No other file
+format is currently supported. The input is passed to the WCS-T service as a
+reference (URL, e.g., a <em>GetCoverage</em> KVP encoded request). It is not
+possible to embed the input image data in the WCS-T request.</p>
+<p>The creation of a new EO-WCS dataset requires the specification of EO
+metadata. These metadata can be either passed by the user (recommended way)
+as a reference using the <code class="docutils literal"><span class="pre">ows:medatata</span></code> XML element, or generated
+automatically by the WCS-T service guessing some of the parameters from the
+GeoTIFF annotation.</p>
+<p>The user provided EO-WCS metadata can be either in form of an EO-O&amp;M XML
+document or arbitrary XML document with embedded EO-O&amp;M XML fragment (such
+as the <em>DescribeCoverage</em> response of a WCS service).</p>
+<p>The following is an example of a valid request to add a coverage:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;wcst:Transaction</span> <span class="na">service=</span><span class="s">&quot;WCS&quot;</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span>
+  <span class="na">xmlns:wcst=</span><span class="s">&quot;http://www.opengis.net/wcs/1.1/wcst&quot;</span>
+  <span class="na">xmlns:ows=</span><span class="s">&quot;http://www.opengis.net/ows/1.1&quot;</span>
+  <span class="na">xmlns:xlink=</span><span class="s">&quot;http://www.w3.org/1999/xlink&quot;</span>
+  <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+  <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/wcs/1.1/wcst http://schemas.opengis.net/wcst/1.1/wcstTransaction.xsd&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;wcst:InputCoverages&gt;</span>
+        <span class="nt">&lt;wcst:Coverage&gt;</span>
+            <span class="c">&lt;!-- optional coverage identifier --&gt;</span>
+            <span class="nt">&lt;ows:Identifier&gt;</span>CoverageId<span class="nt">&lt;/ows:Identifier&gt;</span>
+            <span class="c">&lt;!-- reference to image data --&gt;</span>
+            <span class="nt">&lt;ows:Reference</span>
+                <span class="na">xlink:href=</span><span class="s">&quot;http://foo.eox.at/ows?service=WCS&amp;amp;version=2.0.0&amp;amp;request=getCoverage&amp;amp;format=image/tiff&amp;amp;coverageid=CoverageId&quot;</span>
+                <span class="na">xlink:role=</span><span class="s">&quot;urn:ogc:def:role:WCS:1.1:Pixels&quot;</span><span class="nt">/&gt;</span>
+            <span class="c">&lt;!-- optional reference to EO metadata --&gt;</span>
+            <span class="nt">&lt;ows:Metadata</span>
+                <span class="na">xlink:href=</span><span class="s">&quot;http://foo.eox.at/ows?service=WCS&amp;amp;version=2.0.0&amp;amp;request=describeCoverage&amp;amp;coverageid=CoverageId&quot;</span>
+                <span class="na">xlink:role=</span><span class="s">&quot;http://www.opengis.net/eop/2.0/EarthObservation&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;wcst:Action</span> <span class="na">codeSpace=</span><span class="s">&quot;http://schemas.opengis.net/wcs/1.1.0/actions.xml&quot;</span><span class="nt">&gt;</span>Add<span class="nt">&lt;/wcst:Action&gt;</span>
+        <span class="nt">&lt;/wcst:Coverage&gt;</span>
+    <span class="nt">&lt;/wcst:InputCoverages&gt;</span>
+<span class="nt">&lt;/wcst:Transaction&gt;</span>
+</pre></div>
+</div>
+<p>The coverage identifier specified by the <code class="docutils literal"><span class="pre">ows:Identifier</span></code> element is
+optional. When not specified or not usable (most likely because it is
+already in use by another coverage) a new, unique identifier is generated
+automatically. Thus the WCS-T service is not bound to the user provided
+identifier and the actual identifier shall always be read from the
+transaction response:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;TransactionResponse</span>
+  <span class="na">xmlns=</span><span class="s">&quot;http://www.opengis.net/wcs/1.1/wcst&quot;</span>
+  <span class="na">xmlns:ows=</span><span class="s">&quot;http://www.opengis.net/ows/1.1&quot;</span>
+  <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+  <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/wcs/1.1/wcst http://schemas.opengis.net/wcst/1.1/wcstTransaction.xsd&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;RequestId&gt;</span>wcstReq_btjiFfo4aOvT1BQL-ki5<span class="nt">&lt;/RequestId&gt;</span>
+    <span class="nt">&lt;ows:Identifier&gt;</span>wcstCov_LoEYNGm3d10ZhUUGdlmm<span class="nt">&lt;/ows:Identifier&gt;</span>
+<span class="nt">&lt;/TransactionResponse&gt;</span>
+</pre></div>
+</div>
+<p>Unless there is a need for a specific coverage identifier we recommend to
+leave the identifier selection to be performed by the WCS-T service and omit
+the <code class="docutils literal"><span class="pre">ows:Identifier</span></code> element in case of WCS-T coverage inserts.</p>
+</div>
+<div class="section" id="deleting-existing-coverages">
+<h3><a class="toc-backref" href="#table-of-contents">Deleting Existing Coverages</a><a class="headerlink" href="#deleting-existing-coverages" title="Permalink to this headline">¶</a></h3>
+<p>The coverages inserted via the WCS-T <em>Add</em> action can be removed by means of
+the WCS-T <em>Delete</em> action. For security reasons, only the coverages inserted
+via WCS-T can be actually removed via WCS-T. The only parameter required in
+the removal request is the coverage (dataset) identifier
+(<code class="docutils literal"><span class="pre">wcst:InputCoverages</span></code> XML element):</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;wcst:Transaction</span> <span class="na">service=</span><span class="s">&quot;WCS&quot;</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span>
+  <span class="na">xmlns:wcst=</span><span class="s">&quot;http://www.opengis.net/wcs/1.1/wcst&quot;</span>
+  <span class="na">xmlns:ows=</span><span class="s">&quot;http://www.opengis.net/ows/1.1&quot;</span>
+  <span class="na">xmlns:xlink=</span><span class="s">&quot;http://www.w3.org/1999/xlink&quot;</span>
+  <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+  <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/wcs/1.1/wcst http://schemas.opengis.net/wcst/1.1/wcstTransaction.xsd&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;wcst:InputCoverages&gt;</span>
+        <span class="nt">&lt;wcst:Coverage&gt;</span>
+            <span class="c">&lt;!-- required coverage identifier --&gt;</span>
+            <span class="nt">&lt;ows:Identifier&gt;</span>wcstCov_LoEYNGm3d10ZhUUGdlmm<span class="nt">&lt;/ows:Identifier&gt;</span>
+            <span class="nt">&lt;wcst:Action</span> <span class="na">codeSpace=</span><span class="s">&quot;http://schemas.opengis.net/wcs/1.1.0/actions.xml&quot;</span><span class="nt">&gt;</span>Delete<span class="nt">&lt;/wcst:Action&gt;</span>
+        <span class="nt">&lt;/wcst:Coverage&gt;</span>
+    <span class="nt">&lt;/wcst:InputCoverages&gt;</span>
+<span class="nt">&lt;/wcst:Transaction&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="asynchronous-operation">
+<h3><a class="toc-backref" href="#table-of-contents">Asynchronous Operation</a><a class="headerlink" href="#asynchronous-operation" title="Permalink to this headline">¶</a></h3>
+<p><em>EOxServer</em> supports asynchronous WCS-T requests as specified by the <a class="reference external" href="http://portal.opengeospatial.org/files/?artifact_id=28506">[OGC
+07-068r4]</a> standard. Asynchronous request processing can be invoked by any
+WCS-T request including the <code class="docutils literal"><span class="pre">wcst:ResponseHandler</span></code> element. This element
+shall contain an URL of the remote response handler where the response shall
+be sent once the asynchronous processing is finished:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;wcst:Transaction</span> <span class="na">service=</span><span class="s">&quot;WCS&quot;</span> <span class="na">version=</span><span class="s">&quot;1.1&quot;</span>
+  <span class="na">xmlns:wcst=</span><span class="s">&quot;http://www.opengis.net/wcs/1.1/wcst&quot;</span>
+  <span class="na">xmlns:ows=</span><span class="s">&quot;http://www.opengis.net/ows/1.1&quot;</span>
+  <span class="na">xmlns:xlink=</span><span class="s">&quot;http://www.w3.org/1999/xlink&quot;</span>
+  <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+  <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/wcs/1.1/wcst http://schemas.opengis.net/wcst/1.1/wcstTransaction.xsd&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;wcst:InputCoverages&gt;</span>
+        ...
+    <span class="nt">&lt;/wcst:InputCoverages&gt;</span>
+    <span class="nt">&lt;wcst:RequestId&gt;</span>RequestId<span class="nt">&lt;/wcst:RequestId&gt;</span>
+    <span class="c">&lt;!-- XML element enabling the asynchronous WCS-T processing --&gt;</span>
+    <span class="nt">&lt;wcst:ResponseHandler&gt;</span>http://foo.eox.at/WCSTResponseHandler<span class="nt">&lt;/wcst:ResponseHandler&gt;</span>
+<span class="nt">&lt;/wcst:Transaction&gt;</span>
+</pre></div>
+</div>
+<p>Currently, the WCS-T implementation supports HTTP and FTP URL schemas for the
+response handler. In the first case the response is delivered using HTTP/POST.
+In the latter case, the response is uploaded to a remote FTP server. In case of
+FTP, the user may specify a full file-name of the delivered file or target
+directory. If the FTP target is a directory the file-name of the stored response
+is generated from the request ID returned by the acknowledgement response:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;Acknowledgement</span>
+  <span class="na">xmlns=</span><span class="s">&quot;http://www.opengis.net/wcs/1.1/wcst&quot;</span>
+  <span class="na">xmlns:ows=</span><span class="s">&quot;http://www.opengis.net/ows/1.1&quot;</span>
+  <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+  <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/wcs/1.1/wcst http://schemas.opengis.net/wcst/1.1/wcstTransaction.xsd&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;TimeStamp&gt;</span>2012-04-13T16:00:07Z<span class="nt">&lt;/TimeStamp&gt;</span>
+    <span class="nt">&lt;RequestId&gt;</span>wcstReq_6syhsJbO2TtYwVxFHOur<span class="nt">&lt;/RequestId&gt;</span>
+<span class="nt">&lt;/Acknowledgement&gt;</span>
+</pre></div>
+</div>
+<p>It is worth to mention that request identifiers can be specified in WCS-T
+requests, however this identifier provides only a hint to the WCS-T server
+and the server may change it to another value. Thus it is recommended to
+rely on the request identifier written in the WCS-T response and better omit
+the optional <code class="docutils literal"><span class="pre">wcst:RequestId</span></code> XML element in the WCS-T request.</p>
+<p>It is possible to specify user/password for the response handler for both HTTP
+and FTP using the typical URL structure:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">schema</span><span class="o">&gt;</span><span class="p">:</span><span class="o">//</span><span class="p">[</span><span class="o">&lt;</span><span class="n">username</span><span class="o">&gt;@&lt;</span><span class="n">password</span><span class="o">&gt;</span><span class="p">]</span><span class="o">&lt;</span><span class="n">host</span><span class="o">&gt;/&lt;</span><span class="n">path</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>No other authentication is currently supported.</p>
+<p>The asynchronous WCS-T operation requires the ATP (Asynchronous Task
+Processing) subsystem and, in particular, an ATPD (ATP Daemon) running. For
+more info on the ATP subsystem see the <a class="reference internal" href="atp_sum.html#atp-sum"><span class="std std-ref">Asynchronous Task Processing</span></a> section.</p>
+</div>
+</div>
+<div class="section" id="references">
+<h2><a class="toc-backref" href="#table-of-contents">References</a><a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">[OGC 07-068r4]:</th><td class="field-body"><a class="reference external" href="http://portal.opengeospatial.org/files/?artifact_id=28506">http://portal.opengeospatial.org/files/?artifact_id=28506</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../developers/index.html" class="btn btn-neutral float-right" title="Developers’ Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="atp_sum.html" class="btn btn-neutral float-left" title="Asynchronous Task Processing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; <a href="../copyright.html">Copyright</a> 2011, 2012, 2013, 2014, EOX IT Services GmbH
+      <span class="lastupdated">
+        Last updated on 2019-06-19T12:43:22Z.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
